@@ -69,7 +69,7 @@ global:
     local_part: "_server"
     display_name: "Server alerts"
     avatar: ""
-    room_name: "Server Alerts"	
+    room_name: "Server Alerts"
   jetstream:
     addresses: ["test"]
 app_service_api:

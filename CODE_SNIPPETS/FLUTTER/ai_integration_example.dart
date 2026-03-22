@@ -467,4 +467,3 @@ class SentimentResult {
   bool get isNegative => sentiment == 'negative';
   bool get isNeutral => sentiment == 'neutral';
 }
-

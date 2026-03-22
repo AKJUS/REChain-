@@ -405,4 +405,4 @@ final activeBridges = await getActiveBridges();
 - **MSC 3383**: Advanced reactions
 - **MSC 3384**: Threading support
 
-This comprehensive Matrix backend and protocol extension system provides the foundation for scaling the REChain Ecosystem to handle enterprise-level communication, IoT integration, gaming platforms, educational systems, and much more. The modular architecture allows for easy extension and customization while maintaining high performance and security standards. 
+This comprehensive Matrix backend and protocol extension system provides the foundation for scaling the REChain Ecosystem to handle enterprise-level communication, IoT integration, gaming platforms, educational systems, and much more. The modular architecture allows for easy extension and customization while maintaining high performance and security standards.

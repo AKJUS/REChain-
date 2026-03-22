@@ -231,9 +231,9 @@ All documentation should follow these standards:
 
 ```markdown
 > **Note:** Important information
-> 
+>
 > **Warning:** Cautions and warnings
-> 
+>
 > **Tip:** Helpful tips
 ```
 

@@ -1216,9 +1216,7 @@ class PresenceHandlerTestCase(BaseMultiWorkerStreamTestCase):
                 ),
             ]
         ],
-        name_func=lambda testcase_func,
-        param_num,
-        params: f"{testcase_func.__name__}_{param_num}_{'workers' if params.args[5] else 'monolith'}",
+        name_func=lambda testcase_func, param_num, params: f"{testcase_func.__name__}_{param_num}_{'workers' if params.args[5] else 'monolith'}",
     )
     @unittest.override_config({"experimental_features": {"msc3026_enabled": True}})
     def test_set_presence_from_syncing_multi_device(
@@ -1454,9 +1452,7 @@ class PresenceHandlerTestCase(BaseMultiWorkerStreamTestCase):
                 ),
             ]
         ],
-        name_func=lambda testcase_func,
-        param_num,
-        params: f"{testcase_func.__name__}_{param_num}_{'workers' if params.args[4] else 'monolith'}",
+        name_func=lambda testcase_func, param_num, params: f"{testcase_func.__name__}_{param_num}_{'workers' if params.args[4] else 'monolith'}",
     )
     @unittest.override_config({"experimental_features": {"msc3026_enabled": True}})
     def test_set_presence_from_non_syncing_multi_device(

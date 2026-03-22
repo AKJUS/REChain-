@@ -21,22 +21,22 @@ jobs:
   analyze:
     name: Code Analysis
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -47,13 +47,13 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-android-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-android-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Run Flutter analyzer
         run: flutter analyze
-      
+
       - name: Check formatting
         run: flutter format --set-exit-if-changed lib/
 
@@ -61,22 +61,22 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     needs: analyze
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -87,10 +87,10 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-test-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-test-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Run unit tests
         run: flutter test --coverage
 
@@ -98,22 +98,22 @@ jobs:
     name: Build Debug APK
     runs-on: ubuntu-latest
     needs: test
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -124,13 +124,13 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-build-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-build-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Build Debug APK
         run: flutter build apk --debug --verbose
-      
+
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
@@ -143,24 +143,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main' || github.event.repository.private
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -171,10 +171,10 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-release-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-release-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Decode keystore
         if: env.ANDROID_KEYSTORE_BASE64 != ''
         run: |
@@ -184,7 +184,7 @@ jobs:
           echo "keyAlias=${{ env.ANDROID_KEY_ALIAS }}" >> android/key.properties
           echo "keyPassword=${{ env.ANDROID_KEY_PASSWORD }}" >> android/key.properties
         shell: bash
-      
+
       - name: Build Release APK
         run: flutter build apk --release --verbose
         env:
@@ -192,17 +192,17 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-      
+
       - name: Build App Bundle
         run: flutter build appbundle --release --verbose
-      
+
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
           name: rechain-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
-      
+
       - name: Upload App Bundle
         uses: actions/upload-artifact@v4
         with:
@@ -214,22 +214,22 @@ jobs:
     name: Android Integration Tests
     runs-on: macos-latest
     needs: test
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -240,10 +240,10 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-test-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-test-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Run integration tests
         run: flutter test integration_test --verbose
 
@@ -251,22 +251,22 @@ jobs:
     name: Android Lint
     runs-on: ubuntu-latest
     needs: analyze
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.java_version }}
           distribution: 'temurin'
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.flutter_version }}
-      
+
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
@@ -277,10 +277,10 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ env.flutter_version }}-lint-${{ hashFiles('pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-${{ env.flutter_version }}-lint-
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Run Android lint
         run: ./gradlew lintDebug
 
@@ -289,11 +289,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-debug, build-release, android-test, lint]
     if: always()
-    
+
     steps:
       - name: Send notification
         if: needs.build-release.result == 'success'
         run: |
           echo "✅ Android build completed successfully"
           echo "📦 Artifacts available for download"
-

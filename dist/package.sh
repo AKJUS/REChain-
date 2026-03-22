@@ -112,9 +112,9 @@ print_status() {
 # Build Debian package
 build_deb() {
     local arch="$1"
-    
+
     print_status "info" "Building Debian package for $arch..."
-    
+
     local pkg_dir="${OUTPUT_DIR}/deb/rechain_${VERSION}_${arch}"
     mkdir -p "$pkg_dir/DEBIAN"
     mkdir -p "$pkg_dir/usr/bin"
@@ -122,12 +122,12 @@ build_deb() {
     mkdir -p "$pkg_dir/var/lib/rechain"
     mkdir -p "$pkg_dir/lib/systemd/system"
     mkdir -p "$pkg_dir/usr/share/doc/rechain"
-    
+
     # Copy binaries
     if [ -f "${PROJECT_DIR}/src/rechain" ]; then
         cp "${PROJECT_DIR}/src/rechain" "$pkg_dir/usr/bin/"
     fi
-    
+
     # Create control file
     cat > "$pkg_dir/DEBIAN/control" << EOF
 Package: rechain
@@ -141,7 +141,7 @@ Description: Secure, decentralized messaging platform
  REChain is a secure, decentralized messaging platform.
 Homepage: https://rechain.network
 EOF
-    
+
     # Create postinst script
     cat > "$pkg_dir/DEBIAN/postinst" << 'EOF'
 #!/bin/bash
@@ -160,7 +160,7 @@ esac
 exit 0
 EOF
     chmod +x "$pkg_dir/DEBIAN/postinst"
-    
+
     # Create systemd service
     cat > "$pkg_dir/lib/systemd/system/rechain.service" << EOF
 [Unit]
@@ -179,7 +179,7 @@ StateDirectory=rechain
 [Install]
 WantedBy=multi-user.target
 EOF
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "Would create: rechain_${VERSION}_${arch}.deb"
     else
@@ -192,7 +192,7 @@ EOF
 build_rpm() {
     local arch="$1"
     print_status "info" "Building RPM package for $arch..."
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "Would create RPM for $arch"
     else
@@ -229,7 +229,7 @@ SPECEOF
 # Build Docker image
 build_docker() {
     print_status "info" "Building Docker image..."
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "Would build Docker image: rechain:${VERSION}"
     else
@@ -243,14 +243,14 @@ main() {
     echo "REChain Package Script v${VERSION}"
     echo "================================"
     echo ""
-    
+
     print_status "info" "Package type: $PACKAGE_TYPE"
     print_status "info" "Architectures: $ARCHS"
-    
+
     mkdir -p "$OUTPUT_DIR"
-    
+
     IFS=',' read -ra ARCH_ARRAY <<< "$ARCHS"
-    
+
     case $PACKAGE_TYPE in
         deb)
             for arch in "${ARCH_ARRAY[@]}"; do
@@ -273,7 +273,7 @@ main() {
             build_docker
             ;;
     esac
-    
+
     echo ""
     print_status "ok" "Package build complete!"
 }

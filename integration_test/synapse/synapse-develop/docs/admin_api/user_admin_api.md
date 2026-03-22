@@ -417,8 +417,8 @@ The following actions are **NOT** performed. The list may be incomplete.
 
 ## Suspend/Unsuspend Account
 
-This API allows an admin to suspend/unsuspend an account. While an account is suspended, the user is 
-prohibited from sending invites, joining or knocking on rooms, sending messages, changing profile data, and redacting messages other than their own. 
+This API allows an admin to suspend/unsuspend an account. While an account is suspended, the user is
+prohibited from sending invites, joining or knocking on rooms, sending messages, changing profile data, and redacting messages other than their own.
 
 The api is:
 
@@ -1464,10 +1464,10 @@ _Added in Synapse 1.72.0._
 
 ## Redact all the events of a user
 
-This endpoint allows an admin to redact the events of a given user. There are no restrictions on redactions for a 
-local user. By default, we puppet the user who sent the message to redact it themselves. Redactions for non-local users are issued using the admin user, and will fail in rooms where the admin user is not admin/does not have the specified power level to issue redactions. 
+This endpoint allows an admin to redact the events of a given user. There are no restrictions on redactions for a
+local user. By default, we puppet the user who sent the message to redact it themselves. Redactions for non-local users are issued using the admin user, and will fail in rooms where the admin user is not admin/does not have the specified power level to issue redactions.
 
-The API is 
+The API is
 ```
 POST /_synapse/admin/v1/user/$user_id/redact
 
@@ -1475,8 +1475,8 @@ POST /_synapse/admin/v1/user/$user_id/redact
   "rooms": ["!roomid1", "!roomid2"]
 }
 ```
-If an empty list is provided as the key for `rooms`, all events in all the rooms the user is member of will be redacted, 
-otherwise all the events in the rooms provided in the request will be redacted. 
+If an empty list is provided as the key for `rooms`, all events in all the rooms the user is member of will be redacted,
+otherwise all the events in the rooms provided in the request will be redacted.
 
 The API starts redaction process running, and returns immediately with a JSON body with
 a redact id which can be used to query the status of the redaction process:
@@ -1539,9 +1539,7 @@ The following parameters should be set in the URL:
 The following fields are returned in the JSON response body:
 
 - `status` - string - one of scheduled/active/completed/failed, indicating the status of the redaction job
-- `failed_redactions` - dictionary - the keys of the dict are event ids the process was unable to redact, if any, and the values are 
+- `failed_redactions` - dictionary - the keys of the dict are event ids the process was unable to redact, if any, and the values are
   the corresponding error that caused the redaction to fail
 
 _Added in Synapse 1.116.0._
-
-

@@ -247,11 +247,11 @@ class SlidingSyncRoomLists:
         # Note: this won't include rooms the user has left themselves. We add back
         # `newly_left` rooms below. This is more efficient than fetching all rooms and
         # then filtering out the old left rooms.
-        room_membership_for_user_map: MutableMapping[str, RoomsForUserSlidingSync] = (
-            MutableOverlayMapping(
-                await self.store.get_sliding_sync_rooms_for_user_from_membership_snapshots(
-                    user_id
-                )
+        room_membership_for_user_map: MutableMapping[
+            str, RoomsForUserSlidingSync
+        ] = MutableOverlayMapping(
+            await self.store.get_sliding_sync_rooms_for_user_from_membership_snapshots(
+                user_id
             )
         )
         # To play nice with the rewind logic below, we need to go fetch the rooms the
@@ -367,9 +367,9 @@ class SlidingSyncRoomLists:
                         room_membership_for_user=newly_left_room_for_user_sliding_sync,
                         newly_left=room_id in newly_left_room_map,
                     ):
-                        room_membership_for_user_map[room_id] = (
-                            newly_left_room_for_user_sliding_sync
-                        )
+                        room_membership_for_user_map[
+                            room_id
+                        ] = newly_left_room_for_user_sliding_sync
                     else:
                         room_membership_for_user_map.pop(room_id, None)
 
@@ -767,9 +767,9 @@ class SlidingSyncRoomLists:
 
                     all_rooms.add(room_id)
 
-                    room_membership_for_user_map[room_id] = (
-                        room_membership_for_user_at_to_token
-                    )
+                    room_membership_for_user_map[
+                        room_id
+                    ] = room_membership_for_user_at_to_token
 
                     # Take the superset of the `RoomSyncConfig` for each room.
                     room_sync_config = RoomSyncConfig.from_room_config(
@@ -1257,9 +1257,9 @@ class SlidingSyncRoomLists:
         ) in current_state_delta_membership_changes_in_from_to_range:
             room_id = membership_change.room_id
 
-            last_membership_change_by_room_id_in_from_to_range[room_id] = (
-                membership_change
-            )
+            last_membership_change_by_room_id_in_from_to_range[
+                room_id
+            ] = membership_change
             # Only set if we haven't already set it
             first_membership_change_by_room_id_in_from_to_range.setdefault(
                 room_id, membership_change

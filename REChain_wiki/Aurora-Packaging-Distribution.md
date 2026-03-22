@@ -19,4 +19,4 @@
 
 ---
 
-For more, see the [Platform Support](Platform-Support.md) and [Troubleshooting](Aurora-Troubleshooting.md) guides. 
+For more, see the [Platform Support](Platform-Support.md) and [Troubleshooting](Aurora-Troubleshooting.md) guides.

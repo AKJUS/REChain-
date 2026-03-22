@@ -37,7 +37,7 @@ security:
     method: "multi_factor"
     require_verification: true
     session_timeout: 3600
-    
+
   network:
     trust_internal: false
     verify_federation: true
@@ -123,12 +123,12 @@ security:
       - password
       - totp
       - webhook  # SSO integration
-      
+
     mfa:
       enabled: true
       backup_codes: 10
       totp_issuer: "REChain"
-      
+
     password:
       min_length: 16
       require_uppercase: true

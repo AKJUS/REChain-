@@ -6,4 +6,4 @@ void main() async {
 
   final response = await etke.generateText(prompt: 'Hello, world!');
   print('AI response: ${response.content}');
-} 
+}

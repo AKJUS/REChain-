@@ -298,4 +298,4 @@ See `redis-ha-notes.md` for high availability setup.
 
 ---
 
-*For advanced usage, see the REChain docs and wiki.* 
+*For advanced usage, see the REChain docs and wiki.*

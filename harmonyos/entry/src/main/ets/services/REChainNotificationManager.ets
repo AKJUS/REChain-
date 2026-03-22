@@ -78,26 +78,26 @@ export class REChainNotificationManager {
   public async initialize(config: NotificationConfig): Promise<boolean> {
     try {
       hilog.info(0x0000, 'REChainNotification', 'Initializing notification manager...');
-      
+
       this.config = config;
-      
+
       // Request notification permissions
       await this.requestNotificationPermissions();
-      
+
       // Initialize audio renderer for custom sounds
       await this.initializeAudioRenderer();
-      
+
       // Setup notification slot (channel)
       await this.setupNotificationSlots();
-      
+
       // Clear any existing notifications
       await this.clearAllNotifications();
-      
+
       this.initialized = true;
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Notification manager initialized successfully');
       return true;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to initialize: %{public}s', JSON.stringify(error));
       return false;
@@ -111,25 +111,25 @@ export class REChainNotificationManager {
 
     try {
       hilog.info(0x0000, 'REChainNotification', 'Shutting down notification manager...');
-      
+
       // Clear all active notifications
       this.clearAllNotifications();
-      
+
       // Release audio renderer
       if (this.audioRenderer) {
         this.audioRenderer.release();
         this.audioRenderer = null;
       }
-      
+
       // Clear internal state
       this.activeNotifications.clear();
       this.notificationCount = 0;
       this.badgeCount = 0;
-      
+
       this.initialized = false;
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Notification manager shut down successfully');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Error during shutdown: %{public}s', JSON.stringify(error));
     }
@@ -143,36 +143,36 @@ export class REChainNotificationManager {
     try {
       // Generate unique ID if not provided
       const notificationId = notification.id || this.generateNotificationId();
-      
+
       // Check notification limits
       if (this.activeNotifications.size >= this.config.maxNotifications) {
         this.removeOldestNotification();
       }
-      
+
       // Create HarmonyOS notification request
       const notificationRequest = await this.createNotificationRequest(notification, notificationId);
-      
+
       // Publish notification
       await notificationManager.publish(notificationRequest);
-      
+
       // Store notification reference
       notification.id = notificationId;
       this.activeNotifications.set(notificationId, notification);
       this.notificationCount++;
-      
+
       // Handle sound and vibration
       await this.handleNotificationEffects(notification);
-      
+
       // Update badge count
       if (this.config.enableBadge) {
         this.badgeCount++;
         await this.updateBadgeCount(this.badgeCount);
       }
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Notification displayed: %{public}s', notificationId);
-      
+
       return notificationId;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to display notification: %{public}s', JSON.stringify(error));
       throw error;
@@ -187,21 +187,21 @@ export class REChainNotificationManager {
     try {
       // Cancel the notification
       await notificationManager.cancel(parseInt(notificationId));
-      
+
       // Remove from active notifications
       if (this.activeNotifications.has(notificationId)) {
         this.activeNotifications.delete(notificationId);
-        
+
         // Update badge count
         if (this.config?.enableBadge && this.badgeCount > 0) {
           this.badgeCount--;
           await this.updateBadgeCount(this.badgeCount);
         }
       }
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Notification cancelled: %{public}s', notificationId);
       return true;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to cancel notification: %{public}s', JSON.stringify(error));
       return false;
@@ -216,18 +216,18 @@ export class REChainNotificationManager {
     try {
       // Cancel all notifications
       await notificationManager.cancelAll();
-      
+
       // Clear internal state
       this.activeNotifications.clear();
       this.badgeCount = 0;
-      
+
       // Update badge count
       if (this.config?.enableBadge) {
         await this.updateBadgeCount(0);
       }
-      
+
       hilog.info(0x0000, 'REChainNotification', 'All notifications cleared');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to clear notifications: %{public}s', JSON.stringify(error));
     }
@@ -241,9 +241,9 @@ export class REChainNotificationManager {
     try {
       await bundleManager.setBadgeNumber(count);
       this.badgeCount = count;
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Badge count updated: %{public}d', count);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to update badge count: %{public}s', JSON.stringify(error));
     }
@@ -251,7 +251,7 @@ export class REChainNotificationManager {
 
   public onApplicationForeground(): void {
     hilog.info(0x0000, 'REChainNotification', 'Application moved to foreground');
-    
+
     // Clear badge when app comes to foreground
     if (this.config?.enableBadge) {
       this.updateBadgeCount(0);
@@ -266,7 +266,7 @@ export class REChainNotificationManager {
     try {
       await notificationManager.requestEnableNotification();
       hilog.info(0x0000, 'REChainNotification', 'Notification permissions granted');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to request permissions: %{public}s', JSON.stringify(error));
       throw error;
@@ -305,9 +305,9 @@ export class REChainNotificationManager {
       for (const slot of slots) {
         await notificationManager.addSlot(slot);
       }
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Notification slots configured');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to setup slots: %{public}s', JSON.stringify(error));
       throw error;
@@ -335,9 +335,9 @@ export class REChainNotificationManager {
       };
 
       this.audioRenderer = await audio.createAudioRenderer(audioRendererOptions);
-      
+
       hilog.info(0x0000, 'REChainNotification', 'Audio renderer initialized');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Failed to initialize audio: %{public}s', JSON.stringify(error));
     }
@@ -428,7 +428,7 @@ export class REChainNotificationManager {
         id: 0,
         usage: 'notification'
       });
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Vibration failed: %{public}s', JSON.stringify(error));
     }
@@ -443,7 +443,7 @@ export class REChainNotificationManager {
       // This is a simplified implementation
       // In a real app, you would load and play the actual sound file
       hilog.info(0x0000, 'REChainNotification', 'Playing sound: %{public}s', soundPath);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainNotification', 'Sound playback failed: %{public}s', JSON.stringify(error));
     }

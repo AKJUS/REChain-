@@ -10,4 +10,4 @@ void main() async {
 
   final downloaded = await ipfs.downloadFile(cid);
   print('Downloaded file bytes: ${downloaded.length}');
-} 
+}

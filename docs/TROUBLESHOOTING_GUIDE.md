@@ -159,7 +159,7 @@ sudo setenforce 0  # Temporary fix
 # Check current configuration
 server:
   workers: 0  # Should be higher for production
-  
+
 database:
   options:
     pool_size: 10  # Increase for more connections

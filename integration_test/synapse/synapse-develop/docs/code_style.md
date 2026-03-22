@@ -68,14 +68,14 @@ The [configuration manual](usage/configuration/config_documentation.md) acts as 
 reference to Synapse's configuration options for server administrators.
 Remember that many readers will be unfamiliar with YAML and server
 administration in general, so it is important that when you add
-a configuration option the documentation be as easy to understand as possible, which 
+a configuration option the documentation be as easy to understand as possible, which
 includes following a consistent format.
 
 Some guidelines follow:
 
 - Each option should be listed in the config manual with the following format:
-      
-    - The name of the option, prefixed by `###`. 
+
+    - The name of the option, prefixed by `###`.
 
     - A comment which describes the default behaviour (i.e. what
         happens if the setting is omitted), as well as what the effect
@@ -95,7 +95,7 @@ Example:
 ---
 ### `modules`
 
-Use the `module` sub-option to add a module under `modules` to extend functionality. 
+Use the `module` sub-option to add a module under `modules` to extend functionality.
 The `module` setting then has a sub-option, `config`, which can be used to define some configuration
 for the `module`.
 
@@ -116,4 +116,3 @@ Note that the sample configuration is generated from the synapse code
 and is maintained by a script, `scripts-dev/generate_sample_config.sh`.
 Making sure that the output from this script matches the desired format
 is left as an exercise for the reader!
-

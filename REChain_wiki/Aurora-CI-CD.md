@@ -26,4 +26,4 @@
 
 ---
 
-For more, see [Packaging & Distribution](Aurora-Packaging-Distribution.md). 
+For more, see [Packaging & Distribution](Aurora-Packaging-Distribution.md).

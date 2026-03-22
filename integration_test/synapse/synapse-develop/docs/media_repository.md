@@ -1,4 +1,4 @@
-# Media Repository 
+# Media Repository
 
 *Synapse implementation-specific details for the media repository*
 

@@ -47,10 +47,10 @@ mkdir -p "$PACKAGES_DIR"
 # Function to create DEB package
 create_deb_package() {
     print_status "Creating DEB package..."
-    
+
     local deb_dir="$PACKAGES_DIR/deb/rechainonline"
     local deb_name="rechainonline_${VERSION}-${BUILD_NUMBER}_amd64.deb"
-    
+
     # Clean and create structure
     rm -rf "$deb_dir"
     mkdir -p "$deb_dir/DEBIAN"
@@ -58,10 +58,10 @@ create_deb_package() {
     mkdir -p "$deb_dir/usr/share/applications"
     mkdir -p "$deb_dir/usr/share/icons/hicolor/256x256/apps"
     mkdir -p "$deb_dir/usr/share/rechainonline"
-    
+
     # Copy application files
     cp -r "$BUILD_DIR/bundle"/* "$deb_dir/usr/share/rechainonline/"
-    
+
     # Create wrapper script
     cat > "$deb_dir/usr/bin/rechainonline" << 'EOF'
 #!/bin/bash
@@ -69,7 +69,7 @@ export LD_LIBRARY_PATH="/usr/share/rechainonline/lib:$LD_LIBRARY_PATH"
 exec /usr/share/rechainonline/rechainonline "$@"
 EOF
     chmod +x "$deb_dir/usr/bin/rechainonline"
-    
+
     # Create desktop file
     cat > "$deb_dir/usr/share/applications/rechainonline.desktop" << EOF
 [Desktop Entry]
@@ -84,12 +84,12 @@ MimeType=x-scheme-handler/matrix;
 StartupWMClass=REChain
 StartupNotify=true
 EOF
-    
+
     # Copy icon
     if [ -f "$PROJECT_ROOT/assets/app_icon.png" ]; then
         cp "$PROJECT_ROOT/assets/app_icon.png" "$deb_dir/usr/share/icons/hicolor/256x256/apps/rechainonline.png"
     fi
-    
+
     # Create control file
     cat > "$deb_dir/DEBIAN/control" << EOF
 Package: rechainonline
@@ -105,7 +105,7 @@ Description: REChain - Secure Decentralized Communication
  and advanced privacy features.
 Homepage: https://rechain.email
 EOF
-    
+
     # Create postinst script
     cat > "$deb_dir/DEBIAN/postinst" << 'EOF'
 #!/bin/bash
@@ -124,7 +124,7 @@ fi
 exit 0
 EOF
     chmod +x "$deb_dir/DEBIAN/postinst"
-    
+
     # Create postrm script
     cat > "$deb_dir/DEBIAN/postrm" << 'EOF'
 #!/bin/bash
@@ -135,7 +135,7 @@ if [ "$1" = "remove" ]; then
     if command -v update-desktop-database >/dev/null 2>&1; then
         update-desktop-database /usr/share/applications
     fi
-    
+
     # Update icon cache
     if command -v gtk-update-icon-cache >/dev/null 2>&1; then
         gtk-update-icon-cache -t /usr/share/icons/hicolor
@@ -145,7 +145,7 @@ fi
 exit 0
 EOF
     chmod +x "$deb_dir/DEBIAN/postrm"
-    
+
     # Build DEB package
     if command -v dpkg-deb >/dev/null 2>&1; then
         dpkg-deb --build "$deb_dir" "$PACKAGES_DIR/$deb_name"
@@ -158,24 +158,24 @@ EOF
 # Function to create RPM package
 create_rpm_package() {
     print_status "Creating RPM package..."
-    
+
     local rpm_dir="$PACKAGES_DIR/rpm"
     local spec_file="$rpm_dir/SPECS/rechainonline.spec"
     local rpm_name="rechainonline-${VERSION}-${BUILD_NUMBER}.x86_64.rpm"
-    
+
     # Create RPM build structure
     mkdir -p "$rpm_dir"/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-    
+
     # Create source tarball
     local source_name="rechainonline-$VERSION"
     mkdir -p "$rpm_dir/SOURCES/$source_name"
     cp -r "$BUILD_DIR/bundle"/* "$rpm_dir/SOURCES/$source_name/"
-    
+
     cd "$rpm_dir/SOURCES"
     tar -czf "$source_name.tar.gz" "$source_name"
     rm -rf "$source_name"
     cd - > /dev/null
-    
+
     # Create spec file
     cat > "$spec_file" << EOF
 Name:           rechainonline
@@ -250,11 +250,11 @@ DESKTOP_EOF
 * $(date +'%a %b %d %Y') REChain Team <support@rechain.email> - $VERSION-$BUILD_NUMBER
 - Automated build
 EOF
-    
+
     # Build RPM package
     if command -v rpmbuild >/dev/null 2>&1; then
         rpmbuild --define "_topdir $rpm_dir" -ba "$spec_file"
-        
+
         # Copy RPM to packages directory
         find "$rpm_dir/RPMS" -name "*.rpm" -exec cp {} "$PACKAGES_DIR/" \;
         print_status "RPM package created in $PACKAGES_DIR/"
@@ -266,18 +266,18 @@ EOF
 # Function to create AppImage
 create_appimage() {
     print_status "Creating AppImage..."
-    
+
     local appimage_dir="$PACKAGES_DIR/appimage"
     local appdir="$appimage_dir/REChain.AppDir"
     local appimage_name="REChain-${VERSION}-x86_64.AppImage"
-    
+
     # Clean and create AppDir structure
     rm -rf "$appdir"
     mkdir -p "$appdir"
-    
+
     # Copy application files
     cp -r "$BUILD_DIR/bundle"/* "$appdir/"
-    
+
     # Create AppRun script
     cat > "$appdir/AppRun" << 'EOF'
 #!/bin/bash
@@ -296,7 +296,7 @@ export APPDIR="$HERE"
 exec "$HERE/rechainonline" "$@"
 EOF
     chmod +x "$appdir/AppRun"
-    
+
     # Create desktop file
     cat > "$appdir/rechainonline.desktop" << EOF
 [Desktop Entry]
@@ -311,12 +311,12 @@ MimeType=x-scheme-handler/matrix;
 StartupWMClass=REChain
 StartupNotify=true
 EOF
-    
+
     # Copy icon
     if [ -f "$PROJECT_ROOT/assets/app_icon.png" ]; then
         cp "$PROJECT_ROOT/assets/app_icon.png" "$appdir/rechainonline.png"
     fi
-    
+
     # Create AppImage using appimagetool
     if command -v appimagetool >/dev/null 2>&1; then
         cd "$appimage_dir"
@@ -331,10 +331,10 @@ EOF
 # Function to create Flatpak
 create_flatpak() {
     print_status "Creating Flatpak package..."
-    
+
     if [ -f "$PROJECT_ROOT/com.rechain.online/com.rechain.online.json" ]; then
         local flatpak_dir="$PROJECT_ROOT/com.rechain.online"
-        
+
         if command -v flatpak-builder >/dev/null 2>&1; then
             cd "$flatpak_dir"
             flatpak-builder --force-clean build-dir com.rechain.online.json

@@ -86,7 +86,7 @@ SELECT platform, COUNT(*) FROM (
 	SELECT users.localpart, platform, users.created_ts, MAX(uip.last_seen_ts)
 	FROM userapi_accounts users
 	INNER JOIN
-	(SELECT 
+	(SELECT
 		localpart, last_seen_ts,
 		CASE
 	    	WHEN user_agent LIKE '%%Android%%' THEN 'android'
@@ -117,7 +117,7 @@ const countR30UsersV2SQL = `
 SELECT
 	client_type,
     count(client_type)
-FROM 
+FROM
 	(
     	SELECT
         	localpart,

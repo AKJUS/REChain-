@@ -190,7 +190,7 @@ jobs:
           mkdir -p /tmp/Complement/logs/\$2/\$1/
           docker cp \$1:/tmp/covdatafiles/. /tmp/Complement/logs/\$2/\$1/
           EOF
-          
+
           chmod +x /tmp/posttest.sh
       # Run Complement
       - run: |

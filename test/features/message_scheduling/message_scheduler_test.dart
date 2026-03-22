@@ -32,7 +32,7 @@ void main() {
     test('should schedule message successfully', () async {
       final now = DateTime.now();
       final scheduledTime = now.add(Duration(minutes: 5));
-      
+
       final messageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
         content: 'Test scheduled message',
@@ -40,7 +40,7 @@ void main() {
       );
 
       expect(messageId, isNotEmpty);
-      
+
       final message = scheduler.scheduledMessages[messageId];
       expect(message, isNotNull);
       expect(message?.content, equals('Test scheduled message'));
@@ -50,7 +50,7 @@ void main() {
 
     test('should handle immediate scheduling', () async {
       final now = DateTime.now();
-      
+
       final messageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
         content: 'Send immediately',
@@ -66,7 +66,7 @@ void main() {
 
     test('should handle message types correctly', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Test text message
       final textMessageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
@@ -100,7 +100,7 @@ void main() {
   group('Message Management', () {
     test('should cancel scheduled message', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       final messageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
         content: 'Test message',
@@ -117,7 +117,7 @@ void main() {
     test('should reschedule message', () async {
       final initialTime = DateTime.now().add(Duration(minutes: 5));
       final newTime = DateTime.now().add(Duration(minutes: 10));
-      
+
       final messageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
         content: 'Test message',
@@ -134,7 +134,7 @@ void main() {
 
     test('should handle failed messages', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Mock room to throw error
       when(mockRoom.sendTextEvent(any, msgtype: anyNamed('msgtype'), inReplyTo: anyNamed('inReplyTo')))
           .thenThrow(Exception('Failed to send message'));
@@ -155,7 +155,7 @@ void main() {
 
     test('should retry failed messages', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       final messageId = await scheduler.scheduleMessage(
         roomId: '!test:example.com',
         content: 'Test message',
@@ -164,7 +164,7 @@ void main() {
 
       // Simulate failed message
       await scheduler.retryFailedMessage(messageId);
-      
+
       // Mock successful send for retry
       when(mockRoom.sendTextEvent(any, msgtype: anyNamed('msgtype'), inReplyTo: anyNamed('inReplyTo')))
           .thenAnswer((_) => Future.value(MockEvent()));
@@ -180,14 +180,14 @@ void main() {
     test('should get scheduled messages for room', () async {
       final roomId = '!test:example.com';
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Schedule multiple messages
       await scheduler.scheduleMessage(
         roomId: roomId,
         content: 'Message 1',
         scheduledTime: scheduledTime,
       );
-      
+
       await scheduler.scheduleMessage(
         roomId: roomId,
         content: 'Message 2',
@@ -207,7 +207,7 @@ void main() {
 
     test('should get pending messages', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Schedule messages with different statuses
       await scheduler.scheduleMessage(
         roomId: '!test:example.com',
@@ -229,7 +229,7 @@ void main() {
 
     test('should get failed messages', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Mock room to throw error
       when(mockRoom.sendTextEvent(any, msgtype: anyNamed('msgtype'), inReplyTo: anyNamed('inReplyTo')))
           .thenThrow(Exception('Failed to send message'));
@@ -252,7 +252,7 @@ void main() {
   group('Persistence', () {
     test('should persist scheduled messages', () async {
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Mock SharedPreferences
       when(prefs.setString(any, any)).thenAnswer((_) => Future.value(true));
       when(prefs.getString(any)).thenReturn(null);
@@ -289,7 +289,7 @@ void main() {
 
       // Create new scheduler instance to test loading
       final newScheduler = MessageScheduler(prefs, client);
-      
+
       expect(newScheduler.scheduledMessages['test-id'], isNotNull);
       expect(newScheduler.scheduledMessages['test-id']?.content, equals('Test message'));
     });

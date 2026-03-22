@@ -15,4 +15,3 @@ Actions=NewChat;
 [Desktop Action NewChat]
 Name=Start New Chat
 Exec=AppRun --new-chat
-

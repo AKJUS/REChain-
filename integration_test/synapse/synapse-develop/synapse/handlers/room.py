@@ -529,10 +529,10 @@ class RoomCreationHandler:
         # deep-copy the power-levels event before we start modifying it
         # note that if frozen_dicts are enabled, `power_levels` will be a frozen
         # dict so we can't just copy.deepcopy it.
-        initial_state[(EventTypes.PowerLevels, "")] = power_levels = (
-            copy_and_fixup_power_levels_contents(
-                initial_state[(EventTypes.PowerLevels, "")]
-            )
+        initial_state[
+            (EventTypes.PowerLevels, "")
+        ] = power_levels = copy_and_fixup_power_levels_contents(
+            initial_state[(EventTypes.PowerLevels, "")]
         )
 
         # Resolve the minimum power level required to send any state event

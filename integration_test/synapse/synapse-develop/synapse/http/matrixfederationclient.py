@@ -425,9 +425,9 @@ class MatrixFederationHttpClient:
             )
         else:
             proxy_authorization_secret = hs.config.worker.worker_replication_secret
-            assert proxy_authorization_secret is not None, (
-                "`worker_replication_secret` must be set when using `outbound_federation_restricted_to` (used to authenticate requests across workers)"
-            )
+            assert (
+                proxy_authorization_secret is not None
+            ), "`worker_replication_secret` must be set when using `outbound_federation_restricted_to` (used to authenticate requests across workers)"
             federation_proxy_credentials = BearerProxyCredentials(
                 proxy_authorization_secret.encode("ascii")
             )
@@ -942,7 +942,8 @@ class MatrixFederationHttpClient:
         try_trailing_slash_on_400: bool = False,
         parser: Literal[None] = None,
         backoff_on_all_error_codes: bool = False,
-    ) -> JsonDict: ...
+    ) -> JsonDict:
+        ...
 
     @overload
     async def put_json(
@@ -959,7 +960,8 @@ class MatrixFederationHttpClient:
         try_trailing_slash_on_400: bool = False,
         parser: Optional[ByteParser[T]] = None,
         backoff_on_all_error_codes: bool = False,
-    ) -> T: ...
+    ) -> T:
+        ...
 
     async def put_json(
         self,
@@ -1149,7 +1151,8 @@ class MatrixFederationHttpClient:
         ignore_backoff: bool = False,
         try_trailing_slash_on_400: bool = False,
         parser: Literal[None] = None,
-    ) -> JsonDict: ...
+    ) -> JsonDict:
+        ...
 
     @overload
     async def get_json(
@@ -1162,7 +1165,8 @@ class MatrixFederationHttpClient:
         ignore_backoff: bool = ...,
         try_trailing_slash_on_400: bool = ...,
         parser: ByteParser[T] = ...,
-    ) -> T: ...
+    ) -> T:
+        ...
 
     async def get_json(
         self,
@@ -1243,7 +1247,8 @@ class MatrixFederationHttpClient:
         ignore_backoff: bool = False,
         try_trailing_slash_on_400: bool = False,
         parser: Literal[None] = None,
-    ) -> Tuple[JsonDict, Dict[bytes, List[bytes]]]: ...
+    ) -> Tuple[JsonDict, Dict[bytes, List[bytes]]]:
+        ...
 
     @overload
     async def get_json_with_headers(
@@ -1256,7 +1261,8 @@ class MatrixFederationHttpClient:
         ignore_backoff: bool = ...,
         try_trailing_slash_on_400: bool = ...,
         parser: ByteParser[T] = ...,
-    ) -> Tuple[T, Dict[bytes, List[bytes]]]: ...
+    ) -> Tuple[T, Dict[bytes, List[bytes]]]:
+        ...
 
     async def get_json_with_headers(
         self,

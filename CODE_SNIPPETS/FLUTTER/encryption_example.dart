@@ -295,4 +295,3 @@ extension EncryptionStatusExtension on RoomEncryptionStatus {
     }
   }
 }
-

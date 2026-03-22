@@ -6,9 +6,9 @@
 
 ---
 
-**Document Version:** 4.1.10+1160  
-**Bundle Version:** REChain Military Documentation 4.1.10+1160  
-**Build:** 1160  
+**Document Version:** 4.1.10+1160
+**Bundle Version:** REChain Military Documentation 4.1.10+1160
+**Build:** 1160
 **Release Date:** 2025
 
 ## 1. Personnel Management Overview

@@ -38,7 +38,7 @@ func UpSetHistoryVisibility(ctx context.Context, tx *sql.Tx) error {
 
 	// update the history visibility
 	for roomID, hisVis := range historyVisibilities {
-		_, err = tx.ExecContext(ctx, `UPDATE syncapi_output_room_events SET history_visibility = $1 
+		_, err = tx.ExecContext(ctx, `UPDATE syncapi_output_room_events SET history_visibility = $1
                         WHERE type IN ('m.room.message', 'm.room.encrypted') AND room_id = $2 AND history_visibility <> $1`, hisVis, roomID)
 		if err != nil {
 			return fmt.Errorf("failed to update history visibility: %w", err)

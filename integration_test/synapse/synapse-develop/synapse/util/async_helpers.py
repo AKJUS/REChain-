@@ -352,21 +352,24 @@ T5 = TypeVar("T5")
 @overload
 def gather_results(
     deferredList: Tuple[()], consumeErrors: bool = ...
-) -> "defer.Deferred[Tuple[()]]": ...
+) -> "defer.Deferred[Tuple[()]]":
+    ...
 
 
 @overload
 def gather_results(
     deferredList: Tuple["defer.Deferred[T1]"],
     consumeErrors: bool = ...,
-) -> "defer.Deferred[Tuple[T1]]": ...
+) -> "defer.Deferred[Tuple[T1]]":
+    ...
 
 
 @overload
 def gather_results(
     deferredList: Tuple["defer.Deferred[T1]", "defer.Deferred[T2]"],
     consumeErrors: bool = ...,
-) -> "defer.Deferred[Tuple[T1, T2]]": ...
+) -> "defer.Deferred[Tuple[T1, T2]]":
+    ...
 
 
 @overload
@@ -375,7 +378,8 @@ def gather_results(
         "defer.Deferred[T1]", "defer.Deferred[T2]", "defer.Deferred[T3]"
     ],
     consumeErrors: bool = ...,
-) -> "defer.Deferred[Tuple[T1, T2, T3]]": ...
+) -> "defer.Deferred[Tuple[T1, T2, T3]]":
+    ...
 
 
 @overload
@@ -387,7 +391,8 @@ def gather_results(
         "defer.Deferred[T4]",
     ],
     consumeErrors: bool = ...,
-) -> "defer.Deferred[Tuple[T1, T2, T3, T4]]": ...
+) -> "defer.Deferred[Tuple[T1, T2, T3, T4]]":
+    ...
 
 
 def gather_results(  # type: ignore[misc]
@@ -408,7 +413,8 @@ def gather_results(  # type: ignore[misc]
 @overload
 async def gather_optional_coroutines(
     *coroutines: Unpack[Tuple[Optional[Coroutine[Any, Any, T1]]]],
-) -> Tuple[Optional[T1]]: ...
+) -> Tuple[Optional[T1]]:
+    ...
 
 
 @overload
@@ -419,7 +425,8 @@ async def gather_optional_coroutines(
             Optional[Coroutine[Any, Any, T2]],
         ]
     ],
-) -> Tuple[Optional[T1], Optional[T2]]: ...
+) -> Tuple[Optional[T1], Optional[T2]]:
+    ...
 
 
 @overload
@@ -431,7 +438,8 @@ async def gather_optional_coroutines(
             Optional[Coroutine[Any, Any, T3]],
         ]
     ],
-) -> Tuple[Optional[T1], Optional[T2], Optional[T3]]: ...
+) -> Tuple[Optional[T1], Optional[T2], Optional[T3]]:
+    ...
 
 
 @overload
@@ -444,7 +452,8 @@ async def gather_optional_coroutines(
             Optional[Coroutine[Any, Any, T4]],
         ]
     ],
-) -> Tuple[Optional[T1], Optional[T2], Optional[T3], Optional[T4]]: ...
+) -> Tuple[Optional[T1], Optional[T2], Optional[T3], Optional[T4]]:
+    ...
 
 
 @overload
@@ -458,7 +467,8 @@ async def gather_optional_coroutines(
             Optional[Coroutine[Any, Any, T5]],
         ]
     ],
-) -> Tuple[Optional[T1], Optional[T2], Optional[T3], Optional[T4], Optional[T5]]: ...
+) -> Tuple[Optional[T1], Optional[T2], Optional[T3], Optional[T4], Optional[T5]]:
+    ...
 
 
 async def gather_optional_coroutines(
@@ -878,15 +888,18 @@ def stop_cancellation(deferred: "defer.Deferred[T]") -> "defer.Deferred[T]":
 
 
 @overload
-def delay_cancellation(awaitable: "defer.Deferred[T]") -> "defer.Deferred[T]": ...
+def delay_cancellation(awaitable: "defer.Deferred[T]") -> "defer.Deferred[T]":
+    ...
 
 
 @overload
-def delay_cancellation(awaitable: Coroutine[Any, Any, T]) -> "defer.Deferred[T]": ...
+def delay_cancellation(awaitable: Coroutine[Any, Any, T]) -> "defer.Deferred[T]":
+    ...
 
 
 @overload
-def delay_cancellation(awaitable: Awaitable[T]) -> Awaitable[T]: ...
+def delay_cancellation(awaitable: Awaitable[T]) -> Awaitable[T]:
+    ...
 
 
 def delay_cancellation(awaitable: Awaitable[T]) -> Awaitable[T]:

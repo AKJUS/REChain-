@@ -185,4 +185,3 @@ See LICENSE file for details.
 ---
 
 **REChain: Building the Digital Infrastructure of Autonomous Organizations** 🚀
-

@@ -359,4 +359,3 @@ extension EventFilter on Event {
     return content['displayname'] ?? senderId;
   }
 }
-

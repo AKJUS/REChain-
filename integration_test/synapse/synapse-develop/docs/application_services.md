@@ -1,6 +1,6 @@
 # Registering an Application Service
 
-The registration of new application services depends on the homeserver used. 
+The registration of new application services depends on the homeserver used.
 In synapse, you need to create a new configuration file for your AS and add it
 to the list specified under the `app_service_config_files` config
 option in your synapse config.

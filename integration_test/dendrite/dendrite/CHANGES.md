@@ -4,14 +4,14 @@
 
 ### ⚠ Important
 
-This is a security release, [gomatrixserverlib](https://github.com/matrix-org/gomatrixserverlib) was vulnerable to 
-server-side request forgery, serving content from a private network it can access, under certain conditions. 
+This is a security release, [gomatrixserverlib](https://github.com/matrix-org/gomatrixserverlib) was vulnerable to
+server-side request forgery, serving content from a private network it can access, under certain conditions.
 
 Upgrading to this version is **highly** recommended.
 
 ### Security
 
-- Support for blocking access to certain networks, fixing [CVE-2024-52594](https://www.cve.org/CVERecord?id=CVE-2024-52594) and 
+- Support for blocking access to certain networks, fixing [CVE-2024-52594](https://www.cve.org/CVERecord?id=CVE-2024-52594) and
   [GHSA-4ff6-858j-r822](https://github.com/matrix-org/gomatrixserverlib/security/advisories/GHSA-4ff6-858j-r822)
 
 ### Fixes
@@ -51,7 +51,7 @@ It also improves performance and memory usage.
   - Support for authenticated media ([MSC3916](https://github.com/matrix-org/matrix-spec-proposals/pull/3916)) has been added
   - NATS can now connect to servers requiring authentication (contributed by [paigeadelethompson](https://github.com/paigeadelethompson))
   - Updated dependencies
-    - Internal NATS Server has been updated from v2.10.7 to v2.10.20 (contributed by [neilalexander](https://github.com/neilalexander)) 
+    - Internal NATS Server has been updated from v2.10.7 to v2.10.20 (contributed by [neilalexander](https://github.com/neilalexander))
 
 ### Fixes
 
@@ -136,7 +136,7 @@ algorithm.
 
 ### Fixes:
 
-- The "device list updater" now de-duplicates the servers to fetch devices from on startup. (This also 
+- The "device list updater" now de-duplicates the servers to fetch devices from on startup. (This also
   avoids spamming the logs when shutting down.)
 - A bug in the state resolution algorithm has been fixed. This bug could result in users "being reset"
   out of rooms and other missing state events due to calculating the wrong state.
@@ -153,7 +153,7 @@ algorithm.
 
 - The `user_id` query parameter when authenticating is now used correctly (contributed by [tulir](https://github.com/tulir))
 - Invitations are now correctly pushed to devices
-- A bug which could result in the corruption of `m.direct` account data has been fixed 
+- A bug which could result in the corruption of `m.direct` account data has been fixed
 
 ### Features
 
@@ -197,8 +197,8 @@ algorithm.
 
 This releases fixes a long-standing "off-by-one" error which could result in state resets. Upgrading to this version is **highly** recommended.
 
-When deduplicating state events, we were checking if the event in question was already in a state snapshot. If it was in a previous state snapshot, we would 
-then remove it from the list of events to store. If this happened, we were, unfortunately, skipping the next event to check. This resulted in 
+When deduplicating state events, we were checking if the event in question was already in a state snapshot. If it was in a previous state snapshot, we would
+then remove it from the list of events to store. If this happened, we were, unfortunately, skipping the next event to check. This resulted in
 events getting stored in state snapshots where they may not be needed. When we now compared two of those state snapshots, one of them
 contained the skipped event, while the other didn't. This difference possibly shouldn't exist, resulting in unexpected state resets and explains
 reports of missing state events as well.
@@ -240,7 +240,7 @@ Rooms where a state reset occurred earlier should, hopefully, reconcile over tim
 - A bug where we returned the full event as `redacted_because` in redaction events has been fixed
 - The `displayname` and `avatar_url` can now be set to empty strings
 - Unsafe hotserving of files has been fixed (contributed by [joshqou](https://github.com/joshqou))
-- Joining new rooms would potentially return "redacted" events, due to history visibility not being set correctly, this could result in events being rejected 
+- Joining new rooms would potentially return "redacted" events, due to history visibility not being set correctly, this could result in events being rejected
 - Backfilling resulting in `unsuported room version ''` should now be solved
 
 ### Other
@@ -318,7 +318,7 @@ The last three missing federation API Sytests have been fixed - bringing us to 1
 * Federated backfilling for medium/large rooms has been fixed
 * `/login` causing wrong device list updates has been resolved
 * `/sync` should now return the correct room summary heroes
-* The default config options for `recaptcha_sitekey_class` and `recaptcha_form_field` are now set correctly 
+* The default config options for `recaptcha_sitekey_class` and `recaptcha_form_field` are now set correctly
 * `/messages` now omits empty `state` to be more spec compliant (contributed by [handlerug](https://github.com/handlerug))
 * `/sync` has been optimised to only query state events for history visibility if they are really needed
 

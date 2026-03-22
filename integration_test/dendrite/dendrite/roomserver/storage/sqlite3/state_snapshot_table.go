@@ -26,7 +26,7 @@ const stateSnapshotSchema = `
 	-- The state snapshot NID that identifies this snapshot.
     state_snapshot_nid INTEGER PRIMARY KEY AUTOINCREMENT,
 	-- The hash of the state snapshot, which is used to enforce uniqueness. The hash is
-	-- generated in Dendrite and passed through to the database, as a btree index over 
+	-- generated in Dendrite and passed through to the database, as a btree index over
 	-- this column is cheap and fits within the maximum index size.
 	state_snapshot_hash BLOB UNIQUE,
 	-- The room NID that the snapshot belongs to.

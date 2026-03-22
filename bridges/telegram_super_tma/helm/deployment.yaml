@@ -23,4 +23,4 @@ spec:
             - name: REDIS_PORT
               value: {{ .Values.redis.port | quote }}
           ports:
-            - containerPort: {{ .Values.service.port }} 
+            - containerPort: {{ .Values.service.port }}

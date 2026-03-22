@@ -83,7 +83,7 @@ DEFAULT_APP_NAME=rechain
    ```yaml
    global:
      scrape_interval: 15s
-   
+
    scrape_configs:
      - job_name: 'rechain-app'
        static_configs:
@@ -415,4 +415,4 @@ flutter-aurora build aurora
 ### Platform Notes
 - Some plugins may require extra permissions or tweaks for Aurora OS
 - Test on a real device or emulator
-- For packaging, see `aurora/rpm/com.rechain.online.spec` 
+- For packaging, see `aurora/rpm/com.rechain.online.spec`

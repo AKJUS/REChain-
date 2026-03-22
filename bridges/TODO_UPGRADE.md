@@ -139,5 +139,3 @@ python3 -m pytest test_integration.py -v
 - Automatic restart policies
 - Resource limits
 - Network isolation
-
-

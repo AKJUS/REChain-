@@ -509,9 +509,9 @@ class SlidingSyncExtensionHandler:
             # For live rooms we just get the updates from `all_updates_since_the_from_token`
             if live_rooms:
                 for room_id in all_updates_since_the_from_token.keys() & live_rooms:
-                    account_data_by_room_map[room_id] = (
-                        all_updates_since_the_from_token[room_id]
-                    )
+                    account_data_by_room_map[
+                        room_id
+                    ] = all_updates_since_the_from_token[room_id]
 
             # For previously and initial rooms we query each room individually.
             if previously_rooms or initial_rooms:

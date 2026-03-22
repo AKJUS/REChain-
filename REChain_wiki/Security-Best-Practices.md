@@ -23,4 +23,4 @@
 
 ---
 
-For more, see [Best-Practices.md](Best-Practices.md) and [docs/SECURITY.md](../docs/SECURITY.md). 
+For more, see [Best-Practices.md](Best-Practices.md) and [docs/SECURITY.md](../docs/SECURITY.md).

@@ -1,40 +1,40 @@
 # eturnal TURN server
 
-The following sections describe how to install [eturnal](<https://github.com/processone/eturnal>) 
+The following sections describe how to install [eturnal](<https://github.com/processone/eturnal>)
 (which implements the TURN REST API).
 
 ## `eturnal` setup
 
 ### Initial installation
 
-The `eturnal` TURN server implementation is available from a variety of sources 
-such as native package managers, binary packages, installation from source or 
-[container image](https://eturnal.net/documentation/code/docker.html). They are 
+The `eturnal` TURN server implementation is available from a variety of sources
+such as native package managers, binary packages, installation from source or
+[container image](https://eturnal.net/documentation/code/docker.html). They are
 all described [here](https://github.com/processone/eturnal#installation).
 
-Quick-Test instructions in a [Linux Shell](https://github.com/processone/eturnal/blob/master/QUICK-TEST.md) 
-or with [Docker](https://github.com/processone/eturnal/blob/master/docker-k8s/QUICK-TEST.md) 
+Quick-Test instructions in a [Linux Shell](https://github.com/processone/eturnal/blob/master/QUICK-TEST.md)
+or with [Docker](https://github.com/processone/eturnal/blob/master/docker-k8s/QUICK-TEST.md)
 are available as well.
 
 ### Configuration
 
-After installation, `eturnal` usually ships a [default configuration file](https://github.com/processone/eturnal/blob/master/config/eturnal.yml) 
-here: `/etc/eturnal.yml` (and, if not found there, there is a backup file here: 
-`/opt/eturnal/etc/eturnal.yml`). It uses the (indentation-sensitive!) [YAML](https://en.wikipedia.org/wiki/YAML) 
+After installation, `eturnal` usually ships a [default configuration file](https://github.com/processone/eturnal/blob/master/config/eturnal.yml)
+here: `/etc/eturnal.yml` (and, if not found there, there is a backup file here:
+`/opt/eturnal/etc/eturnal.yml`). It uses the (indentation-sensitive!) [YAML](https://en.wikipedia.org/wiki/YAML)
 format. The file contains further explanations.
 
-Here are some hints how to configure eturnal on your [host machine](https://github.com/processone/eturnal#configuration) 
+Here are some hints how to configure eturnal on your [host machine](https://github.com/processone/eturnal#configuration)
 or when using e.g. [Docker](https://eturnal.net/documentation/code/docker.html).
 You may also further deep dive into the [reference documentation](https://eturnal.net/documentation/).
 
-`eturnal` runs out of the box with the default configuration. To enable TURN and 
-to integrate it with your homeserver, some aspects in `eturnal`'s default configuration file 
+`eturnal` runs out of the box with the default configuration. To enable TURN and
+to integrate it with your homeserver, some aspects in `eturnal`'s default configuration file
 must be edited:
 
-1.  Homeserver's [`turn_shared_secret`](../../usage/configuration/config_documentation.md#turn_shared_secret) 
+1.  Homeserver's [`turn_shared_secret`](../../usage/configuration/config_documentation.md#turn_shared_secret)
     and eturnal's shared `secret` for authentication
 
-    Both need to have the same value. Uncomment and adjust this line in `eturnal`'s 
+    Both need to have the same value. Uncomment and adjust this line in `eturnal`'s
     configuration file:
 
     ```yaml
@@ -50,8 +50,8 @@ must be edited:
 1.  Public IP address
 
     If your TURN server is behind NAT, the NAT gateway must have an external,
-    publicly-reachable IP address. `eturnal` tries to autodetect the public IP address, 
-    however, it may also be configured by uncommenting and adjusting this line, so 
+    publicly-reachable IP address. `eturnal` tries to autodetect the public IP address,
+    however, it may also be configured by uncommenting and adjusting this line, so
     `eturnal` advertises that address to connecting clients:
 
     ```yaml
@@ -94,7 +94,7 @@ must be edited:
                                # local clients/peers within such networks.
     ```
 
-    To whitelist IP addresses or specific (private) networks, you need to **add** a 
+    To whitelist IP addresses or specific (private) networks, you need to **add** a
     whitelist part into the configuration file, e.g.:
 
     ```yaml
@@ -157,14 +157,14 @@ must be edited:
     ```sh
     eturnalctl reload
     ```
-    
+
     `eturnal` performs a configuration check before actually reloading/ restarting
     and provides hints, if something is not correctly configured.
 
 ### eturnalctl opterations script
 
-`eturnal` offers a handy [operations script](https://eturnal.net/documentation/#Operation) 
-which can be called e.g. to check, whether the service is up, to restart the service, 
+`eturnal` offers a handy [operations script](https://eturnal.net/documentation/#Operation)
+which can be called e.g. to check, whether the service is up, to restart the service,
 to query how many active sessions exist, to change logging behaviour and so on.
 
 Hint: If `eturnalctl` is not part of your `$PATH`, consider either sym-linking it (e.g. ´ln -s /opt/eturnal/bin/eturnalctl /usr/local/bin/eturnalctl´) or call it from the default `eturnal` directory directly: e.g. `/opt/eturnal/bin/eturnalctl info`

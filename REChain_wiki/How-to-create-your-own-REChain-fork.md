@@ -13,7 +13,7 @@ the encryption or fulfill the regulations.
 Learn more:
 https://www.bis.doc.gov/index.php/policy-guidance/encryption
 
-If you need help from us with using E2EE in your fork read more below under the 
+If you need help from us with using E2EE in your fork read more below under the
 topic "**Official Support**".
 
 ## 3. Stay up to date!

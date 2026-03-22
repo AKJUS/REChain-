@@ -2027,9 +2027,9 @@ class DownloadAndThumbnailTestCase(unittest.HomeserverTestCase):
                 output_stream.write(f.value.response)
                 return f
 
-            d: Deferred[Tuple[bytes, Tuple[int, Dict[bytes, List[bytes]], bytes]]] = (
-                Deferred()
-            )
+            d: Deferred[
+                Tuple[bytes, Tuple[int, Dict[bytes, List[bytes]], bytes]]
+            ] = Deferred()
             self.fetches.append((d, destination, path, args))
             # Note that this callback changes the value held by d.
             d_after_callback = d.addCallbacks(write_to, write_err)

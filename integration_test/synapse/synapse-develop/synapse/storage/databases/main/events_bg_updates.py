@@ -1760,11 +1760,11 @@ class EventsBackgroundUpdatesStore(StreamWorkerStore, StateDeltasStore, SQLBaseS
             ):
                 most_recent_bump_stamp = bump_stamp_event_pos_results[1].stream
 
-            joined_room_stream_ordering_updates[room_id] = (
-                _JoinedRoomStreamOrderingUpdate(
-                    most_recent_event_stream_ordering=most_recent_event_stream_ordering,
-                    most_recent_bump_stamp=most_recent_bump_stamp,
-                )
+            joined_room_stream_ordering_updates[
+                room_id
+            ] = _JoinedRoomStreamOrderingUpdate(
+                most_recent_event_stream_ordering=most_recent_event_stream_ordering,
+                most_recent_bump_stamp=most_recent_bump_stamp,
             )
 
         def _fill_table_txn(txn: LoggingTransaction) -> None:
@@ -2142,7 +2142,9 @@ class EventsBackgroundUpdatesStore(StreamWorkerStore, StateDeltasStore, SQLBaseS
                 )
 
             # Map of values to insert/update in the `sliding_sync_membership_snapshots` table
-            sliding_sync_membership_snapshots_insert_map: SlidingSyncMembershipSnapshotSharedInsertValues = {}
+            sliding_sync_membership_snapshots_insert_map: SlidingSyncMembershipSnapshotSharedInsertValues = (
+                {}
+            )
             if membership == Membership.JOIN:
                 # If we're still joined, we can pull from current state.
                 current_state_ids_map: StateMap[
@@ -2196,9 +2198,9 @@ class EventsBackgroundUpdatesStore(StreamWorkerStore, StateDeltasStore, SQLBaseS
                     assert sliding_sync_membership_snapshots_insert_map
 
                     # We have current state to work from
-                    sliding_sync_membership_snapshots_insert_map["has_known_state"] = (
-                        True
-                    )
+                    sliding_sync_membership_snapshots_insert_map[
+                        "has_known_state"
+                    ] = True
                 else:
                     # Although we expect every room to have a create event (even
                     # past unknown room versions since we haven't supported one
@@ -2338,20 +2340,20 @@ class EventsBackgroundUpdatesStore(StreamWorkerStore, StateDeltasStore, SQLBaseS
                     f"Unexpected membership {membership} ({membership_event_id}) that we don't know how to handle yet"
                 )
 
-            to_insert_membership_snapshots[(room_id, user_id)] = (
-                sliding_sync_membership_snapshots_insert_map
-            )
-            to_insert_membership_infos[(room_id, user_id)] = (
-                SlidingSyncMembershipInfoWithEventPos(
-                    user_id=user_id,
-                    sender=sender,
-                    membership_event_id=membership_event_id,
-                    membership=membership,
-                    membership_event_stream_ordering=membership_event_stream_ordering,
-                    # If instance_name is null we default to "master"
-                    membership_event_instance_name=membership_event_instance_name
-                    or "master",
-                )
+            to_insert_membership_snapshots[
+                (room_id, user_id)
+            ] = sliding_sync_membership_snapshots_insert_map
+            to_insert_membership_infos[
+                (room_id, user_id)
+            ] = SlidingSyncMembershipInfoWithEventPos(
+                user_id=user_id,
+                sender=sender,
+                membership_event_id=membership_event_id,
+                membership=membership,
+                membership_event_stream_ordering=membership_event_stream_ordering,
+                # If instance_name is null we default to "master"
+                membership_event_instance_name=membership_event_instance_name
+                or "master",
             )
 
         def _fill_table_txn(txn: LoggingTransaction) -> None:
@@ -2779,7 +2781,9 @@ def _resolve_stale_data_in_sliding_sync_joined_rooms_table(
                 "progress_json": "{}",
             },
         )
-        depends_on = _BackgroundUpdates.SLIDING_SYNC_PREFILL_JOINED_ROOMS_TO_RECALCULATE_TABLE_BG_UPDATE
+        depends_on = (
+            _BackgroundUpdates.SLIDING_SYNC_PREFILL_JOINED_ROOMS_TO_RECALCULATE_TABLE_BG_UPDATE
+        )
 
     # Now kick-off the background update to catch-up with what we missed while Synapse
     # was downgraded.
@@ -2891,9 +2895,9 @@ def _resolve_stale_data_in_sliding_sync_membership_snapshots_table(
     progress_json: JsonDict = {}
     if max_stream_ordering_sliding_sync_membership_snapshots_table is not None:
         progress_json["initial_phase"] = False
-        progress_json["last_event_stream_ordering"] = (
-            max_stream_ordering_sliding_sync_membership_snapshots_table
-        )
+        progress_json[
+            "last_event_stream_ordering"
+        ] = max_stream_ordering_sliding_sync_membership_snapshots_table
 
     DatabasePool.simple_upsert_txn_native_upsert(
         txn,

@@ -7,4 +7,3 @@ Hi {{ user_display_name }},
 {%- endfor %}
 
 You can disable these notifications at {{ unsubscribe_link }}
-

@@ -241,12 +241,7 @@ class DehydratedDeviceTestCase(unittest.HomeserverTestCase):
         )
 
         # create another device for the user
-        (
-            new_device_id,
-            _,
-            _,
-            _,
-        ) = self.get_success(
+        (new_device_id, _, _, _,) = self.get_success(
             self.registration.register_device(
                 user_id=user,
                 device_id=None,

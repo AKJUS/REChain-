@@ -78,7 +78,7 @@ EOF
   become: yes
   vars:
     rechainonline_version: "4.1.10-1"
-    
+
   tasks:
     - name: Add REChain repository
       yum_repository:
@@ -87,18 +87,18 @@ EOF
         baseurl: http://repo.company.ru/rechainonline/
         enabled: yes
         gpgcheck: no
-        
+
     - name: Install REChain
       dnf:
         name: rechainonline
         state: present
-        
+
     - name: Configure corporate settings
       template:
         src: rechainonline-config.j2
         dest: /etc/rechainonline/config.json
         mode: '0644'
-        
+
     - name: Enable REChain service
       systemd:
         name: rechainonline

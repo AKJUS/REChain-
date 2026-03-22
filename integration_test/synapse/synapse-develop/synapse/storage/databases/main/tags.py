@@ -338,9 +338,9 @@ class TagsWorkerStore(AccountDataWorkerStore):
         if stream_name == AccountDataStream.NAME:
             # Cast is safe because the `AccountDataStream` should only be giving us
             # `AccountDataStreamRow`
-            account_data_stream_rows: List[AccountDataStream.AccountDataStreamRow] = (
-                cast(List[AccountDataStream.AccountDataStreamRow], rows)
-            )
+            account_data_stream_rows: List[
+                AccountDataStream.AccountDataStreamRow
+            ] = cast(List[AccountDataStream.AccountDataStreamRow], rows)
 
             for row in account_data_stream_rows:
                 if row.data_type == AccountDataTypes.TAG:

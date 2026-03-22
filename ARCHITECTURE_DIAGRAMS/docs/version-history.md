@@ -4,7 +4,7 @@
 
 This document tracks changes to architecture diagrams in the REChain project.
 
-**Current Version:** 4.1.10+1160  
+**Current Version:** 4.1.10+1160
 **Last Updated:** 2025-12-06
 
 ---
@@ -210,4 +210,3 @@ ARCHITECTURE_DIAGRAMS/
 - **Issues:** [GitHub Issues](https://github.com/sorydima/REChain-/issues)
 - **Matrix:** #chatting:matrix.katya.wtf
 - **Email:** support@rechain.network
-

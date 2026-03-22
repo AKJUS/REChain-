@@ -35,7 +35,7 @@ void main() {
       );
 
       expect(messageId, isNotEmpty);
-      
+
       final messages = scheduler.getScheduledMessagesForRoom('test_room');
       expect(messages.length, equals(1));
       expect(messages.first.content, equals('Hello, world!'));
@@ -64,7 +64,7 @@ void main() {
 
       final messages = scheduler.getScheduledMessagesForRoom('test_room');
       expect(messages.length, equals(types.length));
-      
+
       for (int i = 0; i < types.length; i++) {
         expect(messages[i].messageType, equals(types[i]));
       }
@@ -142,7 +142,7 @@ void main() {
     test('Encryption settings copyWith', () {
       final original = EncryptionSettings.createDefault();
       final modified = original.copyWith(encryptionEnabled: false);
-      
+
       expect(modified.encryptionEnabled, isFalse);
       expect(modified.algorithm, equals(original.algorithm));
       expect(modified.backupEnabled, equals(original.backupEnabled));
@@ -159,7 +159,7 @@ void main() {
       final policy = MessageRetentionPolicy.createDefault();
       final json = policy.toJson();
       final restored = MessageRetentionPolicy.fromJson(json);
-      
+
       expect(restored.enabled, equals(policy.enabled));
       expect(restored.retentionPeriod, equals(policy.retentionPeriod));
       expect(restored.deleteAfterRead, equals(policy.deleteAfterRead));
@@ -192,7 +192,7 @@ void main() {
 
       final json = bridge.toJson();
       final restored = BridgeInfo.fromJson(json);
-      
+
       expect(restored.id, equals(bridge.id));
       expect(restored.name, equals(bridge.name));
       expect(restored.enabled, equals(bridge.enabled));
@@ -283,7 +283,7 @@ void main() {
 
       final json = message.toJson();
       final restored = ScheduledMessage.fromJson(json);
-      
+
       expect(restored.id, equals(message.id));
       expect(restored.content, equals(message.content));
       expect(restored.messageType, equals(message.messageType));

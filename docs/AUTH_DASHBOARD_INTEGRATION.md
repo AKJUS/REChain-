@@ -131,11 +131,11 @@ class TONAuthService {
   Future<bool> connectWallet();
   Future<String?> getWalletAddress();
   Future<double> getBalance();
-  
+
   // Transaction signing
   Future<String> signTransaction(Map<String, dynamic> transaction);
   Future<bool> broadcastTransaction(String signedTx);
-  
+
   // NFT operations
   Future<List<NFT>> getOwnedNFTs();
   Future<bool> transferNFT(String nftId, String toAddress);
@@ -149,11 +149,11 @@ class TelegramAuthService {
   Future<bool> authenticateBot(String botToken);
   Future<String?> getUserId();
   Future<String?> getUsername();
-  
+
   // Message operations
   Future<bool> sendMessage(String chatId, String message);
   Future<String> signMessage(String message);
-  
+
   // Payment processing
   Future<bool> processPayment(String amount, String currency);
 }
@@ -165,12 +165,12 @@ class BitgetAuthService {
   // API authentication
   Future<bool> authenticateAPI(String apiKey, String secretKey);
   Future<Map<String, dynamic>> getAccountInfo();
-  
+
   // Trading operations
   Future<String> placeOrder(Map<String, dynamic> order);
   Future<List<Map<String, dynamic>>> getOrders();
   Future<Map<String, dynamic>> getPortfolio();
-  
+
   // Market data
   Future<Map<String, dynamic>> getMarketData(String symbol);
 }
@@ -183,11 +183,11 @@ class Web3AuthService {
   Future<bool> connectWallet(String chainId);
   Future<String?> getWalletAddress();
   Future<double> getBalance(String chainId);
-  
+
   // Smart contract interaction
   Future<String> callContract(String contractAddress, String method, List<dynamic> params);
   Future<String> sendTransaction(Map<String, dynamic> transaction);
-  
+
   // DeFi operations
   Future<Map<String, dynamic>> getDeFiProtocols(String chainId);
   Future<String> swapTokens(String fromToken, String toToken, double amount);
@@ -298,7 +298,7 @@ Future<void> connectTONWallet() async {
     if (isConnected) {
       final address = await tonAuthService.getWalletAddress();
       final balance = await tonAuthService.getBalance();
-      
+
       setState(() {
         _tonWalletAddress = address;
         _tonBalance = balance;
@@ -320,10 +320,10 @@ Future<void> sendTONTransaction(String toAddress, double amount) async {
       'amount': amount,
       'gas': 0.05,
     };
-    
+
     final signedTx = await tonAuthService.signTransaction(transaction);
     final success = await tonAuthService.broadcastTransaction(signedTx);
-    
+
     if (success) {
       _showSuccessDialog('Transaction sent successfully!');
     }
@@ -341,7 +341,7 @@ Future<void> authenticateTelegramBot() async {
     if (isAuthenticated) {
       final userId = await telegramAuthService.getUserId();
       final username = await telegramAuthService.getUsername();
-      
+
       setState(() {
         _telegramUserId = userId;
         _telegramUsername = username;
@@ -365,7 +365,7 @@ Future<void> placeBitgetOrder(String symbol, String side, double amount, double 
       'price': price,
       'type': 'limit',
     };
-    
+
     final orderId = await bitgetAuthService.placeOrder(order);
     _showSuccessDialog('Order placed successfully! Order ID: $orderId');
   } catch (e) {
@@ -458,7 +458,7 @@ Future<void> swapTokens(String fromToken, String toToken, double amount) async {
 ```dart
 void _handleAuthError(String service, dynamic error) {
   String message = 'Unknown error occurred';
-  
+
   if (error.toString().contains('network')) {
     message = 'Network connection error. Please check your internet connection.';
   } else if (error.toString().contains('authentication')) {
@@ -466,7 +466,7 @@ void _handleAuthError(String service, dynamic error) {
   } else if (error.toString().contains('permission')) {
     message = 'Permission denied. Please check your account permissions.';
   }
-  
+
   _showErrorDialog('$service Error: $message');
 }
 ```
@@ -475,4 +475,4 @@ void _handleAuthError(String service, dynamic error) {
 
 The Auth Dashboard integration provides a comprehensive authentication solution for the REChain Ecosystem, enabling secure access to multiple blockchain platforms, exchanges, and DeFi protocols. The modular architecture allows for easy extension and customization while maintaining high security standards.
 
-For more information, refer to the individual service documentation and the main REChain Ecosystem documentation. 
+For more information, refer to the individual service documentation and the main REChain Ecosystem documentation.

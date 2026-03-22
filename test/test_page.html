@@ -53,7 +53,7 @@
 </head>
 <body>
     <h1>REChain Services Test Dashboard</h1>
-    
+
     <div class="test-section">
         <h2>Message Scheduling Test</h2>
         <input type="text" id="roomId" placeholder="Room ID" value="test_room">
@@ -138,7 +138,7 @@
 
                 const result = await response.json();
                 const resultDiv = document.getElementById('scheduleResult');
-                
+
                 if (response.ok) {
                     resultDiv.className = 'test-result success';
                     resultDiv.innerHTML = `✅ Message scheduled successfully! ID: ${result.messageId}`;
@@ -162,7 +162,7 @@
             const response = await fetch(`http://localhost:3000/api/schedule/${roomId}`);
                 const result = await response.json();
                 const resultDiv = document.getElementById('scheduleResult');
-                
+
                 if (response.ok) {
                     resultDiv.className = 'test-result success';
                     resultDiv.innerHTML = `✅ Found ${result.messages.length} scheduled messages:<br>` +
@@ -198,7 +198,7 @@
 
                 const result = await response.json();
                 const resultDiv = document.getElementById('translateResult');
-                
+
                 if (response.ok) {
                     resultDiv.className = 'test-result success';
                     resultDiv.innerHTML = `✅ Translation successful!<br>
@@ -223,7 +223,7 @@
                 const response = await fetch('http://localhost:3000/api/security/audit');
                 const result = await response.json();
                 const resultDiv = document.getElementById('auditResult');
-                
+
                 if (response.ok) {
                     resultDiv.className = 'test-result success';
                     resultDiv.innerHTML = `✅ Security audit completed successfully!`;
@@ -244,7 +244,7 @@
             const summaryDiv = document.getElementById('testSummary');
             const passedTests = Object.values(testResults).filter(Boolean).length;
             const totalTests = Object.keys(testResults).length;
-            
+
             if (passedTests === totalTests) {
                 summaryDiv.className = 'test-result success';
                 summaryDiv.innerHTML = `🎉 All tests passed! (${passedTests}/${totalTests})`;

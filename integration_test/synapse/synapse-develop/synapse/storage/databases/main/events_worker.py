@@ -281,13 +281,13 @@ class EventsWorkerStore(SQLBaseStore):
                 5 * 60 * 1000,
             )
 
-        self._get_event_cache: AsyncLruCache[Tuple[str], EventCacheEntry] = (
-            AsyncLruCache(
-                cache_name="*getEvent*",
-                max_size=hs.config.caches.event_cache_size,
-                # `extra_index_cb` Returns a tuple as that is the key type
-                extra_index_cb=lambda _, v: (v.event.room_id,),
-            )
+        self._get_event_cache: AsyncLruCache[
+            Tuple[str], EventCacheEntry
+        ] = AsyncLruCache(
+            cache_name="*getEvent*",
+            max_size=hs.config.caches.event_cache_size,
+            # `extra_index_cb` Returns a tuple as that is the key type
+            extra_index_cb=lambda _, v: (v.event.room_id,),
         )
 
         # Map from event ID to a deferred that will result in a map from event
@@ -490,7 +490,8 @@ class EventsWorkerStore(SQLBaseStore):
         allow_rejected: bool = ...,
         allow_none: Literal[False] = ...,
         check_room_id: Optional[str] = ...,
-    ) -> EventBase: ...
+    ) -> EventBase:
+        ...
 
     @overload
     async def get_event(
@@ -501,7 +502,8 @@ class EventsWorkerStore(SQLBaseStore):
         allow_rejected: bool = ...,
         allow_none: Literal[True] = ...,
         check_room_id: Optional[str] = ...,
-    ) -> Optional[EventBase]: ...
+    ) -> Optional[EventBase]:
+        ...
 
     @cancellable
     async def get_event(
@@ -853,9 +855,9 @@ class EventsWorkerStore(SQLBaseStore):
                 # to all the events we pulled from the DB (this will result in this
                 # function returning more events than requested, but that can happen
                 # already due to `_get_events_from_db`).
-                fetching_deferred: ObservableDeferred[Dict[str, EventCacheEntry]] = (
-                    ObservableDeferred(defer.Deferred(), consumeErrors=True)
-                )
+                fetching_deferred: ObservableDeferred[
+                    Dict[str, EventCacheEntry]
+                ] = ObservableDeferred(defer.Deferred(), consumeErrors=True)
                 for event_id in missing_events_ids:
                     self._current_event_fetches[event_id] = fetching_deferred
 

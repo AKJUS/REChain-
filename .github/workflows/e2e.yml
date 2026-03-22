@@ -23,4 +23,4 @@ jobs:
           sudo apt-get install -y chromium-browser
       - name: Run E2E test
         run: |
-          python bridges/telegram_super_tma/test_e2e.py 
+          python bridges/telegram_super_tma/test_e2e.py

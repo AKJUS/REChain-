@@ -24,4 +24,4 @@
 
 ---
 
-For more help, see the [wiki home](Home.md) or open an issue on GitHub. 
+For more help, see the [wiki home](Home.md) or open an issue on GitHub.

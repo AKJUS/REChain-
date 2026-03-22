@@ -10,5 +10,3 @@ requires 'IO::Socket::SSL', 0;
 requires 'YAML', 0;
 requires 'JSON', 0;
 requires 'Getopt::Long', 0;
-
-

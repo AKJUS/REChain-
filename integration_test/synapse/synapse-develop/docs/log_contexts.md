@@ -18,7 +18,7 @@ Asynchronous functions make the whole thing complicated, so this document descri
 how it all works, and how to write code which follows the rules.
 
 In this document, "awaitable" refers to any object which can be `await`ed. In the context of
-Synapse, that normally means either a coroutine or a Twisted 
+Synapse, that normally means either a coroutine or a Twisted
 [`Deferred`](https://twistedmatrix.com/documents/current/api/twisted.internet.defer.Deferred.html).
 
 ## Logcontexts without asynchronous code
@@ -348,9 +348,9 @@ def reset_listener_queue():
 
 So, both ends of the awaitable chain have now dropped their references,
 and the awaitable chain is now orphaned, and will be garbage-collected at
-some point. Note that `await_something_interesting` is a coroutine, 
+some point. Note that `await_something_interesting` is a coroutine,
 which Python implements as a generator function.  When Python
-garbage-collects generator functions, it gives them a chance to 
+garbage-collects generator functions, it gives them a chance to
 clean up by making the `await` (or `yield`) raise a `GeneratorExit`
 exception. In our case, that means that the `__exit__` handler of
 `PreserveLoggingContext` will carefully restore the request context, but

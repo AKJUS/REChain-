@@ -34,4 +34,3 @@
 
 -- this table is unused as of Synapse 1.41
 DROP TABLE public_room_list_stream;
-

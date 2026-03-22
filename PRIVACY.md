@@ -185,7 +185,7 @@ A typical push notification could look like this:
         ]
       }
     }
-    
+
 
 REChain.Online sets the `event_id_only` flag at the Katya ® 👽 AI 🧠 REChain ®️ 🪐 ✨ Blockchain Node. This Katya ® 👽 AI 🧠 REChain ®️ 🪐 ✨ Blockchain Node is then responsible to send the correct data.
 
