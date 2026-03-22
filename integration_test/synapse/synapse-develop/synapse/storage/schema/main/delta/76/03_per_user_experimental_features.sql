@@ -43,4 +43,3 @@ CREATE TABLE per_user_experimental_features (
     FOREIGN KEY (user_id) REFERENCES users(name),
     PRIMARY KEY (user_id, feature)
 );
-

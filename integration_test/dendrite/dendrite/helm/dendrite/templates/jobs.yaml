@@ -66,7 +66,7 @@ spec:
         command:
         - sh
         - -c
-        - | 
+        - |
           # check if key already exists
           key=$(kubectl get secret {{ $secretName }} -o jsonpath="{.data['signing\.key']}" 2> /dev/null)
           [ $? -ne 0 ] && echo "Failed to get existing secret" && exit 1
@@ -87,7 +87,7 @@ spec:
       - name: generate-key
         {{- include "image.name" . | nindent 8 }}
         command:
-        - sh 
+        - sh
         - -c
         - |
           /usr/bin/generate-keys -private-key /etc/dendrite/signing-key.pem

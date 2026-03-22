@@ -28,7 +28,7 @@ of the update, the name of the database, and a flag to indicate whether the back
 update will happen in one go and may take a long time (e.g. creating indices). If this last
 argument is set to `False`, the update will be run in batches.
 
-The module must return an async context manager. It will be entered before Synapse runs a 
+The module must return an async context manager. It will be entered before Synapse runs a
 background update; this should return the desired duration of the iteration, in
 milliseconds.
 

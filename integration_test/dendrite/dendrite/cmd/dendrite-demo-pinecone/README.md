@@ -27,7 +27,7 @@ Once logged in, you should be able to open the room directory or join a room by 
 
 ## Store & Forward Relays
 
-To test out the store & forward relay functionality, you need a minimum of 3 instances. 
+To test out the store & forward relay functionality, you need a minimum of 3 instances.
 One instance will act as the relay, and the other two instances will be the users trying to communicate.
 Then you can send messages between the two nodes and watch as the relay is used if the receiving node is offline.
 
@@ -62,4 +62,4 @@ After editing the database you will need to relaunch the nodes for the changes t
 ### Testing
 
 Now you can run two separate instances of element and connect them to `Node 1` and `Node 2`.
-You can shutdown one of the nodes and continue sending messages. If you wait long enough, the message will be sent to the relay server. (you can see this in the log output of the relay server) 
+You can shutdown one of the nodes and continue sending messages. If you wait long enough, the message will be sent to the relay server. (you can see this in the log output of the relay server)

@@ -1,4 +1,4 @@
-{{- if and 
+{{- if and
   (and .Values.prometheus.servicemonitor.enabled .Values.dendrite_config.global.metrics.enabled )
   ( .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" )
 }}

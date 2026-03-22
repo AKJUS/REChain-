@@ -334,9 +334,9 @@ class BulkPushRuleEvaluator:
                     if relation_type == "m.thread" and event.content.get(
                         "m.relates_to", {}
                     ).get("is_falling_back", False):
-                        related_events["m.in_reply_to"]["im.vector.is_falling_back"] = (
-                            ""
-                        )
+                        related_events["m.in_reply_to"][
+                            "im.vector.is_falling_back"
+                        ] = ""
 
         return related_events
 

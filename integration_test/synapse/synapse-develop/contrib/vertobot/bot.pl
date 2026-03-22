@@ -1,4 +1,4 @@
-#!/usr/bin/env perl 
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
@@ -70,7 +70,7 @@ my $bot_matrix = Net::Async::Matrix->new(
     on_invite => sub {
         my ($matrix, $invite) = @_;
         warn "[Matrix] invited to: " . $invite->{room_id} . " by " . $invite->{inviter} . "\n";
-        
+
         $matrix->join_room( $invite->{room_id} )->get;
     },
     on_room_new => sub {
@@ -79,21 +79,21 @@ my $bot_matrix = Net::Async::Matrix->new(
         warn "[Matrix] have a room ID: " . $room->room_id . "\n";
 
         $bot_matrix_rooms{$room->room_id} = $room;
-        
+
         # log in to verto on behalf of this room
         $bridgestate->{$room->room_id}->{sessid} = $sessid;
-         
+
         $room->configure(
             on_message => \&on_room_message,
         );
-        
+
         my $f = send_verto_json_request("login", {
                 'login' => $CONFIG{'verto-dialog-params'}{'login'},
                 'passwd' => $CONFIG{'verto-config'}{'passwd'},
                 'sessid' => $sessid,
             });
         $matrix->adopt_future($f);
-        
+
         # we deliberately don't paginate the room, as we only care about
         # new calls
     },
@@ -108,11 +108,11 @@ sub on_unknown_event
 {
     my ($matrix, $event) = @_;
     print Dumper($event);
-    
+
     my $room_id = $event->{room_id};
     my %dp = %{$CONFIG{'verto-dialog-params'}};
     $dp{callID} = $bridgestate->{$room_id}->{callid};
-    
+
     if ($event->{type} eq 'm.call.invite') {
         $bridgestate->{$room_id}->{matrix_callid} = $event->{content}->{call_id};
         $bridgestate->{$room_id}->{callid} = lc new Data::UUID->create_str();
@@ -146,7 +146,7 @@ sub on_unknown_event
 
             $offer =~ s/(m=video)/$candidate_block->{audio}$1/;
             $offer =~ s/(.$)/$1\n$candidate_block->{video}$1/;
-            
+
             my $f = send_verto_json_request("verto.invite", {
                 "sdp" => $offer,
                 "dialogParams" => \%dp,
@@ -183,19 +183,19 @@ sub on_room_message
 {
     my ($room, $from, $content) = @_;
     my $room_id = $room->room_id;
-    warn "[Matrix] in $room_id: $from: " . $content->{body} . "\n";    
+    warn "[Matrix] in $room_id: $from: " . $content->{body} . "\n";
 }
 
 Future->needs_all(
     $bot_matrix->login( %{ $CONFIG{"matrix-bot"} } )->then( sub {
         $bot_matrix->start;
     }),
-    
+
     $bot_verto->connect(
         %{ $CONFIG{"verto-bot"} },
         on_connect_error => sub { die "Cannot connect to verto - $_[-1]" },
-        on_resolve_error => sub { die "Cannot resolve to verto - $_[-1]" },        
-    )->on_done( sub { 
+        on_resolve_error => sub { die "Cannot resolve to verto - $_[-1]" },
+    )->on_done( sub {
         warn("[Verto] connected to websocket");
     }),
 )->get;
@@ -228,14 +228,14 @@ die $e if $e;
 
 exit 0;
 
-{    
+{
     my $json_id;
     my $requests;
 
     sub send_verto_json_request
     {
         $json_id ||= 1;
-        
+
         my ($method, $params) = @_;
         my $json = {
             jsonrpc => "2.0",
@@ -251,7 +251,7 @@ exit 0;
         $json_id++;
         return $request;
     }
-    
+
     sub send_verto_json_response
     {
         my ($result, $id) = @_;
@@ -264,14 +264,14 @@ exit 0;
         warn "[Verto] sending $text";
         $bot_verto->send_frame ( $text );
     }
-    
+
     sub on_verto_json
     {
         my $json = JSON->new->decode( $_[0] );
         if ($json->{method}) {
             if (($json->{method} eq 'verto.answer' && $json->{params}->{sdp}) ||
                 $json->{method} eq 'verto.media') {
-                                
+
                 my $room_id = $roomid_by_callid->{$json->{params}->{callID}};
                 my $room = $bot_matrix_rooms{$room_id};
 
@@ -306,4 +306,3 @@ exit 0;
         }
     }
 }
-

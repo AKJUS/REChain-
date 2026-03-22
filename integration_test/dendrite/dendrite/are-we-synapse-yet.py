@@ -11,7 +11,7 @@ import os
 # The main complexity is grouping tests sensibly into features like 'Registration'
 # and 'Federation'. Then it just checks the ones which are passing and calculates
 # percentages for each group. Produces results like:
-# 
+#
 # Client-Server APIs: 29% (196/666 tests)
 # -------------------
 #   Registration             :  62% (20/32 tests)
@@ -28,7 +28,7 @@ import os
 #    ✓ POST /register can create a user
 #    ✓ POST /register downcases capitals in usernames
 #    ...
-# 
+#
 # You can also tack `-v` on to see exactly which tests each category falls under.
 
 test_mappings = {
@@ -36,8 +36,7 @@ test_mappings = {
     "unk": "Unknown API (no group specified)",
     "app": "Application Services API",
     "msc": "MSCs",
-    "f": "Federation", # flag to mark test involves federation
-
+    "f": "Federation",  # flag to mark test involves federation
     "federation_apis": {
         "fky": "Key API",
         "fsj": "send_join API",
@@ -53,9 +52,8 @@ test_mappings = {
         "fpb": "Public Room API",
         "fdk": "Device Key APIs",
         "fed": "Federation API",
-		"fsd": "Send-to-Device APIs",
+        "fsd": "Send-to-Device APIs",
     },
-
     "client_apis": {
         "reg": "Registration",
         "log": "Login",
@@ -104,7 +102,7 @@ test_mappings = {
         "adm": "Server Admin API",
         "ign": "Ignore Users",
         "udr": "User Directory APIs",
-		"jso": "Enforced canonical JSON",
+        "jso": "Enforced canonical JSON",
     },
 }
 
@@ -135,6 +133,7 @@ def parse_test_line(line):
         "ok": test_pass,
     }
 
+
 # Prints the stats for a complete section.
 #   header_name => "Client-Server APIs"
 #   gid_to_tests => { gid: { <name>: True|False }}
@@ -156,9 +155,11 @@ def parse_test_line(line):
 #    ✓ POST /register downcases capitals in usernames
 #    ...
 def print_stats(header_name, gid_to_tests, gid_to_name, verbose):
-    ci = os.getenv("CI") # When running from GHA, this groups the subsections
-    subsections = [] # Registration: 100% (13/13 tests)
-    subsection_test_names = {} # 'subsection name': ["✓ Test 1", "✓ Test 2", "× Test 3"]
+    ci = os.getenv("CI")  # When running from GHA, this groups the subsections
+    subsections = []  # Registration: 100% (13/13 tests)
+    subsection_test_names = (
+        {}
+    )  # 'subsection name': ["✓ Test 1", "✓ Test 2", "× Test 3"]
     total_passing = 0
     total_tests = 0
     for gid, tests in gid_to_tests.items():
@@ -171,28 +172,40 @@ def print_stats(header_name, gid_to_tests, gid_to_name, verbose):
             if passing:
                 group_passing += 1
             test_names_and_marks.append(f"{'✅' if passing else '❌'} {name}")
-            
+
         total_tests += group_total
         total_passing += group_passing
-        pct = "{0:.0f}%".format(group_passing/group_total * 100)
-        line = "%s: %s (%d/%d tests)" % (gid_to_name[gid].ljust(25, ' '), pct.rjust(4, ' '), group_passing, group_total)
+        pct = "{0:.0f}%".format(group_passing / group_total * 100)
+        line = "%s: %s (%d/%d tests)" % (
+            gid_to_name[gid].ljust(25, " "),
+            pct.rjust(4, " "),
+            group_passing,
+            group_total,
+        )
         subsections.append(line)
         subsection_test_names[line] = test_names_and_marks
 
     # avoid errors when trying to divide by 0
     if total_tests == 0:
         return
-    
-    pct = "{0:.0f}%".format(total_passing/total_tests * 100)
+
+    pct = "{0:.0f}%".format(total_passing / total_tests * 100)
     print("%s: %s (%d/%d tests)" % (header_name, pct, total_passing, total_tests))
-    print("-" * (len(header_name)+1))
+    print("-" * (len(header_name) + 1))
     for line in subsections:
-        print("%s%s" % ("::group::" if ci and verbose else "", line,))
+        print(
+            "%s%s"
+            % (
+                "::group::" if ci and verbose else "",
+                line,
+            )
+        )
         if verbose:
             for test_name_and_pass_mark in subsection_test_names[line]:
                 print("    %s" % (test_name_and_pass_mark,))
             print("%s" % ("::endgroup::" if ci else ""))
     print("")
+
 
 def main(results_tap_path, verbose):
     # Load up test mappings
@@ -209,7 +222,7 @@ def main(results_tap_path, verbose):
                 else:
                     client_tests.add(test_name)
                 if gid == "f":
-                    continue # we expect another group ID
+                    continue  # we expect another group ID
                 test_name_to_group_id[test_name] = gid
 
     # parse results.tap
@@ -227,11 +240,7 @@ def main(results_tap_path, verbose):
         "appservice": {
             "app": {},
         },
-        "nonspec": {
-            "nsp": {},
-            "msc": {},
-            "unk": {}
-        },
+        "nonspec": {"nsp": {}, "msc": {}, "unk": {}},
     }
     with open(results_tap_path, "r") as f:
         for line in f.readlines():
@@ -261,15 +270,25 @@ def main(results_tap_path, verbose):
     print("===================")
     print("")
     print_stats("Non-Spec APIs", summary["nonspec"], test_mappings, verbose)
-    print_stats("Client-Server APIs", summary["client"], test_mappings["client_apis"], verbose)
-    print_stats("Federation APIs", summary["federation"], test_mappings["federation_apis"], verbose)
-    print_stats("Application Services APIs", summary["appservice"], test_mappings, verbose)
+    print_stats(
+        "Client-Server APIs", summary["client"], test_mappings["client_apis"], verbose
+    )
+    print_stats(
+        "Federation APIs",
+        summary["federation"],
+        test_mappings["federation_apis"],
+        verbose,
+    )
+    print_stats(
+        "Application Services APIs", summary["appservice"], test_mappings, verbose
+    )
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("tap_file", help="path to results.tap")
-    parser.add_argument("-v", action="store_true", help="show individual test names in output")
+    parser.add_argument(
+        "-v", action="store_true", help="show individual test names in output"
+    )
     args = parser.parse_args()
     main(args.tap_file, args.v)

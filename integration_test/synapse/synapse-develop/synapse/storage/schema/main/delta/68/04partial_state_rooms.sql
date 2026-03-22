@@ -56,5 +56,3 @@ CREATE TABLE IF NOT EXISTS partial_state_events (
 
 CREATE INDEX IF NOT EXISTS partial_state_events_room_id_idx
      ON partial_state_events (room_id);
-
-

@@ -188,7 +188,7 @@ REChain integrates multiple cutting-edge technologies:
    ```bash
    # For Windows CI/CD
    .\scripts\build_windows_ci.ps1
-   
+
    # For Linux/macOS
    ./scripts/build_linux_ci.sh
    ```
@@ -320,15 +320,15 @@ REChain is a comprehensive platform that unifies Matrix protocol, blockchain, IP
 
 ![Screenshot](https://github.com/sorydima/REChain-/blob/main/assets/banner.png)
 
-### **REChain Messenger** 🪐🔒  
+### **REChain Messenger** 🪐🔒
 
 https://api.codemagic.io/apps/6849dcd1411f3e1270f933cd/6849dcd1411f3e1270f933cc/status_badge.svg
 
 [![Codemagic build status](https://api.codemagic.io/apps/6849dcd1411f3e1270f933cd/6849dcd1411f3e1270f933cc/status_badge.svg)](https://codemagic.io/app/6849dcd1411f3e1270f933cd/6849dcd1411f3e1270f933cc/latest_build)
 
-**REChain Messenger** is a decentralized messaging app focused on privacy, security, and unrestricted communication. It operates without centralized servers, eliminating censorship, data leaks, and third-party surveillance.  
+**REChain Messenger** is a decentralized messaging app focused on privacy, security, and unrestricted communication. It operates without centralized servers, eliminating censorship, data leaks, and third-party surveillance.
 
-## 🔹 **Key Features**  
+## 🔹 **Key Features**
 
 
 Before We start!
@@ -339,28 +339,28 @@ Termius provides a secure, reliable, and collaborative SSH client.
 
 ![termius-icon-1024](https://github.com/user-attachments/assets/29871120-f7ce-4d98-a2ba-087917d2769a)
 
-### **1. Fully Decentralized Architecture**  
-- No central servers – all messages are transmitted through a distributed network.  
-- Users can deploy their own nodes, ensuring network resilience.  
+### **1. Fully Decentralized Architecture**
+- No central servers – all messages are transmitted through a distributed network.
+- Users can deploy their own nodes, ensuring network resilience.
 
-### **2. End-to-End Encryption**  
-- Advanced cryptographic algorithms protect messages and files.  
-- Only the sender and recipient can decrypt conversations.  
+### **2. End-to-End Encryption**
+- Advanced cryptographic algorithms protect messages and files.
+- Only the sender and recipient can decrypt conversations.
 
-### **3. True Anonymity**  
-- No phone number or email required for registration.  
-- One-time IDs for anonymous communication.  
+### **3. True Anonymity**
+- No phone number or email required for registration.
+- One-time IDs for anonymous communication.
 
-### **4. Built-in Wallet & Token Support**  
-- Send digital assets directly within chats.  
-- Smart contract support and integration with REChain Network.  
+### **4. Built-in Wallet & Token Support**
+- Send digital assets directly within chats.
+- Smart contract support and integration with REChain Network.
 
-### **5. Censorship & Block Resistance**  
-- A decentralized network prevents full shutdowns.  
-- Dynamic node support for bypassing restrictions.  
+### **5. Censorship & Block Resistance**
+- A decentralized network prevents full shutdowns.
+- Dynamic node support for bypassing restrictions.
 
-## 🔥 **Why Choose REChain Messenger?**  
-This messenger is designed for those who value freedom, security, and innovation in digital communication. It is perfect for activists, developers, the crypto community, and anyone who wants to protect their data from third-party interference.  
+## 🔥 **Why Choose REChain Messenger?**
+This messenger is designed for those who value freedom, security, and innovation in digital communication. It is perfect for activists, developers, the crypto community, and anyone who wants to protect their data from third-party interference.
 
 👉 **REChain Messenger is the new standard of privacy in the digital world!** 🚀
 
@@ -417,9 +417,9 @@ Here's the expanded version with your additions:
 
 Please, visit the website for the installation instructions 🪐:
 
-- https://online.rechain.network 
+- https://online.rechain.network
 
-# Donate US! ⌛️ 
+# Donate US! ⌛️
 
 ### For tea, coffee! For the future of decentralized and distributed internet. We do cool and, in my opinion, useful things for the safety and security of users' personal data. And on a completely non-commercial basis! 😎
 
@@ -433,40 +433,40 @@ Please, visit the website for the installation instructions 🪐:
 
 * <a href="https://facebook.com/rechainINC">Facebook</a>
 
-* <a href="https://matrix.to/#/#lab:matrix.tanya.city">#lab:matrix.tanya.city</a>  
-* <a href="https://matrix.to/#/#workdao:matrix.tanya.city">#workdao:matrix.tanya.city</a>  
-* <a href="https://matrix.to/#/#ai:hackliberty.org">#ai:hackliberty.org</a>  
-* <a href="https://matrix.to/#/#foodies:devture.com">#foodies:devture.com</a>  
-* <a href="https://matrix.to/#/#FreeCodeCamp_linux:gitter.im">#FreeCodeCamp_linux:gitter.im</a>  
-* <a href="https://matrix.to/#/#design:gossip.land">#design:gossip.land</a>  
-* <a href="https://matrix.to/#/#basketball:gossip.land">#basketball:gossip.land</a>  
-* <a href="https://matrix.to/#/#books:gossip.land">#books:gossip.land</a>  
-* <a href="https://matrix.to/#/#cats:gossip.land">#cats:gossip.land</a>  
-* <a href="https://matrix.to/#/#dogs:gossip.land">#dogs:gossip.land</a>  
-* <a href="https://matrix.to/#/#film:gossip.land">#film:gossip.land</a>  
-* <a href="https://matrix.to/#/#football:gossip.land">#football:gossip.land</a>  
-* <a href="https://matrix.to/#/#oslo:gossip.land">#oslo:gossip.land</a>  
-* <a href="https://matrix.to/#/#music:gossip.land">#music:gossip.land</a>  
-* <a href="https://matrix.to/#/#news:gossip.land">#news:gossip.land</a>  
-* <a href="https://matrix.to/#/#science:gossip.land">#science:gossip.land</a>  
-* <a href="https://matrix.to/#/#sports:gossip.land">#sports:gossip.land</a>  
-* <a href="https://matrix.to/#/#technology:gossip.land">#technology:gossip.land</a>  
-* <a href="https://matrix.to/#/#rechain:matrix.tanya.city">#rechain:matrix.tanya.city</a>  
-* <a href="https://matrix.to/#/#chatting:matrix.katya.wtf">#chatting:matrix.katya.wtf</a>  
-* <a href="https://matrix.to/#/#bitspace:matrix.katya.wtf">#bitspace:matrix.katya.wtf</a>  
-* <a href="https://matrix.to/#/#bit:matrix.katya.wtf">#bit:matrix.katya.wtf</a>  
-* <a href="https://matrix.to/#/#bitthebot:matrix.org">#bitthebot:matrix.org</a>  
-* <a href="https://matrix.to/#/#marinamoda:matrix.org">#marinamoda:matrix.org</a>  
-* <a href="https://matrix.to/#/#marinamodaru:matrix.org">#marinamodaru:matrix.org</a>  
-* <a href="https://matrix.to/#/#marinamodaen:matrix.org">#marinamodaen:matrix.org</a>  
-* <a href="https://matrix.to/#/#toncity:matrix.org">#toncity:matrix.org</a>  
-* <a href="https://matrix.to/#/#marinamodacity:matrix.org">#marinamodacity:matrix.org</a>  
-* <a href="https://matrix.to/#/#marinadao:matrix.org">#marinadao:matrix.org</a>  
-* <a href="https://matrix.to/#/#durovshater:matrix.org">#durovshater:matrix.org</a>  
-* <a href="https://matrix.to/#/#slackware:matrix.org">#slackware:matrix.org</a>  
-* <a href="https://matrix.to/#/#altlinux-ru:matrix.org">#altlinux-ru:matrix.org</a>  
-* <a href="https://matrix.to/#/#stickers:squirrel.rocks">#stickers:squirrel.rocks</a>  
-* <a href="https://matrix.to/#/#space:alt-gnome.ru">#space:alt-gnome.ru</a>  
+* <a href="https://matrix.to/#/#lab:matrix.tanya.city">#lab:matrix.tanya.city</a>
+* <a href="https://matrix.to/#/#workdao:matrix.tanya.city">#workdao:matrix.tanya.city</a>
+* <a href="https://matrix.to/#/#ai:hackliberty.org">#ai:hackliberty.org</a>
+* <a href="https://matrix.to/#/#foodies:devture.com">#foodies:devture.com</a>
+* <a href="https://matrix.to/#/#FreeCodeCamp_linux:gitter.im">#FreeCodeCamp_linux:gitter.im</a>
+* <a href="https://matrix.to/#/#design:gossip.land">#design:gossip.land</a>
+* <a href="https://matrix.to/#/#basketball:gossip.land">#basketball:gossip.land</a>
+* <a href="https://matrix.to/#/#books:gossip.land">#books:gossip.land</a>
+* <a href="https://matrix.to/#/#cats:gossip.land">#cats:gossip.land</a>
+* <a href="https://matrix.to/#/#dogs:gossip.land">#dogs:gossip.land</a>
+* <a href="https://matrix.to/#/#film:gossip.land">#film:gossip.land</a>
+* <a href="https://matrix.to/#/#football:gossip.land">#football:gossip.land</a>
+* <a href="https://matrix.to/#/#oslo:gossip.land">#oslo:gossip.land</a>
+* <a href="https://matrix.to/#/#music:gossip.land">#music:gossip.land</a>
+* <a href="https://matrix.to/#/#news:gossip.land">#news:gossip.land</a>
+* <a href="https://matrix.to/#/#science:gossip.land">#science:gossip.land</a>
+* <a href="https://matrix.to/#/#sports:gossip.land">#sports:gossip.land</a>
+* <a href="https://matrix.to/#/#technology:gossip.land">#technology:gossip.land</a>
+* <a href="https://matrix.to/#/#rechain:matrix.tanya.city">#rechain:matrix.tanya.city</a>
+* <a href="https://matrix.to/#/#chatting:matrix.katya.wtf">#chatting:matrix.katya.wtf</a>
+* <a href="https://matrix.to/#/#bitspace:matrix.katya.wtf">#bitspace:matrix.katya.wtf</a>
+* <a href="https://matrix.to/#/#bit:matrix.katya.wtf">#bit:matrix.katya.wtf</a>
+* <a href="https://matrix.to/#/#bitthebot:matrix.org">#bitthebot:matrix.org</a>
+* <a href="https://matrix.to/#/#marinamoda:matrix.org">#marinamoda:matrix.org</a>
+* <a href="https://matrix.to/#/#marinamodaru:matrix.org">#marinamodaru:matrix.org</a>
+* <a href="https://matrix.to/#/#marinamodaen:matrix.org">#marinamodaen:matrix.org</a>
+* <a href="https://matrix.to/#/#toncity:matrix.org">#toncity:matrix.org</a>
+* <a href="https://matrix.to/#/#marinamodacity:matrix.org">#marinamodacity:matrix.org</a>
+* <a href="https://matrix.to/#/#marinadao:matrix.org">#marinadao:matrix.org</a>
+* <a href="https://matrix.to/#/#durovshater:matrix.org">#durovshater:matrix.org</a>
+* <a href="https://matrix.to/#/#slackware:matrix.org">#slackware:matrix.org</a>
+* <a href="https://matrix.to/#/#altlinux-ru:matrix.org">#altlinux-ru:matrix.org</a>
+* <a href="https://matrix.to/#/#stickers:squirrel.rocks">#stickers:squirrel.rocks</a>
+* <a href="https://matrix.to/#/#space:alt-gnome.ru">#space:alt-gnome.ru</a>
 * <a href="https://matrix.to/#/#chat:alt-gnome.ru">#chat:alt-gnome.ru</a>
 
 * <a href="https://t.me/+aNI7CzqG3OAxZDdi">Community for the Lab Venture Builder & Incubator 💡👀💭</a>
@@ -626,4 +626,3 @@ flutter-aurora build aurora
 - For packaging, see `aurora/rpm/com.rechain.online.spec`.
 
 For more, see [docs/](docs/) and the [wiki](https://github.com/sorydima/REChain-/wiki).
-

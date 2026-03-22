@@ -747,7 +747,8 @@ def preserve_fn(
 
 
 @overload
-def preserve_fn(f: Callable[P, R]) -> Callable[P, "defer.Deferred[R]"]: ...
+def preserve_fn(f: Callable[P, R]) -> Callable[P, "defer.Deferred[R]"]:
+    ...
 
 
 def preserve_fn(
@@ -776,7 +777,8 @@ def run_in_background(
 @overload
 def run_in_background(
     f: Callable[P, R], *args: P.args, **kwargs: P.kwargs
-) -> "defer.Deferred[R]": ...
+) -> "defer.Deferred[R]":
+    ...
 
 
 def run_in_background(

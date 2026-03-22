@@ -9,4 +9,4 @@ service:
 redis:
   enabled: true
   host: redis
-  port: 6379 
+  port: 6379

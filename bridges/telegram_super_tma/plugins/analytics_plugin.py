@@ -2,7 +2,10 @@ from telegram.ext import CommandHandler
 from dashboard_api import metrics
 import aiohttp
 
-EXTERNAL_ANALYTICS_URL = 'https://analytics.example.com/ingest'  # Replace with real endpoint
+EXTERNAL_ANALYTICS_URL = (
+    "https://analytics.example.com/ingest"  # Replace with real endpoint
+)
+
 
 async def stats_command(update, context):
     msg = (
@@ -19,5 +22,6 @@ async def stats_command(update, context):
         except Exception:
             pass
 
+
 def register(app):
-    app.add_handler(CommandHandler('stats', stats_command)) 
+    app.add_handler(CommandHandler("stats", stats_command))

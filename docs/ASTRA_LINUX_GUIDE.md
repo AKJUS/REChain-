@@ -83,12 +83,12 @@ export http_proxy=http://proxy.company.ru:8080
       get_url:
         url: https://github.com/sorydima/REChain-/releases/latest/download/rechainonline-4.1.10-amd64.deb
         dest: /tmp/rechainonline.deb
-        
+
     - name: Install REChain
       apt:
         deb: /tmp/rechainonline.deb
         state: present
-        
+
     - name: Configure security labels
       shell: pdpl-file -l "Несекретно" /usr/bin/rechainonline
 ```

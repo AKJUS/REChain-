@@ -27,4 +27,4 @@ Thank you for your interest in contributing! We welcome all kinds of contributio
 
 ---
 
-*Thank you for making REChain better!* 
+*Thank you for making REChain better!*

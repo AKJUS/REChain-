@@ -50,7 +50,7 @@ the room IDs of all affected rooms.
 
 ## POST `/_dendrite/admin/resetPassword/{userID}`
 
-Reset the password of a local user. 
+Reset the password of a local user.
 
 **If `logout_devices` is set to `true`, all `access_tokens` will be invalidated, resulting
 in the potential loss of encrypted messages**
@@ -106,5 +106,5 @@ guidance on configuring and using this endpoint.
 
 ## GET `/_matrix/client/v3/admin/whois/{userId}`
 
-From the [Matrix Spec](https://spec.matrix.org/v1.3/client-server-api/#get_matrixclientv3adminwhoisuserid). 
+From the [Matrix Spec](https://spec.matrix.org/v1.3/client-server-api/#get_matrixclientv3adminwhoisuserid).
 Gets information about a particular user. `userId` is the full user ID (e.g. `@alice:domain.com`)

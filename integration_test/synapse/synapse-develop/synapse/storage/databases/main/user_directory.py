@@ -216,7 +216,9 @@ class UserDirectoryBackgroundUpdateStore(StateDeltasStore):
                 SELECT room_id, events FROM %s
                 ORDER BY events DESC
                 LIMIT 250
-            """ % (TEMP_TABLE + "_rooms",)
+            """ % (
+                TEMP_TABLE + "_rooms",
+            )
             txn.execute(sql)
             rooms_to_work_on = cast(List[Tuple[str, int]], txn.fetchall())
 
@@ -576,9 +578,9 @@ class UserDirectoryBackgroundUpdateStore(StateDeltasStore):
             retry_counter: number of failures in refreshing the profile so far. Used for
                 exponential backoff calculations.
         """
-        assert not self.hs.is_mine_id(user_id), (
-            "Can't mark a local user as a stale remote user."
-        )
+        assert not self.hs.is_mine_id(
+            user_id
+        ), "Can't mark a local user as a stale remote user."
 
         server_name = UserID.from_string(user_id).domain
 

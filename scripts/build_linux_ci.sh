@@ -65,10 +65,10 @@ if ! command_exists flutter; then
     if [ ! -d "$FLUTTER_HOME" ]; then
         git clone https://github.com/flutter/flutter.git "$FLUTTER_HOME"
     fi
-    
+
     # Add Flutter to PATH
     export PATH="$FLUTTER_HOME/bin:$PATH"
-    
+
     # Switch to specific version if needed
     if [ "$FLUTTER_VERSION" != "latest" ]; then
         cd "$FLUTTER_HOME"
@@ -177,4 +177,4 @@ else
     fi
 fi
 
-write_status "Linux CI/CD build process completed!" "green" 
+write_status "Linux CI/CD build process completed!" "green"

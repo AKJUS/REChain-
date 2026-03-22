@@ -20,4 +20,4 @@
 
 ---
 
-*Want to contribute a video? Open an issue or PR!* 
+*Want to contribute a video? Open an issue or PR!*

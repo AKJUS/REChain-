@@ -269,4 +269,4 @@ REChain's ecosystem architecture is designed to provide a comprehensive digital 
 
 REChain's ecosystem architecture provides a comprehensive foundation for building autonomous organizations and digital infrastructure. By combining cutting-edge technologies with proven architectural patterns, we create a platform that is secure, scalable, and capable of supporting the next generation of digital innovation.
 
-**Join us in building the future of digital autonomy.** 
+**Join us in building the future of digital autonomy.**

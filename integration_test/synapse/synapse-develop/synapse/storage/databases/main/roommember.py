@@ -236,7 +236,9 @@ class RoomMemberWorkerStore(EventsWorkerStore, CacheInvalidationWorkerStore):
                 AND m.room_id = c.room_id
                 AND m.user_id = c.state_key
                 WHERE c.type = 'm.room.member' AND c.room_id = ? AND m.membership = ? AND %s
-            """ % (clause,)
+            """ % (
+                clause,
+            )
             txn.execute(sql, (room_id, Membership.JOIN, *ids))
 
             return {r[0]: ProfileInfo(display_name=r[1], avatar_url=r[2]) for r in txn}
@@ -550,7 +552,9 @@ class RoomMemberWorkerStore(EventsWorkerStore, CacheInvalidationWorkerStore):
             WHERE
                 user_id = ?
                 AND %s
-        """ % (clause,)
+        """ % (
+            clause,
+        )
 
         txn.execute(sql, (user_id, *args))
         results = [
@@ -1421,7 +1425,9 @@ class RoomMemberWorkerStore(EventsWorkerStore, CacheInvalidationWorkerStore):
                 room_id = ? AND membership = ?
                 AND NOT (%s)
                 LIMIT 1
-        """ % (clause,)
+        """ % (
+            clause,
+        )
 
         def _is_local_host_in_room_ignoring_users_txn(
             txn: LoggingTransaction,

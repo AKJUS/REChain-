@@ -692,7 +692,9 @@ class SlidingSyncHandler:
                 Membership.LEAVE,
                 Membership.BAN,
             ):
-                to_bound = room_membership_for_user_at_to_token.event_pos.to_room_stream_token()
+                to_bound = (
+                    room_membership_for_user_at_to_token.event_pos.to_room_stream_token()
+                )
 
             timeline_from_bound = from_bound
             if ignore_timeline_bound:
@@ -875,9 +877,9 @@ class SlidingSyncHandler:
                 )
                 state_key = leave_event.get_state_key()
                 if state_key is not None:
-                    room_state_delta_id_map[(leave_event.type, state_key)] = (
-                        room_membership_for_user_at_to_token.event_id
-                    )
+                    room_state_delta_id_map[
+                        (leave_event.type, state_key)
+                    ] = room_membership_for_user_at_to_token.event_id
 
             deltas = await self.get_current_state_deltas_for_room(
                 room_id=room_id,
@@ -888,9 +890,9 @@ class SlidingSyncHandler:
             for delta in deltas:
                 # TODO: Handle state resets where event_id is None
                 if delta.event_id is not None:
-                    room_state_delta_id_map[(delta.event_type, delta.state_key)] = (
-                        delta.event_id
-                    )
+                    room_state_delta_id_map[
+                        (delta.event_type, delta.state_key)
+                    ] = delta.event_id
 
                 if delta.event_type == EventTypes.Member:
                     membership_changed = True
@@ -1088,12 +1090,13 @@ class SlidingSyncHandler:
                             # Make a new set or copy of the state key set so we can
                             # modify it without affecting the original
                             # `required_state_map`
-                            expanded_required_state_map[EventTypes.Member] = (
-                                expanded_required_state_map.get(
-                                    EventTypes.Member, set()
-                                )
-                                | {user.to_string()}
-                            )
+                            expanded_required_state_map[
+                                EventTypes.Member
+                            ] = expanded_required_state_map.get(
+                                EventTypes.Member, set()
+                            ) | {
+                                user.to_string()
+                            }
                         else:
                             num_others += 1
                             required_state_types.append((state_type, state_key))
@@ -1154,13 +1157,14 @@ class SlidingSyncHandler:
             if prev_room_sync_config is not None:
                 # Check if there are any changes to the required state config
                 # that we need to handle.
-                changed_required_state_map, added_state_filter = (
-                    _required_state_changes(
-                        user.to_string(),
-                        prev_required_state_map=prev_room_sync_config.required_state_map,
-                        request_required_state_map=expanded_required_state_map,
-                        state_deltas=room_state_delta_id_map,
-                    )
+                (
+                    changed_required_state_map,
+                    added_state_filter,
+                ) = _required_state_changes(
+                    user.to_string(),
+                    prev_required_state_map=prev_room_sync_config.required_state_map,
+                    request_required_state_map=expanded_required_state_map,
+                    state_deltas=room_state_delta_id_map,
                 )
 
                 if added_state_filter:
@@ -1272,9 +1276,9 @@ class SlidingSyncHandler:
             # sensible order again.
             bump_stamp = 0
 
-        room_sync_required_state_map_to_persist: Mapping[str, AbstractSet[str]] = (
-            expanded_required_state_map
-        )
+        room_sync_required_state_map_to_persist: Mapping[
+            str, AbstractSet[str]
+        ] = expanded_required_state_map
         if changed_required_state_map:
             room_sync_required_state_map_to_persist = changed_required_state_map
 

@@ -32,7 +32,7 @@ jobs:
                projectId: $project
                 itemId: $item
                 fieldId: $fieldid
-                value: { 
+                value: {
                   singleSelectOptionId: $columnid
                   }
               }

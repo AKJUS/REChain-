@@ -28,6 +28,6 @@ other | any number unless it matches a more specific rule
 There is also "few" and "many" but they seem to have language specific meaning.
 
 Also the selectors do not need to match the english version such as your language may not even use different words for when there is more than one of something so:
- - {count,plural, other{{count} \<insert translation here\>}} 
+ - {count,plural, other{{count} \<insert translation here\>}}
 
 could be a perfectly resonable way to translate.

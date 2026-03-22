@@ -69,20 +69,20 @@ print_header() {
 # Check deployment prerequisites
 check_prerequisites() {
     log_info "Checking deployment prerequisites..."
-    
+
     # Check if build exists
     if [[ ! -d "$BUILD_DIR" ]]; then
         log_error "Build directory not found: $BUILD_DIR"
         log_error "Please run build script first"
         exit 1
     fi
-    
+
     # Check for built executable
     if [[ ! -f "$BUILD_DIR/com.rechain.online" ]]; then
         log_error "Built executable not found"
         exit 1
     fi
-    
+
     # Check for required tools
     local required_tools=("rpmbuild" "createrepo" "rsync")
     for tool in "${required_tools[@]}"; do
@@ -90,51 +90,51 @@ check_prerequisites() {
             log_warning "Optional tool '$tool' not found"
         fi
     done
-    
+
     # Check signing requirements
     if [[ "$SIGN_PACKAGES" == "true" ]]; then
         if [[ -z "$GPG_KEY_ID" ]]; then
             log_error "GPG_KEY_ID required for package signing"
             exit 1
         fi
-        
+
         if ! command -v gpg &> /dev/null; then
             log_error "GPG not found, required for package signing"
             exit 1
         fi
     fi
-    
+
     log_success "Prerequisites check completed"
 }
 
 # Setup deployment environment
 setup_deployment_environment() {
     log_info "Setting up deployment environment..."
-    
+
     # Create deployment directories
     mkdir -p "$DEPLOY_DIR"
     mkdir -p "$DEPLOY_DIR/packages"
     mkdir -p "$DEPLOY_DIR/repository"
     mkdir -p "$DEPLOY_DIR/staging"
-    
+
     # Set deployment metadata
     export DEPLOY_TIMESTAMP=$(date +%Y%m%d-%H%M%S)
     export DEPLOY_VERSION="4.1.10+1160-$DEPLOY_TIMESTAMP"
     export DEPLOY_BUILD_ID="aurora-$TARGET_ARCH-$DEPLOY_TIMESTAMP"
-    
+
     log_success "Deployment environment configured"
 }
 
 # Create RPM package
 create_rpm_package() {
     log_info "Creating RPM package..."
-    
+
     local rpm_build_dir="$DEPLOY_DIR/rpmbuild"
     local spec_file="$rpm_build_dir/SPECS/rechain.spec"
-    
+
     # Setup RPM build directory structure
     mkdir -p "$rpm_build_dir"/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-    
+
     # Create RPM spec file
     cat > "$spec_file" << EOF
 Name:           rechain
@@ -246,7 +246,7 @@ systemctl daemon-reload
 - Crash reporting and error handling
 - Performance optimizations
 EOF
-    
+
     # Create source tarball
     local source_dir="$rpm_build_dir/SOURCES"
     tar -czf "$source_dir/rechain-4.1.10+1160.tar.gz" \
@@ -256,35 +256,35 @@ EOF
         --exclude="dist" \
         --exclude="deploy" \
         .
-    
+
     # Build RPM
     cd "$rpm_build_dir"
     rpmbuild --define "_topdir $rpm_build_dir" -ba SPECS/rechain.spec
-    
+
     # Copy built packages
     cp RPMS/$TARGET_ARCH/*.rpm "$DEPLOY_DIR/packages/"
     cp SRPMS/*.rpm "$DEPLOY_DIR/packages/"
-    
+
     log_success "RPM package created successfully"
 }
 
 # Create DEB package (for compatibility)
 create_deb_package() {
     log_info "Creating DEB package..."
-    
+
     local deb_build_dir="$DEPLOY_DIR/debbuild"
     local package_dir="$deb_build_dir/rechain_4.1.10+1160_$TARGET_ARCH"
-    
+
     # Setup DEB package structure
     mkdir -p "$package_dir"/{DEBIAN,usr/bin,usr/share/applications,usr/share/icons/hicolor/128x128/apps,etc/rechain}
-    
+
     # Copy files
     cp "$BUILD_DIR/com.rechain.online" "$package_dir/usr/bin/"
     cp "$BUILD_DIR/bundle/"* "$package_dir/usr/share/com.rechain.online/" -r
     cp "$AURORA_DIR/desktop/com.rechain.online.desktop" "$package_dir/usr/share/applications/"
     cp "$AURORA_DIR/icons/128x128.png" "$package_dir/usr/share/icons/hicolor/128x128/apps/com.rechain.online.png"
     cp "$AURORA_DIR/config/"*.conf "$package_dir/etc/rechain/"
-    
+
     # Create control file
     cat > "$package_dir/DEBIAN/control" << EOF
 Package: rechain
@@ -300,14 +300,14 @@ Description: REChain - Secure Matrix Client for Aurora OS
  support, and deep system integration with Aurora OS features.
 Homepage: https://rechain.com
 EOF
-    
+
     # Build DEB package
     cd "$deb_build_dir"
     dpkg-deb --build "rechain_4.1.10+1160_$TARGET_ARCH"
-    
+
     # Copy to packages directory
     cp *.deb "$DEPLOY_DIR/packages/"
-    
+
     log_success "DEB package created successfully"
 }
 
@@ -316,11 +316,11 @@ sign_packages() {
     if [[ "$SIGN_PACKAGES" != "true" ]]; then
         return 0
     fi
-    
+
     log_info "Signing packages..."
-    
+
     cd "$DEPLOY_DIR/packages"
-    
+
     # Sign RPM packages
     for rpm in *.rpm; do
         if [[ -f "$rpm" ]]; then
@@ -328,7 +328,7 @@ sign_packages() {
             log_info "Signed RPM: $rpm"
         fi
     done
-    
+
     # Sign DEB packages
     for deb in *.deb; do
         if [[ -f "$deb" ]]; then
@@ -336,21 +336,21 @@ sign_packages() {
             log_info "Signed DEB: $deb"
         fi
     done
-    
+
     log_success "Package signing completed"
 }
 
 # Create repository
 create_repository() {
     log_info "Creating package repository..."
-    
+
     local repo_dir="$DEPLOY_DIR/repository"
-    
+
     # Create RPM repository
     if ls "$DEPLOY_DIR/packages"/*.rpm &> /dev/null; then
         mkdir -p "$repo_dir/rpm/$TARGET_ARCH"
         cp "$DEPLOY_DIR/packages"/*.rpm "$repo_dir/rpm/$TARGET_ARCH/"
-        
+
         if command -v createrepo &> /dev/null; then
             createrepo "$repo_dir/rpm/$TARGET_ARCH"
             log_success "RPM repository created"
@@ -358,18 +358,18 @@ create_repository() {
             log_warning "createrepo not available, skipping RPM repository creation"
         fi
     fi
-    
+
     # Create DEB repository
     if ls "$DEPLOY_DIR/packages"/*.deb &> /dev/null; then
         mkdir -p "$repo_dir/deb"
         cp "$DEPLOY_DIR/packages"/*.deb "$repo_dir/deb/"
-        
+
         # Create Packages file
         cd "$repo_dir/deb"
         dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
         log_success "DEB repository created"
     fi
-    
+
     # Create repository metadata
     cat > "$repo_dir/rechain.repo" << EOF
 [rechain-aurora]
@@ -379,20 +379,20 @@ enabled=1
 gpgcheck=$([ "$SIGN_PACKAGES" == "true" ] && echo "1" || echo "0")
 $([ "$SIGN_PACKAGES" == "true" ] && echo "gpgkey=https://repo.rechain.com/RPM-GPG-KEY-rechain")
 EOF
-    
+
     log_success "Repository metadata created"
 }
 
 # Deploy to local staging
 deploy_local() {
     log_info "Deploying to local staging area..."
-    
+
     local staging_dir="$DEPLOY_DIR/staging"
-    
+
     # Copy packages
     cp -r "$DEPLOY_DIR/packages"/* "$staging_dir/"
     cp -r "$DEPLOY_DIR/repository"/* "$staging_dir/"
-    
+
     # Create deployment manifest
     cat > "$staging_dir/deployment-manifest.json" << EOF
 {
@@ -411,7 +411,7 @@ $(find "$DEPLOY_DIR/packages" -name "*.rpm" -o -name "*.deb" -exec basename {} \
     }
 }
 EOF
-    
+
     log_success "Local deployment completed"
 }
 
@@ -420,14 +420,14 @@ deploy_remote() {
     if [[ "$UPLOAD_PACKAGES" != "true" ]]; then
         return 0
     fi
-    
+
     log_info "Deploying to remote repository..."
-    
+
     if [[ -z "$REPO_URL" ]]; then
         log_error "REPO_URL not specified for remote deployment"
         exit 1
     fi
-    
+
     # Upload packages using rsync
     if command -v rsync &> /dev/null; then
         rsync -avz --progress "$DEPLOY_DIR/repository/" "$REPO_URL"
@@ -441,15 +441,15 @@ deploy_remote() {
 # Deploy to Aurora Store
 deploy_aurora_store() {
     log_info "Preparing Aurora Store deployment..."
-    
+
     # Create Aurora Store package
     local store_dir="$DEPLOY_DIR/aurora-store"
     mkdir -p "$store_dir"
-    
+
     # Copy RPM package for Aurora Store
     if ls "$DEPLOY_DIR/packages"/*.rpm &> /dev/null; then
         cp "$DEPLOY_DIR/packages"/*.rpm "$store_dir/"
-        
+
         # Create store metadata
         cat > "$store_dir/store-metadata.json" << EOF
 {
@@ -478,7 +478,7 @@ deploy_aurora_store() {
     }
 }
 EOF
-        
+
         log_success "Aurora Store package prepared"
     else
         log_warning "No RPM packages found for Aurora Store deployment"
@@ -488,9 +488,9 @@ EOF
 # Generate deployment report
 generate_deployment_report() {
     log_info "Generating deployment report..."
-    
+
     local report_file="$DEPLOY_DIR/deployment-report-$DEPLOY_TIMESTAMP.html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html>
@@ -515,7 +515,7 @@ generate_deployment_report() {
         <p>Environment: $DEPLOY_ENV</p>
         <p>Architecture: $TARGET_ARCH</p>
     </div>
-    
+
     <h2>Deployment Summary</h2>
     <table>
         <tr><th>Component</th><th>Status</th><th>Details</th></tr>
@@ -524,7 +524,7 @@ generate_deployment_report() {
         <tr><td>Repository Creation</td><td class="success">Success</td><td>Local repository created</td></tr>
         <tr><td>Remote Upload</td><td class="$([ "$UPLOAD_PACKAGES" == "true" ] && echo "success" || echo "warning")">$([ "$UPLOAD_PACKAGES" == "true" ] && echo "Completed" || echo "Skipped")</td><td>URL: ${REPO_URL:-"None"}</td></tr>
     </table>
-    
+
     <h2>Package Information</h2>
     <table>
         <tr><th>Package</th><th>Size</th><th>Checksum</th></tr>
@@ -532,7 +532,7 @@ $(find "$DEPLOY_DIR/packages" -type f \( -name "*.rpm" -o -name "*.deb" \) -exec
     echo "        <tr><td>$name</td><td>$(numfmt --to=iec $size)</td><td>${checksum:0:16}...</td></tr>"
 done)
     </table>
-    
+
     <h2>Installation Instructions</h2>
     <h3>Aurora OS (RPM)</h3>
     <pre>
@@ -545,7 +545,7 @@ sudo pkcon install rechain
 # Or install directly from file
 sudo rpm -ivh $(basename $(ls "$DEPLOY_DIR/packages"/*.rpm | head -1))
     </pre>
-    
+
     <h3>Manual Installation</h3>
     <pre>
 # Download and extract
@@ -555,28 +555,28 @@ sudo rpm -ivh $(basename $(ls "$DEPLOY_DIR/packages"/*.rpm | head -1))
 # Start service
 sudo systemctl enable --now rechain.service
     </pre>
-    
+
     <h2>Deployment Artifacts</h2>
     <ul>
 $(find "$DEPLOY_DIR" -type f -name "*.rpm" -o -name "*.deb" -o -name "*.json" -o -name "*.repo" | sort | while read file; do
     echo "        <li>$(basename "$file") ($(stat -c %s "$file" | numfmt --to=iec))</li>"
 done)
     </ul>
-    
+
     <p><em>Report generated on $(date)</em></p>
 </body>
 </html>
 EOF
-    
+
     log_success "Deployment report generated: $report_file"
 }
 
 # Main deployment function
 main() {
     local start_time=$SECONDS
-    
+
     print_header
-    
+
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -632,11 +632,11 @@ main() {
                 ;;
         esac
     done
-    
+
     # Execute deployment steps
     check_prerequisites
     setup_deployment_environment
-    
+
     # Create packages based on format
     case $PACKAGE_FORMAT in
         "rpm")
@@ -654,13 +654,13 @@ main() {
             exit 1
             ;;
     esac
-    
+
     # Sign packages if requested
     sign_packages
-    
+
     # Create repository
     create_repository
-    
+
     # Deploy based on target
     case $DEPLOY_TARGET in
         "local")
@@ -679,13 +679,13 @@ main() {
             exit 1
             ;;
     esac
-    
+
     # Generate deployment report
     generate_deployment_report
-    
+
     local duration=$((SECONDS - start_time))
     log_success "Deployment completed successfully in $((duration / 60))m $((duration % 60))s"
-    
+
     # Display deployment summary
     echo ""
     echo "Deployment Summary:"

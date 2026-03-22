@@ -4,4 +4,3 @@ Build: 1160
 Release Date: 2025
 Description: Matrix bridges deployment configuration bundle for REChain
 Compatible with: Synapse 1.100+, Docker Compose 3.8+
-

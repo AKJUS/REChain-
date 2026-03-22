@@ -4,4 +4,4 @@ client_secret: your-client-secret
 auth_url: https://provider.example.com/oauth/authorize
 token_url: https://provider.example.com/oauth/token
 redirect_uri: http://localhost:8090/oauth/callback
-scope: openid email profile 
+scope: openid email profile

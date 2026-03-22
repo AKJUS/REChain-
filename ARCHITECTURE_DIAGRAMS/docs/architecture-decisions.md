@@ -4,7 +4,7 @@
 
 This document records key architectural decisions made for REChain v4.1.10+1160.
 
-**Version:** 4.1.10+1160  
+**Version:** 4.1.10+1160
 **Last Updated:** 2025-12-06
 
 ---
@@ -55,8 +55,8 @@ This document records key architectural decisions made for REChain v4.1.10+1160.
 
 ### ADR-001: Flutter for Cross-Platform
 
-**Status:** ✅ Accepted  
-**Date:** 2024-01  
+**Status:** ✅ Accepted
+**Date:** 2024-01
 **Deciders:** Core Team
 
 #### Context
@@ -92,8 +92,8 @@ Use Flutter SDK for all client applications.
 
 ### ADR-002: Matrix Protocol Foundation
 
-**Status:** ✅ Accepted  
-**Date:** 2024-01  
+**Status:** ✅ Accepted
+**Date:** 2024-01
 **Deciders:** Core Team
 
 #### Context
@@ -135,8 +135,8 @@ Adopt Matrix protocol as the core communication layer.
 
 ### ADR-003: Modular Plugin Architecture
 
-**Status:** ✅ Accepted  
-**Date:** 2024-06  
+**Status:** ✅ Accepted
+**Date:** 2024-06
 **Deciders:** Core Team
 
 #### Context
@@ -178,8 +178,8 @@ abstract class Plugin {
 
 ### ADR-004: Multi-Provider IPFS
 
-**Status:** ✅ Accepted  
-**Date:** 2024-08  
+**Status:** ✅ Accepted
+**Date:** 2024-08
 **Deciders:** Core Team
 
 #### Context
@@ -212,7 +212,7 @@ Implement multi-provider IPFS strategy with client-side encryption.
 class IPFSService {
   final List<IPFSProvider> providers;
   final EncryptionService encryption;
-  
+
   Future<CID> upload(EncryptedFile file);
   Future<DecryptedFile> download(CID cid);
 }
@@ -222,8 +222,8 @@ class IPFSService {
 
 ### ADR-005: E2E Encryption with Olm/Megolm
 
-**Status:** ✅ Accepted  
-**Date:** 2024-01  
+**Status:** ✅ Accepted
+**Date:** 2024-01
 **Deciders:** Core Team
 
 #### Context
@@ -259,8 +259,8 @@ Implement Olm and Megolm encryption protocols from Matrix specification.
 
 ### ADR-006: Kubernetes Orchestration
 
-**Status:** ✅ Accepted  
-**Date:** 2024-03  
+**Status:** ✅ Accepted
+**Date:** 2024-03
 **Deciders:** DevOps Team
 
 #### Context
@@ -294,8 +294,8 @@ Adopt Kubernetes for container orchestration with Helm charts.
 
 ### ADR-XXX: Title
 
-**Status:** [✅ Accepted | ❌ Rejected | 🔄 Deprecated]  
-**Date:** YYYY-MM-DD  
+**Status:** [✅ Accepted | ❌ Rejected | 🔄 Deprecated]
+**Date:** YYYY-MM-DD
 **Deciders:** Team Name
 
 #### Context
@@ -331,4 +331,3 @@ Adopt Kubernetes for container orchestration with Helm charts.
 |---------|------|-------------|
 | 4.1.10+1160 | 2025-12-06 | Added AI Services ADR |
 | 4.1.10+1152 | 2025-07-08 | Initial ADRs documented |
-

@@ -18,4 +18,4 @@ Welcome! Whether you're a developer or end user, this guide will help you get st
 
 ---
 
-For more, see the [Wiki Home](Home.md) or the [full docs/ directory](../docs/). 
+For more, see the [Wiki Home](Home.md) or the [full docs/ directory](../docs/).

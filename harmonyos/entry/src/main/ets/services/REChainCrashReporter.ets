@@ -120,32 +120,32 @@ export class REChainCrashReporter {
   public async initialize(config: CrashReporterConfig): Promise<boolean> {
     try {
       hilog.info(0x0000, 'REChainCrash', 'Initializing crash reporter...');
-      
+
       this.config = config;
       this.maxBreadcrumbs = config.maxBreadcrumbs || 50;
       this.maxPendingReports = config.maxPendingReports || 100;
-      
+
       // Setup log file
       await this.setupLogFile();
-      
+
       // Setup global error handlers
       this.setupGlobalErrorHandlers();
-      
+
       // Load pending reports
       await this.loadPendingReports();
-      
+
       // Submit pending reports if auto-submit is enabled
       if (config.autoSubmitCrashes && this.pendingReports.length > 0) {
         this.submitPendingReports();
       }
-      
+
       this.initialized = true;
-      
+
       this.logInfo('Crash reporter initialized successfully');
       this.addBreadcrumb('Crash reporter initialized', 'system', BreadcrumbLevel.INFO);
-      
+
       return true;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to initialize: %{public}s', JSON.stringify(error));
       return false;
@@ -159,20 +159,20 @@ export class REChainCrashReporter {
 
     try {
       hilog.info(0x0000, 'REChainCrash', 'Shutting down crash reporter...');
-      
+
       // Save pending reports
       this.savePendingReports();
-      
+
       // Clear breadcrumbs
       this.breadcrumbs = [];
-      
+
       // Clear user info
       this.userInfo = {};
-      
+
       this.initialized = false;
-      
+
       hilog.info(0x0000, 'REChainCrash', 'Crash reporter shut down successfully');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Error during shutdown: %{public}s', JSON.stringify(error));
     }
@@ -186,16 +186,16 @@ export class REChainCrashReporter {
     try {
       this.logError(`Error recorded: ${message}`);
       this.addBreadcrumb(`Error: ${message}`, 'error', BreadcrumbLevel.ERROR, context);
-      
+
       // Create error report
       const report = this.createErrorReport(message, undefined, context);
       this.addPendingReport(report);
-      
+
       // Auto-submit if enabled
       if (this.config?.autoSubmitCrashes) {
         this.submitReport(report);
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to record error: %{public}s', JSON.stringify(error));
     }
@@ -209,16 +209,16 @@ export class REChainCrashReporter {
     try {
       this.logFatal(`Crash recorded: ${message}`);
       this.addBreadcrumb(`Crash: ${message}`, 'crash', BreadcrumbLevel.ERROR, context);
-      
+
       // Create crash report
       const report = this.createErrorReport(message, stackTrace, context);
       this.addPendingReport(report);
-      
+
       // Auto-submit if enabled
       if (this.config?.autoSubmitCrashes) {
         this.submitReport(report);
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to record crash: %{public}s', JSON.stringify(error));
     }
@@ -244,7 +244,7 @@ export class REChainCrashReporter {
       if (this.config?.enableDebugLogging) {
         hilog.debug(0x0000, 'REChainCrash', 'Breadcrumb added: %{public}s [%{public}s]', message, category);
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to add breadcrumb: %{public}s', JSON.stringify(error));
     }
@@ -260,7 +260,7 @@ export class REChainCrashReporter {
       };
 
       this.addBreadcrumb('User identified', 'user', BreadcrumbLevel.INFO, { userId, email, username });
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to set user info: %{public}s', JSON.stringify(error));
     }
@@ -278,12 +278,12 @@ export class REChainCrashReporter {
 
     try {
       hilog.info(0x0000, 'REChainCrash', 'Submitting %{public}d pending reports', this.pendingReports.length);
-      
+
       const reports = [...this.pendingReports];
       for (const report of reports) {
         await this.submitReport(report);
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to submit pending reports: %{public}s', JSON.stringify(error));
     }
@@ -294,18 +294,18 @@ export class REChainCrashReporter {
       const context = getContext();
       const filesDir = context.filesDir;
       const logsDir = `${filesDir}/logs`;
-      
+
       // Create logs directory
       try {
         await fs.mkdir(logsDir);
       } catch (error) {
         // Directory might already exist
       }
-      
+
       this.logFilePath = `${logsDir}/crash_reporter.log`;
-      
+
       hilog.info(0x0000, 'REChainCrash', 'Log file path: %{public}s', this.logFilePath);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to setup log file: %{public}s', JSON.stringify(error));
     }
@@ -339,7 +339,7 @@ export class REChainCrashReporter {
       });
 
       hilog.info(0x0000, 'REChainCrash', 'Global error handlers configured');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to setup error handlers: %{public}s', JSON.stringify(error));
     }
@@ -347,7 +347,7 @@ export class REChainCrashReporter {
 
   private createErrorReport(message: string, stackTrace?: string, context: ErrorContext = {}): CrashReport {
     const reportId = this.generateReportId();
-    
+
     return {
       reportId,
       timestamp: Date.now(),
@@ -405,7 +405,7 @@ export class REChainCrashReporter {
 
     try {
       const httpRequest = http.createHttp();
-      
+
       const requestOptions: http.HttpRequestOptions = {
         method: http.RequestMethod.POST,
         header: {
@@ -416,7 +416,7 @@ export class REChainCrashReporter {
       };
 
       const response = await httpRequest.request(this.config.submissionEndpoint, requestOptions);
-      
+
       if (response.responseCode === 200) {
         // Remove from pending reports
         this.removePendingReport(report.reportId);
@@ -426,7 +426,7 @@ export class REChainCrashReporter {
       }
 
       httpRequest.destroy();
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Report submission error: %{public}s', JSON.stringify(error));
     }
@@ -434,12 +434,12 @@ export class REChainCrashReporter {
 
   private addPendingReport(report: CrashReport): void {
     this.pendingReports.push(report);
-    
+
     // Limit pending reports
     if (this.pendingReports.length > this.maxPendingReports) {
       this.pendingReports.shift();
     }
-    
+
     // Save to storage
     this.savePendingReports();
   }
@@ -453,20 +453,20 @@ export class REChainCrashReporter {
     try {
       const context = getContext();
       const reportsFile = `${context.filesDir}/pending_reports.json`;
-      
+
       const file = await fs.open(reportsFile, fs.OpenMode.READ_ONLY);
       const buffer = new ArrayBuffer(4096);
       const readResult = await fs.read(file.fd, buffer);
-      
+
       if (readResult.bytesRead > 0) {
         const content = String.fromCharCode(...new Uint8Array(buffer, 0, readResult.bytesRead));
         this.pendingReports = JSON.parse(content) || [];
       }
-      
+
       await fs.close(file);
-      
+
       hilog.info(0x0000, 'REChainCrash', 'Loaded %{public}d pending reports', this.pendingReports.length);
-      
+
     } catch (error) {
       // File might not exist yet
       this.pendingReports = [];
@@ -477,12 +477,12 @@ export class REChainCrashReporter {
     try {
       const context = getContext();
       const reportsFile = `${context.filesDir}/pending_reports.json`;
-      
+
       const content = JSON.stringify(this.pendingReports);
       const file = await fs.open(reportsFile, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE);
       await fs.write(file.fd, content);
       await fs.close(file);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainCrash', 'Failed to save pending reports: %{public}s', JSON.stringify(error));
     }

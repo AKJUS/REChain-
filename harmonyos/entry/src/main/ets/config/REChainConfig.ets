@@ -179,7 +179,7 @@ export class REChainConfig {
     try {
       // Save all configuration values
       const configEntries = Object.entries(this.config);
-      
+
       for (const [key, value] of configEntries) {
         if (typeof value === 'string') {
           await this.preferences.put(key, value);
@@ -249,7 +249,7 @@ export class REChainConfig {
   // Convenience methods for specific config sections
   public getNotificationConfig() {
     if (!this.config) return null;
-    
+
     return {
       appName: this.config.appName,
       enableSound: this.config.soundEnabled,
@@ -263,7 +263,7 @@ export class REChainConfig {
 
   public getCrashReporterConfig() {
     if (!this.config) return null;
-    
+
     return {
       appName: this.config.appName,
       appVersion: this.config.appVersion,
@@ -278,7 +278,7 @@ export class REChainConfig {
 
   public getSystemIntegrationConfig() {
     if (!this.config) return null;
-    
+
     return {
       enableSystemMonitoring: this.config.systemMonitoringEnabled,
       enableSensorMonitoring: this.config.sensorMonitoringEnabled,
@@ -291,7 +291,7 @@ export class REChainConfig {
   // Private helper methods
   private async getString(key: string, defaultValue: string): Promise<string> {
     if (!this.preferences) return defaultValue;
-    
+
     try {
       return await this.preferences.get(key, defaultValue) as string;
     } catch (error) {
@@ -301,7 +301,7 @@ export class REChainConfig {
 
   private async getNumber(key: string, defaultValue: number): Promise<number> {
     if (!this.preferences) return defaultValue;
-    
+
     try {
       return await this.preferences.get(key, defaultValue) as number;
     } catch (error) {
@@ -311,7 +311,7 @@ export class REChainConfig {
 
   private async getBoolean(key: string, defaultValue: boolean): Promise<boolean> {
     if (!this.preferences) return defaultValue;
-    
+
     try {
       return await this.preferences.get(key, defaultValue) as boolean;
     } catch (error) {

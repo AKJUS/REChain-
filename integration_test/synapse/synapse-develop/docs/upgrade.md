@@ -129,10 +129,10 @@ native ICU library on your system is no longer required.
 ## Documented endpoint which can be delegated to a federation worker
 
 The endpoint `^/_matrix/federation/v1/version$` can be delegated to a federation
-worker. This is not new behaviour, but had not been documented yet. The 
-[list of delegatable endpoints](workers.md#synapseappgeneric_worker) has 
+worker. This is not new behaviour, but had not been documented yet. The
+[list of delegatable endpoints](workers.md#synapseappgeneric_worker) has
 been updated to include it. Make sure to check your reverse proxy rules if you
-are using workers. 
+are using workers.
 
 # Upgrading to v1.126.0
 

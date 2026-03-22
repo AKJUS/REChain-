@@ -51,7 +51,7 @@
       {
         "name": "REChainServiceExtension",
         "srcEntry": "./ets/extension/REChainServiceExtension.ets",
-        "description": "$string:service_extension_desc", 
+        "description": "$string:service_extension_desc",
         "type": "service",
         "exported": false
       }

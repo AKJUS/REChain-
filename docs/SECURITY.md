@@ -42,4 +42,4 @@ If you discover a security vulnerability in REChain, please report it responsibl
 
 ---
 
-Thank you for helping keep REChain and its users safe! 
+Thank you for helping keep REChain and its users safe!

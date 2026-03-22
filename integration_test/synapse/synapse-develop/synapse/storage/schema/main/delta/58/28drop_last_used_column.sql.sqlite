@@ -17,14 +17,14 @@
  -- Dropping last_used column from access_tokens table.
 
 CREATE TABLE access_tokens2 (
-    id BIGINT PRIMARY KEY, 
-    user_id TEXT NOT NULL, 
-    device_id TEXT, 
+    id BIGINT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    device_id TEXT,
     token TEXT NOT NULL,
     valid_until_ms BIGINT,
     puppets_user_id TEXT,
     last_validated BIGINT,
-    UNIQUE(token) 
+    UNIQUE(token)
 );
 
 INSERT INTO access_tokens2(id, user_id, device_id, token)

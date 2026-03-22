@@ -17,7 +17,7 @@ import (
 
 const queueJSONSchema = `
 -- The federationsender_queue_json table contains event contents that
--- we failed to send. 
+-- we failed to send.
 CREATE TABLE IF NOT EXISTS federationsender_queue_json (
 	-- The JSON NID. This allows the federationsender_queue_retry table to
 	-- cross-reference to find the JSON blob.

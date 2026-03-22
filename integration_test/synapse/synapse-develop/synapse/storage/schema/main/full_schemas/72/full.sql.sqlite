@@ -372,14 +372,14 @@ CREATE TABLE stream_positions (
 );
 CREATE UNIQUE INDEX stream_positions_idx ON stream_positions(stream_name, instance_name);
 CREATE TABLE IF NOT EXISTS "access_tokens" (
-    id BIGINT PRIMARY KEY, 
-    user_id TEXT NOT NULL, 
-    device_id TEXT, 
+    id BIGINT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    device_id TEXT,
     token TEXT NOT NULL,
     valid_until_ms BIGINT,
     puppets_user_id TEXT,
     last_validated BIGINT, refresh_token_id BIGINT REFERENCES refresh_tokens (id) ON DELETE CASCADE, used BOOLEAN,
-    UNIQUE(token) 
+    UNIQUE(token)
 );
 CREATE INDEX access_tokens_device_id ON access_tokens (user_id, device_id);
 CREATE TABLE IF NOT EXISTS "event_txn_id" (

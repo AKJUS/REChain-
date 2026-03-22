@@ -409,7 +409,7 @@ connect(accelerometer, &QAccelerometer::readingChanged, [this]() {
     double x = reading->x();
     double y = reading->y();
     double z = reading->z();
-    
+
     // Handle accelerometer data
     handleAccelerometerData(x, y, z);
 });
@@ -423,7 +423,7 @@ compass->start();
 connect(compass, &QCompass::readingChanged, [this]() {
     QCompassReading *reading = compass->reading();
     double azimuth = reading->azimuth();
-    
+
     // Handle compass data
     handleCompassData(azimuth);
 });
@@ -607,11 +607,11 @@ void recordError(const QString &message, const QVariantMap &context = QVariantMa
 void recordCrash(const QString &crashInfo, const QVariantMap &context = QVariantMap());
 
 // Add breadcrumb
-void addBreadcrumb(const QString &message, const QString &category = QString(), 
+void addBreadcrumb(const QString &message, const QString &category = QString(),
                    const QVariantMap &data = QVariantMap());
 
 // Set user identification
-void setUserIdentification(const QString &userId, const QString &email = QString(), 
+void setUserIdentification(const QString &userId, const QString &email = QString(),
                           const QString &username = QString());
 ```
 

@@ -35,7 +35,7 @@ Middleware corsHeaders() {
 
 void main() async {
   final app = Router();
-  
+
   // Mock client and services for testing
   final client = Client('test_client');
   final prefs = await SharedPreferences.getInstance();
@@ -56,7 +56,7 @@ void main() async {
     try {
       final payload = await request.readAsString();
       final data = json.decode(payload);
-      
+
       final messageId = await servicesManager.messageScheduler.scheduleMessage(
         roomId: data['roomId'],
         content: data['content'],
@@ -83,7 +83,7 @@ void main() async {
   app.get('/api/schedule/<roomId>', (Request request, String roomId) {
     final messages = servicesManager.messageScheduler
         .getScheduledMessagesForRoom(roomId);
-    
+
     return Response.ok(
       json.encode({
         'messages': messages.map((m) => m.toJson()).toList(),
@@ -97,7 +97,7 @@ void main() async {
     try {
       final payload = await request.readAsString();
       final data = json.decode(payload);
-      
+
       final result = await servicesManager.translationService.translateText(
         data['text'],
         targetLanguage: data['targetLanguage'],

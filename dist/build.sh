@@ -122,7 +122,7 @@ print_verbose() {
 # Check prerequisites
 check_prerequisites() {
     echo "Checking prerequisites..."
-    
+
     # Check for C compiler
     if command -v gcc &> /dev/null; then
         print_status "ok" "GCC found: $(gcc --version | head -n1)"
@@ -132,7 +132,7 @@ check_prerequisites() {
         print_status "error" "No C/C++ compiler found"
         exit 1
     fi
-    
+
     # Check for make
     if command -v make &> /dev/null; then
         print_status "ok" "Make found: $(make --version | head -n1)"
@@ -140,14 +140,14 @@ check_prerequisites() {
         print_status "error" "Make not found"
         exit 1
     fi
-    
+
     # Check for CMake (if needed)
     if command -v cmake &> /dev/null; then
         print_status "ok" "CMake found: $(cmake --version | head -n1)"
     else
         print_status "warn" "CMake not found, will use Makefile"
     fi
-    
+
     # Check for pkg-config
     if command -v pkg-config &> /dev/null; then
         print_status "ok" "pkg-config found"
@@ -159,9 +159,9 @@ check_prerequisites() {
 # Check dependencies
 check_dependencies() {
     print_status "info" "Checking build dependencies..."
-    
+
     local missing_deps=()
-    
+
     # Check for OpenSSL
     if ! pkg-config --exists openssl 2>/dev/null; then
         if [ -f /usr/include/openssl/ssl.h ]; then
@@ -172,7 +172,7 @@ check_dependencies() {
     else
         print_status "ok" "OpenSSL found"
     fi
-    
+
     # Check for SQLite
     if ! pkg-config --exists sqlite3 2>/dev/null; then
         if [ -f /usr/include/sqlite3.h ]; then
@@ -183,7 +183,7 @@ check_dependencies() {
     else
         print_status "ok" "SQLite found"
     fi
-    
+
     # Check for zlib
     if ! pkg-config --exists zlib 2>/dev/null; then
         if [ -f /usr/include/zlib.h ]; then
@@ -194,7 +194,7 @@ check_dependencies() {
     else
         print_status "ok" "zlib found"
     fi
-    
+
     # Check for curl
     if ! pkg-config --exists libcurl 2>/dev/null; then
         if [ -f /usr/include/curl/curl.h ]; then
@@ -205,7 +205,7 @@ check_dependencies() {
     else
         print_status "ok" "libcurl found"
     fi
-    
+
     if [ ${#missing_deps[@]} -gt 0 ]; then
         print_status "warn" "Missing dependencies: ${missing_deps[*]}"
         echo ""
@@ -247,42 +247,42 @@ detect_build_system() {
 # Configure build
 configure_build() {
     local build_system="$1"
-    
+
     print_status "info" "Configuring build with $build_system..."
-    
+
     case $build_system in
         cmake)
             mkdir -p "${PROJECT_DIR}/build"
             cd "${PROJECT_DIR}/build"
-            
+
             local cmake_args=(
                 "-DCMAKE_BUILD_TYPE=${BUILD_TYPE^}"
                 "-DCMAKE_INSTALL_PREFIX=/usr"
                 "-DSYSCONFDIR=/etc"
                 "-DLOCALSTATEDIR=/var"
             )
-            
+
             if [ "$BUILD_TYPE" = "release" ]; then
                 cmake_args+=("-DCMAKE_RELEASE_BUILD=ON")
             fi
-            
+
             if [ "$PARALLEL" = true ]; then
                 cmake_args+=("-DCMAKE_BUILD_PARALLEL=$JOBS")
             fi
-            
+
             if [ "$VERBOSE" = true ]; then
                 cmake "${cmake_args[@]}" ..
             else
                 cmake "${cmake_args[@]}" .. > /dev/null
             fi
             ;;
-            
+
         makefile)
             # Use environment variables for Makefile builds
             export CFLAGS="-O3 -DNDEBUG"
             export CXXFLAGS="-O3 -std=c++17"
             ;;
-            
+
         meson)
             meson setup "${PROJECT_DIR}/build" \
                 --buildtype="$BUILD_TYPE" \
@@ -296,11 +296,11 @@ configure_build() {
 # Compile
 compile() {
     local build_system="$1"
-    
+
     print_status "info" "Compiling REChain ($BUILD_TYPE)..."
-    
+
     local start_time=$(date +%s)
-    
+
     case $build_system in
         cmake)
             cd "${PROJECT_DIR}/build"
@@ -310,7 +310,7 @@ compile() {
                 cmake --build . -- -j "$JOBS" 2>&1 | grep -E "(Error|error|warning:|Building)" || true
             fi
             ;;
-            
+
         makefile)
             cd "${PROJECT_DIR}"
             if [ "$PARALLEL" = true ]; then
@@ -319,13 +319,13 @@ compile() {
                 make 2>&1 | grep -E "(Error|error|warning:)" || true
             fi
             ;;
-            
+
         meson)
             cd "${PROJECT_DIR}/build"
             ninja -j "$JOBS"
             ;;
     esac
-    
+
     local end_time=$(date +%s)
     local duration=$((end_time - start_time))
     print_status "ok" "Build completed in ${duration}s"
@@ -334,79 +334,79 @@ compile() {
 # Copy binaries and assets
 install_to_staging() {
     print_status "info" "Installing to staging directory..."
-    
+
     mkdir -p "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}"
     mkdir -p "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/bin"
     mkdir -p "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/config"
     mkdir -p "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/scripts"
     mkdir -p "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/doc"
-    
+
     # Copy binaries
     if [ -f "${PROJECT_DIR}/src/rechain" ]; then
         cp "${PROJECT_DIR}/src/rechain" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/bin/"
     fi
-    
+
     if [ -f "${PROJECT_DIR}/src/rechain-cli" ]; then
         cp "${PROJECT_DIR}/src/rechain-cli" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/bin/"
     fi
-    
+
     # Copy configuration template
     if [ -f "${SCRIPT_DIR}/templates/config.yaml" ]; then
         cp "${SCRIPT_DIR}/templates/config.yaml" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/config/"
     fi
-    
+
     # Copy scripts
     if [ -f "${SCRIPT_DIR}/scripts/pre_install.sh" ]; then
         cp "${SCRIPT_DIR}/scripts/pre_install.sh" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/scripts/"
     fi
-    
+
     if [ -f "${SCRIPT_DIR}/scripts/post_install.sh" ]; then
         cp "${SCRIPT_DIR}/scripts/post_install.sh" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/scripts/"
     fi
-    
+
     # Copy documentation
     if [ -f "${PROJECT_DIR}/README.md" ]; then
         cp "${PROJECT_DIR}/README.md" "${OUTPUT_DIR}/${VERSION}/rechain-${VERSION}-${ARCH}/doc/"
     fi
-    
+
     print_status "ok" "Staging directory created"
 }
 
 # Create archive
 create_archive() {
     print_status "info" "Creating archive..."
-    
+
     cd "${OUTPUT_DIR}/${VERSION}"
-    
+
     local archive_name="rechain-${VERSION}-${ARCH}"
-    
+
     # Create tar.gz
     tar -czf "${archive_name}.tar.gz" "${archive_name}"
-    
+
     # Create tar.xz (better compression)
     tar -cJf "${archive_name}.tar.xz" "${archive_name}"
-    
+
     # Create zip (for Windows)
     zip -rq "${archive_name}.zip" "${archive_name}"
-    
+
     # Create checksums
     cd "${OUTPUT_DIR}/${VERSION}"
     sha256sum "${archive_name}.tar.gz" "${archive_name}.tar.xz" "${archive_name}.zip" > "${archive_name}.sha256"
     sha512sum "${archive_name}.tar.gz" "${archive_name}.tar.xz" "${archive_name}.zip" > "${archive_name}.sha512"
-    
+
     # List created files
     echo ""
     ls -lh "${archive_name}".*
-    
+
     print_status "ok" "Archive created successfully"
 }
 
 # Build for specific architecture
 build_arch() {
     local arch="$1"
-    
+
     print_status "info" "Building for architecture: $arch"
-    
+
     # Set architecture-specific flags
     case $arch in
         x86_64|amd64)
@@ -422,10 +422,10 @@ build_arch() {
             ARCH="i386"
             ;;
     esac
-    
+
     # Run build
     clean_build
-    
+
     local build_system=$(detect_build_system)
     if [ "$build_system" = "unknown" ]; then
         print_status "warn" "No recognized build system found, copying source instead"
@@ -463,15 +463,15 @@ main() {
     echo "REChain Build Script v${VERSION}"
     echo "================================"
     echo ""
-    
+
     show_build_info
-    
+
     check_prerequisites
     check_dependencies
-    
+
     # Create output directory
     mkdir -p "$OUTPUT_DIR"
-    
+
     # Build for single or multiple architectures
     if [ -n "$ARCHS" ]; then
         IFS=',' read -ra ARCH_ARRAY <<< "$ARCHS"
@@ -481,7 +481,7 @@ main() {
     else
         build_arch "$ARCH"
     fi
-    
+
     echo ""
     echo "================================"
     echo "Build Complete!"
@@ -494,5 +494,3 @@ main() {
 }
 
 main
-
-

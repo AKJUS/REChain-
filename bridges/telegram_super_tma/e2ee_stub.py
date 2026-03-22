@@ -12,4 +12,4 @@
 #
 # For production, implement full Olm/Megolm session management and encrypted key storage.
 #
-# Note: Telegram does not support E2EE for bots or groups (only Secret Chats). 
+# Note: Telegram does not support E2EE for bots or groups (only Secret Chats).

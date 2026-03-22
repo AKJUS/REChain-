@@ -11,4 +11,4 @@ void main() async {
 
   final stats = await tonService.getNetworkStats();
   print('TON network stats: ${stats.toString()}');
-} 
+}

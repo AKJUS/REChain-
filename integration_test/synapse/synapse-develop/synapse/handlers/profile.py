@@ -68,9 +68,9 @@ class ProfileHandler:
         self.request_ratelimiter = hs.get_request_ratelimiter()
 
         self.max_avatar_size: Optional[int] = hs.config.server.max_avatar_size
-        self.allowed_avatar_mimetypes: Optional[List[str]] = (
-            hs.config.server.allowed_avatar_mimetypes
-        )
+        self.allowed_avatar_mimetypes: Optional[
+            List[str]
+        ] = hs.config.server.allowed_avatar_mimetypes
 
         self._is_mine_server_name = hs.is_mine_server_name
 

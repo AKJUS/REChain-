@@ -128,9 +128,9 @@ class ReplicationEndpoint(metaclass=abc.ABCMeta):
 
         # We reserve `instance_name` as a parameter to sending requests, so we
         # assert here that sub classes don't try and use the name.
-        assert "instance_name" not in self.PATH_ARGS, (
-            "`instance_name` is a reserved parameter name"
-        )
+        assert (
+            "instance_name" not in self.PATH_ARGS
+        ), "`instance_name` is a reserved parameter name"
         assert (
             "instance_name"
             not in signature(self.__class__._serialize_payload).parameters
@@ -259,9 +259,9 @@ class ReplicationEndpoint(metaclass=abc.ABCMeta):
                     url_args.append(txn_id)
 
                 if cls.METHOD == "POST":
-                    request_func: Callable[..., Awaitable[Any]] = (
-                        client.post_json_get_json
-                    )
+                    request_func: Callable[
+                        ..., Awaitable[Any]
+                    ] = client.post_json_get_json
                 elif cls.METHOD == "PUT":
                     request_func = client.put_json
                 elif cls.METHOD == "GET":

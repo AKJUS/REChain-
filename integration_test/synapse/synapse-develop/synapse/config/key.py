@@ -239,13 +239,16 @@ class KeyConfig(Config):
             )
             form_secret = 'form_secret: "%s"' % random_string_with_symbols(50)
 
-        return """\
+        return (
+            """\
         %(macaroon_secret_key)s
         %(form_secret)s
         signing_key_path: "%(base_key_name)s.signing.key"
         trusted_key_servers:
           - server_name: "matrix.org"
-        """ % locals()
+        """
+            % locals()
+        )
 
     def read_signing_keys(self, signing_key_path: str, name: str) -> List[SigningKey]:
         """Read the signing keys in the given path.

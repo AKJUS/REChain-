@@ -2,8 +2,8 @@
 
 ## 📊 Comprehensive Performance Testing Suite
 
-**Version:** 4.1.10+1160  
-**Last Updated:** 2025-12-06  
+**Version:** 4.1.10+1160
+**Last Updated:** 2025-12-06
 **Status:** ✅ Active Development
 
 ---
@@ -293,7 +293,7 @@ class BenchmarkRunner:
     def __init__(self):
         self.results_dir = Path(__file__).parent / "results"
         self.results_dir.mkdir(exist_ok=True)
-    
+
     def run_all(self):
         """Run all benchmark suites"""
         suites = [
@@ -303,7 +303,7 @@ class BenchmarkRunner:
             ("IPFS", self.run_ipfs),
             ("AI", self.run_ai),
         ]
-        
+
         for name, suite_func in suites:
             print(f"\n{'='*60}")
             print(f"Running {name} Benchmarks")
@@ -312,43 +312,43 @@ class BenchmarkRunner:
             suite_func()
             elapsed = time.time() - start
             print(f"\n{name} benchmarks completed in {elapsed:.2f}s")
-    
+
     def run_application(self):
         """Run application benchmarks"""
         from scripts.benchmark_startup import BenchmarkStartup
         from scripts.benchmark_memory import BenchmarkMemory
-        
+
         BenchmarkStartup().run()
         BenchmarkMemory().run()
-    
+
     def run_matrix(self):
         """Run Matrix protocol benchmarks"""
         from matrix.benchmark_sync import SyncBenchmark
         from matrix.benchmark_messages import MessageBenchmark
-        
+
         SyncBenchmark().run()
         MessageBenchmark().run()
-    
+
     def run_blockchain(self):
         """Run blockchain benchmarks"""
         from blockchain.benchmark_wallet import WalletBenchmark
         from blockchain.benchmark_transactions import TransactionBenchmark
-        
+
         WalletBenchmark().run()
         TransactionBenchmark().run()
-    
+
     def run_ipfs(self):
         """Run IPFS benchmarks"""
         from ipfs.benchmark_upload import UploadBenchmark
         from ipfs.benchmark_download import DownloadBenchmark
-        
+
         UploadBenchmark().run()
         DownloadBenchmark().run()
-    
+
     def run_ai(self):
         """Run AI services benchmarks"""
         from ai.benchmark_services import AIBenchmark
-        
+
         AIBenchmark().run()
 
 if __name__ == "__main__":
@@ -359,12 +359,12 @@ if __name__ == "__main__":
     parser.add_argument("--blockchain", action="store_true", help="Run blockchain benchmarks")
     parser.add_argument("--ipfs", action="store_true", help="Run IPFS benchmarks")
     parser.add_argument("--ai", action="store_true", help="Run AI benchmarks")
-    
+
     args = parser.parse_args()
-    
+
     runner = BenchmarkRunner()
-    
-    if args.all or not any([args.application, args.matrix, 
+
+    if args.all or not any([args.application, args.matrix,
                            args.blockchain, args.ipfs, args.ai]):
         runner.run_all()
     else:
@@ -469,27 +469,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+
       - name: Install dependencies
         run: |
           pip install -r benchmarks/requirements.txt
-      
+
       - name: Run benchmarks
         run: |
           cd benchmarks
           python3 run_benchmarks.py --all
-      
+
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-results
           path: benchmarks/results/
-      
+
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         run: |
@@ -562,4 +562,3 @@ python3 generate_report.py \
 ---
 
 **REChain: Building the Digital Infrastructure of Autonomous Organizations** 🚀
-

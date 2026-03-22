@@ -31,35 +31,35 @@ CREATE_INSTALLER="${CREATE_INSTALLER:-true}"
 
 check_deployment_environment() {
     log_info "Checking deployment environment..."
-    
+
     if [[ ! -d "$DIST_DIR" ]]; then
         log_error "Distribution directory not found: $DIST_DIR"
         log_error "Please run build script first"
         exit 1
     fi
-    
+
     # Check for HAP files
     local hap_files=($(find "$DIST_DIR" -name "*.hap" -type f))
     if [[ ${#hap_files[@]} -eq 0 ]]; then
         log_error "No HAP files found in distribution directory"
         exit 1
     fi
-    
+
     # Check for hdc
     if ! command -v hdc &> /dev/null; then
         log_error "hdc not found, required for device deployment"
         exit 1
     fi
-    
+
     mkdir -p "$DEPLOY_DIR"
     log_success "Deployment environment ready"
 }
 
 deploy_to_device() {
     log_info "Deploying to HarmonyOS device..."
-    
+
     local hap_file=$(find "$DIST_DIR" -name "*.hap" -type f | head -1)
-    
+
     if [[ -n "$DEVICE_ID" ]]; then
         hdc -t "$DEVICE_ID" install "$hap_file"
         hdc -t "$DEVICE_ID" shell am start -n com.rechain.harmonyos/EntryAbility
@@ -74,7 +74,7 @@ deploy_to_device() {
             log_warning "No devices connected for deployment"
         fi
     fi
-    
+
     log_success "Deployment to device completed"
 }
 
@@ -82,15 +82,15 @@ create_installer_package() {
     if [[ "$CREATE_INSTALLER" != "true" ]]; then
         return 0
     fi
-    
+
     log_info "Creating installer package..."
-    
+
     local installer_dir="$DEPLOY_DIR/installer"
     mkdir -p "$installer_dir"
-    
+
     # Copy HAP files
     cp "$DIST_DIR"/*.hap "$installer_dir/"
-    
+
     # Create installation script
     cat > "$installer_dir/install.sh" << 'EOF'
 #!/bin/bash
@@ -126,21 +126,21 @@ else
     exit 1
 fi
 EOF
-    
+
     chmod +x "$installer_dir/install.sh"
-    
+
     # Create installer package
     cd "$DEPLOY_DIR"
     tar -czf "rechain-harmonyos-installer-$(date +%Y%m%d).tar.gz" installer/
-    
+
     log_success "Installer package created"
 }
 
 generate_deployment_report() {
     log_info "Generating deployment report..."
-    
+
     local report_file="$DEPLOY_DIR/deployment-report-$(date +%Y%m%d-%H%M%S).html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html>
@@ -158,14 +158,14 @@ generate_deployment_report() {
 <body>
     <h1>REChain HarmonyOS Deployment Report</h1>
     <p>Generated: $(date)</p>
-    
+
     <h2>Deployment Summary</h2>
     <table>
         <tr><th>Component</th><th>Status</th><th>Details</th></tr>
         <tr><td>Device Deployment</td><td class="success">Success</td><td>HAP installed on device</td></tr>
         <tr><td>Installer Package</td><td class="$([ "$CREATE_INSTALLER" == "true" ] && echo "success" || echo "warning")">$([ "$CREATE_INSTALLER" == "true" ] && echo "Created" || echo "Skipped")</td><td>Installation package</td></tr>
     </table>
-    
+
     <h2>Installation Instructions</h2>
     <h3>Manual Installation</h3>
     <pre>
@@ -173,7 +173,7 @@ generate_deployment_report() {
 # Enable Developer Mode and USB Debugging
 hdc install rechain-harmonyos.hap
     </pre>
-    
+
     <h3>Using Installer Package</h3>
     <pre>
 # Extract installer package
@@ -184,16 +184,16 @@ cd installer
 </body>
 </html>
 EOF
-    
+
     log_success "Deployment report generated: $report_file"
 }
 
 main() {
     echo "REChain HarmonyOS Deployment"
     echo "=========================="
-    
+
     check_deployment_environment
-    
+
     case "$DEPLOYMENT_TYPE" in
         "local"|"device")
             deploy_to_device
@@ -210,9 +210,9 @@ main() {
             exit 1
             ;;
     esac
-    
+
     generate_deployment_report
-    
+
     log_success "Deployment completed successfully"
 }
 

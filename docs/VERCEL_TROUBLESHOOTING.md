@@ -13,11 +13,11 @@
    - sed command approach as backup
    - Manual verification and logging
 
-2. **Manual Fix**: 
+2. **Manual Fix**:
    ```bash
    # Navigate to vodozemac directory
    cd vodozemac
-   
+
    # Add crate-type manually to Cargo.toml
    echo "" >> Cargo.toml
    echo "[lib]" >> Cargo.toml

@@ -108,7 +108,9 @@ class RoomPolicyTestCase(unittest.FederatingHomeserverTestCase):
             else:
                 self.fail("Unexpected event ID")
 
-        self.mock_federation_transport_client.get_policy_recommendation_for_pdu.side_effect = get_policy_recommendation_for_pdu
+        self.mock_federation_transport_client.get_policy_recommendation_for_pdu.side_effect = (
+            get_policy_recommendation_for_pdu
+        )
 
     def _add_policy_server_to_room(self) -> None:
         # Inject a member event into the room

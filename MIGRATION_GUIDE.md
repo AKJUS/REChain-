@@ -28,4 +28,3 @@ This guide provides instructions for migrating from version 4.1.10+1160 to 4.1.1
 ## Support
 
 For assistance during migration, contact the REChain support team or consult the community forums.
-

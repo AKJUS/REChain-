@@ -3,7 +3,7 @@
   <id>com.rechain.online</id>
   <name>REChain</name>
   <summary>Digital Infrastructure Platform for Autonomous Organizations</summary>
-  
+
   <description>
     <p>
       REChain is the foundational "Digital Spine" for the next generation of autonomous organizations,
@@ -14,17 +14,17 @@
       into a seamless, extensible, and developer-friendly ecosystem.
     </p>
   </description>
-  
+
   <launchable type="desktop-id">REChain.desktop</launchable>
-  
+
   <url type="homepage">https://online.rechain.network</url>
   <url type="bugtracker">https://github.com/sorydima/REChain-/issues</url>
   <url type="help">https://github.com/sorydima/REChain-/wiki</url>
-  
+
   <provides>
     <binary>rechainonline</binary>
   </provides>
-  
+
   <categories>
     <category>Network</category>
     <category>Chat</category>
@@ -32,7 +32,7 @@
     <category>Development</category>
     <category>Security</category>
   </categories>
-  
+
   <keywords>
     <keyword>Matrix</keyword>
     <keyword>Blockchain</keyword>
@@ -44,7 +44,7 @@
     <keyword>Messaging</keyword>
     <keyword>Crypto</keyword>
   </keywords>
-  
+
   <screenshots>
     <screenshot type="default">
       https://github.com/sorydima/REChain-/raw/main/screenshots/rechain-messenger.png
@@ -53,7 +53,7 @@
       https://github.com/sorydima/REChain-/raw/main/screenshots/rechain-dashboard.png
     </screenshot>
   </screenshots>
-  
+
   <releases>
     <release version="4.1.10+1160" date="2025-12-06">
       <description>
@@ -68,33 +68,32 @@
       </description>
     </release>
   </releases>
-  
+
   <content_rating type="oars-1.1">
     <content_attribute id="social-chat">intense</content_attribute>
     <content_attribute id="social-info">low</content_attribute>
   </content_rating>
-  
+
   <requires>
     <memory>1024</memory>
     <storage>500</storage>
   </requires>
-  
+
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
     <control>touch</control>
   </supports>
-  
+
   <project_license>Apache-2.0</project_license>
   <developer_name>REChain Inc.</developer_name>
-  
+
   <translation type="gettext">rechain</translation>
-  
+
   <custom>
     <value key="xdg-icon-category">applications</value>
     <value key="xdg-menu-category">Network</value>
   </custom>
-  
+
   <extends>com.rechain.online</extends>
 </component>
-

@@ -1,3 +1,3 @@
 for f in *.sh; do
-  bash "$f" 
+  bash "$f"
 done

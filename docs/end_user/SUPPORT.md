@@ -13,4 +13,4 @@
 - Open an issue on GitHub: https://github.com/sorydima/REChain-/issues
 - Provide as much detail as possible (steps, screenshots, logs)
 
---- 
+---

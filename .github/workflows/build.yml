@@ -15,7 +15,7 @@ jobs:
   build-windows:
     runs-on: windows-latest
     name: Build Windows
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     name: Build Linux
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -67,7 +67,7 @@ jobs:
   build-macos:
     runs-on: macos-latest
     name: Build macOS
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -95,26 +95,26 @@ jobs:
       run: |
         # Clone vodozemac
         git clone https://github.com/matrix-org/vodozemac.git
-        
+
         # Install wasm-pack
         cargo install wasm-pack
-        
+
         # Build vodozemac for web
         cd vodozemac
         wasm-pack build --target web
         cd ..
-        
+
         # Setup dart-vodozemac
         git clone https://github.com/famedly/dart-vodozemac.git .vodozemac
-        
+
         # Install flutter_rust_bridge_codegen
         cargo install flutter_rust_bridge_codegen
-        
+
         # Build vodozemac bindings
         cd .vodozemac
         flutter_rust_bridge_codegen build-web --dart-root dart --rust-root $(readlink -f rust) --release
         cd ..
-        
+
         # Copy generated files
         mkdir -p assets/vodozemac
         rm -f assets/vodozemac/vodozemac_bindings_dart*
@@ -134,7 +134,7 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     name: Build Android
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -160,26 +160,26 @@ jobs:
       run: |
         # Clone vodozemac
         git clone https://github.com/matrix-org/vodozemac.git
-        
+
         # Install wasm-pack
         cargo install wasm-pack
-        
+
         # Build vodozemac for web
         cd vodozemac
         wasm-pack build --target web
         cd ..
-        
+
         # Setup dart-vodozemac
         git clone https://github.com/famedly/dart-vodozemac.git .vodozemac
-        
+
         # Install flutter_rust_bridge_codegen
         cargo install flutter_rust_bridge_codegen
-        
+
         # Build vodozemac bindings
         cd .vodozemac
         flutter_rust_bridge_codegen build-web --dart-root dart --rust-root $(readlink -f rust) --release
         cd ..
-        
+
         # Copy generated files
         mkdir -p assets/vodozemac
         rm -f assets/vodozemac/vodozemac_bindings_dart*
@@ -199,7 +199,7 @@ jobs:
   build-web:
     runs-on: ubuntu-latest
     name: Build Web
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -222,26 +222,26 @@ jobs:
       run: |
         # Clone vodozemac
         git clone https://github.com/matrix-org/vodozemac.git
-        
+
         # Install wasm-pack
         cargo install wasm-pack
-        
+
         # Build vodozemac for web
         cd vodozemac
         wasm-pack build --target web
         cd ..
-        
+
         # Setup dart-vodozemac
         git clone https://github.com/famedly/dart-vodozemac.git .vodozemac
-        
+
         # Install flutter_rust_bridge_codegen
         cargo install flutter_rust_bridge_codegen
-        
+
         # Build vodozemac bindings
         cd .vodozemac
         flutter_rust_bridge_codegen build-web --dart-root dart --rust-root $(readlink -f rust) --release
         cd ..
-        
+
         # Copy generated files
         mkdir -p assets/vodozemac
         rm -f assets/vodozemac/vodozemac_bindings_dart*
@@ -261,7 +261,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: Run Tests
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -281,7 +281,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     name: Lint Code
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -296,4 +296,4 @@ jobs:
       run: flutter pub get
 
     - name: Analyze code
-      run: flutter analyze 
+      run: flutter analyze

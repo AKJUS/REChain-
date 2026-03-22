@@ -30,4 +30,4 @@ graph TD
 - Plugins can intercept, modify, or extend flows
 - API and dashboard provide observability and control
 
---- 
+---

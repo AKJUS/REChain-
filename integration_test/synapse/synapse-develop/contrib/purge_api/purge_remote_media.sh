@@ -37,7 +37,7 @@ sql (){
 TOKEN=$(sql "SELECT token FROM access_tokens WHERE user_id='$ADMIN' ORDER BY id DESC LIMIT 1")
 
 ###############################################################################
-# check, if your TOKEN works. For example this works: 
+# check, if your TOKEN works. For example this works:
 ###############################################################################
 # curl --header "Authorization: Bearer $TOKEN" "$API_URL/rooms/$ROOM/state/m.room.power_levels"
 

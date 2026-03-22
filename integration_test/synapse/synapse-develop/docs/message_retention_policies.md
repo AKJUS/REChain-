@@ -65,7 +65,7 @@ A default message retention policy is a policy defined in Synapse's
 configuration that is used by Synapse for every room that doesn't have a
 message retention policy configured in its state. This allows server
 admins to ensure that messages are never kept indefinitely in a server's
-database. 
+database.
 
 A default policy can be defined as such, by adding the `retention` option in
 the configuration file and adding these sub-options:

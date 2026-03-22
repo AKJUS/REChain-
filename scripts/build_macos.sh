@@ -63,15 +63,15 @@ if [ -f "$MACOS_DIR/ExportOptions.plist" ]; then
                -configuration Release \
                -archivePath "$PROJECT_ROOT/build/macos/Runner.xcarchive" \
                archive
-    
+
     if [ $? -eq 0 ]; then
         echo "Archive created successfully"
-        
+
         xcodebuild -exportArchive \
                    -archivePath "$PROJECT_ROOT/build/macos/Runner.xcarchive" \
                    -exportPath "$PROJECT_ROOT/build/macos/app" \
                    -exportOptionsPlist "$MACOS_DIR/ExportOptions.plist"
-        
+
         if [ $? -eq 0 ]; then
             echo "App exported successfully"
         else

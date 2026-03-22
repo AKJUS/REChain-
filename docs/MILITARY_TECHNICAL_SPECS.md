@@ -1,7 +1,7 @@
 # ТЕХНИЧЕСКОЕ ЗАДАНИЕ
 ## Система защищенной связи REChain для Вооруженных Сил РФ
 
-**ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ**  
+**ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ**
 **Экз. № ___**
 
 ---
@@ -74,7 +74,7 @@ server_specs:
   storage: "2x 2TB NVMe SSD RAID-1"
   network: "2x 10 Gbps Ethernet"
   security: "TPM 2.0, Hardware HSM"
-  
+
 # Рекомендуемая конфигурация
 recommended_specs:
   cpu: "2x Эльбрус-16С"
@@ -166,14 +166,14 @@ class AndromedeIntegration:
             certificate="military.crt",
             private_key="military.key"
         )
-    
+
     def sync_personnel(self):
         """Синхронизация данных личного состава"""
         personnel_data = self.connection.query(
             "SELECT * FROM personnel WHERE active=1"
         )
         return self.map_to_rechain_users(personnel_data)
-    
+
     def send_order(self, order_data):
         """Отправка боевого приказа"""
         encrypted_order = self.encrypt_gost(order_data)
@@ -330,16 +330,16 @@ class BattleOrderSystem:
             'classification': 'СЕКРЕТНО',
             'digital_signature': None
         }
-        
+
         # Цифровая подпись по ГОСТ
         order['digital_signature'] = self.sign_gost(order)
-        
+
         # Шифрование для каждого получателя
         encrypted_orders = []
         for unit_id in unit_ids:
             encrypted_order = self.encrypt_for_unit(order, unit_id)
             encrypted_orders.append(encrypted_order)
-        
+
         return self.send_orders(encrypted_orders)
 ```
 
@@ -368,18 +368,18 @@ class MilitaryGeoService {
         this.coordinateSystem = 'СК-42'; // Система координат 1942 года
         this.projection = 'Гаусса-Крюгера';
     }
-    
+
     convertToMilitary(lat, lon) {
         // Конвертация в военную систему координат
         return this.convertToSK42(lat, lon);
     }
-    
+
     calculateFireMission(target, battery) {
         // Расчет данных для стрельбы
         const distance = this.calculateDistance(target, battery);
         const azimuth = this.calculateAzimuth(target, battery);
         const elevation = this.calculateElevation(target, battery);
-        
+
         return {
             distance: distance,
             azimuth: azimuth,
@@ -424,7 +424,7 @@ class ClassificationEngine:
                 'связь', 'координаты'
             ]
         }
-    
+
     def classify_message(self, content):
         """Автоматическая классификация сообщения"""
         for level, keywords in self.keywords.items():
@@ -464,7 +464,7 @@ class ClassificationEngine:
 #### Ежедневные сводки
 ```sql
 -- Пример запроса для ежедневной сводки
-SELECT 
+SELECT
     unit_name,
     personnel_count,
     readiness_level,
@@ -472,7 +472,7 @@ SELECT
     ammunition_level,
     fuel_level,
     last_report_time
-FROM unit_status 
+FROM unit_status
 WHERE report_date = CURRENT_DATE
 ORDER BY unit_hierarchy;
 ```
@@ -605,20 +605,20 @@ REChain представляет собой критически важную с
 
 ---
 
-**ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ**  
-**Экз. № ___**  
+**ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ**
+**Экз. № ___**
 **Всего экземпляров: 25**
 
-**Документ подготовлен**: Главное управление связи ВС РФ  
-**Согласовано**: Главное управление Генерального штаба ВС РФ  
+**Документ подготовлен**: Главное управление связи ВС РФ
+**Согласовано**: Главное управление Генерального штаба ВС РФ
 **Утверждено**: Министр обороны Российской Федерации
 
-**Дата**: [ТЕКУЩАЯ ДАТА]  
-**Подпись**: [ПОДПИСЬ МИНИСТРА ОБОРОНЫ]  
+**Дата**: [ТЕКУЩАЯ ДАТА]
+**Подпись**: [ПОДПИСЬ МИНИСТРА ОБОРОНЫ]
 **Печать**: [ПЕЧАТЬ МИНИСТЕРСТВА ОБОРОНЫ РФ]
 
 ---
 
-*REChain - Технологическое превосходство для военного превосходства*  
-*Версия документа: 4.1.10+1160 MILITARY-TECH*  
+*REChain - Технологическое превосходство для военного превосходства*
+*Версия документа: 4.1.10+1160 MILITARY-TECH*
 *Гриф секретности: ДЛЯ СЛУЖЕБНОГО ПОЛЬЗОВАНИЯ*

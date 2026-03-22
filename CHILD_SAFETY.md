@@ -1,14 +1,14 @@
 # Child Safety Standards – REChain.Online!
 
-**Last Updated:** January 25, 2026  
-**Applies To:** REChain.Online! (REChain ®️ 🪐)  
+**Last Updated:** January 25, 2026
+**Applies To:** REChain.Online! (REChain ®️ 🪐)
 **Developer:** REChain Network Solutions
 
 ---
 
 ## 🌍 1. Introduction
 
-Safety — especially the safety of children — is a core principle for REChain.Online! and the REChain ®️ 🪐 ecosystem.  
+Safety — especially the safety of children — is a core principle for REChain.Online! and the REChain ®️ 🪐 ecosystem.
 This document outlines our **Child Safety Standards** and is intended to comply with legal requirements in the **European Union (EU)**, the **United States (US)**, and other jurisdictions.
 
 These standards apply to all uses of REChain.Online!, including:
@@ -25,15 +25,15 @@ These standards apply to all uses of REChain.Online!, including:
 
 This includes, but is not limited to, the following prohibited content and behavior:
 
-- Any **sexual content involving minors**  
-- **Child sexual abuse material (CSAM)**  
-- **Grooming, solicitation, or sexualization of minors**  
-- Requests to create, share, or distribute CSAE-related content  
+- Any **sexual content involving minors**
+- **Child sexual abuse material (CSAM)**
+- **Grooming, solicitation, or sexualization of minors**
+- Requests to create, share, or distribute CSAE-related content
 - Use of the REChain.Online! platform to facilitate exploitation of minors
 
 ❗ Terminology used in these standards:
-- **CSAE** — Child Sexual Abuse and Exploitation  
-- **CSAM** — Child Sexual Abuse Material  
+- **CSAE** — Child Sexual Abuse and Exploitation
+- **CSAM** — Child Sexual Abuse Material
 - **Minor** — Any person under 18 years of age (or higher age if specified by local law)
 
 ---

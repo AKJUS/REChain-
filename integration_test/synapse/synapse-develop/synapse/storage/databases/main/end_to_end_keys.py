@@ -263,7 +263,8 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
         self,
         query_list: Collection[Tuple[str, Optional[str]]],
         include_all_devices: Literal[False] = False,
-    ) -> Dict[str, Dict[str, DeviceKeyLookupResult]]: ...
+    ) -> Dict[str, Dict[str, DeviceKeyLookupResult]]:
+        ...
 
     @overload
     async def get_e2e_device_keys_and_signatures(
@@ -271,7 +272,8 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
         query_list: Collection[Tuple[str, Optional[str]]],
         include_all_devices: bool = False,
         include_deleted_devices: Literal[False] = False,
-    ) -> Dict[str, Dict[str, DeviceKeyLookupResult]]: ...
+    ) -> Dict[str, Dict[str, DeviceKeyLookupResult]]:
+        ...
 
     @overload
     async def get_e2e_device_keys_and_signatures(
@@ -279,7 +281,8 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
         query_list: Collection[Tuple[str, Optional[str]]],
         include_all_devices: Literal[True],
         include_deleted_devices: Literal[True],
-    ) -> Dict[str, Dict[str, Optional[DeviceKeyLookupResult]]]: ...
+    ) -> Dict[str, Dict[str, Optional[DeviceKeyLookupResult]]]:
+        ...
 
     @trace
     @cancellable
@@ -479,7 +482,9 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
         signature_sql = """
             SELECT user_id, key_id, target_device_id, signature
             FROM e2e_cross_signing_signatures WHERE %s
-            """ % (" OR ".join("(" + q + ")" for q in signature_query_clauses))
+            """ % (
+            " OR ".join("(" + q + ")" for q in signature_query_clauses)
+        )
 
         txn.execute(signature_sql, signature_query_params)
         return cast(
@@ -922,7 +927,9 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
                         FROM e2e_cross_signing_keys
                         WHERE %(clause)s
                         ORDER BY user_id, keytype, stream_id DESC
-                """ % {"clause": clause}
+                """ % {
+                    "clause": clause
+                }
             else:
                 # SQLite has special handling for bare columns when using
                 # MIN/MAX with a `GROUP BY` clause where it picks the value from
@@ -932,7 +939,9 @@ class EndToEndKeyWorkerStore(EndToEndKeyBackgroundStore, CacheInvalidationWorker
                         FROM e2e_cross_signing_keys
                         WHERE %(clause)s
                         GROUP BY user_id, keytype
-                """ % {"clause": clause}
+                """ % {
+                    "clause": clause
+                }
 
             txn.execute(sql, params)
 

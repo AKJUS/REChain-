@@ -65,4 +65,4 @@
 
 ---
 
-For more, see [docs/](../docs/). 
+For more, see [docs/](../docs/).

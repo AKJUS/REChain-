@@ -38,76 +38,76 @@ Operational Excellence
 [unreleased] - 2025-06-08
 
 Features
-- Add confirmation dialog before accepting invite  
-- Add feature flag for refresh tokens  
-- Add setting to toggle space navigation rail on mobile  
-- Introduce background audio player  
-- Enable markdown checkbox toggling in messages  
-- Allow creating lists with checkboxes via "+" menu  
-- Limit height of text messages and allow expansion on tap  
-- Integrate video player into multi-image viewer  
-- Show all supported image/video file types in file picker  
-- Enable WebM video support when selecting videos for upload  
+- Add confirmation dialog before accepting invite
+- Add feature flag for refresh tokens
+- Add setting to toggle space navigation rail on mobile
+- Introduce background audio player
+- Enable markdown checkbox toggling in messages
+- Allow creating lists with checkboxes via "+" menu
+- Limit height of text messages and allow expansion on tap
+- Integrate video player into multi-image viewer
+- Show all supported image/video file types in file picker
+- Enable WebM video support when selecting videos for upload
 
 Fixes
-- Prevent crash on page navigation with open popup menu  
-- Fix app crash on window resize in chat  
-- Fix crash when accessing settings in desktop mode  
-- Prevent crash when logging out via client chooser button  
-- Fix avatar rendering with anti-aliased clipping for smoother edges  
-- Correct PNGs to PNG in file selector for consistency  
-- Join new room after room upgrade  
-- Persist state in text input dialogs  
-- Properly show WebP images with lowercase extensions  
-- Add missing mounted check to mxcImage component  
-- Improve localization handling  
+- Prevent crash on page navigation with open popup menu
+- Fix app crash on window resize in chat
+- Fix crash when accessing settings in desktop mode
+- Prevent crash when logging out via client chooser button
+- Fix avatar rendering with anti-aliased clipping for smoother edges
+- Correct PNGs to PNG in file selector for consistency
+- Join new room after room upgrade
+- Persist state in text input dialogs
+- Properly show WebP images with lowercase extensions
+- Add missing mounted check to mxcImage component
+- Improve localization handling
 
 Build
-- Update SDK to 0.40.2  
-- Upgrade to Flutter 3.32.1  
-- Update Android packages: record, shared_preferences  
-- Apply workaround for Flutter Secure Storage on Linux  
+- Update SDK to 0.40.2
+- Upgrade to Flutter 3.32.1
+- Update Android packages: record, shared_preferences
+- Apply workaround for Flutter Secure Storage on Linux
 - Added script: scripts/update-dependencies.sh for dependency upgrades
 
 Chore
-- Crop and cache shortcut file on Android  
-- Display loading dialog while preparing voice messages  
-- Format lib/utils/file_selector.dart  
-- Let users define custom title in error reporter  
-- Narrow space navigation bar on mobile and match theme  
-- Improve checkbox visuals  
-- Preload server file config before upload  
-- Remove unused translations and custom error widget builder  
-- Simplify voice message getter and update localization  
+- Crop and cache shortcut file on Android
+- Display loading dialog while preparing voice messages
+- Format lib/utils/file_selector.dart
+- Let users define custom title in error reporter
+- Narrow space navigation bar on mobile and match theme
+- Improve checkbox visuals
+- Preload server file config before upload
+- Remove unused translations and custom error widget builder
+- Simplify voice message getter and update localization
 
 Refactor
-- Always use HtmlMessage  
-- Reduce notification avatar size to 128px  
+- Always use HtmlMessage
+- Reduce notification avatar size to 128px
 
 Translations (via Weblate)
 
 New Languages
-- Cantonese (Traditional Han script)  
-- Danish  
-- Yue (yue_HK)  
+- Cantonese (Traditional Han script)
+- Danish
+- Yue (yue_HK)
 
 Updated Languages
-- Arabic  
-- Basque  
-- Catalan  
-- Chinese (Simplified & Traditional)  
-- Dutch  
-- Estonian  
-- Finnish  
-- Galician  
-- German  
-- Hebrew  
-- Hungarian  
-- Indonesian  
-- Irish  
-- Italian  
-- Latvian  
-- Polish  
-- Portuguese (Brazil)  
-- Russian  
+- Arabic
+- Basque
+- Catalan
+- Chinese (Simplified & Traditional)
+- Dutch
+- Estonian
+- Finnish
+- Galician
+- German
+- Hebrew
+- Hungarian
+- Indonesian
+- Irish
+- Italian
+- Latvian
+- Polish
+- Portuguese (Brazil)
+- Russian
 - Ukrainian

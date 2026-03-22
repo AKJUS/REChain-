@@ -53,7 +53,7 @@ func DownFixCrossSigningSignatureIndexes(ctx context.Context, tx *sql.Tx) error 
 
 		DROP TABLE keyserver_cross_signing_sigs;
 		ALTER TABLE keyserver_cross_signing_sigs_tmp RENAME TO keyserver_cross_signing_sigs;
-		
+
 		DELETE INDEX IF EXISTS keyserver_cross_signing_sigs_idx;
 	`)
 	if err != nil {

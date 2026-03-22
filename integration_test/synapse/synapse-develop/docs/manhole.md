@@ -14,7 +14,7 @@ environments where untrusted users have shell access.
 ## Configuring the manhole
 
 To enable it, first add the `manhole` listener configuration in your
-`homeserver.yaml`. You can find information on how to do that 
+`homeserver.yaml`. You can find information on how to do that
 in the [configuration manual](usage/configuration/config_documentation.md#manhole_settings).
 The configuration is slightly different if you're using docker.
 
@@ -30,7 +30,7 @@ listeners:
 ```
 
 When using `docker run` to start the server, you will then need to change the command to the following to include the
-`manhole` port forwarding. The `-p 127.0.0.1:9000:9000` below is important: it 
+`manhole` port forwarding. The `-p 127.0.0.1:9000:9000` below is important: it
 ensures that access to the `manhole` is only possible for local users.
 
 ```bash
@@ -77,7 +77,7 @@ manhole_settings:
 ## Accessing synapse manhole
 
 Then restart synapse, and point an ssh client at port 9000 on localhost, using
-the username and password configured in `homeserver.yaml` - with the default 
+the username and password configured in `homeserver.yaml` - with the default
 configuration, this would be:
 
 ```bash

@@ -11,7 +11,7 @@
 - End-user onboarding, FAQ, and support docs
 - Final polish, cross-linking, and review
 
---- 
+---
 
 **Use this outline for presentations, onboarding slides, or to brief designers for a visual infographic.**
 

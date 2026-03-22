@@ -389,13 +389,15 @@ def only_if_tracing(func: Callable[P, R]) -> Callable[P, Optional[R]]:
 @overload
 def ensure_active_span(
     message: str,
-) -> Callable[[Callable[P, R]], Callable[P, Optional[R]]]: ...
+) -> Callable[[Callable[P, R]], Callable[P, Optional[R]]]:
+    ...
 
 
 @overload
 def ensure_active_span(
     message: str, ret: T
-) -> Callable[[Callable[P, R]], Callable[P, Union[T, R]]]: ...
+) -> Callable[[Callable[P, R]], Callable[P, Union[T, R]]]:
+    ...
 
 
 def ensure_active_span(
@@ -1102,9 +1104,9 @@ def trace_servlet(
             # Mypy seems to think that start_context.tag below can be Optional[str], but
             # that doesn't appear to be correct and works in practice.
 
-            request_tags[SynapseTags.REQUEST_TAG] = (
-                request.request_metrics.start_context.tag  # type: ignore[assignment]
-            )
+            request_tags[
+                SynapseTags.REQUEST_TAG
+            ] = request.request_metrics.start_context.tag  # type: ignore[assignment]
 
             # set the tags *after* the servlet completes, in case it decided to
             # prioritise the span (tags will get dropped on unprioritised spans)

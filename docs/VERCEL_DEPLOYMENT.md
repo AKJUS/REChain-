@@ -85,7 +85,7 @@ FLUTTER_BUILD_MODE=release
    Type: CNAME
    Name: www
    Value: cname.vercel-dns.com
-   
+
    Type: A
    Name: @
    Value: 76.76.19.61

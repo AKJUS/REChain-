@@ -465,4 +465,3 @@ class PresenceIndicator extends StatelessWidget {
     );
   }
 }
-

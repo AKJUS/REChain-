@@ -23,7 +23,7 @@ A user is **never** considered active if they are either:
    - Note: This **only** covers users that are part of an application service `namespaces.users` registration. The namespace
      must also be marked as `exclusive`.
 
-Otherwise, any request to Synapse will mark the user as active. Please note that registration will not mark a user as active *unless* 
+Otherwise, any request to Synapse will mark the user as active. Please note that registration will not mark a user as active *unless*
 they register with a 3pid that is included in the config field `mau_limits_reserved_threepids`.
 
 The Prometheus metric for MAU is refreshed every 5 minutes.
@@ -47,7 +47,7 @@ Users registered by an application service will be recorded with an `appservice_
 
 ## Limiting usage of the homeserver when the maximum MAU is reached
 
-If both config options `limit_usage_by_mau` and `max_mau_value` is set, and the current MAU value exceeds the maximum value, the 
+If both config options `limit_usage_by_mau` and `max_mau_value` is set, and the current MAU value exceeds the maximum value, the
 homeserver will begin to block some actions.
 
 Individual users matching **any** of the below criteria never have their actions blocked:

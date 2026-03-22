@@ -459,4 +459,3 @@ class Web3Signature {
     return RegExp(r'^0x[a-fA-F0-9]{64}$').hasMatch(privateKey);
   }
 }
-

@@ -132,9 +132,9 @@ The synapse config will look like this:
 
 1. Create a regular web application for Synapse
 2. Set the Allowed Callback URLs to `[synapse public baseurl]/_synapse/client/oidc/callback`
-3. Add a rule with any name to add the `preferred_username` claim. 
+3. Add a rule with any name to add the `preferred_username` claim.
 (See https://auth0.com/docs/customize/rules/create-rules for more information on how to create rules.)
-   
+
    <details>
     <summary>Code sample</summary>
 
@@ -465,7 +465,7 @@ oidc_providers:
 
 [Google][google-idp] is an OpenID certified authentication and authorisation provider.
 
-1. Set up a project in the Google API Console (see 
+1. Set up a project in the Google API Console (see
    [documentation](https://developers.google.com/identity/protocols/oauth2/openid-connect#appsetup)).
 3. Add an "OAuth Client ID" for a Web Application under "Credentials".
 4. Copy the Client ID and Client Secret, and add the following to your synapse config:
@@ -610,7 +610,7 @@ oidc_providers:
     idp_name: "Mastodon Instance Example"
     discover: false
     issuer: "https://your.mastodon.instance.url/@admin"
-    client_id: "someclientid_123"    
+    client_id: "someclientid_123"
     client_secret: "someclientsecret_123"
     authorization_endpoint: "https://your.mastodon.instance.url/oauth/authorize"
     token_endpoint: "https://your.mastodon.instance.url/oauth/token"

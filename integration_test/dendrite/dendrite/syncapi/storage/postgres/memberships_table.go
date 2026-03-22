@@ -62,8 +62,8 @@ const purgeMembershipsSQL = "" +
 
 const selectMembersSQL = `
 	SELECT event_id FROM (
-		SELECT DISTINCT ON (room_id, user_id) room_id, user_id, event_id, membership FROM syncapi_memberships WHERE room_id = $1 AND topological_pos <= $2 ORDER BY room_id, user_id, stream_pos DESC  
-	) t 
+		SELECT DISTINCT ON (room_id, user_id) room_id, user_id, event_id, membership FROM syncapi_memberships WHERE room_id = $1 AND topological_pos <= $2 ORDER BY room_id, user_id, stream_pos DESC
+	) t
 	WHERE ($3::text IS NULL OR t.membership = $3)
 		AND ($4::text IS NULL OR t.membership <> $4)
 `

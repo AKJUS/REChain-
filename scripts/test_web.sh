@@ -38,39 +38,39 @@ print_error() {
 # Check dependencies
 check_dependencies() {
     print_status "Checking test dependencies..."
-    
+
     if ! command -v flutter &> /dev/null; then
         print_error "Flutter is not installed or not in PATH"
         exit 1
     fi
-    
+
     if ! command -v node &> /dev/null; then
         print_warning "Node.js not found. JavaScript tests will be skipped."
     fi
-    
+
     # Check Chrome for web testing
     if ! command -v google-chrome &> /dev/null && ! command -v chromium-browser &> /dev/null; then
         print_warning "Chrome/Chromium not found. Some web tests may fail."
     fi
-    
+
     print_status "Dependencies check completed"
 }
 
 # Setup test environment
 setup_test_environment() {
     print_status "Setting up test environment..."
-    
+
     # Create output directories
     mkdir -p "$OUTPUT_DIR"
     mkdir -p "$COVERAGE_DIR"
-    
+
     # Clean previous results
     rm -rf "$OUTPUT_DIR"/*
     rm -rf "$COVERAGE_DIR"/*
-    
+
     # Get dependencies
     flutter pub get
-    
+
     print_status "Test environment setup completed"
 }
 
@@ -78,12 +78,12 @@ setup_test_environment() {
 run_flutter_tests() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "unit" ]; then
         print_status "Running Flutter unit tests..."
-        
+
         local test_args="--coverage --reporter=json"
-        
+
         # Run tests with coverage
         flutter test $test_args > "$OUTPUT_DIR/flutter_test_results.json" 2>&1
-        
+
         if [ $? -eq 0 ]; then
             print_status "Flutter unit tests passed"
         else
@@ -91,7 +91,7 @@ run_flutter_tests() {
             cat "$OUTPUT_DIR/flutter_test_results.json"
             return 1
         fi
-        
+
         # Move coverage data
         if [ -f "coverage/lcov.info" ]; then
             cp coverage/lcov.info "$COVERAGE_DIR/flutter_coverage.info"
@@ -103,10 +103,10 @@ run_flutter_tests() {
 run_web_integration_tests() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "integration" ]; then
         print_status "Running web integration tests..."
-        
+
         # Run Flutter integration tests on Chrome
         flutter test integration_test --web-port=7357 --browser-name=chrome > "$OUTPUT_DIR/integration_test_results.txt" 2>&1
-        
+
         if [ $? -eq 0 ]; then
             print_status "Web integration tests passed"
         else
@@ -120,20 +120,20 @@ run_web_integration_tests() {
 test_javascript_modules() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "javascript" ]; then
         print_status "Testing JavaScript modules..."
-        
+
         if ! command -v node &> /dev/null; then
             print_warning "Node.js not available, skipping JavaScript tests"
             return 0
         fi
-        
+
         # Create test runner for JavaScript modules
         create_js_test_runner
-        
+
         # Run JavaScript tests
         cd web && node test_runner.js > "../$OUTPUT_DIR/javascript_test_results.txt" 2>&1
         local js_result=$?
         cd ..
-        
+
         if [ $js_result -eq 0 ]; then
             print_status "JavaScript module tests passed"
         else
@@ -214,35 +214,35 @@ try {
     eval(fs.readFileSync('js/CrashReportingManager.js', 'utf8'));
     eval(fs.readFileSync('js/WebSystemIntegration.js', 'utf8'));
     eval(fs.readFileSync('js/AutonomousNotificationIntegration.js', 'utf8'));
-    
+
     // Test AutonomousNotificationService
     test('AutonomousNotificationService constructor', () => {
         const service = new AutonomousNotificationService();
         assert(service instanceof AutonomousNotificationService, 'Should create instance');
         assert(!service.isInitialized, 'Should not be initialized');
     });
-    
+
     // Test CrashReportingManager
     test('CrashReportingManager constructor', () => {
         const manager = new CrashReportingManager();
         assert(manager instanceof CrashReportingManager, 'Should create instance');
         assert(!manager.isInitialized, 'Should not be initialized');
     });
-    
+
     // Test WebSystemIntegration
     test('WebSystemIntegration constructor', () => {
         const integration = new WebSystemIntegration();
         assert(integration instanceof WebSystemIntegration, 'Should create instance');
         assert(!integration.isInitialized, 'Should not be initialized');
     });
-    
+
     // Test AutonomousNotificationIntegration
     test('AutonomousNotificationIntegration constructor', () => {
         const integration = new AutonomousNotificationIntegration();
         assert(integration instanceof AutonomousNotificationIntegration, 'Should create instance');
         assert(!integration.isInitialized, 'Should not be initialized');
     });
-    
+
     // Test configuration handling
     test('Configuration management', () => {
         const integration = new AutonomousNotificationIntegration();
@@ -250,7 +250,7 @@ try {
         assert(typeof config === 'object', 'Should return configuration object');
         assert(typeof config.enableNotifications === 'boolean', 'Should have enableNotifications setting');
     });
-    
+
 } catch (error) {
     console.error('Failed to load modules:', error.message);
     testResults.failed++;
@@ -278,11 +278,11 @@ EOF
 test_pwa_features() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "pwa" ]; then
         print_status "Testing PWA features..."
-        
+
         # Check manifest.json
         if [ -f "web/manifest.json" ]; then
             print_status "Validating manifest.json..."
-            
+
             # Basic JSON validation
             if command -v node &> /dev/null; then
                 node -e "JSON.parse(require('fs').readFileSync('web/manifest.json', 'utf8'))" 2>/dev/null
@@ -297,7 +297,7 @@ test_pwa_features() {
             print_error "manifest.json not found"
             return 1
         fi
-        
+
         # Check service worker
         if [ -f "web/sw.js" ]; then
             print_status "Service worker found"
@@ -305,7 +305,7 @@ test_pwa_features() {
             print_error "Service worker (sw.js) not found"
             return 1
         fi
-        
+
         # Check required PWA assets
         local required_files=("icons/Icon-192.png" "icons/Icon-512.png")
         for file in "${required_files[@]}"; do
@@ -322,7 +322,7 @@ test_pwa_features() {
 test_service_worker() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "sw" ]; then
         print_status "Testing service worker functionality..."
-        
+
         if [ -f "web/sw.js" ]; then
             # Basic syntax check
             if command -v node &> /dev/null; then
@@ -334,7 +334,7 @@ test_service_worker() {
                     return 1
                 fi
             fi
-            
+
             # Check for required service worker features
             local required_features=("install" "activate" "fetch" "push" "notificationclick")
             for feature in "${required_features[@]}"; do
@@ -355,11 +355,11 @@ test_service_worker() {
 test_build_system() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "build" ]; then
         print_status "Testing build system..."
-        
+
         # Test debug build
         print_status "Testing debug build..."
         flutter build web --debug --web-renderer html > "$OUTPUT_DIR/debug_build.log" 2>&1
-        
+
         if [ $? -eq 0 ]; then
             print_status "Debug build successful"
         else
@@ -367,11 +367,11 @@ test_build_system() {
             cat "$OUTPUT_DIR/debug_build.log"
             return 1
         fi
-        
+
         # Test release build
         print_status "Testing release build..."
         flutter build web --release --web-renderer canvaskit > "$OUTPUT_DIR/release_build.log" 2>&1
-        
+
         if [ $? -eq 0 ]; then
             print_status "Release build successful"
         else
@@ -386,14 +386,14 @@ test_build_system() {
 test_performance() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "performance" ]; then
         print_status "Running performance tests..."
-        
+
         if command -v node &> /dev/null; then
             # Create performance test script
             create_performance_test
-            
+
             # Run performance tests
             node web/performance_test.js > "$OUTPUT_DIR/performance_results.txt" 2>&1
-            
+
             if [ $? -eq 0 ]; then
                 print_status "Performance tests completed"
                 cat "$OUTPUT_DIR/performance_results.txt"
@@ -418,7 +418,7 @@ console.log('=== REChain Web Performance Analysis ===\n');
 
 // Analyze JavaScript file sizes
 console.log('JavaScript File Sizes:');
-const jsFiles = ['js/AutonomousNotificationService.js', 'js/CrashReportingManager.js', 
+const jsFiles = ['js/AutonomousNotificationService.js', 'js/CrashReportingManager.js',
                 'js/WebSystemIntegration.js', 'js/AutonomousNotificationIntegration.js'];
 
 let totalSize = 0;
@@ -444,13 +444,13 @@ console.log('Optimization Recommendations:');
 jsFiles.forEach(file => {
     if (fs.existsSync(file)) {
         const content = fs.readFileSync(file, 'utf8');
-        
+
         // Check for console.log statements
         const consoleCount = (content.match(/console\./g) || []).length;
         if (consoleCount > 10) {
             console.log(`  ${file}: Consider removing ${consoleCount} console statements for production`);
         }
-        
+
         // Check for comments
         const commentLines = (content.match(/^\s*\/\//gm) || []).length;
         if (commentLines > 50) {
@@ -467,10 +467,10 @@ EOF
 test_security() {
     if [ "$TEST_MODE" = "all" ] || [ "$TEST_MODE" = "security" ]; then
         print_status "Running security tests..."
-        
+
         # Check for security headers in configuration files
         local security_issues=0
-        
+
         if [ -f "build/web/.htaccess" ]; then
             if grep -q "X-Frame-Options" build/web/.htaccess; then
                 print_status "X-Frame-Options header configured"
@@ -478,7 +478,7 @@ test_security() {
                 print_warning "X-Frame-Options header missing"
                 ((security_issues++))
             fi
-            
+
             if grep -q "X-Content-Type-Options" build/web/.htaccess; then
                 print_status "X-Content-Type-Options header configured"
             else
@@ -486,7 +486,7 @@ test_security() {
                 ((security_issues++))
             fi
         fi
-        
+
         # Check JavaScript for potential security issues
         local js_files=("web/js/AutonomousNotificationService.js" "web/js/CrashReportingManager.js")
         for file in "${js_files[@]}"; do
@@ -496,7 +496,7 @@ test_security() {
                     print_warning "Found eval() usage in $file - potential security risk"
                     ((security_issues++))
                 fi
-                
+
                 # Check for innerHTML usage
                 if grep -q "innerHTML" "$file"; then
                     print_warning "Found innerHTML usage in $file - consider using textContent"
@@ -504,7 +504,7 @@ test_security() {
                 fi
             fi
         done
-        
+
         if [ $security_issues -eq 0 ]; then
             print_status "No security issues found"
         else
@@ -516,9 +516,9 @@ test_security() {
 # Generate test report
 generate_test_report() {
     print_status "Generating test report..."
-    
+
     local report_file="$OUTPUT_DIR/test_report.html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html>
@@ -540,7 +540,7 @@ generate_test_report() {
         <p>Generated: $(date)</p>
         <p>Test Mode: $TEST_MODE</p>
     </div>
-    
+
     <div class="section">
         <h2>Test Results Summary</h2>
         <ul>
@@ -553,11 +553,11 @@ EOF
             echo "            <li><a href=\"#$filename\">$filename</a></li>" >> "$report_file"
         fi
     done
-    
+
     cat >> "$report_file" << EOF
         </ul>
     </div>
-    
+
     <div class="section">
         <h2>Coverage Information</h2>
         <p>Coverage reports are available in the coverage directory.</p>
@@ -574,25 +574,25 @@ EOF
             echo "    </div>" >> "$report_file"
         fi
     done
-    
+
     echo "</body></html>" >> "$report_file"
-    
+
     print_status "Test report generated: $report_file"
 }
 
 # Cleanup
 cleanup() {
     print_status "Cleaning up test artifacts..."
-    
+
     # Remove temporary test files
     if [ -f "web/test_runner.js" ]; then
         rm web/test_runner.js
     fi
-    
+
     if [ -f "web/performance_test.js" ]; then
         rm web/performance_test.js
     fi
-    
+
     print_status "Cleanup completed"
 }
 
@@ -600,12 +600,12 @@ cleanup() {
 main() {
     echo -e "${BLUE}Starting REChain web testing process...${NC}"
     echo ""
-    
+
     local failed_tests=0
-    
+
     check_dependencies
     setup_test_environment
-    
+
     # Run tests based on mode
     if ! run_flutter_tests; then ((failed_tests++)); fi
     if ! run_web_integration_tests; then ((failed_tests++)); fi
@@ -615,10 +615,10 @@ main() {
     if ! test_build_system; then ((failed_tests++)); fi
     test_performance
     test_security
-    
+
     generate_test_report
     cleanup
-    
+
     echo ""
     if [ $failed_tests -eq 0 ]; then
         echo -e "${GREEN}✓ All REChain web tests completed successfully!${NC}"
@@ -628,7 +628,7 @@ main() {
     echo -e "${GREEN}✓ Test results: $OUTPUT_DIR${NC}"
     echo -e "${GREEN}✓ Coverage reports: $COVERAGE_DIR${NC}"
     echo ""
-    
+
     exit $failed_tests
 }
 
