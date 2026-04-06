@@ -1,7 +1,7 @@
 
 var skwasm = (() => {
   var _scriptDir = import.meta.url;
-  
+
   return (
 async function(moduleArg = {}) {
 

@@ -1327,5 +1327,6 @@ def is_unknown_endpoint(
         )
     ) or (
         # Older Synapses returned a 400 error.
-        e.code == 400 and synapse_error.errcode == Codes.UNRECOGNIZED
+        e.code == 400
+        and synapse_error.errcode == Codes.UNRECOGNIZED
     )

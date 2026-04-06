@@ -33,4 +33,4 @@ graph TD
 - **API Layer** exposes REST, gRPC, and serverless endpoints for automation and external integrations.
 - **Dashboards** provide modern UI/UX for management and analytics.
 
-For more, see [docs/Architecture.md](../docs/Architecture.md). 
+For more, see [docs/Architecture.md](../docs/Architecture.md).

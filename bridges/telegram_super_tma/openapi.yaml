@@ -131,4 +131,4 @@ paths:
     get:
       summary: Per-room stats
       responses:
-        '200': {description: OK} 
+        '200': {description: OK}

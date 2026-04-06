@@ -30,7 +30,7 @@ detect_os() {
 install_rechain() {
     local os_type=$(detect_os)
     local base_url="https://github.com/sorydima/REChain-/releases/latest/download"
-    
+
     case $os_type in
         "astra")
             echo "Установка для Astra Linux..."
@@ -69,7 +69,7 @@ install_rechain() {
 post_install_config() {
     # Создание конфигурационной директории
     mkdir -p ~/.config/REChain/
-    
+
     # Базовая конфигурация
     cat > ~/.config/REChain/config.json << EOF
 {
@@ -79,7 +79,7 @@ post_install_config() {
     "auto_update": true
 }
 EOF
-    
+
     echo "REChain успешно установлен и настроен!"
 }
 
@@ -87,10 +87,10 @@ EOF
 main() {
     echo "🇷🇺 Автоматическая установка REChain для российских ОС Linux"
     echo "============================================================"
-    
+
     install_rechain
     post_install_config
-    
+
     echo "✅ Установка завершена! Запустите REChain из меню приложений."
 }
 
@@ -107,7 +107,7 @@ main "$@"
   vars:
     rechain_version: "4.1.10"
     base_url: "https://github.com/sorydima/REChain-/releases/latest/download"
-    
+
   tasks:
     - name: Detect OS type
       set_fact:
@@ -117,7 +117,7 @@ main "$@"
                      'rosa' if ansible_facts['distribution'] == 'ROSA' else
                      'elbrus' if 'elbrus' in ansible_facts['processor'][0]|lower else
                      'unknown' }}"
-    
+
     - name: Install REChain on Astra Linux
       block:
         - name: Download DEB package
@@ -129,7 +129,7 @@ main "$@"
             deb: "/tmp/rechainonline.deb"
             state: present
       when: os_type == "astra"
-    
+
     - name: Install REChain on RPM-based systems
       block:
         - name: Download RPM package
@@ -141,7 +141,7 @@ main "$@"
             name: "/tmp/rechainonline.rpm"
             state: present
       when: os_type in ["redos", "alt", "rosa"]
-    
+
     - name: Install REChain via AppImage
       block:
         - name: Create installation directory
@@ -160,13 +160,13 @@ main "$@"
             dest: "/usr/local/bin/rechainonline"
             state: link
       when: os_type in ["elbrus", "unknown"]
-    
+
     - name: Configure REChain
       template:
         src: rechain-config.j2
         dest: /etc/rechainonline/config.json
         mode: '0644'
-    
+
     - name: Enable REChain service (if applicable)
       systemd:
         name: rechainonline
@@ -271,9 +271,9 @@ spec:
 
 check_rechain_health() {
     local status=0
-    
+
     echo "🔍 Проверка состояния REChain..."
-    
+
     # Проверка процесса
     if pgrep -f rechainonline > /dev/null; then
         echo "✅ Процесс REChain запущен"
@@ -281,14 +281,14 @@ check_rechain_health() {
         echo "❌ Процесс REChain не найден"
         status=1
     fi
-    
+
     # Проверка сетевых подключений
     if ss -tulpn | grep -q rechainonline; then
         echo "✅ Сетевые подключения активны"
     else
         echo "⚠️  Нет активных сетевых подключений"
     fi
-    
+
     # Проверка использования памяти
     local mem_usage=$(ps -o rss= -p $(pgrep rechainonline) 2>/dev/null | awk '{sum+=$1} END {print sum/1024}')
     if [ -n "$mem_usage" ]; then
@@ -297,7 +297,7 @@ check_rechain_health() {
             echo "⚠️  Высокое использование памяти"
         fi
     fi
-    
+
     # Проверка логов на ошибки
     local error_count=$(journalctl -u rechainonline --since "1 hour ago" | grep -c ERROR || echo 0)
     if [ "$error_count" -gt 0 ]; then
@@ -306,7 +306,7 @@ check_rechain_health() {
     else
         echo "✅ Ошибок в логах не найдено"
     fi
-    
+
     return $status
 }
 
@@ -314,19 +314,19 @@ check_rechain_health() {
 send_notification() {
     local message="$1"
     local status="$2"
-    
+
     # Отправка в Telegram (если настроен)
     if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
         curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
             -d chat_id="$TELEGRAM_CHAT_ID" \
             -d text="🖥️ REChain Health Check: $message"
     fi
-    
+
     # Отправка по email (если настроен)
     if command -v mail &> /dev/null && [ -n "$ADMIN_EMAIL" ]; then
         echo "$message" | mail -s "REChain Health Check" "$ADMIN_EMAIL"
     fi
-    
+
     # Запись в syslog
     logger -t rechain-health "$message"
 }
@@ -359,7 +359,7 @@ scrape_configs:
       - targets: ['localhost:9090']
     metrics_path: /metrics
     scrape_interval: 30s
-    
+
 rule_files:
   - "rechain_alerts.yml"
 
@@ -419,25 +419,25 @@ alerting:
 
 perform_security_audit() {
     echo "🔒 Аудит безопасности REChain..."
-    
+
     # Проверка прав доступа к файлам
     echo "Проверка прав доступа..."
     find /usr/share/rechainonline -type f -perm /o+w -exec echo "⚠️  Файл {} доступен для записи всем" \;
-    
+
     # Проверка сетевых подключений
     echo "Проверка сетевых подключений..."
     ss -tulpn | grep rechainonline | while read line; do
         echo "🌐 $line"
     done
-    
+
     # Проверка процессов
     echo "Проверка процессов..."
     ps aux | grep rechainonline | grep -v grep
-    
+
     # Проверка логов на подозрительную активность
     echo "Анализ логов..."
     journalctl -u rechainonline --since "24 hours ago" | grep -i "failed\|error\|unauthorized" | head -10
-    
+
     # Проверка сертификатов
     echo "Проверка сертификатов..."
     if [ -d ~/.config/REChain/crypto ]; then
@@ -447,29 +447,29 @@ perform_security_audit() {
 
 generate_compliance_report() {
     local report_file="rechain-compliance-$(date +%Y%m%d).txt"
-    
+
     {
         echo "REChain Compliance Report - $(date)"
         echo "=================================="
         echo
-        
+
         echo "ГОСТ Compliance:"
         echo "- Encryption: $(openssl version)"
         echo "- Certificates: $(find ~/.config/REChain/crypto -name "*.pem" | wc -l) found"
         echo
-        
+
         echo "FSTEC Requirements:"
         echo "- Audit logging: $(systemctl is-active auditd)"
         echo "- Access controls: $(ls -la /usr/bin/rechainonline)"
         echo
-        
+
         echo "Data Residency:"
         echo "- Config location: ~/.config/REChain/"
         echo "- Data location: ~/.local/share/REChain/"
         echo "- Logs location: ~/.local/share/REChain/logs/"
-        
+
     } > "$report_file"
-    
+
     echo "📋 Отчет сохранен в $report_file"
 }
 

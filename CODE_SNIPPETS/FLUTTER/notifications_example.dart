@@ -388,4 +388,3 @@ extension NotificationState on RoomNotificationState {
     }
   }
 }
-

@@ -1,2 +1,2 @@
-keypass=""
-keystorepass=""
+keypass = ""
+keystorepass = ""

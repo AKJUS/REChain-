@@ -274,4 +274,3 @@ groups:
       - record: avg_latency
         expr: |
           histogram_quantile(0.50, rate(bridge_latency_seconds_bucket[5m]))
-

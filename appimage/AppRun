@@ -16,4 +16,3 @@ fi
 
 # Execute the main application
 exec ./rechainonline "$@"
-

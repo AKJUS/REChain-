@@ -328,4 +328,3 @@ class MatrixRoomsExample {
     await room.setNotificationMode(level);
   }
 }
-

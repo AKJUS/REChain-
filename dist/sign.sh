@@ -86,32 +86,32 @@ print_status() {
 sign_gpg() {
     local file="$1"
     local basename=$(basename "$file")
-    
+
     print_status "info" "Signing: $basename"
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "Would sign: $file with GPG key: $GPG_KEY"
         return
     fi
-    
+
     # Create cleartext signature
     gpg --batch --yes --armor \
         --local-user "$GPG_KEY" \
         --detach-sign "$file" \
         --output "${file}.sig"
-    
+
     # Create binary signature
     gpg --batch --yes \
         --local-user "$GPG_KEY" \
         --detach-sign --binary "$file" > "${file}.bin.sig"
-    
+
     # Create signature block for .deb files
     if [[ "$file" == *.deb ]]; then
         dpkg-sig --batch --yes \
             --key "$GPG_KEY" \
             --sign builder "$file"
     fi
-    
+
     print_status "ok" "Signed: $basename"
 }
 
@@ -119,26 +119,26 @@ sign_gpg() {
 generate_checksums() {
     local file="$1"
     local basename=$(basename "$file")
-    
+
     print_status "info" "Generating checksums: $basename"
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "Would generate checksums for: $file"
         return
     fi
-    
+
     # SHA256
     sha256sum "$file" >> "${OUTPUT_DIR}/SHA256SUMS"
     sha256sum "$file" | tee -a "${OUTPUT_DIR}/SHA256SUMS.txt"
-    
+
     # SHA512
     sha512sum "$file" >> "${OUTPUT_DIR}/SHA512SUMS"
     sha512sum "$file" | tee -a "${OUTPUT_DIR}/SHA512SUMS.txt"
-    
+
     # MD5 (legacy)
     md5sum "$file" >> "${OUTPUT_DIR}/MD5SUMS"
     md5sum "$file" | tee -a "${OUTPUT_DIR}/MD5SUMS.txt"
-    
+
     print_status "ok" "Checksums generated: $basename"
 }
 
@@ -146,9 +146,9 @@ generate_checksums() {
 verify_gpg() {
     local file="$1"
     local basename=$(basename "$file")
-    
+
     print_status "info" "Verifying GPG signature: $basename"
-    
+
     if [ -f "${file}.sig" ]; then
         gpg --verify "${file}.sig" "$file" 2>&1 | grep -E "(Good|bad|ERROR)" || {
             print_status "warn" "Signature verification: $basename"
@@ -166,9 +166,9 @@ verify_gpg() {
 verify_checksum() {
     local file="$1"
     local basename=$(basename "$file")
-    
+
     print_status "info" "Verifying checksum: $basename"
-    
+
     if [ -f "${OUTPUT_DIR}/SHA256SUMS" ]; then
         if sha256sum -c "${OUTPUT_DIR}/SHA256SUMS" 2>&1 | grep -q "$basename: OK"; then
             print_status "ok" "SHA256 verified: $basename"
@@ -186,9 +186,9 @@ main() {
     echo "REChain Signing Script"
     echo "================================"
     echo ""
-    
+
     mkdir -p "$OUTPUT_DIR"
-    
+
     # Clear previous checksums
     > "${OUTPUT_DIR}/SHA256SUMS"
     > "${OUTPUT_DIR}/SHA512SUMS"
@@ -196,7 +196,7 @@ main() {
     > "${OUTPUT_DIR}/SHA256SUMS.txt"
     > "${OUTPUT_DIR}/SHA512SUMS.txt"
     > "${OUTPUT_DIR}/MD5SUMS.txt"
-    
+
     # Get list of files to process
     local files=("$@")
     if [ ${#files[@]} -eq 0 ]; then
@@ -207,11 +207,11 @@ main() {
                "${OUTPUT_DIR}"/rechain_*.deb \
                "${OUTPUT_DIR}"/rechain-*.rpm)
     fi
-    
+
     for file in "${files[@]}"; do
         # Skip if file doesn't exist (glob didn't match)
         [ -f "$file" ] || continue
-        
+
         if [ "$VERIFY" = true ]; then
             verify_gpg "$file"
             verify_checksum "$file"
@@ -219,26 +219,26 @@ main() {
             if [ "$SIGN_GPG" = true ]; then
                 sign_gpg "$file"
             fi
-            
+
             if [ "$SIGN_CHECKSUM" = true ]; then
                 generate_checksums "$file"
             fi
         fi
     done
-    
+
     echo ""
-    
+
     # Create signed checksums file
     if [ "$SIGN_GPG" = true ] && [ -f "${OUTPUT_DIR}/SHA256SUMS" ]; then
         print_status "info" "Signing checksums file..."
         sign_gpg "${OUTPUT_DIR}/SHA256SUMS"
     fi
-    
+
     # List created files
     echo ""
     echo "Generated files:"
     ls -la "${OUTPUT_DIR}"/*.sig "${OUTPUT_DIR}"/*.bin.sig "${OUTPUT_DIR}"/*SUMS* 2>/dev/null || true
-    
+
     echo ""
     if [ "$VERIFY" = true ]; then
         print_status "ok" "Verification complete!"

@@ -220,10 +220,7 @@ class DelayedEventsStore(SQLBaseStore):
 
     async def process_timeout_delayed_events(
         self, current_ts: Timestamp
-    ) -> Tuple[
-        List[DelayedEventDetails],
-        Optional[Timestamp],
-    ]:
+    ) -> Tuple[List[DelayedEventDetails], Optional[Timestamp],]:
         """
         Marks for processing all delayed events that should have been sent prior to the provided time
         that haven't already been marked as such.
@@ -234,10 +231,7 @@ class DelayedEventsStore(SQLBaseStore):
 
         def process_timeout_delayed_events_txn(
             txn: LoggingTransaction,
-        ) -> Tuple[
-            List[DelayedEventDetails],
-            Optional[Timestamp],
-        ]:
+        ) -> Tuple[List[DelayedEventDetails], Optional[Timestamp],]:
             sql_cols = ", ".join(
                 (
                     "delay_id",
@@ -306,10 +300,7 @@ class DelayedEventsStore(SQLBaseStore):
         *,
         delay_id: str,
         user_localpart: str,
-    ) -> Tuple[
-        EventDetails,
-        Optional[Timestamp],
-    ]:
+    ) -> Tuple[EventDetails, Optional[Timestamp],]:
         """
         Marks for processing the matching delayed event, regardless of its timeout time,
         as long as it has not already been marked as such.
@@ -327,10 +318,7 @@ class DelayedEventsStore(SQLBaseStore):
 
         def process_target_delayed_event_txn(
             txn: LoggingTransaction,
-        ) -> Tuple[
-            EventDetails,
-            Optional[Timestamp],
-        ]:
+        ) -> Tuple[EventDetails, Optional[Timestamp],]:
             sql_cols = ", ".join(
                 (
                     "room_id",

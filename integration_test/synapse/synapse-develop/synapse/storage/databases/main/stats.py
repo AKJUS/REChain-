@@ -754,7 +754,9 @@ class StatsStore(StateDeltasStore):
                 LEFT JOIN profiles AS p ON lmr.user_id = p.full_user_id
                 {}
                 GROUP BY lmr.user_id, displayname
-            """.format(where_clause)
+            """.format(
+                where_clause
+            )
 
             # SQLite does not support SELECT COUNT(*) OVER()
             sql = """

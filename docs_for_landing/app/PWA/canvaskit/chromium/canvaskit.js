@@ -1,7 +1,7 @@
 
 var CanvasKitInit = (() => {
   var _scriptDir = import.meta.url;
-  
+
   return (
 async function(moduleArg = {}) {
 

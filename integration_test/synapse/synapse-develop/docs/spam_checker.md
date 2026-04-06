@@ -56,7 +56,7 @@ class ExampleSpamChecker:
     @staticmethod
     def parse_config(config):
         return config
-        
+
     async def check_event_for_spam(self, foo):
         return False  # allow all events
 

@@ -4,7 +4,7 @@
 
 This guide explains how to create, edit, and maintain architecture diagrams for REChain.
 
-**Version:** 4.1.10+1160  
+**Version:** 4.1.10+1160
 **Last Updated:** 2025-12-06
 
 ---
@@ -133,7 +133,7 @@ jebbs.plantuml
 graph TB
     A[Component A] --> B[Component B]
     B --> C[Component C]
-    
+
     style A fill:#42a5f5
     style B fill:#66bb6a
     style C fill:#ffa726
@@ -147,11 +147,11 @@ graph TB
         A[Component A]
         B[Component B]
     end
-    
+
     subgraph "Layer 2"
         C[Component C]
     end
-    
+
     A --> C
     B --> C
 ```
@@ -162,7 +162,7 @@ graph TB
 sequenceDiagram
     participant A as Alice
     participant B as Bob
-    
+
     A->>B: Message
     B-->>A: Response
 ```
@@ -387,4 +387,3 @@ jobs:
 - **Issues:** GitHub Issues
 - **Matrix:** #chatting:matrix.katya.wtf
 - **Email:** support@rechain.network
-

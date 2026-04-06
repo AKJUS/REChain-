@@ -147,7 +147,7 @@ void main() {
     test('should perform comprehensive security audit', () async {
       final mockRoom1 = MockRoom();
       final mockRoom2 = MockRoom();
-      
+
       when(mockRoom1.encrypted).thenReturn(true);
       when(mockRoom2.encrypted).thenReturn(false);
       when(client.rooms).thenReturn([mockRoom1, mockRoom2]);
@@ -203,7 +203,7 @@ void main() {
       const phrase = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
 
       await securityManager.storeRecoveryPhrase(phrase);
-      
+
       final isValid = await securityManager.verifyRecoveryPhrase(phrase);
       expect(isValid, true);
 
@@ -248,7 +248,7 @@ void main() {
     test('should restore from secure backup', () async {
       const roomId = '!test:example.com';
       final now = DateTime.now();
-      
+
       final backup = {
         'timestamp': now.toIso8601String(),
         'client_id': 'test-client',

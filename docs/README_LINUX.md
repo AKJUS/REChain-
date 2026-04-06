@@ -176,7 +176,7 @@ The test suite includes:
 # DEB package
 ./scripts/package_linux.sh deb
 
-# RPM package  
+# RPM package
 ./scripts/package_linux.sh rpm
 
 # AppImage
@@ -404,7 +404,7 @@ cd REChain
 - name: Build Linux
   run: ./scripts/build_linux.sh
 
-- name: Test Linux  
+- name: Test Linux
   run: ./scripts/test_linux.sh
 
 - name: Package Linux

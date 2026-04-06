@@ -39,7 +39,7 @@ print_error() {
 # Check dependencies
 check_dependencies() {
     print_status "Checking deployment dependencies..."
-    
+
     case $DEPLOYMENT_TARGET in
         netlify)
             if ! command -v netlify &> /dev/null; then
@@ -65,19 +65,19 @@ check_dependencies() {
             fi
             ;;
     esac
-    
+
     print_status "Dependencies check completed"
 }
 
 # Load deployment configuration
 load_deployment_config() {
     print_status "Loading deployment configuration..."
-    
+
     if [ ! -f "$DEPLOYMENT_CONFIG_FILE" ]; then
         print_status "Creating default deployment configuration..."
         create_default_config
     fi
-    
+
     # Source configuration
     if command -v jq &> /dev/null; then
         SITE_NAME=$(jq -r '.siteName // "rechain-web"' "$DEPLOYMENT_CONFIG_FILE")
@@ -91,7 +91,7 @@ load_deployment_config() {
         BUILD_COMMAND="flutter build web --release"
         PUBLISH_DIR="build/web"
     fi
-    
+
     print_status "Configuration loaded: $SITE_NAME"
 }
 
@@ -137,14 +137,14 @@ EOF
 # Pre-deployment checks
 pre_deployment_checks() {
     print_status "Running pre-deployment checks..."
-    
+
     # Check if build exists
     if [ ! -d "$BUILD_DIR" ]; then
         print_error "Build directory not found: $BUILD_DIR"
         print_status "Running build first..."
         ./scripts/build_web.sh release
     fi
-    
+
     # Verify essential files
     local required_files=("index.html" "manifest.json" "sw.js")
     for file in "${required_files[@]}"; do
@@ -153,39 +153,39 @@ pre_deployment_checks() {
             exit 1
         fi
     done
-    
+
     # Check file sizes
     local index_size=$(stat -f%z "$BUILD_DIR/index.html" 2>/dev/null || stat -c%s "$BUILD_DIR/index.html" 2>/dev/null || echo "0")
     if [ "$index_size" -lt 1000 ]; then
         print_warning "index.html seems too small ($index_size bytes)"
     fi
-    
+
     print_status "Pre-deployment checks completed"
 }
 
 # Deploy to Netlify
 deploy_netlify() {
     print_status "Deploying to Netlify..."
-    
+
     # Create netlify.toml if it doesn't exist
     if [ ! -f "netlify.toml" ]; then
         create_netlify_config
     fi
-    
+
     # Deploy
     if [ "$2" = "production" ]; then
         netlify deploy --prod --dir="$BUILD_DIR"
     else
         netlify deploy --dir="$BUILD_DIR"
     fi
-    
+
     print_status "Netlify deployment completed"
 }
 
 # Create Netlify configuration
 create_netlify_config() {
     print_status "Creating netlify.toml configuration..."
-    
+
     cat > netlify.toml << 'EOF'
 [build]
   publish = "build/web"
@@ -234,33 +234,33 @@ create_netlify_config() {
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 EOF
-    
+
     print_status "netlify.toml created"
 }
 
 # Deploy to Vercel
 deploy_vercel() {
     print_status "Deploying to Vercel..."
-    
+
     # Create vercel.json if it doesn't exist
     if [ ! -f "vercel.json" ]; then
         create_vercel_config
     fi
-    
+
     # Deploy
     if [ "$2" = "production" ]; then
         vercel --prod
     else
         vercel
     fi
-    
+
     print_status "Vercel deployment completed"
 }
 
 # Create Vercel configuration
 create_vercel_config() {
     print_status "Creating vercel.json configuration..."
-    
+
     cat > vercel.json << 'EOF'
 {
   "buildCommand": "flutter build web --release",
@@ -299,35 +299,35 @@ create_vercel_config() {
   ]
 }
 EOF
-    
+
     print_status "vercel.json created"
 }
 
 # Deploy to Firebase Hosting
 deploy_firebase() {
     print_status "Deploying to Firebase Hosting..."
-    
+
     # Create firebase.json if it doesn't exist
     if [ ! -f "firebase.json" ]; then
         create_firebase_config
     fi
-    
+
     # Initialize Firebase if needed
     if [ ! -f ".firebaserc" ]; then
         print_status "Initializing Firebase project..."
         firebase init hosting
     fi
-    
+
     # Deploy
     firebase deploy --only hosting
-    
+
     print_status "Firebase deployment completed"
 }
 
 # Create Firebase configuration
 create_firebase_config() {
     print_status "Creating firebase.json configuration..."
-    
+
     cat > firebase.json << 'EOF'
 {
   "hosting": {
@@ -366,14 +366,14 @@ create_firebase_config() {
   }
 }
 EOF
-    
+
     print_status "firebase.json created"
 }
 
 # Deploy to GitHub Pages
 deploy_github_pages() {
     print_status "Deploying to GitHub Pages..."
-    
+
     # Check if gh-pages branch exists
     if ! git show-ref --verify --quiet refs/heads/gh-pages; then
         print_status "Creating gh-pages branch..."
@@ -382,51 +382,51 @@ deploy_github_pages() {
         git commit --allow-empty -m "Initial gh-pages commit"
         git checkout main || git checkout master
     fi
-    
+
     # Copy build to gh-pages branch
     git checkout gh-pages
-    
+
     # Clear existing files (except .git)
     find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-    
+
     # Copy build files
     cp -r "$BUILD_DIR"/* .
-    
+
     # Add CNAME if domain is specified
     if [ -n "$DOMAIN" ]; then
         echo "$DOMAIN" > CNAME
     fi
-    
+
     # Commit and push
     git add .
     git commit -m "Deploy $(date)"
     git push origin gh-pages
-    
+
     # Return to main branch
     git checkout main || git checkout master
-    
+
     print_status "GitHub Pages deployment completed"
 }
 
 # Deploy to custom server via rsync
 deploy_custom_server() {
     print_status "Deploying to custom server..."
-    
+
     if [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_PATH" ]; then
         print_error "DEPLOY_HOST and DEPLOY_PATH environment variables must be set"
         exit 1
     fi
-    
+
     # Deploy via rsync
     rsync -avz --delete "$BUILD_DIR/" "$DEPLOY_HOST:$DEPLOY_PATH/"
-    
+
     print_status "Custom server deployment completed"
 }
 
 # Post-deployment tasks
 post_deployment_tasks() {
     print_status "Running post-deployment tasks..."
-    
+
     # Update deployment info
     local deployment_info="{
         \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",
@@ -434,24 +434,24 @@ post_deployment_tasks() {
         \"version\": \"$(git describe --tags --always 2>/dev/null || echo 'unknown')\",
         \"commit\": \"$(git rev-parse HEAD 2>/dev/null || echo 'unknown')\"
     }"
-    
+
     echo "$deployment_info" > "$BUILD_DIR/deployment-info.json"
-    
+
     # Run deployment tests if available
     if [ -f "scripts/test_deployment.sh" ]; then
         print_status "Running deployment tests..."
         ./scripts/test_deployment.sh "$DEPLOYMENT_TARGET"
     fi
-    
+
     print_status "Post-deployment tasks completed"
 }
 
 # Generate deployment report
 generate_deployment_report() {
     print_status "Generating deployment report..."
-    
+
     local report_file="deployment-report-$(date +%Y%m%d-%H%M%S).html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html>
@@ -472,7 +472,7 @@ generate_deployment_report() {
         <p>Generated: $(date)</p>
         <p>Target: $DEPLOYMENT_TARGET</p>
     </div>
-    
+
     <div class="section">
         <h2>Deployment Summary</h2>
         <ul>
@@ -483,12 +483,12 @@ generate_deployment_report() {
             <li><strong>Status:</strong> <span class="success">Successful</span></li>
         </ul>
     </div>
-    
+
     <div class="section">
         <h2>Build Information</h2>
         <pre>$(cat "$BUILD_DIR/deployment-info.json" 2>/dev/null || echo "No deployment info available")</pre>
     </div>
-    
+
     <div class="section">
         <h2>File Structure</h2>
         <pre>$(find "$BUILD_DIR" -type f | head -20)</pre>
@@ -496,7 +496,7 @@ generate_deployment_report() {
 </body>
 </html>
 EOF
-    
+
     print_status "Deployment report generated: $report_file"
 }
 
@@ -504,11 +504,11 @@ EOF
 main() {
     echo -e "${BLUE}Starting REChain web deployment process...${NC}"
     echo ""
-    
+
     check_dependencies
     load_deployment_config
     pre_deployment_checks
-    
+
     # Deploy based on target
     case $DEPLOYMENT_TARGET in
         netlify)
@@ -532,10 +532,10 @@ main() {
             exit 1
             ;;
     esac
-    
+
     post_deployment_tasks
     generate_deployment_report
-    
+
     echo ""
     echo -e "${GREEN}✓ REChain web deployment completed successfully!${NC}"
     echo -e "${GREEN}✓ Target: $DEPLOYMENT_TARGET${NC}"

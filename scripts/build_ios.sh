@@ -63,15 +63,15 @@ if [ -f "$IOS_DIR/ExportOptions.plist" ]; then
                -configuration Release \
                -archivePath "$PROJECT_ROOT/build/ios/Runner.xcarchive" \
                archive
-    
+
     if [ $? -eq 0 ]; then
         echo "Archive created successfully"
-        
+
         xcodebuild -exportArchive \
                    -archivePath "$PROJECT_ROOT/build/ios/Runner.xcarchive" \
                    -exportPath "$PROJECT_ROOT/build/ios/ipa" \
                    -exportOptionsPlist "$IOS_DIR/ExportOptions.plist"
-        
+
         if [ $? -eq 0 ]; then
             echo "IPA exported successfully"
         else

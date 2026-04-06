@@ -52,7 +52,7 @@ echo Checking build artifacts...
 set BUILD_DIR=%PROJECT_ROOT%\build\windows\x64\runner\Release
 if exist "%BUILD_DIR%\REChain.exe" (
     echo ✓ Release executable exists
-    
+
     echo Testing executable launch...
     timeout /t 1 /nobreak >nul
     tasklist /fi "imagename eq REChain.exe" 2>nul | find /i "REChain.exe" >nul

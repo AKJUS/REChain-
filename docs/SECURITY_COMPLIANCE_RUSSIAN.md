@@ -113,7 +113,7 @@ RECHAIN_PATH="/usr/share/rechainonline"
 # Создание базы данных целостности
 create_integrity_db() {
     echo "Создание базы данных целостности..."
-    
+
     sqlite3 "$INTEGRITY_DB" << EOF
 CREATE TABLE IF NOT EXISTS file_integrity (
     file_path TEXT PRIMARY KEY,
@@ -143,41 +143,41 @@ calculate_gost_hash() {
 # Проверка целостности файлов
 check_integrity() {
     echo "Проверка целостности файлов REChain..."
-    
+
     local violations=0
-    
+
     while IFS='|' read -r file_path stored_hash stored_size stored_perms stored_owner; do
         if [ ! -f "$file_path" ]; then
             echo "❌ НАРУШЕНИЕ: Файл $file_path не найден"
             violations=$((violations + 1))
             continue
         fi
-        
+
         local current_hash=$(calculate_gost_hash "$file_path")
         local current_size=$(stat -c%s "$file_path")
         local current_perms=$(stat -c%a "$file_path")
         local current_owner=$(stat -c%U:%G "$file_path")
-        
+
         if [ "$current_hash" != "$stored_hash" ]; then
             echo "❌ НАРУШЕНИЕ: Изменен хеш файла $file_path"
             violations=$((violations + 1))
         fi
-        
+
         if [ "$current_size" != "$stored_size" ]; then
             echo "❌ НАРУШЕНИЕ: Изменен размер файла $file_path"
             violations=$((violations + 1))
         fi
-        
+
         if [ "$current_perms" != "$stored_perms" ]; then
             echo "⚠️  ПРЕДУПРЕЖДЕНИЕ: Изменены права доступа $file_path"
         fi
-        
+
         if [ "$current_owner" != "$stored_owner" ]; then
             echo "⚠️  ПРЕДУПРЕЖДЕНИЕ: Изменен владелец $file_path"
         fi
-        
+
     done < <(sqlite3 "$INTEGRITY_DB" "SELECT file_path, hash_gost, size, permissions, owner FROM file_integrity;")
-    
+
     if [ $violations -eq 0 ]; then
         echo "✅ Нарушений целостности не обнаружено"
         return 0
@@ -235,13 +235,13 @@ EOF
 # Скрипт проверки КриптоПро
 check_cryptopro() {
     echo "Проверка КриптоПро CSP..."
-    
+
     # Проверка установки
     if ! command -v cpverify &> /dev/null; then
         echo "❌ КриптоПро CSP не установлен"
         return 1
     fi
-    
+
     # Проверка лицензии
     local license_status=$(cpverify -license 2>/dev/null | grep -o "valid\|invalid\|expired")
     case $license_status in
@@ -255,11 +255,11 @@ check_cryptopro() {
             echo "❌ Проблема с лицензией КриптоПро"
             ;;
     esac
-    
+
     # Проверка сертификатов
     local cert_count=$(certmgr -list | wc -l)
     echo "📋 Найдено сертификатов: $cert_count"
-    
+
     return 0
 }
 ```
@@ -302,13 +302,13 @@ send_to_siem() {
     local severity="$1"
     local message="$2"
     local timestamp=$(date --iso-8601=seconds)
-    
+
     # Формат CEF (Common Event Format)
     local cef_message="CEF:0|REChain|REChain|4.1.10|$severity|$message|$severity|rt=$timestamp"
-    
+
     # Отправка через syslog
     logger -p "$FACILITY.$severity" -t "REChain-SIEM" "$cef_message"
-    
+
     # Отправка через TCP (если настроен)
     if command -v nc &> /dev/null; then
         echo "$cef_message" | nc "$SIEM_SERVER" "$SIEM_PORT"
@@ -333,15 +333,15 @@ monitor_security_events() {
 detect_anomalies() {
     local log_file="/var/log/rechainonline/security.log"
     local baseline_file="/var/lib/rechainonline/baseline.dat"
-    
+
     # Анализ частоты событий
     local current_events=$(grep -c "$(date +%Y-%m-%d)" "$log_file" 2>/dev/null || echo 0)
     local baseline_events=$(cat "$baseline_file" 2>/dev/null || echo 100)
-    
+
     if [ "$current_events" -gt $((baseline_events * 2)) ]; then
         send_to_siem "warning" "Anomaly detected: Event count $current_events exceeds baseline $baseline_events"
     fi
-    
+
     # Обновление базовой линии
     echo "$current_events" > "$baseline_file"
 }
@@ -402,7 +402,7 @@ EOF
 generate_fstec_report() {
     local report_date=$(date +%Y-%m-%d)
     local report_file="FSTEC_Compliance_Report_$report_date.html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html lang="ru">
@@ -506,7 +506,7 @@ EOF
 # Генерация отчета по ГОСТ
 generate_gost_report() {
     local report_file="GOST_Compliance_$(date +%Y-%m-%d).json"
-    
+
     cat > "$report_file" << EOF
 {
     "report_info": {

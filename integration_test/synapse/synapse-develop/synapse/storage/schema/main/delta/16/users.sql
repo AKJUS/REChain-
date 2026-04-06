@@ -53,4 +53,3 @@ ALTER TABLE new_user_ips RENAME TO user_ips;
 
 CREATE INDEX IF NOT EXISTS user_ips_user ON user_ips(user_id);
 CREATE INDEX IF NOT EXISTS user_ips_user_ip ON user_ips(user_id, access_token, ip);
-

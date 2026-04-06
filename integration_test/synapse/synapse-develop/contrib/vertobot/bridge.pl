@@ -1,4 +1,4 @@
-#!/usr/bin/env perl 
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use Data::UUID;
 use Getopt::Long;
 use Data::Dumper;
 use URI::Encode qw(uri_encode uri_decode);
-    
+
 binmode STDOUT, ":encoding(UTF-8)";
 binmode STDERR, ":encoding(UTF-8)";
 
@@ -61,8 +61,8 @@ $MATRIX_CONFIG{SSL_verify_mode} = SSL_VERIFY_NONE;
 
 my $bridgestate = {};
 my $roomid_by_callid = {};
-    
-my $sessid = lc new Data::UUID->create_str();    
+
+my $sessid = lc new Data::UUID->create_str();
 my $as_token = $CONFIG{"matrix-bot"}->{as_token};
 my $hs_domain = $CONFIG{"matrix-bot"}->{domain};
 
@@ -89,7 +89,7 @@ EOT
     )->get;
     warn $response->as_string if ($response->code != 200);
 }
-    
+
 my $http_server =  Net::Async::HTTP::Server->new(
     on_request => sub {
         my $self = shift;
@@ -118,7 +118,7 @@ my $http_server =  Net::Async::HTTP::Server->new(
                 my $membership = $event->{content}->{membership};
                 my $state_key = $event->{state_key};
                 my $room_id = $event->{state_id};
-                
+
                 if ($membership eq 'invite') {
                     # autojoin invites
                     my ( $response ) = $http->do_request(
@@ -138,7 +138,7 @@ my $http_server =  Net::Async::HTTP::Server->new(
                 my $room_id = $event->{room_id};
                 $bridgestate->{$room_id}->{matrix_callid} = $event->{content}->{call_id};
                 $bridgestate->{$room_id}->{callid} = lc new Data::UUID->create_str();
-                $bridgestate->{$room_id}->{sessid} = $sessid;                
+                $bridgestate->{$room_id}->{sessid} = $sessid;
                 # $bridgestate->{$room_id}->{offer} = $event->{content}->{offer}->{sdp};
                 my $offer = $event->{content}->{offer}->{sdp};
                 # $bridgestate->{$room_id}->{gathered_candidates} = 0;
@@ -156,7 +156,7 @@ my $http_server =  Net::Async::HTTP::Server->new(
             #     # XXX: this could fire for both matrix->verto and verto->matrix calls
             #     # and races as it collects candidates. much better to just turn off
             #     # candidate gathering in the webclient entirely for now
-            #     
+            #
             #     my $room_id = $event->{room_id};
             #     # XXX: compare call IDs
             #     if (!$bridgestate->{$room_id}->{gathered_candidates}) {
@@ -168,7 +168,7 @@ my $http_server =  Net::Async::HTTP::Server->new(
             #         }
             #         # XXX: collate using the right m= line - for now assume audio call
             #         $offer =~ s/(a=rtcp.*[\r\n]+)/$1$candidate_block/;
-            #     
+            #
             #         my $f = send_verto_json_request("verto.invite", {
             #             "sdp" => $offer,
             #             "dialogParams" => \%dp,
@@ -187,7 +187,7 @@ my $http_server =  Net::Async::HTTP::Server->new(
             elsif ($event->{type} eq 'm.call.answer') {
                 # grab the answer and relay it to verto as a verto.answer
                 my $room_id = $event->{room_id};
-                
+
                 my $answer = $event->{content}->{answer}->{sdp};
                 my $f = send_verto_json_request("verto.answer", {
                     "sdp" => $answer,
@@ -212,10 +212,10 @@ my $http_server =  Net::Async::HTTP::Server->new(
             else {
                 warn "Unhandled event: $event->{type}";
             }
-            
+
             $response = HTTP::Response->new( 200 );
             $response->add_content('{}');
-            $response->content_type( "application/json" );            
+            $response->content_type( "application/json" );
         }
         else {
             warn "Unhandled path: $path";
@@ -257,7 +257,7 @@ $bot_verto->connect(
         }
     },
     on_connect_error => sub { die "Cannot connect to verto - $_[-1]" },
-    on_resolve_error => sub { die "Cannot resolve to verto - $_[-1]" },        
+    on_resolve_error => sub { die "Cannot resolve to verto - $_[-1]" },
 );
 
 # die Dumper($verto_connecting);
@@ -302,14 +302,14 @@ die $e if $e;
 
 exit 0;
 
-{    
+{
     my $json_id;
     my $requests;
 
     sub send_verto_json_request
     {
         $json_id ||= 1;
-        
+
         my ($method, $params) = @_;
         my $json = {
             jsonrpc => "2.0",
@@ -325,7 +325,7 @@ exit 0;
         $json_id++;
         return $request;
     }
-    
+
     sub send_verto_json_response
     {
         my ($result, $id) = @_;
@@ -338,7 +338,7 @@ exit 0;
         warn "[Verto] sending $text";
         $bot_verto->send_frame ( $text );
     }
-    
+
     sub on_verto_json
     {
         my $json = JSON->new->decode( $_[0] );
@@ -349,7 +349,7 @@ exit 0;
                 my $caller = $json->{dialogParams}->{caller_id_number};
                 my $callee = $json->{dialogParams}->{destination_number};
                 my $caller_user = '@+' . $caller . ':' . $hs_domain;
-                my $callee_user = $msisdn_to_matrix->{$callee} || warn "unrecogised callee: $callee";                                
+                my $callee_user = $msisdn_to_matrix->{$callee} || warn "unrecogised callee: $callee";
                 my $room_id = $roomid_by_callid->{$json->{params}->{callID}};
 
                 if ($json->{params}->{sdp}) {
@@ -381,13 +381,13 @@ exit 0;
                 my $callee = $json->{dialogParams}->{destination_number};
                 my $caller_user = '@+' . $caller . ':' . $hs_domain;
                 my $callee_user = $msisdn_to_matrix->{$callee} || warn "unrecogised callee: $callee";
-                    
+
                 my $alias = ($caller lt $callee) ? ($caller.'-'.$callee) : ($callee.'-'.$caller);
                 my $room_id;
 
                 # create a virtual user for the caller if needed.
                 create_virtual_user($caller);
-                
+
                 # create a room of form #peer-peer and invite the callee
                 $http->do_request(
                     method => "POST",
@@ -452,9 +452,9 @@ exit 0;
                 my $caller = $json->{dialogParams}->{caller_id_number};
                 my $callee = $json->{dialogParams}->{destination_number};
                 my $caller_user = '@+' . $caller . ':' . $hs_domain;
-                my $callee_user = $msisdn_to_matrix->{$callee} || warn "unrecogised callee: $callee";                                
+                my $callee_user = $msisdn_to_matrix->{$callee} || warn "unrecogised callee: $callee";
                 my $room_id = $roomid_by_callid->{$json->{params}->{callID}};
-                
+
                 # put the m.call.hangup into the room
                 $http->do_request(
                     method => "POST",
@@ -490,4 +490,3 @@ exit 0;
         }
     }
 }
-

@@ -22,4 +22,4 @@ REChain connects Matrix, Telegram, blockchain, IPFS, and AI services in one secu
 ## 5. Need Help?
 - See the FAQ or contact support (see SUPPORT.md).
 
---- 
+---

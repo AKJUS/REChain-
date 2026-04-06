@@ -33,22 +33,22 @@ Table "matrix.partial_state_events"
 ══════════╪══════╪═══════════╪══════════╪═════════
  room_id  │ text │           │ not null │
  event_id │ text │           │ not null │
- 
+
 matrix=> \d partial_state_rooms
                 Table "matrix.partial_state_rooms"
-         Column         │  Type  │ Collation │ Nullable │ Default 
+         Column         │  Type  │ Collation │ Nullable │ Default
 ════════════════════════╪════════╪═══════════╪══════════╪═════════
- room_id                │ text   │           │ not null │ 
+ room_id                │ text   │           │ not null │
  device_lists_stream_id │ bigint │           │ not null │ 0
- join_event_id          │ text   │           │          │ 
- joined_via             │ text   │           │          │ 
+ join_event_id          │ text   │           │          │
+ joined_via             │ text   │           │          │
 
 matrix=> \d partial_state_rooms_servers
      Table "matrix.partial_state_rooms_servers"
-   Column    │ Type │ Collation │ Nullable │ Default 
+   Column    │ Type │ Collation │ Nullable │ Default
 ═════════════╪══════╪═══════════╪══════════╪═════════
- room_id     │ text │           │ not null │ 
- server_name │ text │           │ not null │ 
+ room_id     │ text │           │ not null │
+ server_name │ text │           │ not null │
 ```
 
 Indices, foreign-keys and check constraints are omitted for brevity.
@@ -162,12 +162,12 @@ proceed as normal.
 
 The partial-state approximation is only a temporary affair. In the background,
 synapse beings a "resync" process. This is a continuous loop, starting at the
-partial join event and proceeding downwards through the event graph. For each 
-`E` seen in the room since partial join, Synapse will fetch 
+partial join event and proceeding downwards through the event graph. For each
+`E` seen in the room since partial join, Synapse will fetch
 
-- the event ids in the state of the room before `E`, via 
+- the event ids in the state of the room before `E`, via
   [`/state_ids`](https://spec.matrix.org/v1.5/server-server-api/#get_matrixfederationv1state_idsroomid);
-- the event ids in the full auth chain of `E`, included in the `/state_ids` 
+- the event ids in the full auth chain of `E`, included in the `/state_ids`
   response; and
 - any events from the previous two bullets that Synapse hasn't persisted, via
   [`/state](https://spec.matrix.org/v1.5/server-server-api/#get_matrixfederationv1stateroomid).
@@ -181,12 +181,12 @@ by removing `E` from the `partial_state_events` table.
 before `E`, or do we alter the (partial-)state group in-place? Are state groups
 ever marked as partially-stated? \]
 
-This scheme means it is possible for us to have accepted and sent an event to 
-clients, only to reject it during the resync. From a client's perspective, the 
-effect is similar to a retroactive 
+This scheme means it is possible for us to have accepted and sent an event to
+clients, only to reject it during the resync. From a client's perspective, the
+effect is similar to a retroactive
 state change due to state resolution---i.e. a "state reset".[^3]
 
-[^3]: Clients should refresh caches to detect such a change. Rumour has it that 
+[^3]: Clients should refresh caches to detect such a change. Rumour has it that
 sliding sync will fix this.
 
 When all events since the join `J` have been fully-stated, the room resync
@@ -207,7 +207,7 @@ disclosures because they have yet to be implemented in mainline Synapse.
 
 ### Creating events during a partial join
 
-When sending out messages during a partial join, we assume our partial state is 
+When sending out messages during a partial join, we assume our partial state is
 accurate and proceed as normal. For this to have any hope of succeeding at all,
 our partial state must contain an entry for each of the (type, state key) pairs
 [specified by the auth rules](https://spec.matrix.org/v1.3/rooms/v10/#authorization-rules):
@@ -225,8 +225,8 @@ means the only possible omission is the target's membership in an invite, kick
 or ban.
 
 The worst possibility is that we locally invite someone who is banned according to
-the full state, because we lack their ban in our current partial state. The rest 
-of the federation---at least, those who are fully joined---should correctly 
+the full state, because we lack their ban in our current partial state. The rest
+of the federation---at least, those who are fully joined---should correctly
 enforce the [membership transition constraints](
     https://spec.matrix.org/v1.3/client-server-api/#room-membership
 ). So any the erroneous invite should be ignored by fully-joined

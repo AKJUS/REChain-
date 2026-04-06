@@ -20,7 +20,7 @@ enum PollKind {
 class PollAnswer {
   final String id;
   final String answer;
-  
+
   PollAnswer({
     required this.id,
     required this.answer,
@@ -32,7 +32,7 @@ class PollStartContent {
   final String question;
   final List<PollAnswer> answers;
   final int maxSelections;
-  
+
   PollStartContent({
     required this.kind,
     required this.question,

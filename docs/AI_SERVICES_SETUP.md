@@ -252,7 +252,7 @@ The REChain application integrates 20 top AI and GPT services, providing a unifi
 #### 21. Etke.cc
 - **API Key**: Get from [Etke.cc](https://etke.cc/)
 - **Base URL**: `https://api.etke.cc/v1`
-- **Models**: 
+- **Models**:
   - Text: etke-gpt-4, etke-gpt-3.5, etke-claude
   - Code: etke-coder, etke-debugger, etke-optimizer
   - Image: etke-dalle, etke-stable-diffusion
@@ -460,4 +460,4 @@ This guide is regularly updated with:
 - Best practices
 - Troubleshooting tips
 
-Check the changelog for the latest updates. 
+Check the changelog for the latest updates.

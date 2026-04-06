@@ -51,4 +51,3 @@ ALTER TABLE deleted_pushers2 RENAME TO deleted_pushers;
 -- create the index after doing the inserts because that's more efficient.
 -- it also means we can give it the same name as the old one without renaming.
 CREATE INDEX deleted_pushers_stream_id ON deleted_pushers (stream_id);
-

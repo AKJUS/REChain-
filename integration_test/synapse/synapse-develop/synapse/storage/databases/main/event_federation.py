@@ -1220,7 +1220,9 @@ class EventFederationWorkerStore(SignatureWorkerStore, EventsWorkerStore, SQLBas
                 HAVING count(*) > ?
                 ORDER BY count(*) DESC
                 LIMIT ?
-            """ % (where_clause,)
+            """ % (
+                where_clause,
+            )
 
             query_args = list(itertools.chain(room_id_filter, [min_count, limit]))
             txn.execute(sql, query_args)

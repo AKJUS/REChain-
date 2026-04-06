@@ -404,7 +404,7 @@ func TestToClientEventsFormatSync(t *testing.T) { // nolint: gocyclo
 			},
             "prev_sender": "testSenderID"
 		},
-        "depth": 9	
+        "depth": 9
     }`), false)
 	if err != nil {
 		t.Fatalf("failed to create Event: %s", err)
@@ -496,7 +496,7 @@ func TestToClientEventsFormatSyncUnknownPrevSender(t *testing.T) { // nolint: go
 			},
             "prev_sender": "unknownSenderID"
 		},
-        "depth": 9	
+        "depth": 9
     }`), false)
 	if err != nil {
 		t.Fatalf("failed to create Event: %s", err)

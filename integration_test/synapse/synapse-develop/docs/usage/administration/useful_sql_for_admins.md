@@ -6,8 +6,8 @@ SELECT pg_size_pretty( pg_database_size( 'matrix' ) );
 ```
 
 ### Result example:
-``` 
-pg_size_pretty 
+```
+pg_size_pretty
 ----------------
  6420 MB
 (1 row)
@@ -113,7 +113,7 @@ plus same, but with join removed for performance reasons:
 ```sql
 SELECT s.room_id, COUNT(s.room_id)
   FROM state_groups_state s
-  GROUP BY s.room_id 
+  GROUP BY s.room_id
   ORDER BY COUNT(s.room_id) DESC
   LIMIT 20;
 ```
@@ -124,7 +124,7 @@ SELECT e.room_id, r.name, COUNT(e.event_id) cnt
   FROM events e
   LEFT JOIN room_stats_state r USING (room_id)
   WHERE e.origin_server_ts >= DATE_PART('epoch', NOW() - INTERVAL '1 day') * 1000
-  GROUP BY e.room_id, r.name 
+  GROUP BY e.room_id, r.name
   ORDER BY cnt DESC
   LIMIT 20;
 ```
@@ -195,7 +195,7 @@ SELECT rss.room_id, rss.name, rss.canonical_alias, rss.topic, rss.encryption,
   LEFT JOIN room_stats_current rsc USING (room_id)
   WHERE room_id IN (
     '!OGEhHVWSdvArJzumhm:matrix.org',
-    '!YTvKGNlinIzlkMTVRl:matrix.org' 
+    '!YTvKGNlinIzlkMTVRl:matrix.org'
   );
 ```
 

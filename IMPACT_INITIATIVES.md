@@ -272,4 +272,4 @@ The Piglet Initiative is REChain's flagship social impact project focused on sus
 
 REChain's impact initiatives demonstrate our commitment to using technology as a force for positive change. Through our comprehensive approach to social impact, we're not only building innovative digital solutions but also creating lasting positive change in communities around the world.
 
-**Join us in building a better digital future for all.** 
+**Join us in building a better digital future for all.**

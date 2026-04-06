@@ -55,4 +55,3 @@ Matrix --> App : Logout success
 App -> App : Clear stored credentials
 
 @enduml
-

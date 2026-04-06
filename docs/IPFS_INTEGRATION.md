@@ -140,4 +140,4 @@ print('File uploaded to IPFS with CID: $cid');
 
 ---
 
-*For more details, see the code in `lib/features/ipfs/` and the IntegrationManager.* 
+*For more details, see the code in `lib/features/ipfs/` and the IntegrationManager.*

@@ -30,4 +30,4 @@ REChain supports Aurora OS via the [flutter-aurora](https://github.com/auroraos/
 
 ---
 
-For more, see the [README](../README.md) and [Integration Setup](../docs/INTEGRATION_SETUP.md). 
+For more, see the [README](../README.md) and [Integration Setup](../docs/INTEGRATION_SETUP.md).

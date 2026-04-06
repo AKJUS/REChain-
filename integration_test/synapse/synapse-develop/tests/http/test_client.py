@@ -59,11 +59,7 @@ class ReadMultipartResponseTests(TestCase):
 
     def _build_multipart_response(
         self, response_length: Union[int, str], max_length: int
-    ) -> Tuple[
-        BytesIO,
-        "Deferred[MultipartResponse]",
-        _MultipartParserProtocol,
-    ]:
+    ) -> Tuple[BytesIO, "Deferred[MultipartResponse]", _MultipartParserProtocol,]:
         """Start reading the body, returns the response, result and proto"""
         response = Mock(length=response_length)
         result = BytesIO()
@@ -209,11 +205,7 @@ class ReadMultipartResponseTests(TestCase):
 class ReadBodyWithMaxSizeTests(TestCase):
     def _build_response(
         self, length: Union[int, str] = UNKNOWN_LENGTH
-    ) -> Tuple[
-        BytesIO,
-        "Deferred[int]",
-        _DiscardBodyWithMaxSizeProtocol,
-    ]:
+    ) -> Tuple[BytesIO, "Deferred[int]", _DiscardBodyWithMaxSizeProtocol,]:
         """Start reading the body, returns the response, result and proto"""
         response = Mock(length=length)
         result = BytesIO()

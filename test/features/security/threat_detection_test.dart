@@ -12,10 +12,10 @@ class MockRoom extends Mock implements Room {}
 class MockEvent extends Mock implements Event {
   @override
   String get eventId => 'test_event_id';
-  
+
   @override
   String get roomId => '!test_room:example.com';
-  
+
   @override
   String get senderId => '@test_user:example.com';
 }
@@ -30,7 +30,7 @@ void main() {
     client = MockClient();
     prefs = MockSharedPreferences();
     eventController = StreamController<Event>();
-    
+
     when(client.onEvent).thenReturn(eventController.stream);
     when(prefs.getString(any)).thenReturn(null);
     when(prefs.setString(any, any)).thenAnswer((_) => Future.value(true));
@@ -330,7 +330,7 @@ void main() {
 
     test('should cleanup resources on disposal', () async {
       engine.dispose();
-      
+
       // Verify that sending new events doesn't trigger alerts
       final event = MockEvent();
       when(event.content).thenReturn({

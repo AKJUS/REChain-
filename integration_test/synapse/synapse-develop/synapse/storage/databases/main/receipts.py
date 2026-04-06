@@ -432,9 +432,9 @@ class ReceiptsWorkerStore(SQLBaseStore):
 
         content: JsonDict = {}
         for receipt_type, user_id, event_id, data in rows:
-            content.setdefault(event_id, {}).setdefault(receipt_type, {})[user_id] = (
-                db_to_json(data)
-            )
+            content.setdefault(event_id, {}).setdefault(receipt_type, {})[
+                user_id
+            ] = db_to_json(data)
 
         return [{"type": EduTypes.RECEIPT, "room_id": room_id, "content": content}]
 
@@ -1030,7 +1030,9 @@ class ReceiptsWorkerStore(SQLBaseStore):
             SELECT event_id WHERE room_id = ? AND stream_ordering IN (
                 SELECT max(stream_ordering) WHERE %s
             )
-        """ % (clause,)
+        """ % (
+            clause,
+        )
 
         txn.execute(sql, [room_id] + list(args))
         rows = txn.fetchall()

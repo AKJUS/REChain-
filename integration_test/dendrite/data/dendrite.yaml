@@ -68,7 +68,7 @@ global:
   # party identifiers such as phone numbers and email addresses.
   trusted_third_party_id_servers:
     - node.marinchik.ink
-    - matrix.tanya.city 
+    - matrix.tanya.city
     - vector.im
 
   # Disables federation. Dendrite will not be able to communicate with other servers
@@ -227,7 +227,7 @@ federation_api:
 media_api:
   database:
     connection_string: file:media_api.db
-  
+
   # Storage path for uploaded media. May be relative or absolute.
   base_path: ./media_store
 
@@ -259,7 +259,7 @@ mscs:
   database:
     connection_string: file:mscs.db
   mscs:
-  #  - msc2836 
+  #  - msc2836
   #  - msc2946
 
 # Configuration for the Sync API.
@@ -278,7 +278,7 @@ key_server:
 room_server:
   database:
     connection_string: file:room_server.db
-  
+
 
 # Configuration for the User API.
 user_api:
@@ -325,4 +325,3 @@ logging:
     level: info
     params:
       path: ./logs
-

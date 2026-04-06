@@ -51,10 +51,10 @@ chmod 700 /var/lib/rechain/keys
 if command -v systemctl &> /dev/null; then
     echo "Setting up systemd service..."
     systemctl daemon-reload
-    
+
     # Enable service but don't start yet (let user do initial config)
     systemctl enable rechain.service 2>/dev/null || true
-    
+
     echo ""
     echo "Service installed successfully!"
     echo ""
@@ -83,7 +83,7 @@ if [ -f /etc/rechain/config.yaml ]; then
                     -keyout /etc/rechain/key.pem \
                     -out /etc/rechain/cert.pem \
                     -subj "/C=XX/ST=State/L=City/O=REChain/CN=localhost" 2>/dev/null || true
-                
+
                 chown root:root /etc/rechain/cert.pem /etc/rechain/key.pem
                 chmod 600 /etc/rechain/key.pem
             fi

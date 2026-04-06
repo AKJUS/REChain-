@@ -1,6 +1,6 @@
 #!/bin/sh
 # Copyright 2016 Vitor Borrego, Corroios, Portugal
-# Heavily based on deb2tgz (https://code.google.com/archive/p/deb2tgz/) created by Marcos Henrique Esteves Barbosa 
+# Heavily based on deb2tgz (https://code.google.com/archive/p/deb2tgz/) created by Marcos Henrique Esteves Barbosa
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -64,7 +64,7 @@ for debfile in $* ; do
     TMPDIR=$(make_temp_dir)
 
     # Extract the DEB:
-    # Extract the file data.* from package $debfile 
+    # Extract the file data.* from package $debfile
     cp $debfile $TMPDIR
     cd $TMPDIR
     ar x $debfile 2> /dev/null
@@ -86,9 +86,9 @@ for debfile in $* ; do
 
         if [ -f "$TMPDIR/data.tar.xz" ]
         then
-          mv $TMPDIR/data.tar.xz $CURRDIR/$(basename $debfile .deb).txz 
+          mv $TMPDIR/data.tar.xz $CURRDIR/$(basename $debfile .deb).txz
         fi
- 
+
         if [ -f "$TMPDIR/data.tar.bz2" ]
         then
           mv $TMPDIR/data.tar.bz2 $CURRDIR/$(basename $debfile .deb).tbz
@@ -100,7 +100,7 @@ for debfile in $* ; do
         fi
 
         # Added suggested support for zst as mentioned in issue 1 created by @sevens.
-        # Check commits sevens@9a99096 and sevens@9829fbf 
+        # Check commits sevens@9a99096 and sevens@9829fbf
         # https://github.com/sevens/deb2tgz/commit/9a990965577c286a268ac982172cc502564c155f
         # https://github.com/sevens/deb2tgz/commit/9829fbf1309439b96dfa9f93a79c486491daabbf
         if [ -f "$TMPDIR/data.tar.zst" ]
@@ -119,4 +119,3 @@ for debfile in $* ; do
     rm -rf $TMPDIR
 done
 cd $CURRDIR
-

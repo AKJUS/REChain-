@@ -17,13 +17,13 @@ go tool cover -func=integrationcover.log
 
 To run Sytest with coverage enabled:
 
-```bash 
+```bash
 docker run --rm --name sytest -v "/Users/kegan/github/sytest:/sytest" \
   -v "/Users/kegan/github/dendrite:/src" -v "$(pwd)/sytest_logs:/logs" \
   -v "/Users/kegan/go/:/gopath" -e "POSTGRES=1" \
   -e "COVER=1" \
   matrixdotorg/sytest-dendrite:latest
-  
+
 # to get a more accurate coverage you may also need to run Sytest using SQLite as the database:
 docker run --rm --name sytest -v "/Users/kegan/github/sytest:/sytest" \
   -v "/Users/kegan/github/dendrite:/src" -v "$(pwd)/sytest_logs:/logs" \
@@ -59,7 +59,7 @@ which will never be tested in a single test run (e.g sqlite or postgres). To get
 Additional processing is required also to remove packages which will never be tested and extension MSCs:
 
 ```bash
-# If you executed both commands from above, you can get the total coverage using the following commands  
+# If you executed both commands from above, you can get the total coverage using the following commands
 go tool covdata textfmt -i="$(find -name 'covmeta*' -type f -exec dirname {} \; | uniq | paste -s -d ',' -)" -o sytest.cov
 grep -Ev 'relayapi|setup/mscs' sytest.cov > final.cov
 go tool cover -func=final.cov
@@ -91,7 +91,7 @@ git clone https://github.com/matrix-org/complement.git
 cd complement
 ```
 
-Next we'll need a script to execute after a test finishes, create a new file `posttest.sh`, make the file executable (`chmod +x posttest.sh`) 
+Next we'll need a script to execute after a test finishes, create a new file `posttest.sh`, make the file executable (`chmod +x posttest.sh`)
 and add the following content:
 ```bash
 #!/bin/bash
@@ -99,7 +99,7 @@ and add the following content:
 mkdir -p /tmp/Complement/logs/$2/$1/
 docker cp $1:/tmp/covdatafiles/. /tmp/Complement/logs/$2/$1/
 ```
-This will copy the `covdatafiles` files from each container to something like 
+This will copy the `covdatafiles` files from each container to something like
 `/tmp/Complement/logs/TestLogin/94f9c428de95779d2b62a3ccd8eab9d5ddcf65cc259a40ece06bdc61687ffed3/`. (`$1` is the containerID, `$2` the test name)
 
 Now that we have set up everything we need, we can finally execute Complement:

@@ -65,7 +65,7 @@ admin@homeserver:~$ zgrep '/client/r0/join/' /var/log/matrix-synapse/homeserver.
 911.625sec/-570.847sec /_matrix/client/r0/join/%23synapse%3Amatrix.org
 
 admin@homeserver:~$ sudo --user postgres psql matrix-synapse --command 'select canonical_alias, joined_members, current_state_events from room_stats_state natural join room_stats_current where canonical_alias is not null order by current_state_events desc fetch first 5 rows only'
-        canonical_alias        | joined_members | current_state_events 
+        canonical_alias        | joined_members | current_state_events
 -------------------------------+----------------+----------------------
  #_oftc_#debian:matrix.org             |  871   |  52355
  #matrix:matrix.org                    |  6379  |  10684

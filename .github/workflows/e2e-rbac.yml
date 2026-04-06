@@ -27,4 +27,4 @@ jobs:
           sleep 5
       - name: Run E2E test
         run: |
-          python bridges/telegram_super_tma/test_e2e_rbac.py 
+          python bridges/telegram_super_tma/test_e2e_rbac.py

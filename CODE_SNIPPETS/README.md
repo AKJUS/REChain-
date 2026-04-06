@@ -225,5 +225,3 @@ node TESTING/test_examples.js
 
 *This code snippets collection is part of the REChain v4.2.0 documentation suite.*
 *Last updated: 2025-01-09*
-
-

@@ -1203,10 +1203,7 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
             events_to_persist = []
 
             # Create the events as an outliers
-            (
-                event,
-                unpersisted_context,
-            ) = self.get_success(
+            (event, unpersisted_context,) = self.get_success(
                 self.hs.get_event_creation_handler().create_event(
                     requester=create_requester(user1_id),
                     event_dict=event_dict,
@@ -1220,10 +1217,7 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
             # Create the event again but as an non-outlier. This will de-outlier the event
             # when we persist it.
-            (
-                event,
-                unpersisted_context,
-            ) = self.get_success(
+            (event, unpersisted_context,) = self.get_success(
                 self.hs.get_event_creation_handler().create_event(
                     requester=create_requester(user1_id),
                     event_dict=event_dict,
@@ -2256,9 +2250,10 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
         _user1_tok = self.login(user1_id, "pass")
 
         # Create a remote invite room without any `unsigned.invite_room_state`
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(user1_id, stripped_state)
-        )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(user1_id, stripped_state)
 
         # No one local is joined to the remote room
         sliding_sync_joined_rooms_results = self._get_sliding_sync_joined_rooms()
@@ -2308,29 +2303,30 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create a remote invite room with some `unsigned.invite_room_state`
         # indicating that the room is encrypted.
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper room",
-                        },
-                    ),
-                ],
-            )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper room",
+                    },
+                ),
+            ],
         )
 
         # No one local is joined to the remote room
@@ -2380,48 +2376,49 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create a remote invite room with some `unsigned.invite_room_state`
         # indicating that the room is encrypted.
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                    # This is not one of the stripped state events according to the state
-                    # but we still handle it.
-                    StrippedStateEvent(
-                        type=EventTypes.Tombstone,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.TOMBSTONE_SUCCESSOR_ROOM: "another_room",
-                        },
-                    ),
-                    # Also test a random event that we don't care about
-                    StrippedStateEvent(
-                        type="org.matrix.foo_state",
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            "foo": "qux",
-                        },
-                    ),
-                ],
-            )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+                # This is not one of the stripped state events according to the state
+                # but we still handle it.
+                StrippedStateEvent(
+                    type=EventTypes.Tombstone,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.TOMBSTONE_SUCCESSOR_ROOM: "another_room",
+                    },
+                ),
+                # Also test a random event that we don't care about
+                StrippedStateEvent(
+                    type="org.matrix.foo_state",
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        "foo": "qux",
+                    },
+                ),
+            ],
         )
 
         # No one local is joined to the remote room
@@ -2471,39 +2468,40 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create a remote invite room with some `unsigned.invite_room_state`
         # indicating that the room is encrypted.
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                            # Specify that it is a space room
-                            EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper space",
-                        },
-                    ),
-                ],
-            )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                        # Specify that it is a space room
+                        EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper space",
+                    },
+                ),
+            ],
         )
 
         # No one local is joined to the remote room
@@ -2554,29 +2552,30 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create a remote invite room with some `unsigned.invite_room_state`
         # indicating that the room is encrypted.
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                ],
-            )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+            ],
         )
 
         # User1 decides to leave the room (reject the invite)
@@ -2635,29 +2634,30 @@ class SlidingSyncTablesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create a remote invite room with some `unsigned.invite_room_state`
         # indicating that the room is encrypted.
-        remote_invite_room_id, remote_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                ],
-            )
+        (
+            remote_invite_room_id,
+            remote_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+            ],
         )
 
         # `@inviter:remote_server` decides to retract the invite (kicks the user).
@@ -3593,84 +3593,88 @@ class SlidingSyncTablesBackgroundUpdatesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create rooms with various levels of state that should appear in the table
         #
-        room_id_unknown_state, room_id_unknown_state_invite_event = (
-            self._create_remote_invite_room_for_user(user1_id, None)
+        (
+            room_id_unknown_state,
+            room_id_unknown_state_invite_event,
+        ) = self._create_remote_invite_room_for_user(user1_id, None)
+
+        (
+            room_id_no_info,
+            room_id_no_info_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+            ],
         )
 
-        room_id_no_info, room_id_no_info_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                ],
-            )
+        (
+            room_id_with_info,
+            room_id_with_info_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper room",
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+            ],
         )
 
-        room_id_with_info, room_id_with_info_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper room",
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                ],
-            )
-        )
-
-        space_room_id, space_room_id_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                            EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper space",
-                        },
-                    ),
-                ],
-            )
+        (
+            space_room_id,
+            space_room_id_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                        EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper space",
+                    },
+                ),
+            ],
         )
 
         # Clean-up the `sliding_sync_membership_snapshots` table as if the inserts did not
@@ -3810,84 +3814,88 @@ class SlidingSyncTablesBackgroundUpdatesTestCase(SlidingSyncTablesTestCaseBase):
 
         # Create rooms with various levels of state that should appear in the table
         #
-        room_id_unknown_state, room_id_unknown_state_invite_event = (
-            self._create_remote_invite_room_for_user(user1_id, None)
+        (
+            room_id_unknown_state,
+            room_id_unknown_state_invite_event,
+        ) = self._create_remote_invite_room_for_user(user1_id, None)
+
+        (
+            room_id_no_info,
+            room_id_no_info_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+            ],
         )
 
-        room_id_no_info, room_id_no_info_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                ],
-            )
+        (
+            room_id_with_info,
+            room_id_with_info_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper room",
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.RoomEncryption,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
+                    },
+                ),
+            ],
         )
 
-        room_id_with_info, room_id_with_info_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper room",
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.RoomEncryption,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ENCRYPTION_ALGORITHM: "m.megolm.v1.aes-sha2",
-                        },
-                    ),
-                ],
-            )
-        )
-
-        space_room_id, space_room_id_invite_event = (
-            self._create_remote_invite_room_for_user(
-                user1_id,
-                [
-                    StrippedStateEvent(
-                        type=EventTypes.Create,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
-                            EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
-                            EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
-                        },
-                    ),
-                    StrippedStateEvent(
-                        type=EventTypes.Name,
-                        state_key="",
-                        sender="@inviter:remote_server",
-                        content={
-                            EventContentFields.ROOM_NAME: "my super duper space",
-                        },
-                    ),
-                ],
-            )
+        (
+            space_room_id,
+            space_room_id_invite_event,
+        ) = self._create_remote_invite_room_for_user(
+            user1_id,
+            [
+                StrippedStateEvent(
+                    type=EventTypes.Create,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_CREATOR: "@inviter:remote_server",
+                        EventContentFields.ROOM_VERSION: RoomVersions.V10.identifier,
+                        EventContentFields.ROOM_TYPE: RoomTypes.SPACE,
+                    },
+                ),
+                StrippedStateEvent(
+                    type=EventTypes.Name,
+                    state_key="",
+                    sender="@inviter:remote_server",
+                    content={
+                        EventContentFields.ROOM_NAME: "my super duper space",
+                    },
+                ),
+            ],
         )
 
         # Reject the remote invites.

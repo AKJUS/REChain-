@@ -293,4 +293,4 @@ REChain represents the convergence of cutting-edge technologies to create a more
 
 By focusing on open collaboration, sustainable development, and real-world impact, we're building the foundation for a future where technology serves humanity's highest aspirations while maintaining the security, privacy, and sovereignty that are essential for trust and adoption.
 
-**Join us in building the digital infrastructure of tomorrow.** 
+**Join us in building the digital infrastructure of tomorrow.**

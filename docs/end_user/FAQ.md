@@ -17,4 +17,4 @@ Yes! See SECURITY.md for details on encryption and privacy.
 ## Where can I get help?
 See SUPPORT.md or use the in-app help widget.
 
---- 
+---

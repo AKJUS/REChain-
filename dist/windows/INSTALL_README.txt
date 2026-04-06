@@ -30,7 +30,7 @@ TROUBLESHOOTING
 If you see "App Installer could not install this package":
 - Make sure you ran install_certificate.bat as Administrator
 - Make sure Windows Sideloading is enabled:
-  Settings > Apps > Advanced app settings > 
+  Settings > Apps > Advanced app settings >
   Choose where to get apps > "Anywhere"
 
 For support: support@rechain.network

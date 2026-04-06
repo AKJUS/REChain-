@@ -50,7 +50,7 @@
     },
     {
       "name": "rechain_native",
-      "srcPath": "./rechain_native", 
+      "srcPath": "./rechain_native",
       "targets": [
         {
           "name": "default",

@@ -18,4 +18,4 @@ Aurora OS supports QML for custom UI/UX. You can integrate QML with your Flutter
 
 ---
 
-For more, see the [Aurora OS Platform Support](Platform-Support.md) guide. 
+For more, see the [Aurora OS Platform Support](Platform-Support.md) guide.
