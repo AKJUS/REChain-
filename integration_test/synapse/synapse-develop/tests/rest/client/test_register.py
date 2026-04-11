@@ -1077,7 +1077,9 @@ class AccountValidityRenewalByEmailTestCase(unittest.HomeserverTestCase):
 
         # Check that the HTML we're getting is the one we expect when using an
         # invalid/unknown token.
-        expected_html = self.hs.config.account_validity.account_validity_invalid_token_template.render()
+        expected_html = (
+            self.hs.config.account_validity.account_validity_invalid_token_template.render()
+        )
         self.assertEqual(
             channel.result["body"], expected_html.encode("utf8"), channel.result
         )

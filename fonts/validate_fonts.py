@@ -14,6 +14,7 @@ import hashlib
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+
 class FontValidator:
     def __init__(self, fonts_dir: str):
         self.fonts_dir = Path(fonts_dir)
@@ -43,7 +44,7 @@ class FontValidator:
             return None
 
         try:
-            with open(self.config_file, 'r', encoding='utf-8') as f:
+            with open(self.config_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
             self.log_error(f"Invalid JSON in config file: {e}")
@@ -54,15 +55,15 @@ class FontValidator:
         success = True
 
         # Check Roboto fonts
-        if 'roboto' in config['fonts']:
-            roboto_config = config['fonts']['roboto']
+        if "roboto" in config["fonts"]:
+            roboto_config = config["fonts"]["roboto"]
             roboto_dir = self.fonts_dir / "Roboto"
 
             if not roboto_dir.exists():
                 self.log_error("Roboto directory not found")
                 success = False
             else:
-                for font_file in roboto_config['files']:
+                for font_file in roboto_config["files"]:
                     font_path = roboto_dir / font_file
                     if not font_path.exists():
                         self.log_error(f"Roboto font missing: {font_file}")
@@ -71,9 +72,9 @@ class FontValidator:
                         self.log_success(f"Roboto font found: {font_file}")
 
                 # Check Roboto Mono
-                if 'mono_variant' in roboto_config:
-                    mono_config = roboto_config['mono_variant']
-                    for mono_file in mono_config['files']:
+                if "mono_variant" in roboto_config:
+                    mono_config = roboto_config["mono_variant"]
+                    for mono_file in mono_config["files"]:
                         mono_path = roboto_dir / mono_file
                         if not mono_path.exists():
                             self.log_warning(f"Roboto Mono font missing: {mono_file}")
@@ -81,15 +82,15 @@ class FontValidator:
                             self.log_success(f"Roboto Mono font found: {mono_file}")
 
         # Check Noto Emoji fonts
-        if 'noto_emoji' in config['fonts']:
-            emoji_config = config['fonts']['noto_emoji']
+        if "noto_emoji" in config["fonts"]:
+            emoji_config = config["fonts"]["noto_emoji"]
             emoji_dir = self.fonts_dir / "NotoEmoji"
 
             if not emoji_dir.exists():
                 self.log_error("NotoEmoji directory not found")
                 success = False
             else:
-                for emoji_file in emoji_config['files']:
+                for emoji_file in emoji_config["files"]:
                     emoji_path = emoji_dir / emoji_file
                     if not emoji_path.exists():
                         self.log_error(f"Noto Emoji font missing: {emoji_file}")
@@ -110,10 +111,10 @@ class FontValidator:
 
         # Load expected checksums
         try:
-            with open(self.checksum_file, 'r', encoding='utf-8') as f:
+            with open(self.checksum_file, "r", encoding="utf-8") as f:
                 for line in f:
                     if line.strip():
-                        checksum, filepath = line.strip().split('  ', 1)
+                        checksum, filepath = line.strip().split("  ", 1)
                         expected_checksums[filepath] = checksum
         except Exception as e:
             self.log_error(f"Failed to load checksums: {e}")
@@ -122,13 +123,13 @@ class FontValidator:
         # Validate each font file
         for root, dirs, files in os.walk(self.fonts_dir):
             for file in files:
-                if file.endswith('.ttf'):
+                if file.endswith(".ttf"):
                     filepath = os.path.join(root, file)
                     relative_path = os.path.relpath(filepath, self.fonts_dir)
 
                     if relative_path in expected_checksums:
                         try:
-                            with open(filepath, 'rb') as f:
+                            with open(filepath, "rb") as f:
                                 actual_checksum = hashlib.sha256(f.read()).hexdigest()
 
                             if actual_checksum != expected_checksums[relative_path]:
@@ -158,7 +159,7 @@ class FontValidator:
         # Validate each TTF file
         for root, dirs, files in os.walk(self.fonts_dir):
             for file in files:
-                if file.endswith('.ttf'):
+                if file.endswith(".ttf"):
                     filepath = os.path.join(root, file)
 
                     try:
@@ -178,18 +179,22 @@ class FontValidator:
         pubspec_path = self.fonts_dir.parent / "pubspec.yaml"
 
         if not pubspec_path.exists():
-            self.log_warning("pubspec.yaml not found, skipping Flutter integration check")
+            self.log_warning(
+                "pubspec.yaml not found, skipping Flutter integration check"
+            )
             return True
 
         try:
-            with open(pubspec_path, 'r', encoding='utf-8') as f:
+            with open(pubspec_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            if 'fonts:' in content:
+            if "fonts:" in content:
                 self.log_success("Flutter fonts configuration found in pubspec.yaml")
                 return True
             else:
-                self.log_warning("Flutter fonts configuration not found in pubspec.yaml")
+                self.log_warning(
+                    "Flutter fonts configuration not found in pubspec.yaml"
+                )
                 return False
         except Exception as e:
             self.log_error(f"Failed to check Flutter integration: {e}")
@@ -198,15 +203,15 @@ class FontValidator:
     def generate_report(self) -> Dict:
         """Generate validation report."""
         return {
-            'version': '4.1.10+1160',
-            'timestamp': '2025-01-09',
-            'errors': self.errors,
-            'warnings': self.warnings,
-            'success': len(self.errors) == 0,
-            'summary': {
-                'total_errors': len(self.errors),
-                'total_warnings': len(self.warnings)
-            }
+            "version": "4.1.10+1160",
+            "timestamp": "2025-01-09",
+            "errors": self.errors,
+            "warnings": self.warnings,
+            "success": len(self.errors) == 0,
+            "summary": {
+                "total_errors": len(self.errors),
+                "total_warnings": len(self.warnings),
+            },
         }
 
     def run_validation(self) -> bool:
@@ -257,13 +262,14 @@ class FontValidator:
         # Save report
         report_file = self.fonts_dir / "validation_report.json"
         try:
-            with open(report_file, 'w', encoding='utf-8') as f:
+            with open(report_file, "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
             self.log_success(f"Validation report saved: {report_file}")
         except Exception as e:
             self.log_error(f"Failed to save validation report: {e}")
 
         return all_passed
+
 
 def main():
     """Main entry point."""
@@ -272,6 +278,7 @@ def main():
 
     success = validator.run_validation()
     sys.exit(0 if success else 1)
+
 
 if __name__ == "__main__":
     main()

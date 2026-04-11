@@ -71,9 +71,7 @@ def generate_request_key() -> SyncRequestKey:
         (True,),
         (False,),
     ],
-    class_name_func=lambda cls,
-    num,
-    params_dict: f"{cls.__name__}_{'state_after' if params_dict['use_state_after'] else 'state'}",
+    class_name_func=lambda cls, num, params_dict: f"{cls.__name__}_{'state_after' if params_dict['use_state_after'] else 'state'}",
 )
 class SyncTestCase(tests.unittest.HomeserverTestCase):
     """Tests Sync Handler."""

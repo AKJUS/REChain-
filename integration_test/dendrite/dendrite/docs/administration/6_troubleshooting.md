@@ -79,6 +79,6 @@ available number of file descriptors.
 ## 6. STUN/TURN Server tester
 
 If you are experiencing problems with VoIP or video calls, you should check that Dendrite
-is able to successfully connect your TURN server using 
+is able to successfully connect your TURN server using
 [Matrix VoIP Tester](https://test.voip.librepush.net/). This can highlight any issues
 that the server may encounter so that you can begin the troubleshooting process.

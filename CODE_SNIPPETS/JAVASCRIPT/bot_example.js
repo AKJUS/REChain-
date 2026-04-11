@@ -10,7 +10,7 @@ class MatrixBot {
         this.config = config;
         this.commands = new Map();
         this.aliases = new Map();
-        
+
         this.client = MatrixClient.createClient({
             baseUrl: config.homeserverUrl,
             userId: config.userId,
@@ -20,33 +20,33 @@ class MatrixBot {
 
     start() {
         this.client.startClient({ pollTimeout: 30000 });
-        
+
         this.client.on('room.message', this.handleMessage.bind(this));
         this.client.on('room.invite', this.handleInvite.bind(this));
-        
+
         console.log('Bot started as', this.config.userId);
-        
+
         // Register default commands
         this.registerDefaultCommands();
     }
 
     handleMessage(roomId, event) {
         if (event.sender === this.client.getUserId()) return;
-        
+
         const content = event.content;
         if (content.msgtype !== 'm.text') return;
-        
+
         const body = content.body;
-        
+
         // Check for command prefix
         const commandPrefix = this.config.commandPrefix || '!';
         if (!body.startsWith(commandPrefix)) return;
-        
+
         const args = body.slice(commandPrefix.length).split(' ');
         const command = args.shift().toLowerCase();
-        
+
         console.log(`Command in ${roomId}: ${command}`);
-        
+
         this.executeCommand(roomId, command, args, event);
     }
 
@@ -60,13 +60,13 @@ class MatrixBot {
     executeCommand(roomId, command, args, event) {
         // Check aliases
         const actualCommand = this.aliases.get(command) || command;
-        
+
         const handler = this.commands.get(actualCommand);
         if (!handler) {
             this.sendMessage(roomId, `Unknown command: ${command}`);
             return;
         }
-        
+
         try {
             const context = {
                 roomId,
@@ -75,7 +75,7 @@ class MatrixBot {
                 reply: (msg) => this.sendReply(roomId, event.event_id, msg),
                 sendHtml: (body, html) => this.sendHtmlMessage(roomId, body, html)
             };
-            
+
             handler(context);
         } catch (e) {
             console.error('Command error:', e);
@@ -85,13 +85,13 @@ class MatrixBot {
 
     registerCommand(name, handler, options = {}) {
         this.commands.set(name, handler);
-        
+
         if (options.alias) {
             for (const alias of options.alias) {
                 this.aliases.set(alias, name);
             }
         }
-        
+
         return this;
     }
 
@@ -172,11 +172,9 @@ module.exports = MatrixBot;
 //     accessToken: 'your_access_token',
 //     commandPrefix: '!'
 // });
-// 
+//
 // bot.registerCommand('hello', (ctx) => {
 //     ctx.reply('Hello! 👋');
 // });
-// 
+//
 // bot.start();
-
-

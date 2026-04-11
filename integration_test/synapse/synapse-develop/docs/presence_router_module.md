@@ -32,7 +32,7 @@ async def ModuleApi.send_local_online_presence_to(users: Iterable[str]) -> None
 ```
 
 which can be given a list of local or remote MXIDs to broadcast known, online user
-presence to (for those users that the receiving user is considered interested in). 
+presence to (for those users that the receiving user is considered interested in).
 It does not include state for users who are currently offline, and it can only be
 called on workers that support sending federation. Additionally, this method must
 only be called from the process that has been configured to write to the
@@ -109,7 +109,7 @@ class PresenceRouterConfig:
         # Config options with their defaults
         # A list of users to always send all user presence updates to
         self.always_send_to_users = []  # type: List[str]
-        
+
         # A list of users to ignore presence updates for. Does not affect
         # shared-room presence relationships
         self.blacklisted_users = []  # type: List[str]
@@ -162,7 +162,7 @@ class ExamplePresenceRouter:
             state_updates: An iterable of user presence state updates.
 
         Returns:
-          A dictionary of user_id -> set of UserPresenceState that the user should 
+          A dictionary of user_id -> set of UserPresenceState that the user should
           receive.
         """
         destination_users = {}  # type: Dict[str, Set[UserPresenceState]
@@ -207,10 +207,10 @@ class ExamplePresenceRouter:
 #### A note on `get_users_for_states` and `get_interested_users`
 
 Both of these methods are effectively two different sides of the same coin. The logic
-regarding which users should receive updates for other users should be the same 
+regarding which users should receive updates for other users should be the same
 between them.
 
-`get_users_for_states` is called when presence updates come in from either federation 
+`get_users_for_states` is called when presence updates come in from either federation
 or local users, and is used to either direct local presence to remote users, or to
 wake up the sync streams of local users to collect remote presence.
 

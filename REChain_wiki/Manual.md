@@ -56,4 +56,3 @@ If possible, please also include a screenshot!
 ### How do I use Emotes from others?
 ## Bug Reporting with logs
 _Please also read the bug reporting basics first!_
-

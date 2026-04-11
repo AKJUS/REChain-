@@ -18,19 +18,19 @@ export default class EntryAbility extends UIAbility {
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'REChain HarmonyOS Application Starting...');
-    
+
     try {
       // Initialize crash reporting first
       this.initializeCrashReporting();
-      
+
       // Initialize system integration
       this.initializeSystemIntegration();
-      
+
       // Initialize notification system
       this.initializeNotificationSystem();
-      
+
       hilog.info(0x0000, 'REChain', '%{public}s', 'All native services initialized successfully');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Failed to initialize services: %{public}s', JSON.stringify(error));
       if (this.crashReporter) {
@@ -41,26 +41,26 @@ export default class EntryAbility extends UIAbility {
 
   onDestroy(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'REChain Application Destroying...');
-    
+
     try {
       // Shutdown services in reverse order
       if (this.notificationManager) {
         this.notificationManager.shutdown();
         this.notificationManager = null;
       }
-      
+
       if (this.systemIntegration) {
         this.systemIntegration.shutdown();
         this.systemIntegration = null;
       }
-      
+
       if (this.crashReporter) {
         this.crashReporter.shutdown();
         this.crashReporter = null;
       }
-      
+
       hilog.info(0x0000, 'REChain', '%{public}s', 'All services shut down successfully');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Error during shutdown: %{public}s', JSON.stringify(error));
     }
@@ -68,7 +68,7 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'onWindowStageCreate');
-    
+
     try {
       // Configure main window
       windowStage.loadContent('pages/Index', (err, data) => {
@@ -79,13 +79,13 @@ export default class EntryAbility extends UIAbility {
           }
           return;
         }
-        
+
         hilog.info(0x0000, 'REChain', '%{public}s', 'Main content loaded successfully');
-        
+
         // Configure window properties
         this.configureMainWindow(windowStage);
       });
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Window stage creation error: %{public}s', JSON.stringify(error));
       if (this.crashReporter) {
@@ -100,17 +100,17 @@ export default class EntryAbility extends UIAbility {
 
   onForeground(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'Application moved to foreground');
-    
+
     try {
       // Notify services about foreground state
       if (this.systemIntegration) {
         this.systemIntegration.onApplicationForeground();
       }
-      
+
       if (this.notificationManager) {
         this.notificationManager.onApplicationForeground();
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Foreground transition error: %{public}s', JSON.stringify(error));
     }
@@ -118,17 +118,17 @@ export default class EntryAbility extends UIAbility {
 
   onBackground(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'Application moved to background');
-    
+
     try {
       // Notify services about background state
       if (this.systemIntegration) {
         this.systemIntegration.onApplicationBackground();
       }
-      
+
       if (this.notificationManager) {
         this.notificationManager.onApplicationBackground();
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Background transition error: %{public}s', JSON.stringify(error));
     }
@@ -136,7 +136,7 @@ export default class EntryAbility extends UIAbility {
 
   private initializeCrashReporting(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'Initializing crash reporting...');
-    
+
     this.crashReporter = new REChainCrashReporter();
     const crashConfig = {
       appName: 'REChain',
@@ -146,7 +146,7 @@ export default class EntryAbility extends UIAbility {
       autoSubmitCrashes: true,
       enableDebugLogging: false
     };
-    
+
     if (!this.crashReporter.initialize(crashConfig)) {
       hilog.error(0x0000, 'REChain', '%{public}s', 'Failed to initialize crash reporting');
     } else {
@@ -156,7 +156,7 @@ export default class EntryAbility extends UIAbility {
 
   private initializeSystemIntegration(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'Initializing system integration...');
-    
+
     this.systemIntegration = new REChainSystemIntegration();
     const systemConfig = {
       enableSystemMonitoring: true,
@@ -165,7 +165,7 @@ export default class EntryAbility extends UIAbility {
       enableNetworkMonitoring: true,
       enablePerformanceMonitoring: true
     };
-    
+
     if (!this.systemIntegration.initialize(systemConfig)) {
       hilog.error(0x0000, 'REChain', '%{public}s', 'Failed to initialize system integration');
     } else {
@@ -175,7 +175,7 @@ export default class EntryAbility extends UIAbility {
 
   private initializeNotificationSystem(): void {
     hilog.info(0x0000, 'REChain', '%{public}s', 'Initializing notification system...');
-    
+
     this.notificationManager = new REChainNotificationManager();
     const notificationConfig = {
       appName: 'REChain',
@@ -186,7 +186,7 @@ export default class EntryAbility extends UIAbility {
       notificationTimeout: 5000,
       enableDebugLogging: false
     };
-    
+
     if (!this.notificationManager.initialize(notificationConfig)) {
       hilog.error(0x0000, 'REChain', '%{public}s', 'Failed to initialize notification system');
     } else {
@@ -201,18 +201,18 @@ export default class EntryAbility extends UIAbility {
           hilog.error(0x0000, 'REChain', 'Failed to get main window: %{public}s', JSON.stringify(err));
           return;
         }
-        
+
         // Set window properties
         windowClass.setUIContent('pages/Index');
         windowClass.setWindowSystemBarEnable(['status', 'navigation']);
         windowClass.setWindowLayoutFullScreen(false);
-        
+
         // Set window background
         windowClass.setWindowBackgroundColor('#FFFFFF');
-        
+
         hilog.info(0x0000, 'REChain', '%{public}s', 'Main window configured successfully');
       });
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChain', 'Window configuration error: %{public}s', JSON.stringify(error));
     }

@@ -354,7 +354,7 @@ class AIPlugin:
     async def on_message(self, message):
         # AI moderation
         return await self.moderate(message)
-    
+
     async def on_event(self, event):
         # Analytics tracking
         return await self.track(event)
@@ -522,4 +522,3 @@ We welcome contributions! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for
 
 *This document is part of the REChain v4.2.0 release documentation.*
 *Last updated: 2025-01-09*
-

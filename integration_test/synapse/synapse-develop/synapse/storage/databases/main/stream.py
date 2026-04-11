@@ -110,7 +110,8 @@ class PaginateFunction(Protocol):
         to_key: Optional[RoomStreamToken] = None,
         direction: Direction = Direction.BACKWARDS,
         limit: int = 0,
-    ) -> Tuple[List[EventBase], RoomStreamToken, bool]: ...
+    ) -> Tuple[List[EventBase], RoomStreamToken, bool]:
+        ...
 
 
 # Used as return values for pagination APIs
@@ -1389,7 +1390,9 @@ class StreamWorkerStore(EventsWorkerStore, SQLBaseStore):
                     AND e.stream_ordering > ? AND e.stream_ordering <= ?
                     %s
                 ORDER BY e.stream_ordering ASC
-            """ % (ignore_room_clause,)
+            """ % (
+                ignore_room_clause,
+            )
 
             txn.execute(sql, args)
 
@@ -1870,7 +1873,8 @@ class StreamWorkerStore(EventsWorkerStore, SQLBaseStore):
         txn: LoggingTransaction,
         event_id: str,
         allow_none: Literal[False] = False,
-    ) -> int: ...
+    ) -> int:
+        ...
 
     @overload
     def get_stream_id_for_event_txn(
@@ -1878,7 +1882,8 @@ class StreamWorkerStore(EventsWorkerStore, SQLBaseStore):
         txn: LoggingTransaction,
         event_id: str,
         allow_none: bool = False,
-    ) -> Optional[int]: ...
+    ) -> Optional[int]:
+        ...
 
     def get_stream_id_for_event_txn(
         self,

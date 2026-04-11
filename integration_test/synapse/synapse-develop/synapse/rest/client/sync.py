@@ -361,12 +361,12 @@ class SyncRestServlet(RestServlet):
 
         # https://github.com/matrix-org/matrix-doc/blob/54255851f642f84a4f1aaf7bc063eebe3d76752b/proposals/2732-olm-fallback-keys.md
         # states that this field should always be included, as long as the server supports the feature.
-        response["org.matrix.msc2732.device_unused_fallback_key_types"] = (
-            sync_result.device_unused_fallback_key_types
-        )
-        response["device_unused_fallback_key_types"] = (
-            sync_result.device_unused_fallback_key_types
-        )
+        response[
+            "org.matrix.msc2732.device_unused_fallback_key_types"
+        ] = sync_result.device_unused_fallback_key_types
+        response[
+            "device_unused_fallback_key_types"
+        ] = sync_result.device_unused_fallback_key_types
 
         if joined:
             response["rooms"][Membership.JOIN] = joined
@@ -620,9 +620,9 @@ class SyncRestServlet(RestServlet):
             if room.unread_thread_notifications:
                 result["unread_thread_notifications"] = room.unread_thread_notifications
                 if self._msc3773_enabled:
-                    result["org.matrix.msc3773.unread_thread_notifications"] = (
-                        room.unread_thread_notifications
-                    )
+                    result[
+                        "org.matrix.msc3773.unread_thread_notifications"
+                    ] = room.unread_thread_notifications
             result["summary"] = room.summary
             if self._msc2654_enabled:
                 result["org.matrix.msc2654.unread_count"] = room.unread_count
@@ -794,9 +794,9 @@ class SlidingSyncE2eeRestServlet(RestServlet):
 
         # https://github.com/matrix-org/matrix-doc/blob/54255851f642f84a4f1aaf7bc063eebe3d76752b/proposals/2732-olm-fallback-keys.md
         # states that this field should always be included, as long as the server supports the feature.
-        response["device_unused_fallback_key_types"] = (
-            sync_result.device_unused_fallback_key_types
-        )
+        response[
+            "device_unused_fallback_key_types"
+        ] = sync_result.device_unused_fallback_key_types
 
         return 200, response
 
@@ -1106,9 +1106,9 @@ class SlidingSyncRestServlet(RestServlet):
                 serialized_rooms[room_id]["initial"] = room_result.initial
 
             if room_result.unstable_expanded_timeline:
-                serialized_rooms[room_id]["unstable_expanded_timeline"] = (
-                    room_result.unstable_expanded_timeline
-                )
+                serialized_rooms[room_id][
+                    "unstable_expanded_timeline"
+                ] = room_result.unstable_expanded_timeline
 
             # This will be omitted for invite/knock rooms with `stripped_state`
             if (

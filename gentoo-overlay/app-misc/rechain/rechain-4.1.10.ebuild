@@ -26,9 +26,9 @@ src_install() {
     insinto /opt/${PN}
     doins -r data lib rechain_new
     fperms 755 /opt/${PN}/rechain_new
-    
+
     dosym ../opt/${PN}/rechain_new /usr/bin/${PN}
-    
+
     doicon com.rechain.online.svg
     domenu REChain.desktop
 }

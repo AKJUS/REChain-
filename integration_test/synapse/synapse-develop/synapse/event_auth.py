@@ -89,7 +89,8 @@ class _EventSourceStore(Protocol):
         redact_behaviour: EventRedactBehaviour,
         get_prev_content: bool = False,
         allow_rejected: bool = False,
-    ) -> Dict[str, "EventBase"]: ...
+    ) -> Dict[str, "EventBase"]:
+        ...
 
 
 def validate_event_for_room_version(event: "EventBase") -> None:
@@ -922,8 +923,7 @@ def _check_power_levels(
                     raise SynapseError(400, f"{v!r} must be an integer.")
             if k in {"events", "notifications", "users"}:
                 if not isinstance(v, collections.abc.Mapping) or not all(
-                    type(v) is int
-                    for v in v.values()  # noqa: E721
+                    type(v) is int for v in v.values()  # noqa: E721
                 ):
                     raise SynapseError(
                         400,

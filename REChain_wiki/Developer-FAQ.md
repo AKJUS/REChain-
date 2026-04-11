@@ -20,4 +20,4 @@ A: See [CONTRIBUTING.md](../docs/CONTRIBUTING.md) and open a PR!
 
 ---
 
-For more, explore the [wiki home](Home.md). 
+For more, explore the [wiki home](Home.md).

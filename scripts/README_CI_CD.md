@@ -119,13 +119,13 @@ If you need to build manually, follow these steps:
    cargo install wasm-pack
    wasm-pack build --target web
    cd ..
-   
+
    git clone https://github.com/famedly/dart-vodozemac.git .vodozemac
    cd .vodozemac
    cargo install flutter_rust_bridge_codegen
    flutter_rust_bridge_codegen build-web --dart-root dart --rust-root (Resolve-Path rust) --release
    cd ..
-   
+
    Copy-Item ".vodozemac/dart/web/pkg/vodozemac_bindings_dart*" "assets/vodozemac/" -Force
    Remove-Item -Recurse -Force ".vodozemac"
    ```
@@ -157,13 +157,13 @@ If you need to build manually, follow these steps:
    cargo install wasm-pack
    wasm-pack build --target web
    cd ..
-   
+
    git clone https://github.com/famedly/dart-vodozemac.git .vodozemac
    cd .vodozemac
    cargo install flutter_rust_bridge_codegen
    flutter_rust_bridge_codegen build-web --dart-root dart --rust-root $(readlink -f rust) --release
    cd ..
-   
+
    cp .vodozemac/dart/web/pkg/vodozemac_bindings_dart* assets/vodozemac/
    rm -rf .vodozemac
    ```
@@ -241,4 +241,4 @@ For issues with these scripts:
 1. Check the troubleshooting section above
 2. Review the GitHub Actions logs for specific error messages
 3. Ensure all prerequisites are met
-4. Try the manual build process to isolate issues 
+4. Try the manual build process to isolate issues

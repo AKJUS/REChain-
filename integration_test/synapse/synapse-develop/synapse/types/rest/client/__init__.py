@@ -376,9 +376,9 @@ class SlidingSyncBody(RequestBodyModel):
     if TYPE_CHECKING:
         lists: Optional[Dict[str, SlidingSyncList]] = None
     else:
-        lists: Optional[Dict[constr(max_length=64, strict=True), SlidingSyncList]] = (
-            None  # type: ignore[valid-type]
-        )
+        lists: Optional[
+            Dict[constr(max_length=64, strict=True), SlidingSyncList]
+        ] = None  # type: ignore[valid-type]
     room_subscriptions: Optional[Dict[StrictStr, RoomSubscription]] = None
     extensions: Optional[Extensions] = None
 

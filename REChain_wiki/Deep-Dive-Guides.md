@@ -24,4 +24,4 @@
 
 ---
 
-*Want a deep-dive on another topic? Open an issue or PR!* 
+*Want a deep-dive on another topic? Open an issue or PR!*

@@ -32,7 +32,7 @@
  * limitations under the License.
  */
 
-/* The type of the user: NULL for a regular user, or one of the constants in 
+/* The type of the user: NULL for a regular user, or one of the constants in
  * synapse.api.constants.UserTypes
  */
 ALTER TABLE users ADD COLUMN user_type TEXT DEFAULT NULL;

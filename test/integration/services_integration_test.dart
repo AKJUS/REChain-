@@ -19,14 +19,14 @@ void main() {
   late ServicesManager servicesManager;
   late MockClient client;
   late MockSharedPreferences prefs;
-  
+
   setUp(() {
     client = MockClient();
     prefs = MockSharedPreferences();
-    
+
     when(prefs.getString(any)).thenReturn(null);
     when(prefs.setString(any, any)).thenAnswer((_) => Future.value(true));
-    
+
     servicesManager = ServicesManager(
       client: client,
       store: prefs,
@@ -49,7 +49,7 @@ void main() {
       await servicesManager.initializeServices();
 
       // Verify security audit has access to security manager
-      expect(servicesManager.securityAudit.securityManager, 
+      expect(servicesManager.securityAudit.securityManager,
              equals(servicesManager.securityManager));
 
       // Verify threat detection has access to security audit
@@ -83,11 +83,11 @@ void main() {
       );
 
       final result = await servicesManager.bridgeManager.createBridge(bridgeConfig);
-      
+
       // Verify security audit captures the new bridge
       final vulnerabilities = servicesManager.securityAudit.vulnerabilities;
       expect(
-        vulnerabilities.any((v) => 
+        vulnerabilities.any((v) =>
           v.metadata['bridgeId'] == result.bridge?.id &&
           v.type == SecurityVulnerabilityType.unverifiedDevice
         ),
@@ -99,7 +99,7 @@ void main() {
       await servicesManager.initializeServices();
 
       final scheduledTime = DateTime.now().add(Duration(minutes: 5));
-      
+
       // Schedule a message with suspicious content
       final messageId = await servicesManager.messageScheduler.scheduleMessage(
         roomId: '!test:example.com',
@@ -109,7 +109,7 @@ void main() {
 
       // Verify threat detection caught the suspicious content
       expect(
-        servicesManager.threatDetection.alerts.any((a) => 
+        servicesManager.threatDetection.alerts.any((a) =>
           a.metadata['relatedMessageId'] == messageId &&
           a.threatType == ThreatType.phishingAttempt
         ),
@@ -166,7 +166,7 @@ void main() {
       await servicesManager.initializeServices();
 
       // Simulate high load with many concurrent events
-      final futures = List.generate(100, (i) => 
+      final futures = List.generate(100, (i) =>
         servicesManager.messageScheduler.scheduleMessage(
           roomId: '!test:example.com',
           content: 'Test message $i',
@@ -231,7 +231,7 @@ void main() {
 
       // Simulate memory pressure with large number of operations
       final largeData = List.generate(10000, (i) => 'Data chunk $i').join(' ');
-      
+
       // Perform memory-intensive operations
       await Future.wait([
         servicesManager.translationService.translateText(largeData, targetLanguage: 'es'),

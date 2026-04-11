@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 -- SQLite needs to rebuild indices which use partial indices on Postgres, but
 -- previously did not use them on SQLite.
 

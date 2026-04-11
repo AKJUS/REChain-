@@ -47,10 +47,10 @@ TOTAL_TESTS=0
 run_test() {
     local test_name="$1"
     local test_command="$2"
-    
+
     TOTAL_TESTS=$((TOTAL_TESTS + 1))
     print_status "Running test: $test_name"
-    
+
     if eval "$test_command" >> "$TEST_LOG" 2>&1; then
         print_success "$test_name - PASSED"
         echo "[PASS] $test_name" >> "$TEST_LOG"
@@ -93,16 +93,16 @@ run_test "GLib 2.0 Availability" "pkg-config --exists glib-2.0"
 # Test 5: Native Services Tests (if built)
 if [ -f "$BUILD_DIR/bundle/rechainonline" ]; then
     print_status "Testing native services..."
-    
+
     # Test executable exists and has correct permissions
     run_test "Executable Permissions" "test -x '$BUILD_DIR/bundle/rechainonline'"
-    
+
     # Test library dependencies
     run_test "Library Dependencies" "ldd '$BUILD_DIR/bundle/rechainonline' | grep -E '(gtk|notify|gio|glib)'"
-    
+
     # Test basic execution (version check)
     run_test "Basic Execution Test" "timeout 10s '$BUILD_DIR/bundle/rechainonline' --version || true"
-    
+
     # Test desktop integration files
     if [ -f "$BUILD_DIR/bundle/rechainonline.desktop" ]; then
         run_test "Desktop File Validation" "desktop-file-validate '$BUILD_DIR/bundle/rechainonline.desktop' || true"
@@ -120,7 +120,7 @@ fi
 # Test 7: Memory and Performance Tests
 if [ -f "$BUILD_DIR/bundle/rechainonline" ]; then
     print_status "Running performance tests..."
-    
+
     # Test memory usage (basic check)
     if command -v valgrind &> /dev/null; then
         run_test "Memory Leak Check" "timeout 30s valgrind --leak-check=summary --error-exitcode=1 '$BUILD_DIR/bundle/rechainonline' --version"

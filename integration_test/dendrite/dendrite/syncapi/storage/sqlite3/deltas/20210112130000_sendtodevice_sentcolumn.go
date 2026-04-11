@@ -18,7 +18,7 @@ func UpRemoveSendToDeviceSentColumn(ctx context.Context, tx *sql.Tx) error {
 		INSERT INTO syncapi_send_to_device_backup SELECT id, user_id, device_id, content FROM syncapi_send_to_device;
 		DROP TABLE syncapi_send_to_device;
 		CREATE TABLE syncapi_send_to_device(
-			id INTEGER PRIMARY KEY AUTOINCREMENT, 
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			user_id TEXT NOT NULL,
 			device_id TEXT NOT NULL,
 			content TEXT NOT NULL
@@ -38,9 +38,9 @@ func DownRemoveSendToDeviceSentColumn(ctx context.Context, tx *sql.Tx) error {
 		INSERT INTO syncapi_send_to_device_backup SELECT id, user_id, device_id, content FROM syncapi_send_to_device;
 		DROP TABLE syncapi_send_to_device;
 		CREATE TABLE syncapi_send_to_device(
-			id INTEGER PRIMARY KEY AUTOINCREMENT, 
-			user_id TEXT NOT NULL, 
-			device_id TEXT NOT NULL, 
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			user_id TEXT NOT NULL,
+			device_id TEXT NOT NULL,
 			content TEXT NOT NULL,
 			sent_by_token TEXT
 		);

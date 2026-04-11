@@ -497,4 +497,4 @@ For technical support and questions about the specialized Matrix integrations:
 
 ---
 
-This documentation provides a comprehensive guide to the specialized Matrix integrations in the REChain Ecosystem. For more information, please refer to the API reference and code examples provided. 
+This documentation provides a comprehensive guide to the specialized Matrix integrations in the REChain Ecosystem. For more information, please refer to the API reference and code examples provided.

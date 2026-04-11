@@ -36,12 +36,12 @@ the reverse proxy and the homeserver.
 
 ## Homeserver Configuration
 
-The HTTP configuration will need to be updated for Synapse to correctly record 
-client IP addresses and generate redirect URLs while behind a reverse proxy. 
+The HTTP configuration will need to be updated for Synapse to correctly record
+client IP addresses and generate redirect URLs while behind a reverse proxy.
 
-In `homeserver.yaml` set `x_forwarded: true` in the port 8008 section and 
+In `homeserver.yaml` set `x_forwarded: true` in the port 8008 section and
 consider setting `bind_addresses: ['127.0.0.1']` so that the server only
-listens to traffic on localhost. (Do not change `bind_addresses` to `127.0.0.1` 
+listens to traffic on localhost. (Do not change `bind_addresses` to `127.0.0.1`
 when using a containerized Synapse, as that will prevent it from responding
 to proxied traffic.)
 
@@ -79,7 +79,7 @@ server {
         # Nginx by default only allows file uploads up to 1M in size
         # Increase client_max_body_size to match max_upload_size defined in homeserver.yaml
         client_max_body_size 50M;
-	
+
 	# Synapse responses may be chunked, which is an HTTP/1.1 feature.
 	proxy_http_version 1.1;
     }
@@ -213,7 +213,7 @@ frontend https
   acl matrix-well-known-server-path path /.well-known/matrix/server
   use_backend matrix-well-known-client if matrix-well-known-client-path
   use_backend matrix-well-known-server if matrix-well-known-server-path
- 
+
 backend matrix-well-known-client
   http-after-response set-header Access-Control-Allow-Origin "*"
   http-after-response set-header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"

@@ -8,4 +8,4 @@ if command -v redis-cli >/dev/null; then
   redis-cli save
   cp /var/lib/redis/dump.rdb $BACKUP_DIR/ 2>/dev/null || true
 fi
-echo "Backup complete: $BACKUP_DIR" 
+echo "Backup complete: $BACKUP_DIR"

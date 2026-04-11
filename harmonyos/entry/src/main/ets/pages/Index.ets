@@ -221,7 +221,7 @@ struct Index {
 
     } catch (error) {
       hilog.error(0x0000, 'REChainUI', 'Failed to send test notification: %{public}s', JSON.stringify(error));
-      
+
       if (this.crashReporter) {
         this.crashReporter.recordError('Test notification failed', { error: error.toString() });
       }
@@ -240,7 +240,7 @@ struct Index {
 
     } catch (error) {
       hilog.error(0x0000, 'REChainUI', 'Failed to trigger vibration: %{public}s', JSON.stringify(error));
-      
+
       if (this.crashReporter) {
         this.crashReporter.recordError('Test vibration failed', { error: error.toString() });
       }
@@ -274,7 +274,7 @@ struct Index {
 
     try {
       const systemStatus = await this.systemIntegration.getSystemStatus();
-      
+
       if (systemStatus) {
         this.batteryLevel = systemStatus.batteryLevel;
         this.networkStatus = systemStatus.networkConnected ? 'Connected' : 'Disconnected';

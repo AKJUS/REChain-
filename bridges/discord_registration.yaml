@@ -96,4 +96,3 @@ logging:
   format: "json"
   timestamps: true
   include_timestamp: true
-

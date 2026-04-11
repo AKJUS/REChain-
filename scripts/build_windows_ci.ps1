@@ -185,4 +185,4 @@ while ($attempt -le $maxAttempts -and -not $buildSucceeded) {
     $attempt++
 }
 
-Write-Status "Windows CI/CD build process completed!" "Green" 
+Write-Status "Windows CI/CD build process completed!" "Green"

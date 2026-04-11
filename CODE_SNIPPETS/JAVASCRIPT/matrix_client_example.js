@@ -69,5 +69,3 @@ module.exports = MatrixBotExample;
 //     'your_access_token'
 // );
 // bot.start();
-
-

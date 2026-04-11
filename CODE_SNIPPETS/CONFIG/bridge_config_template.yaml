@@ -73,13 +73,13 @@ bridge:
     token: "__CHANGE_ME__"
     username: "your_bot_username"
     privacy_mode: "users"
-  
+
   # Connection settings
   connection:
     use_ipv6: false
     proxy: null
     max_connections: 5
-  
+
   # Message handling
   message:
     format: "matrix"
@@ -88,35 +88,35 @@ bridge:
     allow_reactions: true
     allow_edits: true
     allow_reply: true
-  
+
   # Group bridging
   group:
     bridge_initial_chat: true
     invite_own_puppet_to_pm: false
     direct_chat_on_invite: true
-  
+
   # User bridging
   user:
     puppet_source: "platform"
     avatar_source: "both"
     displayname_source: "platform"
-  
+
   # Admin management
   admin:
     enabled: true
     relaybot: "@relaybot:your.domain.tld"
-  
+
   # Relay bot
   relay:
     enabled: true
     username_suffix: "relaybot"
     icon: "default"
-  
+
   # Double puppeting
   double_puppet:
     enabled: true
     source: "platform"
-  
+
   # Bridging settings
   bridging:
     public: false
@@ -127,25 +127,25 @@ bridge:
     enable_presence_bridging: false
     resend_bridge_info: true
     async_transmission: true
-  
+
   # Push notifications
   push:
     enabled: false
     notifications: false
     alert_words: []
-  
+
   # Metrics
   metrics:
     enabled: true
     port: 8001
     path: "/metrics"
-  
+
   # Webhook configuration
   webhook:
     enabled: false
     url: null
     secret: null
-  
+
   # Room configuration
   room:
     default_bridge_name: "bridge"
@@ -177,4 +177,3 @@ backup:
   interval: 86400
   retention: 7
   path: "/data/backups"
-

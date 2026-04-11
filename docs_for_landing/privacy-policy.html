@@ -161,14 +161,14 @@
   left: -3px;
   transform: rotate(-45deg);
   transform-origin: top right;
-  background: linear-gradient(to right, #fb6e53 0%, #fb7454 100%); 
+  background: linear-gradient(to right, #fb6e53 0%, #fb7454 100%);
   }
   .btn-primary:after {
   bottom:0;
   right: -3px;
   transform: rotate(-45deg);
   transform-origin: bottom left;
-  background: linear-gradient(to right, #74e79a 0%, #74e79a 100%); 
+  background: linear-gradient(to right, #74e79a 0%, #74e79a 100%);
   }
   .btn-primary-lines-1:before,
   .btn-primary-lines-1:after {
@@ -180,7 +180,7 @@
   .btn-primary-lines-1:before {
   top: 0;
   left: 7px;
-  background: linear-gradient(to right, #fb7454 0%, #bcda68 100%); 
+  background: linear-gradient(to right, #fb7454 0%, #bcda68 100%);
   }
   .btn-primary-lines-1:after {
   bottom: 0;
@@ -294,7 +294,7 @@
   .custom-slider-arrow--top.w-slider-arrow-left {left: 0;}
   }
   @media screen and (max-width: 767px) {
-  .custom-slider-arrow.w-slider-arrow-left, .custom-slider-arrow.w-slider-arrow-right, 
+  .custom-slider-arrow.w-slider-arrow-left, .custom-slider-arrow.w-slider-arrow-right,
   .custom-slider-arrow .w-icon-slider-left, .custom-slider-arrow .w-icon-slider-right {
   width: 27px;
   height: 27px;
@@ -324,7 +324,7 @@
   .link-more * {pointer-events: none;}
   .btn-primary input,
   .btn-primary button {pointer-events: auto;}
-  /* ai model tabs */ 
+  /* ai model tabs */
   .ai-model-content-head:not(.active) .ai-model-title-h3.ai-model-title-tab {background: none;}
   /*Zalyva styles*/
   .top-banner.hidden {
@@ -350,7 +350,7 @@
   .latest-items .w--current .articles-bg {display: block;}
   /*Mobile menu*/
   .w-dropdown-list.w--open .w-dropdown-link {margin: 0;}
-  @media screen and (max-width: 991px) {  
+  @media screen and (max-width: 991px) {
   .w-nav[data-collapse=medium] .w-nav-button {display: flex !important;}
   .w-dropdown-toggle.w--open .header__icon-arrow {transform: scaleY(-1);}
   .nav-menu-2 {
@@ -358,7 +358,7 @@
   overflow: auto;
   }
   }
-  
+
   @media screen and (min-width: 992px) {
   .menu-2 .nav-link-5:after {
   position: absolute;
@@ -410,7 +410,7 @@
   /* pricing tabs */
   .pricing-tab-link:not(.w--current) .pricing-tab-text {background: none;}
   /* custom form */
-  
+
   .form-field {resize: vertical;}
   .form-field:required {
   background-image: url(https://assets-global.website-files.com/64354b8ce4872ad8cd1c7b04/645a3c7ba47fbd79366e7ccb_asterisk.svg);
@@ -491,7 +491,7 @@
   </style>
   <script>
   var cookie3Options = {"siteId":214,"additionalTracking":true,"cookielessEnabled":true}
-  
+
   window._paq = window._paq || [];
   (function () {
   var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
@@ -734,14 +734,14 @@
           .product-menu-toggle.w--open .product-menu-icon .product-menu-icon-dot {
           transform: translate(0,0);
           }
-          
+
           @media screen and (min-width: 1280px) {
           .product-menu-toggle:hover .product-menu-icon {transform: rotate(45deg);}
           .product-menu-toggle:hover .product-menu-icon .product-menu-icon-dot {
           transform: translate(0,0);
           }
           }
-          
+
           @media screen and (min-width: 992px) {
           .w-dropdown-list.product-menu-list.w--open {
           left: 0;
@@ -899,13 +899,13 @@
     if (!isSafari) {
     if (Webflow.env("editor") === undefined) {
     const lenis = new Lenis();
-    
+
     function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-    
+
     function connectToScrollTrigger() {
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.lagSmoothing(0)
@@ -935,32 +935,32 @@
     }
     }
     copyCode();
-    
+
     /* marquee */
     function marqueeClone() {
     let marquee = document.querySelector(".js-marquee-token-clone");
     if (marquee) {
     let marqueeContent = document.querySelector('.js-marquee-token-clone .marquee-content');
-    
+
     // Create a copy of it
     let marqueeContentClone = marqueeContent.cloneNode(true);
-    
+
     // Inject it into the DOM
     marqueeContent.after(marqueeContentClone);
-    
+
     }
     }
     marqueeClone();
-    
+
     /* marquee revolution */
     function marqueeRevolutionClone() {
     let marqueeTopBanner = document.querySelector(".js-marquee-revolution-clone");
     if (marqueeTopBanner) {
     let marqueeContent = document.querySelector('.js-marquee-revolution-clone .marquee-content');
-    
+
     // Create a copy of it
     let marqueeContentClone = marqueeContent.cloneNode(true);
-    
+
     // Inject it into the DOM
     marqueeContent.after(marqueeContentClone);
     }
@@ -991,7 +991,7 @@
     }, 300)
     });
     }
-    
+
     if (btnCloseAsideMenu) {
     btnCloseAsideMenu.addEventListener("click", function (e) {
     body.classList.remove("aside-menu-is-opened");
@@ -1011,10 +1011,10 @@
     function aimodelTabs() {
     const userTab = document.querySelector('#tab-user');
     const developerTab = document.querySelector('#tab-developer');
-    
+
     if (userTab && developerTab) {
     userTab.classList.add('active');
-    
+
     userTab.addEventListener("click", function () {
     userTab.classList.add('active');
     developerTab.classList.remove('active');
@@ -1030,31 +1030,31 @@
     const topBannerButton = document.querySelector('.top-banner__close-btn');
     const topBannerWrapper = document.querySelector('.top-banner');
     const siteHeader = document.querySelector('.site-header');
-    
-    
+
+
     topBannerButton.addEventListener('click', () => {
     topBannerWrapper.classList.add('hidden');
     localStorage.setItem('visibility', 'hidden');
     siteHeader.style.top = '0';
     document.querySelector('body').classList.add('body-no-banner');
     });
-    
+
     localStorage.getItem('visibility') == 'hidden' ? visibility() : null;
-    
+
     function visibility() {
     siteHeader.style.top = '0';
     topBannerWrapper.style.display = 'none';
     document.querySelector('body').classList.add('body-no-banner');
     }
     // FAQ
-    
+
     const faqWraps = document.querySelectorAll('.faq-wrap-2');
-    
+
     faqWraps.forEach((faqWrap) => {
     const question = faqWrap.querySelector('.faq-question-2');
     const answer = faqWrap.querySelector('.faq-answer-2');
     const plusWrap = faqWrap.querySelector('.plus-wrap-2');
-    
+
     if(question) {
     question.addEventListener('click', () => {
     if (answer.classList.contains('active')) {
@@ -1069,30 +1069,30 @@
     });
     }
     });
-    
+
     const siteHeaderButton = document.querySelector('.site-header .w-nav-button');
     const siteHeaderWrapp = document.querySelector('.site-header');
-    
+
     /*siteHeaderButton.addEventListener('click', () => {
     siteHeaderWrapp.classList.toggle('menuOpen');
     });*/
-    
+
     // Team members counter
     const teamMemberCounter = document.querySelector('#team-count-item');
     const teamCard = document.querySelectorAll('#main-team-list .team-card');
-    
+
     teamMemberCounter && teamCard ? teamMemberCounter.innerHTML = teamCard.length : null;
-    
+
     // Advisors members counter
     const advisorsMemberCounter = document.querySelector('#advisors-count-item');
     const advisorsCard = document.querySelectorAll('#advisors-team-list .team-card');
-    
+
     advisorsMemberCounter && advisorsCard ? advisorsMemberCounter.innerHTML = advisorsCard.length : null;
-    
+
     // Partners members counter
     const partnersMemberCounter = document.querySelector('#partners-team-heading .team-row-count-item');
     const partnersCard = document.querySelectorAll('#partners-team-list .team-partners-logo');
-    
+
     partnersMemberCounter && partnersCard ? partnersMemberCounter.innerHTML = partnersCard.length : null;
     /*youtube*/
     function renderYoutubeVideos() {
@@ -1113,14 +1113,14 @@
     iframe.setAttribute( "src", "https://www.youtube-nocookie.com/embed/"+ this.dataset.embed +"?rel=0&showinfo=0&autoplay=1" );
     this.innerHTML = "";
     this.appendChild( iframe );
-    } );  
+    } );
     };
     };
     renderYoutubeVideos();
     /* load youtube videos*/
     function loadYoutubeVideos() {
     const btnLoadVideo = document.querySelector('.js-load-video');
-    
+
     if (btnLoadVideo) {
     btnLoadVideo.addEventListener("click", function () {
     setTimeout(function(){

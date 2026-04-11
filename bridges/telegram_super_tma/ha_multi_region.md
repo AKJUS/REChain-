@@ -26,4 +26,4 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install redis bitnami/redis --set architecture=replication,sentinel.enabled=true
 ```
 
---- 
+---

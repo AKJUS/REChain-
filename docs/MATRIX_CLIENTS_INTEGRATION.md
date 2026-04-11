@@ -72,7 +72,7 @@ FluffyChat is a modern, cross-platform Matrix client that provides:
      apiKey: 'your_api_key',
      baseUrl: 'https://api.online.rechain.network',
    );
-   
+
    await fluffyChatIntegration.initialize();
    ```
 
@@ -198,7 +198,7 @@ Krille-chan is a lightweight, performance-focused Matrix client that provides:
      apiKey: 'your_api_key',
      baseUrl: 'https://api.krille-chan.dev',
    );
-   
+
    await krilleChanIntegration.initialize();
    ```
 
@@ -574,4 +574,4 @@ For support and questions:
 
 ---
 
-*Last updated: December 2024* 
+*Last updated: December 2024*

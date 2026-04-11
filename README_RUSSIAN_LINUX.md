@@ -4,7 +4,7 @@
 
 ![REChain Logo](assets/banner.png)
 
-**Комплексная платформа для Matrix, блокчейн, IPFS и ИИ**  
+**Комплексная платформа для Matrix, блокчейн, IPFS и ИИ**
 **Полная поддержка российских ОС Linux**
 
 [![Лицензия](https://img.shields.io/badge/License-REChain_EULA-blue.svg)](REChain_EULA.txt)

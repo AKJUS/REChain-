@@ -8,10 +8,10 @@
 homeserver:
   # Matrix homeserver address (internal Docker networking)
   address: http://synapse:8008
-  
+
   # Your domain name (public)
   domain: your.domain.tld
-  
+
   # Connection settings
   connection_timeout: 30      # Seconds to wait for connection
   read_timeout: 60            # Seconds to wait for response
@@ -25,13 +25,13 @@ homeserver:
 appservice:
   # Database file (SQLite by default)
   database: appservice.db
-  
+
   # Enhanced database options
   database_opts:
     pool_size: 5              # Connection pool size
     max_overflow: 10          # Additional connections for burst
     timeout: 20               # Query timeout in seconds
-  
+
   # Session management
   session_timeout: 300        # Session timeout in seconds
   idle_timeout: 600           # Idle timeout in seconds
@@ -58,19 +58,19 @@ performance:
   message_processing_workers: 4
   batch_size: 100              # Messages per batch
   batch_timeout: 5             # Seconds to wait for batch
-  
+
   # Rate limiting
   rate_limit:
     enabled: true
     requests_per_second: 50
     burst_size: 100
-  
+
   # Caching
   cache:
     enabled: true
     max_entries: 10000
     ttl: 3600                  # Cache TTL in seconds
-  
+
   # Connection pooling
   connection_pool:
     min_connections: 2
@@ -85,19 +85,19 @@ security:
   encryption:
     enabled: true
     algorithm: AES-256-GCM
-  
+
   # Authentication
   authentication:
     method: token              # token, oauth, basic
     token_rotation_interval: 86400  # Token rotation in seconds
-  
+
   # Access control
   access_control:
     default_policy: deny       # deny or allow
     allowed_users:
       - "@admin:your.domain.tld"
     blocked_users: []
-  
+
   # Per-user rate limiting
   user_rate_limit:
     enabled: true
@@ -110,7 +110,7 @@ security:
 bridge:
   # BRIDGE NAME - Replace with actual bridge name (e.g., telegram, discord)
   bridge_name:
-    
+
     # Authentication credentials
     auth:
       # API key or token
@@ -119,14 +119,14 @@ bridge:
       username: null
       password: null
       redirect_uri: null
-    
+
     # Connection settings
     connection:
       use_ipv6: false
       proxy: null              # e.g., "socks5://proxy:1080"
       max_connections: 5
       timeout: 30
-    
+
     # Message handling
     message:
       format: matrix           # matrix, text, html
@@ -137,36 +137,36 @@ bridge:
       allow_reply: true
       allow_forward: true
       allow_reply_notices: true
-    
+
     # Group/channel bridging
     group:
       bridge_initial_chat: true
       direct_chat_on_invite: true
       private_chat_on_invite: false
       sync_participants: true
-    
+
     # User bridging
     user:
       puppet_source: "bridge_name"
       avatar_source: "both"    # bridge, matrix, both
       displayname_source: "bridge_name"
-    
+
     # Admin management
     admin:
       enabled: true
       relaybot: "@relaybot:your.domain.tld"
-  
+
   # Relay bot configuration
   relay:
     enabled: true
     username_suffix: "relaybot"
     icon: "default"
-  
+
   # Double puppeting
   double_puppet:
     enabled: true
     source: "bridge_name"
-  
+
   # General bridging settings
   bridging:
     public: false              # Allow public room bridging
@@ -177,25 +177,25 @@ bridge:
     enable_presence_bridging: false
     resend_bridge_info: true
     async_transmission: true
-  
+
   # Push notifications
   push:
     enabled: false
     notifications: false
     alert_words: []
-  
+
   # Metrics and monitoring
   metrics:
     enabled: true
     port: 8001
     path: "/metrics"
-  
+
   # Webhook configuration
   webhook:
     enabled: false
     url: null
     secret: null
-  
+
   # Room configuration
   room:
     default_bridge_name: "bridge_name"
@@ -211,7 +211,7 @@ bridge:
 experimental:
   matrix_live:
     enabled: false
-  
+
   # Matrix Spec Changes (MSCs)
   msc:
     - "msc2409"  # Authentication factors
@@ -259,4 +259,3 @@ migration:
 #       privacy_mode: "users"
 #     phone_number: null
 #     verify_token: null
-

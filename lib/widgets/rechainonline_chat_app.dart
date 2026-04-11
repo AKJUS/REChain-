@@ -20,9 +20,9 @@ class REChain {
   REChain._internal();
 
   static REChain get pp => _instance;
-  
+
   late GoRouter router;
-  
+
   void initializeRouter(GoRouter router) {
     this.router = router;
   }
@@ -58,7 +58,7 @@ class REChainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Initialize the global router
     REChain.pp.initializeRouter(router);
-    
+
     return ThemeBuilder(
       builder: (context, themeMode, primaryColor) => MaterialApp.router(
         title: AppSettings.applicationName.value,

@@ -1456,9 +1456,9 @@ class RoomMemberHandler(metaclass=abc.ABCMeta):
 
         if requester is not None:
             sender = UserID.from_string(event.sender)
-            assert sender == requester.user, (
-                "Sender (%s) must be same as requester (%s)" % (sender, requester.user)
-            )
+            assert (
+                sender == requester.user
+            ), "Sender (%s) must be same as requester (%s)" % (sender, requester.user)
             assert self.hs.is_mine(sender), "Sender must be our own: %s" % (sender,)
         else:
             requester = types.create_requester(target_user)

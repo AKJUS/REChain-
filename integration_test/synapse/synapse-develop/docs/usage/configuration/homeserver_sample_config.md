@@ -1,7 +1,7 @@
 # Homeserver Sample Configuration File
 
-Below is a sample homeserver configuration file. The homeserver configuration file 
-can be tweaked to change the behaviour of your homeserver. A restart of the server is 
+Below is a sample homeserver configuration file. The homeserver configuration file
+can be tweaked to change the behaviour of your homeserver. A restart of the server is
 generally required to apply any changes made to this file.
 
 Note that the contents below are *not* intended to be copied and used as the basis for

@@ -20,7 +20,7 @@ REChain is designed to power decentralized solutions with applications ranging f
 - **Security Focused**: Employs cutting-edge cryptographic techniques to ensure secure transactions and communications.
 - **Private & Anonymous**: Full end-to-end encryption and privacy guarantees for sensitive data and transactions.
 - **Modular & Extensible**: Designed to support modular upgrades and extensions as per user or developer requirements.
-  
+
 ---
 
 ## Getting Started

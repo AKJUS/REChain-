@@ -27,4 +27,4 @@ if [ -f $TMPDIR/dump.rdb ]; then
 else
   echo "Redis dump missing!"
 fi
-echo "Backup verification complete. Temp dir: $TMPDIR" 
+echo "Backup verification complete. Temp dir: $TMPDIR"

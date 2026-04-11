@@ -249,7 +249,7 @@ void main() {
     test('should perform periodic audits', () async {
       // Fast-forward time to trigger periodic audit
       await Future.delayed(Duration(milliseconds: 100));
-      
+
       verify(client.rooms).called(greaterThan(1));
     });
 

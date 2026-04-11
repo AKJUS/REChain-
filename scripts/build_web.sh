@@ -40,41 +40,41 @@ print_error() {
 # Check dependencies
 check_dependencies() {
     print_status "Checking dependencies..."
-    
+
     if ! command -v flutter &> /dev/null; then
         print_error "Flutter is not installed or not in PATH"
         exit 1
     fi
-    
+
     if ! command -v node &> /dev/null; then
         print_warning "Node.js not found. Some optimizations may be skipped."
     fi
-    
+
     # Check Flutter web support
     if ! flutter config --list | grep -q "enable-web: true"; then
         print_status "Enabling Flutter web support..."
         flutter config --enable-web
     fi
-    
+
     print_status "Dependencies check completed"
 }
 
 # Clean previous builds
 clean_build() {
     print_status "Cleaning previous builds..."
-    
+
     if [ -d "$OUTPUT_DIR" ]; then
         rm -rf "$OUTPUT_DIR"
     fi
-    
+
     if [ -d "$TEMP_DIR" ]; then
         rm -rf "$TEMP_DIR"
     fi
-    
+
     if [ -d "$DIST_DIR" ]; then
         rm -rf "$DIST_DIR"
     fi
-    
+
     flutter clean
     print_status "Clean completed"
 }
@@ -83,31 +83,31 @@ clean_build() {
 get_dependencies() {
     print_status "Getting Flutter dependencies..."
     flutter pub get
-    
+
     if [ -f "web/package.json" ]; then
         print_status "Getting Node.js dependencies..."
         cd web && npm install && cd ..
     fi
-    
+
     print_status "Dependencies installed"
 }
 
 # Pre-build optimizations
 pre_build_optimizations() {
     print_status "Running pre-build optimizations..."
-    
+
     # Create temp directory
     mkdir -p "$TEMP_DIR"
-    
+
     # Copy web assets
     if [ -d "web" ]; then
         cp -r web/* "$TEMP_DIR/"
     fi
-    
+
     # Optimize JavaScript files
     if command -v node &> /dev/null && [ -f "web/package.json" ]; then
         print_status "Optimizing JavaScript files..."
-        
+
         # Minify JavaScript files
         for js_file in web/js/*.js; do
             if [ -f "$js_file" ]; then
@@ -118,16 +118,16 @@ pre_build_optimizations() {
             fi
         done
     fi
-    
+
     print_status "Pre-build optimizations completed"
 }
 
 # Build Flutter web
 build_flutter_web() {
     print_status "Building Flutter web application..."
-    
+
     local build_args=""
-    
+
     if [ "$BUILD_MODE" = "release" ]; then
         build_args="--release --web-renderer canvaskit --dart-define=FLUTTER_WEB_USE_SKIA=true"
     elif [ "$BUILD_MODE" = "profile" ]; then
@@ -135,15 +135,15 @@ build_flutter_web() {
     else
         build_args="--debug --web-renderer html"
     fi
-    
+
     # Add optimization flags for release builds
     if [ "$BUILD_MODE" = "release" ]; then
         build_args="$build_args --tree-shake-icons --split-debug-info=build/web/debug_symbols"
     fi
-    
+
     print_status "Running: flutter build web $build_args"
     flutter build web $build_args
-    
+
     if [ $? -eq 0 ]; then
         print_status "Flutter web build completed successfully"
     else
@@ -155,51 +155,51 @@ build_flutter_web() {
 # Post-build optimizations
 post_build_optimizations() {
     print_status "Running post-build optimizations..."
-    
+
     # Copy optimized assets
     if [ -d "$TEMP_DIR" ]; then
         # Copy optimized JS files
         if [ -d "$TEMP_DIR/js" ]; then
             cp -r "$TEMP_DIR/js" "$OUTPUT_DIR/"
         fi
-        
+
         # Copy service worker
         if [ -f "$TEMP_DIR/sw.js" ]; then
             cp "$TEMP_DIR/sw.js" "$OUTPUT_DIR/"
         fi
     fi
-    
+
     # Optimize images if tools are available
     if command -v optipng &> /dev/null; then
         print_status "Optimizing PNG images..."
         find "$OUTPUT_DIR" -name "*.png" -exec optipng -o2 {} \;
     fi
-    
+
     # Generate service worker cache manifest
     generate_cache_manifest
-    
+
     # Create .htaccess for Apache servers
     create_htaccess
-    
+
     # Create nginx configuration
     create_nginx_config
-    
+
     print_status "Post-build optimizations completed"
 }
 
 # Generate service worker cache manifest
 generate_cache_manifest() {
     print_status "Generating service worker cache manifest..."
-    
+
     local manifest_file="$OUTPUT_DIR/cache-manifest.json"
     local files=()
-    
+
     # Find all static assets
     while IFS= read -r -d '' file; do
         local relative_path="${file#$OUTPUT_DIR/}"
         files+=("\"$relative_path\"")
     done < <(find "$OUTPUT_DIR" -type f \( -name "*.js" -o -name "*.css" -o -name "*.png" -o -name "*.jpg" -o -name "*.svg" -o -name "*.woff2" -o -name "*.ttf" \) -print0)
-    
+
     # Create manifest
     cat > "$manifest_file" << EOF
 {
@@ -209,14 +209,14 @@ generate_cache_manifest() {
   ]
 }
 EOF
-    
+
     print_status "Cache manifest generated: $manifest_file"
 }
 
 # Create .htaccess for Apache
 create_htaccess() {
     print_status "Creating .htaccess configuration..."
-    
+
     cat > "$OUTPUT_DIR/.htaccess" << 'EOF'
 # REChain Web Application - Apache Configuration
 
@@ -278,14 +278,14 @@ create_htaccess() {
     RewriteRule . /index.html [L]
 </IfModule>
 EOF
-    
+
     print_status ".htaccess configuration created"
 }
 
 # Create nginx configuration
 create_nginx_config() {
     print_status "Creating nginx configuration..."
-    
+
     cat > "$OUTPUT_DIR/nginx.conf" << 'EOF'
 # REChain Web Application - Nginx Configuration
 
@@ -344,19 +344,19 @@ server {
     }
 }
 EOF
-    
+
     print_status "nginx configuration created"
 }
 
 # Create distribution package
 create_distribution() {
     print_status "Creating distribution package..."
-    
+
     mkdir -p "$DIST_DIR"
-    
+
     # Copy build output
     cp -r "$OUTPUT_DIR"/* "$DIST_DIR/"
-    
+
     # Create deployment info
     cat > "$DIST_DIR/deployment-info.json" << EOF
 {
@@ -366,14 +366,14 @@ create_distribution() {
   "commit": "$(git rev-parse HEAD 2>/dev/null || echo 'unknown')"
 }
 EOF
-    
+
     # Create archive
     if command -v tar &> /dev/null; then
         local archive_name="rechain-web-$(date +%Y%m%d-%H%M%S).tar.gz"
         tar -czf "$archive_name" -C "$DIST_DIR" .
         print_status "Distribution archive created: $archive_name"
     fi
-    
+
     print_status "Distribution package created in: $DIST_DIR"
 }
 
@@ -381,10 +381,10 @@ EOF
 run_tests() {
     if [ "$BUILD_MODE" != "debug" ]; then
         print_status "Running web tests..."
-        
+
         # Run Flutter tests
         flutter test --platform chrome
-        
+
         if [ $? -eq 0 ]; then
             print_status "All tests passed"
         else
@@ -396,11 +396,11 @@ run_tests() {
 # Cleanup temporary files
 cleanup() {
     print_status "Cleaning up temporary files..."
-    
+
     if [ -d "$TEMP_DIR" ]; then
         rm -rf "$TEMP_DIR"
     fi
-    
+
     print_status "Cleanup completed"
 }
 
@@ -408,7 +408,7 @@ cleanup() {
 main() {
     echo -e "${BLUE}Starting REChain web build process...${NC}"
     echo ""
-    
+
     check_dependencies
     clean_build
     get_dependencies
@@ -418,7 +418,7 @@ main() {
     create_distribution
     run_tests
     cleanup
-    
+
     echo ""
     echo -e "${GREEN}✓ REChain web build completed successfully!${NC}"
     echo -e "${GREEN}✓ Output directory: $OUTPUT_DIR${NC}"

@@ -11,4 +11,3 @@ for pid_file in $FILES; do
         kill "$pid"
     fi
 done
-
