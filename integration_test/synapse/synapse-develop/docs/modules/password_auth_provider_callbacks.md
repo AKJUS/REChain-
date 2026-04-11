@@ -25,7 +25,7 @@ async def check_auth(
     login_dict: "synapse.module_api.JsonDict",
 ) -> Optional[
     Tuple[
-        str, 
+        str,
         Optional[Callable[["synapse.module_api.LoginResponse"], Awaitable[None]]]
     ]
 ]
@@ -39,7 +39,7 @@ The callback is passed the `user` field provided by the client (which might not 
 `@username:server` form), the login type, and a dictionary of login secrets passed by
 the client.
 
-If the authentication is successful, the module must return the user's Matrix ID (e.g. 
+If the authentication is successful, the module must return the user's Matrix ID (e.g.
 `@alice:example.com`) and optionally a callback to be called with the response to the
 `/login` request. If the module doesn't wish to return a callback, it must return `None`
 instead.
@@ -64,12 +64,12 @@ _First introduced in Synapse v1.46.0_
 
 ```python
 async def check_3pid_auth(
-    medium: str, 
+    medium: str,
     address: str,
     password: str,
 ) -> Optional[
     Tuple[
-        str, 
+        str,
         Optional[Callable[["synapse.module_api.LoginResponse"], Awaitable[None]]]
     ]
 ]
@@ -79,7 +79,7 @@ Called when a user attempts to register or log in with a third party identifier,
 such as email. It is passed the medium (eg. `email`), an address (eg. `jdoe@example.com`)
 and the user's password.
 
-If the authentication is successful, the module must return the user's Matrix ID (e.g. 
+If the authentication is successful, the module must return the user's Matrix ID (e.g.
 `@alice:example.com`) and optionally a callback to be called with the response to the `/login` request.
 If the module doesn't wish to return a callback, it must return None instead.
 
@@ -101,7 +101,7 @@ async def on_logged_out(
     device_id: Optional[str],
     access_token: str
 ) -> None
-``` 
+```
 Called during a logout request for a user. It is passed the qualified user ID, the ID of the
 deactivated device (if any: access tokens are occasionally created without an associated
 device ID), and the (now deactivated) access token.
@@ -222,8 +222,8 @@ any of the subsequent implementations of this callback.
 
 ## Example
 
-The example module below implements authentication checkers for two different login types: 
--  `my.login.type` 
+The example module below implements authentication checkers for two different login types:
+-  `my.login.type`
     - Expects a `my_field` field to be sent to `/login`
     - Is checked by the method: `self.check_my_login`
 - `m.login.password` (defined in [the spec](https://matrix.org/docs/spec/client_server/latest#password-based))

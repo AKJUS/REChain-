@@ -185,7 +185,10 @@ class JoinedSyncResult:
         to tell if room needs to be part of the sync result.
         """
         return bool(
-            self.timeline or self.state or self.ephemeral or self.account_data
+            self.timeline
+            or self.state
+            or self.ephemeral
+            or self.account_data
             # nb the notification count does not, er, count: if there's nothing
             # else in the result, we don't need to send it.
         )
@@ -379,7 +382,8 @@ class SyncHandler:
         since_token: Optional[StreamToken] = None,
         timeout: int = 0,
         full_state: bool = False,
-    ) -> SyncResult: ...
+    ) -> SyncResult:
+        ...
 
     @overload
     async def wait_for_sync_for_user(
@@ -391,7 +395,8 @@ class SyncHandler:
         since_token: Optional[StreamToken] = None,
         timeout: int = 0,
         full_state: bool = False,
-    ) -> E2eeSyncResult: ...
+    ) -> E2eeSyncResult:
+        ...
 
     @overload
     async def wait_for_sync_for_user(
@@ -403,7 +408,8 @@ class SyncHandler:
         since_token: Optional[StreamToken] = None,
         timeout: int = 0,
         full_state: bool = False,
-    ) -> Union[SyncResult, E2eeSyncResult]: ...
+    ) -> Union[SyncResult, E2eeSyncResult]:
+        ...
 
     async def wait_for_sync_for_user(
         self,
@@ -460,7 +466,8 @@ class SyncHandler:
         timeout: int,
         full_state: bool,
         cache_context: ResponseCacheContext[SyncRequestKey],
-    ) -> SyncResult: ...
+    ) -> SyncResult:
+        ...
 
     @overload
     async def _wait_for_sync_for_user(
@@ -471,7 +478,8 @@ class SyncHandler:
         timeout: int,
         full_state: bool,
         cache_context: ResponseCacheContext[SyncRequestKey],
-    ) -> E2eeSyncResult: ...
+    ) -> E2eeSyncResult:
+        ...
 
     @overload
     async def _wait_for_sync_for_user(
@@ -482,7 +490,8 @@ class SyncHandler:
         timeout: int,
         full_state: bool,
         cache_context: ResponseCacheContext[SyncRequestKey],
-    ) -> Union[SyncResult, E2eeSyncResult]: ...
+    ) -> Union[SyncResult, E2eeSyncResult]:
+        ...
 
     async def _wait_for_sync_for_user(
         self,
@@ -622,7 +631,8 @@ class SyncHandler:
         sync_version: Literal[SyncVersion.SYNC_V2],
         since_token: Optional[StreamToken] = None,
         full_state: bool = False,
-    ) -> SyncResult: ...
+    ) -> SyncResult:
+        ...
 
     @overload
     async def current_sync_for_user(
@@ -631,7 +641,8 @@ class SyncHandler:
         sync_version: Literal[SyncVersion.E2EE_SYNC],
         since_token: Optional[StreamToken] = None,
         full_state: bool = False,
-    ) -> E2eeSyncResult: ...
+    ) -> E2eeSyncResult:
+        ...
 
     @overload
     async def current_sync_for_user(
@@ -640,7 +651,8 @@ class SyncHandler:
         sync_version: SyncVersion,
         since_token: Optional[StreamToken] = None,
         full_state: bool = False,
-    ) -> Union[SyncResult, E2eeSyncResult]: ...
+    ) -> Union[SyncResult, E2eeSyncResult]:
+        ...
 
     async def current_sync_for_user(
         self,
@@ -1416,9 +1428,9 @@ class SyncHandler:
                     # correctly pick the earliest delta.
                     for delta in reversed(deltas):
                         if delta.prev_event_id:
-                            mutable_state_ids[(delta.event_type, delta.state_key)] = (
-                                delta.prev_event_id
-                            )
+                            mutable_state_ids[
+                                (delta.event_type, delta.state_key)
+                            ] = delta.prev_event_id
                         elif (delta.event_type, delta.state_key) in mutable_state_ids:
                             mutable_state_ids.pop((delta.event_type, delta.state_key))
 
@@ -1596,16 +1608,13 @@ class SyncHandler:
                     # timeline here. The caller will then dedupe any redundant
                     # ones.
 
-                    state_ids = (
-                        await self._state_storage_controller.get_state_ids_for_event(
-                            batch.events[0].event_id,
-                            # we only want members!
-                            state_filter=StateFilter.from_types(
-                                (EventTypes.Member, member)
-                                for member in members_to_fetch
-                            ),
-                            await_full_state=False,
-                        )
+                    state_ids = await self._state_storage_controller.get_state_ids_for_event(
+                        batch.events[0].event_id,
+                        # we only want members!
+                        state_filter=StateFilter.from_types(
+                            (EventTypes.Member, member) for member in members_to_fetch
+                        ),
+                        await_full_state=False,
                     )
             return state_ids
 
@@ -1756,9 +1765,9 @@ class SyncHandler:
                     and auth_event.state_key == member
                 ):
                     missing_members.discard(member)
-                    additional_state_ids[(EventTypes.Member, member)] = (
-                        auth_event.event_id
-                    )
+                    additional_state_ids[
+                        (EventTypes.Member, member)
+                    ] = auth_event.event_id
                     break
 
         if missing_members:

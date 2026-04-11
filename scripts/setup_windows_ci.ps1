@@ -17,7 +17,7 @@ if (-not (Get-Command rustc -ErrorAction SilentlyContinue)) {
     Invoke-WebRequest -Uri "https://win.rustup.rs/x86_64" -OutFile "rustup-init.exe"
     Start-Process -FilePath "rustup-init.exe" -ArgumentList "-y" -Wait -NoNewWindow
     Remove-Item "rustup-init.exe" -Force
-    
+
     # Add Rust to PATH for current session
     $env:PATH = "$env:USERPROFILE\.cargo\bin;$env:PATH"
 } else {
@@ -67,4 +67,4 @@ flutter doctor -v
 Write-Host "Getting Flutter dependencies..." -ForegroundColor Yellow
 flutter pub get
 
-Write-Host "Windows CI environment setup completed!" -ForegroundColor Green 
+Write-Host "Windows CI environment setup completed!" -ForegroundColor Green

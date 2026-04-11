@@ -30,4 +30,3 @@ INSERT INTO background_updates (ordering, update_name, progress_json, depends_on
 -- drop old index
 INSERT INTO background_updates (ordering, update_name, progress_json, depends_on) VALUES
   (5807, 'media_repository_drop_index_wo_method', '{}', 'remote_media_repository_thumbnails_method_idx');
-

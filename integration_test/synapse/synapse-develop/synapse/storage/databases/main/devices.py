@@ -671,7 +671,9 @@ class DeviceWorkerStore(RoomMemberWorkerStore, EndToEndKeyWorkerStore):
                         result["keys"] = keys
 
                     device_display_name = None
-                    if self.hs.config.federation.allow_device_name_lookup_over_federation:
+                    if (
+                        self.hs.config.federation.allow_device_name_lookup_over_federation
+                    ):
                         device_display_name = device.display_name
                     if device_display_name:
                         result["device_display_name"] = device_display_name
@@ -1772,9 +1774,9 @@ class DeviceStore(DeviceWorkerStore, DeviceBackgroundUpdateStore):
 
         # Map of (user_id, device_id) -> bool. If there is an entry that implies
         # the device exists.
-        self.device_id_exists_cache: LruCache[Tuple[str, str], Literal[True]] = (
-            LruCache(cache_name="device_id_exists", max_size=10000)
-        )
+        self.device_id_exists_cache: LruCache[
+            Tuple[str, str], Literal[True]
+        ] = LruCache(cache_name="device_id_exists", max_size=10000)
 
     async def store_device(
         self,

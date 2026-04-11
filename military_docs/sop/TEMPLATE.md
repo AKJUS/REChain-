@@ -6,9 +6,9 @@
 
 ---
 
-**Template Version:** 4.1.10+1160  
-**Bundle Version:** REChain Military Documentation 4.1.10+1160  
-**Build:** 1160  
+**Template Version:** 4.1.10+1160
+**Bundle Version:** REChain Military Documentation 4.1.10+1160
+**Build:** 1160
 **Release Date:** 2025
 
 ## 1. SOP Identification
@@ -330,28 +330,28 @@
 
 ### 9.1 Approval Signatures
 - **Sponsor**: ______________________
-  - **Name**: 
-  - **Rank/Grade**: 
-  - **Signature**: 
-  - **Date**: 
+  - **Name**:
+  - **Rank/Grade**:
+  - **Signature**:
+  - **Date**:
 
 - **Technical Authority**: ______________________
-  - **Name**: 
-  - **Rank/Grade**: 
-  - **Signature**: 
-  - **Date**: 
+  - **Name**:
+  - **Rank/Grade**:
+  - **Signature**:
+  - **Date**:
 
 - **Security Officer**: ______________________
-  - **Name**: 
-  - **Rank/Grade**: 
-  - **Signature**: 
-  - **Date**: 
+  - **Name**:
+  - **Rank/Grade**:
+  - **Signature**:
+  - **Date**:
 
 - **Commanding Officer**: ______________________
-  - **Name**: 
-  - **Rank/Grade**: 
-  - **Signature**: 
-  - **Date**: 
+  - **Name**:
+  - **Rank/Grade**:
+  - **Signature**:
+  - **Date**:
 
 ### 9.2 Distribution List
 - **Primary Distribution**: [List of primary recipients]

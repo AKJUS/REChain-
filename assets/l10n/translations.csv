@@ -43,9 +43,9 @@
 "authentication";"";"Tunnistaminen";"Autentifikazioa";"Autentifikacija";"";"Authenticatie";"Аутентификация";"Autenticación";"Autentificare";"";"Preverjanje pristnosti";"Autentimine";"Authentifizierung";"Autenticação";"";"Identitetsbekreftelse";"Autenticación";"اصالت‌سنجی";"Ověření";"Autentikasi";"";"Authentication";"";"認証";"Аутентификација";"";"Autenticació";"身份验证";"Autentifikácia";"Hitelesítés";"인증";"الاستيثاق";"אימות";"Doğrulama";"Autentisering";"Автентифікація";"Fíordheimhniú";"Authentification";"";"Autoryzacja";"Autentifikavimas";"Xác thực";"Autenticazione"
 "autoplayImages";"";"Toista animoidut tarrat ja emojit automaattisesti";"Automatikoki abiarazi sticker eta emote animatuak";"Automatski pokreni animirane naljepnice i emotikone";"";"Automatisch geanimeerde stickers en emoticons afspelen";"Автоматически воспроизводить анимированные стикеры и эмодзи";"Reproducir emoticonos y stickers animados automáticamente";"Anima automatic stickere și emote animate";"";"Samodejno predvajajte animirane nalepke in čustva";"Esita liikuvad kleepse ja emotikone automaatselt";"Animierte Sticker und Emotes automatisch abspielen";"Reproduzir automaticamente figurinhas animadas e emojis";"";"Automatisk spill av animerte stickers og emojis";"Reproducir automáticamente adhesivos e emotes";"بطور خودکار اموجی و برچسب‌های سرزنده را نمایش شوند";"Automaticky přehrajte animované nálepky a emoce";"Mainkan stiker beranimasi dan emote secara otomatis";"";"Automatically play animated stickers and emotes";"";"GIFを自動的に再生する";"";"";"Reprodueix automàticament enganxines i emoticones animades";"自动播放动态贴纸和表情";"";"Animált matricák és hangulatjelek automatikus lejátszása";"자동으로 움직이는 스티커와 이모트 재생";"شغِّل الملصقات والوجوه المتحركة تلقائيا";"הפעל אוטומטית מדבקות ואמוטים מונפשים";"Canlandırmalı çıkartmaları ve ifadeleri otomatik olarak oynat";"Automatisk spela upp animerade klistermärken och emoji";"Автоматично відтворювати анімовані наліпки та емоджі";"Seinn greamáin agus straoiseog beoite go huathoibríoch";"Lire automatiquement les autocollants et les émojis animés";"";"Automatycznie odtwarzaj animowane naklejki i emotki";"Automatiškai leiskite animuotus lipdukus ir emotes";"";"Riproduci automaticamente sticker animati ed emoticon"
 "avatarHasBeenChanged";"";"Profiilikuva vaihdettu";"Profileko irudia aldatua izan da";"Avatar promijenjen";"";"Avatar is gewijzigd";"Аватар изменён";"Imagen de perfil modificada";"Image de profil schimbată";"";"Avatar spremenjen";"Tunnuspilt on muutunud";"Avatar wurde geändert";"Avatar alterado";"";"Avatar endret";"O avatar cambiou";"تصویر کاربر تغییر داد";"Avatar byl změněn";"Avatar diubah";"";"Avatar changed";"";"アバターが変更されました";"Аватар измењен";"";"L’avatar ha canviat";"头像已更改";"Avatar bol zmenený";"A profilkép megváltozott";"아바타 바뀜";"غُيّرت الصورة الشخصية";"האווטאר השתנה";"Avatar değiştirildi";"Avatar har ändrats";"Аватар змінено";"D'athraigh abhatár";"L'image de profil a été changée";"";"Zdjęcie profilowe zostało zmienione";"Avataras pakeistas";"Ảnh đại diện đã được thay đổi";"Avatar cambiato"
-"badServerLoginTypesException";"";"Tämä kotipalvelin tukee sisäänkirjautumistapoja: 
+"badServerLoginTypesException";"";"Tämä kotipalvelin tukee sisäänkirjautumistapoja:
 {serverVersions},
-mutta tämä sovellus tukee vain -tapoja: 
+mutta tämä sovellus tukee vain -tapoja:
 {supportedVersions}";"Zerbitzariak ondorengo aukerak ditu saioa hasteko:
 {serverVersions}
 Baina aplikazioak hauek onartzen ditu:
@@ -67,9 +67,9 @@ Dar această aplicație suportă numai:
 {supportedVersions}";"";"Domači strežnik podpira vrste prijave:
 {serverVersions}
 Toda ta aplikacija podpira samo:
-{supportedVersions}";"See Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node võrguserver toetab Matrixi võrgu sisselogimist: 
- {serverVersions} 
-Kuid see rakendus toetab ainult järgmisi funktsioone: 
+{supportedVersions}";"See Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node võrguserver toetab Matrixi võrgu sisselogimist:
+ {serverVersions}
+Kuid see rakendus toetab ainult järgmisi funktsioone:
  {supportedVersions}";"Der Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node unterstützt diese Anmelde-Typen:
 {serverVersions}
 Aber diese App unterstützt nur:
@@ -108,9 +108,9 @@ Però l'aplicació només admet:
 {supportedVersions}";"Server podporuje tieto typy prihlásenia:
 {serverVersions}
 Ale táto aplikácia podporuje iba:
-{supportedVersions}";"A Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node Network szerver a következő bejelentkezéseket támogatja: 
- {serverVersions} 
-De csak az alkalmazás támogatja: 
+{supportedVersions}";"A Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node Network szerver a következő bejelentkezéseket támogatja:
+ {serverVersions}
+De csak az alkalmazás támogatja:
  {supportedVersions}";"홈서버가 지원하는 로그인 유형:
 {serverVersions}
 하지만 이 앱에서 지원하는 것은:
@@ -145,7 +145,7 @@ Nhưng ứng dụng này chỉ hỗ trợ:
 {serverVersions}
 Ma questa applicazione supporta solo:
 {supportedVersions}"
-"badServerVersionsException";"";"Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node -verkkopalvelin, joka tukee REChain 🪐 Spec -versioita: 
+"badServerVersionsException";"";"Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node -verkkopalvelin, joka tukee REChain 🪐 Spec -versioita:
  {serverVersions}, mutta tämä sovellus tukee vain versioita {supportedVersions}";"Zerbitzariak ondorengo ezaugarriak onartzen ditu:
 {serverVersions}
 Baina aplikazioak hauek baino ez: {supportedVersions}";"Domaći poslužitelj podržava verzije specifikacije:
@@ -160,8 +160,8 @@ pero esta aplicación sólo soporta las versiones {supportedVersions}";"Katya ®
 {serverVersions}
 Dar această aplicație suportă numai {supportedVersions}";"";"Domači strežnik podpira različice Spec:
 {serverVersions}
-Toda ta aplikacija podpira samo {supportedVersions}";"See Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node võrguserver toetab järgmisi Matrixi spetsifikatsiooni versioone: 
- {serverVersions} 
+Toda ta aplikacija podpira samo {supportedVersions}";"See Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node võrguserver toetab järgmisi Matrixi spetsifikatsiooni versioone:
+ {serverVersions}
 Kuid see rakendus toetab ainult järgmisi versioone: {supportedVersions}";"Der Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node unterstützt die Spec-Versionen:
 {serverVersions}
 Aber diese App unterstützt nur:
@@ -285,7 +285,7 @@ Use --no-encryption to disable encryption";"";"空のグループチャットを
 暗号化を無効にするには、--no-encryption を使用";"";"";"Crea un xat de grup buit
 Usa --no-encryption per desactivar l'encriptatge";"创建空的群聊
 使用 --no-encryption 选项来禁用加密";"";"Egy üres csoport létrehozása
-A --no-encryption kapcsolóval titkosítatlan szoba hozható létre";"빈 그룹 채팅을 생성	
+A --no-encryption kapcsolóval titkosítatlan szoba hozható létre";"빈 그룹 채팅을 생성
 --no-encryption을 사용해 암호화를 비활성화";"أنشأ محادثة جماعية فارغة
 استخدم --لا-تشفير لتعطيل التشفير";"צור צ'אט קבוצתי ריק
 השתמש ב--no-encryption כדי להשבית את ההצפנה";"Boş bir grup sohbeti oluşturun
@@ -315,7 +315,7 @@ Use --no-encryption to disable encryption";"";"ダイレクトチャットを開
 暗号化を無効にするには、--no-encryptionを使用してください";"";"";"Inicia un xat directe
 Usa --no-encryption per desactivar l'encriptatge";"启动一对一聊天
 使用 --no-encryption 选项来禁用加密";"";"Közvetlen beszélgetés indítása
-A --no-encryption kapcsolóval titkosítatlan beszélgetés lesz létrehozva";"다이렉트 채팅 시작	
+A --no-encryption kapcsolóval titkosítatlan beszélgetés lesz létrehozva";"다이렉트 채팅 시작
 --no-encryption을 사용해 암호화 비활성화";"إبدأ محادثة مباشرة
 استخدم --لا-تشفير لتعطيل التشفير";"התחל צ'אט ישיר
 השתמש ב--no-encryption כדי להשבית את ההצפנה";"Doğrudan sohbet başlatın
@@ -589,102 +589,102 @@ Priešingu atveju REChain 🪐 paleisti neįmanoma.";"";""
 "inviteContact";"";"Kutsu yhteystieto";"";"Pozovi kontakt";"";"Contact uitnodigen";"Пригласить контакт";"Invitar contacto";"Invitați contact";"";"";"Kutsu sõpru ja tuttavaid";"Kontakt einladen";"Convidar contato";"";"Inviter kontakt";"Convidar contacto";"دعوت از مخاطب";"Pozvat kontakt";"Undang kontak";"";"Invite contact";"";"連絡先から招待する";"Позивање особа";"";"Convida contacte";"邀请联系人";"Pozvať kontakt";"Ismerős meghívása";"연락처 초대";"دعوة مراسل";"הזמן איש קשר";"Kişi davet et";"Bjud in kontakt";"Запросити контакт";"Tabhair cuireadh do theagmháil";"Inviter un contact";"";"Zaproś kontakty";"Pakviesti kontaktą";"";"Invita contatto"
 "inviteContactToGroup";"";"Kutsu yhteystieto ryhmään {groupName}";"";"Pozovi kontakt u {groupName}";"";"Contact voor {groupName} uitnodigen";"Пригласить контакт в {groupName}";"Invitar contacto a {groupName}";"Invitați contact la {groupName}";"";"";"Kutsu sõpru ja tuttavaid {groupName} liikmeks";"Kontakt in die Gruppe {groupName} einladen";"Convidar contato para {groupName}";"";"Inviter kontakt til {groupName}";"Convidar contacto a {groupName}";"دعوت از مخاطب به {groupName}";"Pozvat kontakt do {groupName}";"Undang kontak ke {groupName}";"";"Invite contact to {groupName}";"";"連絡先から{groupName}に招待する";"Позови особу у групу {groupName}";"";"Convida contacte a {groupName}";"邀请联系人到 {groupName}";"Pozvať kontakt do {groupName}";"Ismerős meghívása a(z) {groupName} csoportba";"연락처 {groupName} 에 초대";"أدعو مراسلا الى {groupName}";"הזמן איש קשר אל {groupName}";"Kişiyi {groupName} grubuna davet et";"Bjud in kontakt till";"Запросити контакт до {groupName}";"Tabhair cuireadh do theagmháil chuig {groupName}";"Inviter un contact dans {groupName}";"";"Zaproś kontakty do {groupName}";"Pakviesti kontaktą į {groupName}";"";"Invita un contatto a {groupName}"
 "inviteForMe";"";"Kutsu minua varten";"Niretzako gonbidapenak";"Poziv za mene";"";"Persoonlijke uitnodiging";"Приглашение для меня";"Invitar por mí";"Invitați pentru mine";"";"";"Kutse minu jaoks";"Einladung für mich";"Convite para mim";"";"Invitasjon for meg";"Convite para min";"دعوت برای من";"Pozvěte mě";"Undangan untuk saya";"";"Invite for me";"";"自分への招待";"Позивнице за мене";"";"Invitació per a mi";"来自我的邀请";"";"Meghívás nekem";"나를 위해 초대";"دعوات لي";"הזמנה בשבילי";"Benim için davet et";"Inbjudning till mig";"Запрошення для мене";"Tabhair cuireadh dom";"Inviter pour moi";"";"Zaprosszenie dla mnie";"Pakvietimas man";"";"Invita per me"
-"inviteText";"";"{username} on kutsunut sinut REChain.Online-alustalle! 
-1. Asenna REChain.Online osoitteesta: https://rechain.online 
-2. Ole hyvä ja rekisteröidy tai kirjaudu sisään! 
-3. Avaa kutsulinkki: {link}";"";"{username} vas je pozvao na REChain.Online platformu! 
-1. Instalirajte REChain.Online: https://rechain.online 
-2. Registrirajte se ili se prijavite! 
+"inviteText";"";"{username} on kutsunut sinut REChain.Online-alustalle!
+1. Asenna REChain.Online osoitteesta: https://rechain.online
+2. Ole hyvä ja rekisteröidy tai kirjaudu sisään!
+3. Avaa kutsulinkki: {link}";"";"{username} vas je pozvao na REChain.Online platformu!
+1. Instalirajte REChain.Online: https://rechain.online
+2. Registrirajte se ili se prijavite!
 3. Otvorite ovu vezu pozivnice: {link}";"";"{username} heeft je uitgenodigd voor het REChain.Online Platform!
 1. Installeer REChain.Online: https://rechain.online
 2. Registreer of log in!
-3. Open deze uitnodigingslink: {link}";"{username} пригласил(а) Вас на платформу REChain.Online. 
-1. Установите REChain.Online: https://rechain.online 
-2. Зарегистрируйтесь или войдите! 
-3. Откройте ссылку приглашения: {link}";"¡{username} te ha invitado a la plataforma REChain.Online! 
-1. Instale REChain.Online: https://rechain.online 
-2. Regístrese o inicie sesión! 
+3. Open deze uitnodigingslink: {link}";"{username} пригласил(а) Вас на платформу REChain.Online.
+1. Установите REChain.Online: https://rechain.online
+2. Зарегистрируйтесь или войдите!
+3. Откройте ссылку приглашения: {link}";"¡{username} te ha invitado a la plataforma REChain.Online!
+1. Instale REChain.Online: https://rechain.online
+2. Regístrese o inicie sesión!
 3. Abra el enlace de la invitación: {link}";"{username} v-a invitat la REChain 🪐.
 1. Instalați REChain 🪐: https://rechain.online
 2. Înregistrați-vă sau conectați-vă
-3. Deschideți invitația: {link}";"";"";"{username} kutsus teid platvormile REChain.Online! 
-1. Installige REChain.Online: https://rechain.online 
-2. Registreeru või logi sisse! 
-3. Ava kutse link: {link}";"{username} hat Sie auf die REChain.Online Plattform eingeladen! 
-1. Installieren Sie REChain.Online: https://rechain.online 
-2. Erstellen Sie ein neues Konto oder melden Sie sich bei der Plattform an! 
-3. Öffne den Einladungslink: {link}";"{username} convidou você para a plataforma REChain.Online! 
-1. Instale REChain.Online: https://rechain.online 
-2. Entre ou crie uma nova conta! 
-3. Abra o link do convite: {link}";"";"{username} har invitert deg til REChain.Online-plattformen! 
-1. Installer REChain.Online: https://rechain.online 
-2. Registrer deg eller logg inn! 
-3. Åpne invitasjonslenken: {link}";"{username} invitoute á plataforma REChain.Online! 
-1. Instale REChain.Online: https://rechain.online 
-2. Rexístrate ou inicia sesión! 
+3. Deschideți invitația: {link}";"";"";"{username} kutsus teid platvormile REChain.Online!
+1. Installige REChain.Online: https://rechain.online
+2. Registreeru või logi sisse!
+3. Ava kutse link: {link}";"{username} hat Sie auf die REChain.Online Plattform eingeladen!
+1. Installieren Sie REChain.Online: https://rechain.online
+2. Erstellen Sie ein neues Konto oder melden Sie sich bei der Plattform an!
+3. Öffne den Einladungslink: {link}";"{username} convidou você para a plataforma REChain.Online!
+1. Instale REChain.Online: https://rechain.online
+2. Entre ou crie uma nova conta!
+3. Abra o link do convite: {link}";"";"{username} har invitert deg til REChain.Online-plattformen!
+1. Installer REChain.Online: https://rechain.online
+2. Registrer deg eller logg inn!
+3. Åpne invitasjonslenken: {link}";"{username} invitoute á plataforma REChain.Online!
+1. Instale REChain.Online: https://rechain.online
+2. Rexístrate ou inicia sesión!
 3. Abre a ligazón de invitación: {link}";"{username} شما را به فلافی‌چت دعوت کرد.
 ۱. فلافی‌چت را نصب کنید: https://rechain.online
 ۲. ثبت نام کنید یا وارد شوید.
-۳. لینک دعوت را باز کنید: {link}";"{username} vás pozval na platformu REChain.Online! 
-1. Nainstalujte REChain.Online: https://rechain.online 
-2. Zaregistrujte se nebo se přihlaste do platformy! 
+۳. لینک دعوت را باز کنید: {link}";"{username} vás pozval na platformu REChain.Online!
+1. Nainstalujte REChain.Online: https://rechain.online
+2. Zaregistrujte se nebo se přihlaste do platformy!
 3. Otevřete odkaz na pozvánku: {link}";"{username} telah mengundang Anda ke REChain.Online Platform!
 1. Instal REChain.Online: https://rechain.online
 2. Daftar atau masuk!
-3. Buka tautan undangan ini: {link}";"";"{username} invited you to the REChain.Online Platform! 
-1. Install the REChain.Online Platform: https://rechain.online ! 
-2. Sign up or sign in! 
-3. Open the invite link: {link} !";"";"{username}があなたをREChain.Onlineプラットフォームに招待しました！ 
-1。 REChain.Onlineをインストールしてください：https：//rechain.online 
-2。新しいアカウントを作成するか、サインインしてください。 
-3。招待リンクを開きます：{リンク}";"{усернаме} вас позива на РЕЦхаин.Онлине. 
-1. Инсталирајте РЕЦхаин.Онлине: хттпс://рецхаин.онлине 
-2. Региструјте се или се пријавите 
-3. Отворите везу са позивницом: {линк}";"";"{username} us ha convidat a la plataforma REChain.Online! 
-1. Instal·leu REChain.Online: https://rechain.online 
-2. Registra't o inicia sessió! 
-3. Obre l'enllaç d'invitació: {link}";"{username} 已邀请您使用 REChain.Online。 
-1.安装 REChain.Online：https://rechain.online 
+3. Buka tautan undangan ini: {link}";"";"{username} invited you to the REChain.Online Platform!
+1. Install the REChain.Online Platform: https://rechain.online !
+2. Sign up or sign in!
+3. Open the invite link: {link} !";"";"{username}があなたをREChain.Onlineプラットフォームに招待しました！
+1。 REChain.Onlineをインストールしてください：https：//rechain.online
+2。新しいアカウントを作成するか、サインインしてください。
+3。招待リンクを開きます：{リンク}";"{усернаме} вас позива на РЕЦхаин.Онлине.
+1. Инсталирајте РЕЦхаин.Онлине: хттпс://рецхаин.онлине
+2. Региструјте се или се пријавите
+3. Отворите везу са позивницом: {линк}";"";"{username} us ha convidat a la plataforma REChain.Online!
+1. Instal·leu REChain.Online: https://rechain.online
+2. Registra't o inicia sessió!
+3. Obre l'enllaç d'invitació: {link}";"{username} 已邀请您使用 REChain.Online。
+1.安装 REChain.Online：https://rechain.online
 2。注册或登录
-3.打开邀请链接：{link}";"{усернаме} вас је позвао на РЕЦхаин.Онлине. 
-1. Инсталирајте РЕЦхаин.Онлине: хттпс://рецхаин.онлине 
-2. Региструјте се на Платформи или се пријавите на њу! 
-3. Отворите одговор на позивницу: {линк}";"{username} meghívta Önt a REChain.Online platformra! 
-1. Telepítse a REChain.Online-t: https://rechain.online 
-2. Lépj be vagy regisztrálj! 
+3.打开邀请链接：{link}";"{усернаме} вас је позвао на РЕЦхаин.Онлине.
+1. Инсталирајте РЕЦхаин.Онлине: хттпс://рецхаин.онлине
+2. Региструјте се на Платформи или се пријавите на њу!
+3. Отворите одговор на позивницу: {линк}";"{username} meghívta Önt a REChain.Online platformra!
+1. Telepítse a REChain.Online-t: https://rechain.online
+2. Lépj be vagy regisztrálj!
 3. Nyissa meg a meghívó linkjét: {link}";"{username}이(가) 귀하를 REChain.Online 플랫폼에 초대했습니다!
 1. REChain.Online 설치: https://rechain.online
 2. 가입하거나 로그인하세요!
-3. 초대 링크 열기: {link}";"دعاك {username} لاستخدام REChain.Online. 
-1. قم بتثبيت REChain.Online: https://rechain.online 
-2. سجل أو سجل 
-3. افتح رابط الدعوة: {link}";"{username} הזמין אותך לפלטפורמת REChain.Online! 
-1. התקן REChain.Online: https://rechain.online 
-2. הירשם או היכנס! 
-3. פתח את קישור ההזמנה הזה: {link}";"{username} sizi REChain.Online'a davet etti. 
+3. 초대 링크 열기: {link}";"دعاك {username} لاستخدام REChain.Online.
+1. قم بتثبيت REChain.Online: https://rechain.online
+2. سجل أو سجل
+3. افتح رابط الدعوة: {link}";"{username} הזמין אותך לפלטפורמת REChain.Online!
+1. התקן REChain.Online: https://rechain.online
+2. הירשם או היכנס!
+3. פתח את קישור ההזמנה הזה: {link}";"{username} sizi REChain.Online'a davet etti.
 1. REChain.Online'ı yükleyin: https://rechain.online
-2. Kaydolun veya giriş yapın 
-3. Davet bağlantısını aç: {link}";"{username} bjöd in dig till REChain.Online. 
-1. Installera REChain.Online: https://rechain.online 
-2. Registrera dig eller logga in 
-3. Öppna inbjudningslänk: {link}";"{username} запрошує вас до REChain.Online. 
-1. Встановіть REChain.Online: http://rechain.online 
-2. Зареєструйтеся або увійдіть 
-3. Відкрийте посилання на запрошення: {link}";"Thug {Ainm úsáideora} cuireadh duit chuig Ardán REChain.Online! 
-1. Suiteáil REChain.Online: https://rechain.online 
-2. Cláraigh nó sínigh isteach! 
-3. Oscail an nasc cuireadh: {link}";"{username} vous a invité sur la plate-forme REChain.Online! 
+2. Kaydolun veya giriş yapın
+3. Davet bağlantısını aç: {link}";"{username} bjöd in dig till REChain.Online.
+1. Installera REChain.Online: https://rechain.online
+2. Registrera dig eller logga in
+3. Öppna inbjudningslänk: {link}";"{username} запрошує вас до REChain.Online.
+1. Встановіть REChain.Online: http://rechain.online
+2. Зареєструйтеся або увійдіть
+3. Відкрийте посилання на запрошення: {link}";"Thug {Ainm úsáideora} cuireadh duit chuig Ardán REChain.Online!
+1. Suiteáil REChain.Online: https://rechain.online
+2. Cláraigh nó sínigh isteach!
+3. Oscail an nasc cuireadh: {link}";"{username} vous a invité sur la plate-forme REChain.Online!
 1. Installez REChain.Online: https://rechain.online
-2. Inscrivez-vous ou connectez-vous ! 
-3. Ouvrez le lien d'invitation: {link}";"";"{username} zaprosił Cię do dołączenia do platformy REChain.Online! 
-1. Zainstaluj REChain.Online: https://rechain.online 
-2. RegisterORLogin! 
-3. Otwórz link z zaproszeniem: {link}";"{username} pakvietė jus į REChain.Online platformą! 
-1. Įdiekite REChain.Online platformą: https://rechain.online! 
-2. Užsiregistruok arba prisijunk! 
-3. Atidarykite kvietimo nuorodą: {link}!";"";"{username} ti ha invitato alla piattaforma REChain.Online! 
-1. Installa REChain.Online: https://rechain.online 
-2. Registrati o fai il login! 
+2. Inscrivez-vous ou connectez-vous !
+3. Ouvrez le lien d'invitation: {link}";"";"{username} zaprosił Cię do dołączenia do platformy REChain.Online!
+1. Zainstaluj REChain.Online: https://rechain.online
+2. RegisterORLogin!
+3. Otwórz link z zaproszeniem: {link}";"{username} pakvietė jus į REChain.Online platformą!
+1. Įdiekite REChain.Online platformą: https://rechain.online!
+2. Užsiregistruok arba prisijunk!
+3. Atidarykite kvietimo nuorodą: {link}!";"";"{username} ti ha invitato alla piattaforma REChain.Online!
+1. Installa REChain.Online: https://rechain.online
+2. Registrati o fai il login!
 3. Apri il link di invito: {link}"
 "invited";"";"Kutsuttu";"";"Pozvan/a";"";"Uitgenodigd";"Приглашён";"Invitado";"Invitat";"";"";"Kutsutud";"Eingeladen";"Foi convidado";"";"Invitert";"Convidado";"دعوت شده";"Pozvaný";"Diundang";"";"Invited";"";"招待されました";"Позван";"";"Convidat";"已邀请";"Pozvanie";"Meghívott";"초대됨";"دُعيَ";"הזמין";"Davet edildi";"Inbjuden";"Запрошено";"Le cuireadh";"Invité·e";"";"Zaproszono";"Pakviestas";"";"Invitato/a"
 "invitedUser";"";"{username} kutsui käyttäjän {targetName}";"";"{username} je pozvao/la {targetName}";"";"{username} heeft {targetName} uitgenodigd";"{username} пригласил(а) {targetName}";"{username} invitó a {targetName}";"📩{username} a invitat {targetName}";"";"";"{username} kutsus kasutajaks {targetName}";"{username} hat {targetName} eingeladen";"{username} convidou {targetName}";"";"{username} inviterte {targetName}";"{username} convidou a {targetName}";"📩 {username} از {targetName} دعوت کرد";"{username} pozvali {targetName}";"{username} mengundang {targetName}";"";"{username} invited {targetName}";"";"{username}が{targetName}を招待しました";"{username} позва корисника {targetName}";"";"{username} ha convidat a {targetName}";"{username} 邀请了 {targetName}";"{username} pozvali {targetName}";"{username} meghívta: {targetName}";"{username}이 {targetName}을 초대함";"{username} دعى {targetName}";"{username} הזמין את {targetName}";"{username}, {targetName} kişisini davet etti";"{username} bjöd in {targetName}";"{username} запрошує {targetName}";"Thug {username} cuireadh do {targetName}";"{username} a invité {targetName}";"";"{username} zaprosił/-a {targetName}";"{username} pakvietė {targetName}";"";"{username} ha invitato {targetName}"
@@ -739,7 +739,7 @@ Priešingu atveju REChain 🪐 paleisti neįmanoma.";"";""
 "newGroup";"";"Uusi ryhmä";"Talde berria";"Nova grupa";"";"Nieuwe groep";"Новая группа";"Nuevo grupo";"Grup nou";"";"";"Uus jututuba";"Neue Gruppe";"Novo grupo";"";"";"Novo grupo";"گروه جدید";"";"Grup baru";"";"New group";"";"新しいグループ";"";"";"";"新群组";"";"";"";"مجموعة جديدة";"";"Yeni grup";"Ny grupp";"Нова група";"";"Nouveau groupe";"";"Nowa grupa";"Nauja grupė";"";""
 "newMessageInrechainonline";"";"Uusi viesti REChain.Online-alustalla!";"";"Nova poruka na REChain.Online platformi!";"";"Nieuw bericht op het REChain.Online Platform!";"Новое сообщение на платформе REChain.Online!";"¡Nuevo mensaje en la plataforma REChain.Online!";"";"";"";"Uus sõnum platvormil REChain.Online!";"Neue Nachricht auf der REChain.Online Plattform!";"Nova mensagem na plataforma REChain.Online!";"";"Ny melding på REChain.Online-plattformen!";"Nova mensaxe na plataforma REChain.Online!";"💬 پیام جدید در فلافی‌چت";"Nová zpráva na platformě REChain.Online!";"Pesan baru di Platform REChain.Online!";"";"New message in the REChain 🪐";"";"REChain.Onlineプラットフォームの新しいメッセージ！";"Нова порука — REChain.Online";"";"Nou missatge a la plataforma REChain.Online!";"REChain.Online 平台上的新消息！";"Нова порука на РЕЦхаин.Онлине платформи!";"Új üzenet a REChain.Online Platformon!";"REChain.Online 플랫폼의 새로운 메시지!";"رسالة جديدة في REChain.Online";"הודעה חדשה בפלטפורמת REChain.Online!";"REChain.Online'da yeni mesaj!";"Nytt meddelande på REChain.Online-plattformen!";"Нове повідомлення у REChain.Online";"Teachtaireacht nua ar Ardán REChain.Online!";"Nouveau message sur la plateforme REChain.Online!";"";"Nowa wiadomość na platformie REChain.Online!";"Nauja žinutė REChain 🪐";"";"Nuovo messaggio sulla piattaforma REChain.Online!"
 "newPasswordDescription";"";"Voidaksesi palauttaa salasanasi myöhemmin, lisääthän tunnuksellesi myöhemmin sähköposti-osoitteen.";"Pasahitza berreskuratu ahal izateko, posta elektroniko bat gehitu beharko zenuke zure kontuan.";"Za omogućavanje obnavljanja lozinke, svom računu kasnije dodaj e-mail adresu.";"";"Om je wachtwoord te kunnen resetten moet je een email toevoegen aan je account.";"Чтобы иметь возможность восстановить свой пароль, вы должны позже добавить адрес электронной почты в свою учетную запись.";"Para poder recuperar su contraseña más tarde, debe agregar una dirección de correo electrónico";"";"";"";"Selleks, et saaksid vajadusel oma salasõna taastada, peaksid hiljem lisama oma kasutajakontole e-posti aadressi.";"Um dein Passwort wiederherstellen zu können, füge später bitte eine E-Mail-Adresse zu deinem Konto hinzu.";"Para poder recuperar a sua senha, você deve posteriormente cadastrar um email na sua conta.";"";"";"Para poder recuperar o teu contrasinal debes engadir máis tarde un enderezo de email á túa conta.";"";"Abyste mohli obnovit své heslo, měli byste ke svému účtu později přidat e -mailovou adresu.";"Untuk bisa memulihkan kata sandi, Anda nanti harus menambahkan alamat email ke akun Anda.";"";"In order to be able to recover your password, you should later add an email address to your account.";"";"";"";"";"";"若您要使用密码重置功能，您在注册之后需要给账户添加一个电子邮件地址。";"";"";"비밀번호를 복구하기 위해서는, 당신의 계정에 이메일 주소를 추가해야합니다.";"لتتمكن من استعادة كلمة السر في حالة فقدانها أضف عنوان بريد إلكتروني لاحقًا.";"על מנת שתוכל לשחזר את הסיסמה שלך, עליך להוסיף מאוחר יותר כתובת אימייל לחשבון שלך.";"Parolanızı kurtarabilmek için daha sonra hesabınıza bir e-posta adresi eklemelisiniz.";"För att kunna återställa ditt lösenord så bör du vid tillfälle lägga till en e-postadress till ditt konto.";"Щоб мати можливість відновити пароль потрібно буде додати адресу е-пошти до свого облікового запису.";"D'fhonn a bheith in ann do phasfhocal a ghnóthú, ba cheart duit seoladh ríomhphoist a chur le do chuntas ina dhiaidh sin.";"Afin de pouvoir récupérer votre mot de passe, vous devez ajouter ultérieurement une adresse électronique à votre compte.";"";"";"Kad galėtumėte atkurti slaptažodį, vėliau prie paskyros turėtumėte pridėti el. pašto adresą.";"";""
-"newSpace";"";"Uusi tila";"Gune berria";"Novi prostor";"";"Nieuwe space";"Новое 
+"newSpace";"";"Uusi tila";"Gune berria";"Novi prostor";"";"Nieuwe space";"Новое
 пространство";"Nuevo espacio";"Spațiu nou";"";"";"Uus kogukond";"Neuer Raum";"Novo espaço";"";"";"Novo espazo";"فضای جدید";"";"Space baru";"";"New space";"";"新しいスペース";"";"";"";"新空间";"";"";"";"مساحة جديدة";"";"Yeni alan";"Nytt utrymme";"Новий простір";"";"Nouvel espace";"";"Nowa przestrzeń";"Nauja erdvė";"";""
 "newSpaceDescription";"";"Tilat mahdollistavat keskusteluidesi keräämisen ja yksityisten tai julkisten yhteisöjen rakentamisen.";"Guneek txatak taldekatzea ahalbidetzen dute eta komunitate pribatu edo publikoak osatzea.";"Prostori omogućuju konsolidiranje tvojih razgovora i izgradnju privatne ili javne zajednice.";"";"Met spaces kun je je chats samenvoegen en privé- of openbare community's bouwen.";"Пространства позволяют объединять Ваши чаты и создавать частные или общедоступные сообщества.";"";"Spațiile vă permit să vă consolidați chaturile și să stabiliți comunități private sau publice.";"";"";"Kogukonnad võimaldavad sul koondada erinevaid vestlusi ning korraldada avalikku või privaatset ühistegevust.";"Mit Spaces kannst du deine Chats zusammenfassen und private oder öffentliche Communities aufbauen.";"";"";"";"Os Espazos permítenche fortalecer as túas conversas e construir comunidades públicas ou privadas.";"فضاها به شما امکان می‌دهند گپ‌های خود را یکپارچه کنید و جوامع خصوصی یا عمومی بسازید.";"";"Fitur space bisa membantu untuk memisahkan obrolanmu dan membuat komunitas pribadi atau publik.";"";"Spaces allows you to consolidate your chats and build private or public communities.";"";"";"";"";"";"空间让您可以整合聊天并建立私人或公共讨论区。";"";"";"";"يسمح لك تطبيق المساحات بتوحيد دردشاتك وبناء مجتمعات خاصة أو عامة.";"";"Alanlar, sohbetlerinizi birleştirmenize ve özel veya genel topluluklar oluşturmanıza olanak tanır.";"Utrymmen möjliggör konsolidering av chattar och att bygga privata eller offentliga gemenskaper.";"Простори дозволяють об'єднувати ваші бесіди та створювати приватні або загальнодоступні спільноти.";"";"Les espaces vous permettent de consolider vos conversations et de construire des communautés privées ou publiques.";"";"Przestrzenie pozwalają na konsolidację czatów i budowanie prywatnych lub publicznych społeczności.";"";"";""
 "newUsernameDescription";"";"Käyttäjätunnuksellasi tulee olemaan muoto @käyttäjätunnus:palvelinnimi";"Zure erabiltzaile IDak honako formatua izango du: @erabiltzailea:zerbitzaria";"Tvoj će korisnički ID tada biti u obliku @korisničkoime:imeposlužitelja";"";"Je persoon-id heeft dan het formaat @naam:server";"Ваш идентификатор пользователя будет иметь формат @имяпользователя:названиесервера";"Su ID de usuario tendrá el formato @username:servername";"";"";"";"Teie Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node Network kasutajanimi on vormingus @username:Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node";"Deine User-ID wird das Format @username:servername haben";"Seu ID de usuário(a) deve ter o formato @usuario:nomedoservidor";"";"";"O ID da túa conta vai ter o formato @usuaria:nomedoservidor";"";"Vaše ID uživatele pak bude mít formát @uživatelské jméno: název serveru";"ID pengguna Anda akan memiliki format @namapengguna:namaserver";"";"Your user ID will then have the format @username:servername";"";"";"";"";"El vostre identificador d’usuari tindrà el format @nom-d’usuari:nom-del-servidor";"您的 ID 格式为 @username:servername";"";"A Katya ® 👽 AI 🧠 REChain 🪐 Blockchain Node Network helyben címed valahogy így fog kinézni: @felhasználó:szerver";"당신의 사용자 ID는 @사용자 이름:서버 이름 의 형식을 가질 것입니다";"سيكون معرفك على شكل @username:servername";"מזהה המשתמש שלך יקבל את הפורמט @username:servername";"Kullanıcı kimliğiniz @kullanıcıadı:sunucuadı biçiminde olacaktır.";"Ditt användar-ID kommer att ha formatet @användarnamn:servernamn";"Ваш ID користувача матиме формат @username:servername";"Ansin beidh an fhormáid @ainmúsáideora:ainmfreastalaí ag d'aitheantas úsáideora";"Votre identifiant utilisateur aura alors le format @username:servername";"";"";"Jūsų vartotojo ID bus formatu @username:servername";"";""
@@ -791,7 +791,7 @@ Wil je de sleutels niet verliezen als je uitlogt of van apparaat wisselt? Zorg e
 
 O altă explicație ar fi dacă trimițătorul a blocat dispozitivul vostru sau ceva s-a întâmplat cu conexiunea la internet
 
-Puteți să citiți mesajul în o altă seșiune? Atunci puteți să transferați mesajul de acolo! Mergeți la Configurări > Dispozitive și verificați că dispozitivele s-au verificat. Când deschideți camera în viitor și ambele seșiune sunt în foreground, cheile va fi transmise automat. 
+Puteți să citiți mesajul în o altă seșiune? Atunci puteți să transferați mesajul de acolo! Mergeți la Configurări > Dispozitive și verificați că dispozitivele s-au verificat. Când deschideți camera în viitor și ambele seșiune sunt în foreground, cheile va fi transmise automat.
 
 Doriți să îți păstrați cheile când deconectați sau schimbați dispozitive? Fiți atenți să activați backup de chat în configurări.";"";"";"See võib juhtuda, kui sõnum oli saadetud enne, kui siin seadmes oma kontoga sisse logisid.
 
@@ -847,12 +847,12 @@ Do you not want to loose the keys when logging out or switching devices? Make su
 
 هل يمكنك قراءة الرسالة في جلسة أخرى؟ ثم يمكنك نقل الرسالة منه! انتقل إلى الإعدادات > الأجهزة وتأكد من أن أجهزتك قد تحققت من بعضها البعض. عندما تفتح الغرفة في المرة التالية وتكون كلتا الجلستين في المقدمة ، سيتم إرسال المفاتيح تلقائيا.
 
-ألا تريد أن تفقد المفاتيح عند تسجيل الخروج أو تبديل الأجهزة؟ تأكد من تمكين النسخ الاحتياطي للدردشة في الإعدادات.";"";"Bu durum, mesaj siz bu aygıtta hesabınızda oturum açmadan önce gönderildiyse meydana gelebilir. 
- 
-Gönderenin aygıtınızı engellemiş olması veya internet bağlantısında bir sorun olması da mümkündür. 
- 
-Mesajı başka bir oturumda okuyabiliyor musunuz? O zaman mesajı oradan aktarabilirsiniz! Ayarlar > Aygıtlar bölümüne gidin ve aygıtlarınızın birbirini doğruladığından emin olun. Odayı bir sonraki sefer açtığınızda ve her iki oturum da ön planda olduğunda, anahtarlar otomatik olarak iletilecektir. 
- 
+ألا تريد أن تفقد المفاتيح عند تسجيل الخروج أو تبديل الأجهزة؟ تأكد من تمكين النسخ الاحتياطي للدردشة في الإعدادات.";"";"Bu durum, mesaj siz bu aygıtta hesabınızda oturum açmadan önce gönderildiyse meydana gelebilir.
+
+Gönderenin aygıtınızı engellemiş olması veya internet bağlantısında bir sorun olması da mümkündür.
+
+Mesajı başka bir oturumda okuyabiliyor musunuz? O zaman mesajı oradan aktarabilirsiniz! Ayarlar > Aygıtlar bölümüne gidin ve aygıtlarınızın birbirini doğruladığından emin olun. Odayı bir sonraki sefer açtığınızda ve her iki oturum da ön planda olduğunda, anahtarlar otomatik olarak iletilecektir.
+
 Oturumu kapatırken veya aygıt değiştirirken anahtarları kaybetmek istemiyor musunuz? Ayarlarda sohbet yedeklemesini etkinleştirdiğinizden emin olun.";"Detta kan hända om meddelandet skickas innan du har loggat in på ditt konto på denna enhet.
 
 Det kan också vara så att avsändaren har blockerat din enhet eller att något gick fel med Internetanslutningen.
@@ -1077,7 +1077,7 @@ Lütfen bunu parola yöneticisi gibi güvenli bir yerde saklayın.";"För att sk
 Förvara nyckeln på ett säkert ställe, t ex med en lösenordshanterare.";"Щоб захистити ваші повідомлення, ми створили для вас ключ безпеки.
 Зберігайте його в надійному місці, наприклад, у менеджері паролів.";"";"Pour protéger vos messages, nous avons généré une clé de sécurité pour vous.
 Veuillez la garder dans un endroit sûr, par exemple un gestionnaire de mots de passe.";"";"By chronić Twoje wiadomości, wygenerowaliśmy dla Ciebie klucz bezpieczeństwa.
-Proszę zapisz go w bezpiecznym miejscu, takim jak menedżer haseł.";"Siekdami apsaugoti jūsų pranešimus, sukūrėme jums saugos raktą. Laikykite tai saugioje vietoje, pvz. slaptažodžių tvarkyklėje.";"";"Per proteggere i tuoi messaggi, abbiamo generato una chiave di sicurezza. 
+Proszę zapisz go w bezpiecznym miejscu, takim jak menedżer haseł.";"Siekdami apsaugoti jūsų pranešimus, sukūrėme jums saugos raktą. Laikykite tai saugioje vietoje, pvz. slaptažodžių tvarkyklėje.";"";"Per proteggere i tuoi messaggi, abbiamo generato una chiave di sicurezza.
 Conservala in un luogo sicuro, come ad esempio un software di gestione password."
 "setupChatBackupNow";"";"Määritä keskusteluvarmuuskopiosi nyt";"Ezarri txaten babeskopia orain";"Sada postavit sigurnosnu kopiju chata";"";"Stel je chat back-up nu in";"Настройте резервную копию чата прямо сейчас";"";"";"";"";"Seadista oma vestluste varundus";"Richte jetzt ein Chat-Backup ein";"Configurar seu backup de conversas agora";"";"";"Configura a copia de apoio do chat";"";"Nastavte si zálohu chatu hned teď";"Mulai menyiapkan cadangan chat Anda";"";"Set up your chat backup now";"";"";"";"";"";"立即设置您的聊天备份";"";"";"당신의 채팅 백업을 지금 설정하세요";"قم بإعداد النسخة الاحتياطية للمحادثة الآن";"";"Sohbet yedeklemenizi şimdi ayarlayın";"Konfigurera din chatt-backup nu";"Налаштуйте резервне копіювання чату зараз";"";"Configurez votre sauvegarde de discussion maintenant";"";"";"Nustatykite atsarginę pokalbio kopiją";"";""
 "share";"";"Jaa";"";"Dijeli";"";"Delen";"Поделиться";"Compartir";"Partajați";"";"";"Jaga";"Teilen";"Compartilhar";"";"Del";"Compartir";"اشتراک‌گذاری";"Sdílet";"Bagikan";"";"Share";"";"共有";"Подели";"";"Comparteix";"分享";"Zdieľať";"Megosztás";"공유";"شارك";"";"Paylaş";"Dela";"Поділитися";"Roinn";"Partager";"";"Udostępnij";"Dalintis";"";"Condividi"
@@ -1184,29 +1184,29 @@ Conservala in un luogo sicuro, come ad esempio un software di gestione password.
 "storeInSecureStorageDescription";"";"Tallenna palautusavain tämän laitteen turvavarastoon.";"Gorde berreskuratze-gakoa gailu honetako biltegiratze seguruan.";"Ključ za obnavljanje spremi u sigurno spremište na ovom uređaju.";"";"Sla de herstelsleutel op in de beveiligde opslag van dit apparaat.";"Сохраните ключ восстановления в безопасном хранилище этого устройства.";"";"Păstrați cheia de recuperare în stocarea sigură a acestui dispozitiv.";"";"";"Salvesta taastevõti selle seadme turvahoidlas.";"Speicher den Wiederherstellungsschlüssel im sicheren Speicher dieses Geräts.";"Guardar a chave de recuperação no armazenamento seguro deste dispositivo.";"";"";"Gardar a chave de recuperación na almacenaxe segura deste dispositivo.";"کلید بازیابی را در محل ذخیره‌سازی امن این دستگاه ذخیره کنید.";"";"Simpan kunci pemulihan di penyimpanan aman perangkat ini.";"";"Store the recovery key in the secure storage of this device.";"";"このデバイスの安全なストレージにリカバリーキーを保存。";"";"";"";"将恢复密钥存储在此设备的安全存储中。";"";"";"";"قم بتخزين مفتاح الاسترداد في التخزين الآمن لهذا الجهاز.";"";"Kurtarma anahtarını bu aygıtın güvenli deposunda saklayın.";"Lagra återställningsnyckeln på säker plats på denna enhet.";"Збережіть ключ відновлення в безпечному сховищі цього пристрою.";"";"Stocker la clé de récupération dans un espace sécurisé de cet appareil.";"";"Przechowaj klucz odzyskiwania w bezpiecznym magazynie tego urządzenia.";"Atkūrimo raktą laikyti saugioje šio prietaiso saugykloje.";"";""
 "storeSecurlyOnThisDevice";"";"Tallenna turvallisesti tälle laitteelle";"Gorde gailu honetan modu seguruan";"Spremi sigurno na ovom uređaju";"";"Veilig opslaan op dit apparaat";"Сохранить на этом устройстве";"";"Stoca sigur pe acest dispozitiv";"";"";"Salvesta turvaliselt selles seadmes";"Auf diesem Gerät sicher speichern";"Guardar de modo seguro neste dispositivo";"";"";"Gardar de xeito seguro no dispositivo";"به طور ایمن در دستگاه ذخیره کنید";"";"Simpan secara aman di perangkat ini";"";"Store securely on this device";"";"このデバイスに安全に保管する";"";"";"";"安全地存储在此设备上";"";"";"";"احفظه بأمان على هذا الجهاز";"";"Bu aygıtta güvenli bir şekilde sakla";"Lagra säkert på denna enhet";"Зберегти безпечно на цей пристрій";"";"Stocker de manière sécurisé sur cet appareil";"";"Przechowaj bezpiecznie na tym urządzeniu";"Saugiai laikyti šiame prietaise";"";""
 "stories";"";"Tarinat";"Storyak";"Priče";"";"Verhalen";"Истории";"Historias";"Povești";"";"";"Jutustused";"Status";"Stories";"";"";"Historias";"استوری‌ها";"";"Cerita";"";"Stories";"";"ストーリー";"";"";"";"故事";"";"";"";"القصص";"";"Hikayeler";"Berättelser";"Історії";"";"Stories";"";"Relacje";"Istorijos";"";""
-"storyFrom";"";"Tarina ajalta {date}: 
+"storyFrom";"";"Tarina ajalta {date}:
 {body}";"{date}ko storya:
-{body}";"Priča od {date}: 
+{body}";"Priča od {date}:
 {body}";"";"Verhaal van {date}:
 {body}";"История за {date}:
 {body}";"";"Story de {date}:
 {body}";"";"";"Lugu {date}:
-{body}";"Story von {date}: 
+{body}";"Story von {date}:
 {body}";"Painel de {date}:
 {body}";"";"";"Historia do {date}:
 {body}";"استوری از {date}:
 {body}";"Příběh z {date}:
  {body}";"Cerita dari {date}:
-{body}";"";"Story from {date}: 
+{body}";"";"Story from {date}:
 {body}";"";"{date}からのストーリー:
-{body}";"";"";"";"自 {date} 起的 Story: 
+{body}";"";"";"";"自 {date} 起的 Story:
 {body}";"";"";"{date}의 스토리:
-{body}";"رسالة من {date}: 
-{body}";"";"{date} tarihinden hikaye: 
-{body}";"Berättelse från {date}: 
-{body}";"Історія за {date}: 
-{body}";"";"Story du {date} : 
-{body}";"";"Relacja z {date}: 
+{body}";"رسالة من {date}:
+{body}";"";"{date} tarihinden hikaye:
+{body}";"Berättelse från {date}:
+{body}";"Історія за {date}:
+{body}";"";"Story du {date} :
+{body}";"";"Relacja z {date}:
 {body}";"Istorija nuo {date}: {body}";"";""
 "storyPrivacyWarning";"";"Huomaathan ihmisten pystyvän näkemään ja olemaan yhteydessä toisiinsa tarinassasi. Tarinasi tulevat olemaan näkyvissä 24 tuntia, mutta niiden poistamisesta kaikilta laitteilta ja palvelimilta ei ole takeita.";"Mesedez, kontuan izan jendeak bata bestea ikus dezakeela eta bata bestearekin harremanetan jar daitekeela. Zure storya 24 orduz egongo da ikusgai baina ezin da ziurtatu gailu eta zerbitzari guztietatik ezabatuko denik denbora pasatakoan.";"Imaj na umu da ljudi mogu vidjeti i međusobno se kontaktirati u tvojoj priči. Tvoje priče će biti vidljive 24 sata, ali nema jamstva da će se izbrisati sa svih uređaja i poslužitelja.";"";"Houd er rekening mee dat personen elkaar kunnen zien en contacteren in je verhaal. Je verhalen zijn 24 uur zichtbaar, maar er is geen garantie dat ze van alle apparaten en servers worden verwijderd.";"Обратите внимание, что люди могут видеть и связываться друг с другом в вашей истории. Ваши истории будут видны в течение 24 часов, но нет гарантии, что они будут удалены со всех устройств и серверов.";"";"Vă rugăm să țineți în minte că utilizatori poate să se vadă și contacta pe story-ul vostru. Story-urile voastre va fi disponibile pentru 24 de ore dar nu se poate garanta că va fi șterse de pe fie care dispozitiv și server.";"";"";"Palun arvesta, et sinu jutustuste lugejad näevad üksteist ning saavad üksteisega suhelda. Lood ise on loetavad vaid 24 tunni jooksul, kuid mitte miski ei taga, et nad kustutatakse kõikidest seadmetest ja serveritest.";"Bitte beachte, dass sich die Leute in deiner Story sehen und kontaktieren können. Ihre Stories sind 24 Stunden lang sichtbar, aber es gibt keine Garantie dafür, dass sie von allen Geräten und Servern gelöscht werden.";"Por favor, note que pessoas podem ver e contactar umas às outras no seu painel. Ele ficará visível por apenas 24 horas, mas não há garantias de que será apagado por todos dispositivos e servidores.";"";"";"Ten en conta que outras persoas poden verse en contactar entre elas na túa historia. As historias son visibles durante 24 horas pero non hai garantía de que sexan eliminadas en tódolos dispositivos e servidores.";"لطفا توجه داشته باشید که در استوری شما، مردم می‌توانند یکدیگر را ببینند و با هم تماس بگیرند. استوری‌های شما تا ۲۴ ساعت قابل رویت خواهند بود، اما تضمینی وجود ندارد که آن‌ها از تمام دستگاه‌ها و سرورها حذف شوند.";"Upozorňujeme, že lidé se ve vašem příběhu mohou navzájem vidět a kontaktovat. Vaše příběhy budou viditelné po dobu 24 hodin, ale není zaručeno, že budou smazány ze všech zařízení a serverů.";"Diingat bahwa orang-orang dapat melihat dan kontak satu bersama di ceritamu. Ceritamu akan terlihat selama 24 jam tetapi tidak ada jaminan bahwa itu akan dihapus oleh semua perangkat dan server.";"";"Please note that people can see and contact each other in your story. Your stories will be visible for 24 hours but there is no guarantee that they will be deleted from all devices and servers.";"";"あなたのストーリーでは、人々がお互いを見て連絡を取ることができることに注意してください。ストーリーは24時間表示されますが、すべてのデバイスとサーバーから削除されるという保証はありません。";"";"";"";"请注意，人们可以在你的 Story 中看到和联系彼此。您的故事在 24 小时内可见，但不能保证它们将从所有设备和服务器上删除。";"";"";"사람들이 서로를 보고 연락할 수 있다는 점에 유의해주세요. 스토리는 24시간 동안 보이지만 모든 기기와 서버에서 삭제된다는 보장은 없습니다.";"يرجى ملاحظة أنه يمكن للأشخاص رؤية بعضهم البعض والتواصل مع بعضهم البعض في قصتك. ستكون قصصك مرئية لمدة 24 ساعة ولكن ليس هناك ما يضمن حذفها من جميع الأجهزة والخوادم.";"";"İnsanların hikayenizde birbirlerini görebileceğini ve iletişim kurabileceğini lütfen unutmayın. Hikayeleriniz 24 saat boyunca görünür olacaktır ancak tüm aygıtlardan ve sunuculardan silineceklerinin garantisi yoktur.";"Notera att användare kan se och kontakta varandra i din berättelse. Din berättelse är synlig i 24 timmar, men det finns ingen garanti för att berättelser raderas från alla enheter och servrar.";"Зверніть увагу, що люди можуть бачити та зв'язуватися один з одним у вашій історії. Ваші історії будуть видимі впродовж 24 годин, але немає жодної гарантії, що вони будуть видалені з усіх пристроїв і серверів.";"";"Veuillez noter que les personnes peuvent se voir et se contacter dans votre story. Vos stories seront visibles pendant 24 heures, mais il n'y a aucune garantie qu'elles seront supprimées de tous les appareils et de tous les serveurs.";"";"Pamiętaj, że w Twojej relacji ludzie mogą się widzieć i kontaktować ze sobą. Twoje relacje będą widoczne przez 24 godziny, ale nie ma gwarancji, że zostaną usunięte ze wszystkich urządzeń i serwerów.";"Atminkite, kad žmonės gali matyti vienas kitą ir susisiekti tarpusavyje jūsų istorijoje. Jūsų istorijos bus matomos 24 valandas, tačiau nėra garantijos, kad jos bus ištrintos iš visų įrenginių ir serverių.";"";""
 "submit";"";"Lähetä";"";"Pošalji";"";"Verstuur";"Отправить";"Enviar";"Trimiteți";"";"";"Saada";"Absenden";"Submeter";"";"Send inn";"Enviar";"ارسال";"Odeslat";"Kirim";"";"Submit";"";"送信";"Пошаљи";"";"Envia";"提交";"Odoslať";"Beküldés";"제출";"أرسل";"";"Gönder";"Skicka in";"Надіслати";"Cuir isteach";"Soumettre";"";"Odeślij";"Pateikti";"";"Invia"

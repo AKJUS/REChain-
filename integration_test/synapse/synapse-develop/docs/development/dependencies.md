@@ -279,9 +279,9 @@ doesn't require poetry. (It's what we use in CI too). However, you could try
 
 ## ...handle a Dependabot pull request?
 
-Synapse uses Dependabot to keep the `poetry.lock` and `Cargo.lock` file 
+Synapse uses Dependabot to keep the `poetry.lock` and `Cargo.lock` file
 up-to-date with the latest releases of our dependencies. The changelog check is
-omitted for Dependabot PRs; the release script will include them in the 
+omitted for Dependabot PRs; the release script will include them in the
 changelog.
 
 When reviewing a dependabot PR, ensure that:

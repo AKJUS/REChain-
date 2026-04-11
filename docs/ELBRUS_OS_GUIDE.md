@@ -8,7 +8,7 @@
 
 ### Процессоры Эльбрус
 - **Эльбрус-4С** (4-ядерный)
-- **Эльбрус-8С** (8-ядерный) 
+- **Эльбрус-8С** (8-ядерный)
 - **Эльбрус-8СВ** (8-ядерный, улучшенный)
 - **Эльбрус-16С** (16-ядерный)
 - **Эльбрус-2С3** (2-ядерный)
@@ -210,17 +210,17 @@ for ws in "${WORKSTATIONS[@]}"; do
     ssh root@$ws "
         # Создание директории
         mkdir -p /opt/rechainonline/
-        
+
         # Скачивание AppImage
         wget -O /opt/rechainonline/rechainonline-e2k.AppImage '$APPIMAGE_URL'
         chmod +x /opt/rechainonline/rechainonline-e2k.AppImage
-        
+
         # Создание символической ссылки
         ln -sf /opt/rechainonline/rechainonline-e2k.AppImage /usr/local/bin/rechainonline
-        
+
         # Интеграция в систему
         /opt/rechainonline/rechainonline-e2k.AppImage --appimage-integrate
-        
+
         echo 'Установка завершена на $ws'
     "
 done
@@ -269,19 +269,19 @@ LOG_FILE="/var/log/rechainonline-elbrus-performance.log"
 
 while true; do
     TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-    
+
     # Использование CPU (специфично для e2k)
     CPU_USAGE=$(top -bn1 | grep "rechainonline" | awk '{print $9}')
-    
+
     # Использование памяти
     MEM_USAGE=$(ps -o pid,vsz,rss,comm -C rechainonline | tail -n +2 | awk '{sum+=$3} END {print sum}')
-    
+
     # Температура процессора (если доступно)
     CPU_TEMP=$(sensors | grep "Core 0" | awk '{print $3}' | sed 's/+//g' | sed 's/°C//g')
-    
+
     # Запись в лог
     echo "$TIMESTAMP CPU: ${CPU_USAGE}% MEM: ${MEM_USAGE}KB TEMP: ${CPU_TEMP}°C" >> $LOG_FILE
-    
+
     sleep 60
 done
 EOF

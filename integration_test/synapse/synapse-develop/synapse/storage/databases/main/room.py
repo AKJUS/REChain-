@@ -1262,9 +1262,10 @@ class RoomWorkerStore(CacheInvalidationWorkerStore):
         # First, determine the hashes of the media we want to delete.
         # We also want the media_ids for any media that lacks a hash.
         if local_mxcs:
-            hash_sql_many_clause_sql, hash_sql_many_clause_args = (
-                make_in_list_sql_clause(txn.database_engine, "media_id", local_mxcs)
-            )
+            (
+                hash_sql_many_clause_sql,
+                hash_sql_many_clause_args,
+            ) = make_in_list_sql_clause(txn.database_engine, "media_id", local_mxcs)
             hash_sql = f"SELECT sha256, media_id FROM local_media_repository WHERE {hash_sql_many_clause_sql}"
             if quarantined_by is not None:
                 hash_sql += " AND safe_from_quarantine = FALSE"
@@ -1802,7 +1803,9 @@ class RoomWorkerStore(CacheInvalidationWorkerStore):
                 LEFT JOIN events USING(event_id)
                 JOIN room_stats_state ON room_stats_state.room_id = er.room_id
                 {}
-                """.format(where_clause)
+                """.format(
+                where_clause
+            )
             txn.execute(sql, args)
             count = cast(Tuple[int], txn.fetchone())[0]
 

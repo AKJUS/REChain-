@@ -17,4 +17,4 @@
 
 ---
 
-For more, see [Platform Support](Platform-Support.md) and [QML Integration](Aurora-QML-Integration.md). 
+For more, see [Platform Support](Platform-Support.md) and [QML Integration](Aurora-QML-Integration.md).

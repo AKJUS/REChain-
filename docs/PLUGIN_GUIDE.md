@@ -20,4 +20,4 @@ def register(app):
 ## Publishing
 - Document your plugin and open a PR to share with the community
 
---- 
+---

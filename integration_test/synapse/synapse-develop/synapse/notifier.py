@@ -473,7 +473,8 @@ class Notifier:
         new_token: RoomStreamToken,
         users: Optional[Collection[Union[str, UserID]]] = None,
         rooms: Optional[StrCollection] = None,
-    ) -> None: ...
+    ) -> None:
+        ...
 
     @overload
     def on_new_event(
@@ -482,7 +483,8 @@ class Notifier:
         new_token: MultiWriterStreamToken,
         users: Optional[Collection[Union[str, UserID]]] = None,
         rooms: Optional[StrCollection] = None,
-    ) -> None: ...
+    ) -> None:
+        ...
 
     @overload
     def on_new_event(
@@ -499,7 +501,8 @@ class Notifier:
         new_token: int,
         users: Optional[Collection[Union[str, UserID]]] = None,
         rooms: Optional[StrCollection] = None,
-    ) -> None: ...
+    ) -> None:
+        ...
 
     def on_new_event(
         self,

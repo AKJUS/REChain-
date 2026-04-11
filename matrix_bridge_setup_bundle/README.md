@@ -1,8 +1,8 @@
 
 # Matrix Bridges Final Installer
 
-**Version:** 4.1.10+1160  
-**Build:** 1160  
+**Version:** 4.1.10+1160
+**Build:** 1160
 **Release Date:** 2025
 
 Этот архив содержит:
@@ -55,4 +55,3 @@ cp registrations/*.yaml /opt/matrix/synapse/registration/
 - KakaoTalk (mautrix/kakaotalk)
 - QQ (mautrix/qq)
 - Heisenbridge (mautrix/heisenbridge)
-

@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS roomserver_state_snapshots (
 	-- The state snapshot NID that identifies this snapshot.
 	state_snapshot_nid bigint PRIMARY KEY DEFAULT nextval('roomserver_state_snapshot_nid_seq'),
 	-- The hash of the state snapshot, which is used to enforce uniqueness. The hash is
-	-- generated in Dendrite and passed through to the database, as a btree index over 
+	-- generated in Dendrite and passed through to the database, as a btree index over
 	-- this column is cheap and fits within the maximum index size.
 	state_snapshot_hash BYTEA UNIQUE,
 	-- The room NID that the snapshot belongs to.

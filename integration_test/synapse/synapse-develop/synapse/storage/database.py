@@ -114,7 +114,8 @@ class _PoolConnection(Connection):
     A Connection from twisted.enterprise.adbapi.Connection.
     """
 
-    def reconnect(self) -> None: ...
+    def reconnect(self) -> None:
+        ...
 
 
 def make_pool(
@@ -1685,7 +1686,8 @@ class DatabasePool:
         retcols: Collection[str],
         allow_none: Literal[False] = False,
         desc: str = "simple_select_one",
-    ) -> Tuple[Any, ...]: ...
+    ) -> Tuple[Any, ...]:
+        ...
 
     @overload
     async def simple_select_one(
@@ -1695,7 +1697,8 @@ class DatabasePool:
         retcols: Collection[str],
         allow_none: Literal[True] = True,
         desc: str = "simple_select_one",
-    ) -> Optional[Tuple[Any, ...]]: ...
+    ) -> Optional[Tuple[Any, ...]]:
+        ...
 
     async def simple_select_one(
         self,
@@ -1734,7 +1737,8 @@ class DatabasePool:
         retcol: str,
         allow_none: Literal[False] = False,
         desc: str = "simple_select_one_onecol",
-    ) -> Any: ...
+    ) -> Any:
+        ...
 
     @overload
     async def simple_select_one_onecol(
@@ -1744,7 +1748,8 @@ class DatabasePool:
         retcol: str,
         allow_none: Literal[True] = True,
         desc: str = "simple_select_one_onecol",
-    ) -> Optional[Any]: ...
+    ) -> Optional[Any]:
+        ...
 
     async def simple_select_one_onecol(
         self,
@@ -1784,7 +1789,8 @@ class DatabasePool:
         keyvalues: Dict[str, Any],
         retcol: str,
         allow_none: Literal[False] = False,
-    ) -> Any: ...
+    ) -> Any:
+        ...
 
     @overload
     @classmethod
@@ -1795,7 +1801,8 @@ class DatabasePool:
         keyvalues: Dict[str, Any],
         retcol: str,
         allow_none: Literal[True] = True,
-    ) -> Optional[Any]: ...
+    ) -> Optional[Any]:
+        ...
 
     @classmethod
     def simple_select_one_onecol_txn(
@@ -2206,7 +2213,8 @@ class DatabasePool:
         keyvalues: Dict[str, Any],
         retcols: Collection[str],
         allow_none: Literal[False] = False,
-    ) -> Tuple[Any, ...]: ...
+    ) -> Tuple[Any, ...]:
+        ...
 
     @overload
     @staticmethod
@@ -2216,7 +2224,8 @@ class DatabasePool:
         keyvalues: Dict[str, Any],
         retcols: Collection[str],
         allow_none: Literal[True] = True,
-    ) -> Optional[Tuple[Any, ...]]: ...
+    ) -> Optional[Tuple[Any, ...]]:
+        ...
 
     @staticmethod
     def simple_select_one_txn(
@@ -2608,7 +2617,8 @@ def make_tuple_in_list_sql_clause(
     database_engine: BaseDatabaseEngine,
     columns: Tuple[str, str],
     iterable: Collection[Tuple[Any, Any]],
-) -> Tuple[str, list]: ...
+) -> Tuple[str, list]:
+    ...
 
 
 def make_tuple_in_list_sql_clause(

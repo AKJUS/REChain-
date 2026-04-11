@@ -20,7 +20,7 @@ The available presence router callbacks are:
 
 _First introduced in Synapse v1.42.0_
 
-```python 
+```python
 async def get_users_for_states(
     state_updates: Iterable["synapse.api.UserPresenceState"],
 ) -> Dict[str, Set["synapse.api.UserPresenceState"]]
@@ -36,7 +36,7 @@ Synapse will then attempt to send the specified presence updates to each user wh
 
 If multiple modules implement this callback, Synapse merges all the dictionaries returned
 by the callbacks. If multiple callbacks return a dictionary containing the same key,
-Synapse concatenates the sets associated with this key from each dictionary. 
+Synapse concatenates the sets associated with this key from each dictionary.
 
 ### `get_interested_users`
 
@@ -50,12 +50,12 @@ async def get_interested_users(
 **Requires** `get_users_for_states` to also be registered
 
 Called when determining which users someone should be able to see the presence state of. This
-callback should return complementary results to `get_users_for_state` or the presence information 
+callback should return complementary results to `get_users_for_state` or the presence information
 may not be properly forwarded.
 
 The callback is given the Matrix user ID for a local user that is requesting presence data and
 should return the Matrix user IDs of the users whose presence state they are allowed to
-query. The returned users can be local or remote. 
+query. The returned users can be local or remote.
 
 Alternatively the callback can return `synapse.module_api.PRESENCE_ALL_USERS`
 to indicate that the user should receive updates from all known users.

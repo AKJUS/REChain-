@@ -163,7 +163,9 @@ class PurgeEventsStorageController:
         deletion."""
 
         while True:
-            next_to_delete = await self.stores.state_deletion.get_next_state_group_collection_to_delete()
+            next_to_delete = (
+                await self.stores.state_deletion.get_next_state_group_collection_to_delete()
+            )
             if next_to_delete is None:
                 break
 

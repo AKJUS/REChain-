@@ -22,4 +22,4 @@
 
 ---
 
-For more, see [Getting Started](Getting-Started.md) and [API Reference](API-Reference.md). 
+For more, see [Getting Started](Getting-Started.md) and [API Reference](API-Reference.md).

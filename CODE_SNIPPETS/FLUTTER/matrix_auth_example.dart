@@ -368,4 +368,3 @@ extension LoginStateExtension on LoginState {
   bool get isLoggedOut => this == LoginState.loggedOut;
   bool get isLoggingIn => this == LoginState.loggingIn;
 }
-

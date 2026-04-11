@@ -1,6 +1,6 @@
 # Documentation Website Files and Assets
 
-This directory contains extra files for modifying the look and functionality of 
+This directory contains extra files for modifying the look and functionality of
 [mdbook](https://github.com/rust-lang/mdBook), the documentation software that's
 used to generate Synapse's documentation website.
 

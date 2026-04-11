@@ -5,4 +5,4 @@ void main() {
   runApp(MaterialApp(
     home: DashboardPage(walletAddress: '0x...'),
   ));
-} 
+}

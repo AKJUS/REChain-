@@ -9,17 +9,17 @@ index f92f73f3..6d389efb 100644
 -    //id "com.google.gms.google-services"
 +    id "com.google.gms.google-services"
  }
- 
+
  def localProperties = new Properties()
 @@ -83,10 +83,10 @@ flutter {
  }
- 
+
  dependencies {
 -    //implementation 'com.google.firebase:firebase-messaging:19.0.1' // Workaround for https://github.com/microg/android_packages_apps_GmsCore/issues/313#issuecomment-617651698
 +    implementation 'com.google.firebase:firebase-messaging:19.0.1' // Workaround for https://github.com/microg/android_packages_apps_GmsCore/issues/313#issuecomment-617651698
      implementation 'androidx.multidex:multidex:2.0.1'
  }
- 
+
  configurations.all {
 -    exclude group: 'com.google.android.gms'
 +    //exclude group: 'com.google.android.gms'
@@ -82,9 +82,9 @@ index d9930f55..510e9845 100644
 @@ -1,4 +1,4 @@
 -/*package com.rechain.online
 +package com.rechain.online
- 
+
  import com.famedly.fcm_shared_isolate.FcmSharedIsolateService
- 
+
 @@ -33,4 +33,3 @@ class FcmPushService : FcmSharedIsolateService() {
          }
      }
@@ -102,7 +102,7 @@ index b2fd960a..fdb01a4d 100644
 -    // id "com.google.gms.google-services" version "4.3.8" apply false
 +    id "com.google.gms.google-services" version "4.3.8" apply false
  }
- 
+
  include ":app"
 \ No newline at end of file
 diff --git a/lib/utils/background_push.dart b/lib/utils/background_push.dart
@@ -112,21 +112,21 @@ index 1ba2659a..989f458e 100644
 @@ -39,7 +39,7 @@ import '../config/setting_keys.dart';
  import '../widgets/matrix.dart';
  import 'platform_infos.dart';
- 
+
 -//import 'package:fcm_shared_isolate/fcm_shared_isolate.dart';
 +import 'package:fcm_shared_isolate/fcm_shared_isolate.dart';
- 
+
  class NoTokenException implements Exception {
    String get cause => 'Cannot get firebase token';
 @@ -64,7 +64,7 @@ class BackgroundPush {
- 
+
    final pendingTests = <String, Completer<void>>{};
- 
+
 -  final dynamic firebase = null; //FcmSharedIsolate();
 +  final dynamic firebase = FcmSharedIsolate();
- 
+
    DateTime? lastReceivedPush;
- 
+
 diff --git a/pubspec.yaml b/pubspec.yaml
 index fb3e3ca4..039b2ccc 100644
 --- a/pubspec.yaml

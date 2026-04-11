@@ -11,4 +11,4 @@ if [ -f $1/dump.rdb ] && [ -d /var/lib/redis ]; then
   echo "Restarting Redis..."
   systemctl restart redis || true
 fi
-echo "Restore complete from $1" 
+echo "Restore complete from $1"

@@ -12,4 +12,4 @@ For production, use Redis Sentinel or Redis Cluster for high availability and fa
 - Deploy 6+ Redis nodes (3 masters, 3 replicas minimum).
 - Update your Redis client config to use cluster mode.
 
-See the [Redis docs](https://redis.io/docs/management/sentinel/) for setup details. 
+See the [Redis docs](https://redis.io/docs/management/sentinel/) for setup details.

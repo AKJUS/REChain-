@@ -22,4 +22,4 @@
 
 ---
 
-*For more, see the [docs](../docs/) and [wiki home](Home.md).* 
+*For more, see the [docs](../docs/) and [wiki home](Home.md).*

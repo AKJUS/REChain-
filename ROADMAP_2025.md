@@ -230,4 +230,4 @@ This roadmap outlines REChain's strategic development phases, key milestones, an
 
 This roadmap represents REChain's commitment to building a comprehensive digital autonomy infrastructure that serves humanity's highest aspirations. By focusing on sustainable development, community-driven innovation, and real-world impact, we're creating the foundation for a more efficient, transparent, and autonomous digital future.
 
-**Join us in building the digital infrastructure of tomorrow.** 
+**Join us in building the digital infrastructure of tomorrow.**

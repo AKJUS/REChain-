@@ -124,42 +124,42 @@ export class REChainSystemIntegration {
   public async initialize(config: SystemIntegrationConfig): Promise<boolean> {
     try {
       hilog.info(0x0000, 'REChainSystem', 'Initializing system integration...');
-      
+
       this.config = config;
-      
+
       // Initialize device information
       await this.initializeDeviceInfo();
-      
+
       // Initialize system monitoring
       if (config.enableSystemMonitoring) {
         await this.initializeSystemMonitoring();
       }
-      
+
       // Initialize sensor monitoring
       if (config.enableSensorMonitoring) {
         await this.initializeSensorMonitoring();
       }
-      
+
       // Initialize battery monitoring
       if (config.enableBatteryMonitoring) {
         await this.initializeBatteryMonitoring();
       }
-      
+
       // Initialize network monitoring
       if (config.enableNetworkMonitoring) {
         await this.initializeNetworkMonitoring();
       }
-      
+
       // Start performance monitoring
       if (config.enablePerformanceMonitoring) {
         this.startPerformanceMonitoring();
       }
-      
+
       this.initialized = true;
-      
+
       hilog.info(0x0000, 'REChainSystem', 'System integration initialized successfully');
       return true;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize: %{public}s', JSON.stringify(error));
       return false;
@@ -173,27 +173,27 @@ export class REChainSystemIntegration {
 
     try {
       hilog.info(0x0000, 'REChainSystem', 'Shutting down system integration...');
-      
+
       // Stop performance monitoring
       if (this.monitoringInterval) {
         clearInterval(this.monitoringInterval);
         this.monitoringInterval = null;
       }
-      
+
       // Unsubscribe from sensors
       this.shutdownSensorMonitoring();
-      
+
       // Clear event listeners
       this.eventListeners.clear();
-      
+
       // Clear cached data
       this.sensorData = {};
       this.systemStatus = null;
-      
+
       this.initialized = false;
-      
+
       hilog.info(0x0000, 'REChainSystem', 'System integration shut down successfully');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Error during shutdown: %{public}s', JSON.stringify(error));
     }
@@ -225,7 +225,7 @@ export class REChainSystemIntegration {
 
       this.systemStatus = status;
       return status;
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to get system status: %{public}s', JSON.stringify(error));
       return null;
@@ -257,9 +257,9 @@ export class REChainSystemIntegration {
           usage: 'notification'
         });
       }
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Vibration triggered: %{public}d ms', duration);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Vibration failed: %{public}s', JSON.stringify(error));
     }
@@ -269,12 +269,12 @@ export class REChainSystemIntegration {
     try {
       // Clamp brightness value between 0 and 255
       const clampedBrightness = Math.max(0, Math.min(255, brightness));
-      
+
       // Note: This might require system permissions
       // await brightness.setValue(clampedBrightness);
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Screen brightness set: %{public}d', clampedBrightness);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to set brightness: %{public}s', JSON.stringify(error));
     }
@@ -285,7 +285,7 @@ export class REChainSystemIntegration {
       // Note: This might require system permissions
       // return await brightness.getValue();
       return 128; // Default value
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to get brightness: %{public}s', JSON.stringify(error));
       return 128;
@@ -311,7 +311,7 @@ export class REChainSystemIntegration {
 
   public onApplicationForeground(): void {
     hilog.info(0x0000, 'REChainSystem', 'Application moved to foreground');
-    
+
     // Resume sensor monitoring if it was paused
     if (this.config?.enableSensorMonitoring) {
       this.resumeSensorMonitoring();
@@ -320,7 +320,7 @@ export class REChainSystemIntegration {
 
   public onApplicationBackground(): void {
     hilog.info(0x0000, 'REChainSystem', 'Application moved to background');
-    
+
     // Pause non-essential sensor monitoring to save battery
     this.pauseSensorMonitoring();
   }
@@ -328,7 +328,7 @@ export class REChainSystemIntegration {
   private async initializeDeviceInfo(): Promise<void> {
     try {
       const defaultDisplay = await display.getDefaultDisplay();
-      
+
       this.deviceInfo = {
         deviceType: deviceInfo.deviceType,
         manufacturer: deviceInfo.manufacture,
@@ -342,10 +342,10 @@ export class REChainSystemIntegration {
         screenWidth: defaultDisplay.width,
         screenHeight: defaultDisplay.height
       };
-      
-      hilog.info(0x0000, 'REChainSystem', 'Device info initialized: %{public}s %{public}s', 
+
+      hilog.info(0x0000, 'REChainSystem', 'Device info initialized: %{public}s %{public}s',
         this.deviceInfo.manufacturer, this.deviceInfo.model);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize device info: %{public}s', JSON.stringify(error));
     }
@@ -355,9 +355,9 @@ export class REChainSystemIntegration {
     try {
       // Initialize system status
       await this.getSystemStatus();
-      
+
       hilog.info(0x0000, 'REChainSystem', 'System monitoring initialized');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize system monitoring: %{public}s', JSON.stringify(error));
     }
@@ -367,24 +367,24 @@ export class REChainSystemIntegration {
     try {
       // Initialize accelerometer
       await this.initializeAccelerometer();
-      
+
       // Initialize gyroscope
       await this.initializeGyroscope();
-      
+
       // Initialize magnetometer
       await this.initializeMagnetometer();
-      
+
       // Initialize gravity sensor
       await this.initializeGravitySensor();
-      
+
       // Initialize proximity sensor
       await this.initializeProximitySensor();
-      
+
       // Initialize ambient light sensor
       await this.initializeAmbientLightSensor();
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Sensor monitoring initialized');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize sensor monitoring: %{public}s', JSON.stringify(error));
     }
@@ -404,7 +404,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.ACCELEROMETER, callback, { interval: 100000000 }); // 100ms
       this.sensorCallbacks.set('accelerometer', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize accelerometer: %{public}s', JSON.stringify(error));
     }
@@ -424,7 +424,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.GYROSCOPE, callback, { interval: 100000000 }); // 100ms
       this.sensorCallbacks.set('gyroscope', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize gyroscope: %{public}s', JSON.stringify(error));
     }
@@ -444,7 +444,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.MAGNETIC_FIELD, callback, { interval: 100000000 }); // 100ms
       this.sensorCallbacks.set('magnetometer', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize magnetometer: %{public}s', JSON.stringify(error));
     }
@@ -464,7 +464,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.GRAVITY, callback, { interval: 100000000 }); // 100ms
       this.sensorCallbacks.set('gravity', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize gravity sensor: %{public}s', JSON.stringify(error));
     }
@@ -482,7 +482,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.PROXIMITY, callback, { interval: 200000000 }); // 200ms
       this.sensorCallbacks.set('proximity', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize proximity sensor: %{public}s', JSON.stringify(error));
     }
@@ -500,7 +500,7 @@ export class REChainSystemIntegration {
 
       sensor.on(sensor.SensorId.AMBIENT_LIGHT, callback, { interval: 500000000 }); // 500ms
       this.sensorCallbacks.set('ambientLight', 1);
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize ambient light sensor: %{public}s', JSON.stringify(error));
     }
@@ -511,9 +511,9 @@ export class REChainSystemIntegration {
       // Monitor battery level changes
       // Note: HarmonyOS might not have direct battery change listeners
       // This would typically be implemented through system events or polling
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Battery monitoring initialized');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize battery monitoring: %{public}s', JSON.stringify(error));
     }
@@ -529,9 +529,9 @@ export class REChainSystemIntegration {
       connection.createNetConnection().on('netUnavailable', () => {
         this.emitEvent(SystemEvent.NETWORK_STATUS_CHANGED, { connected: false });
       });
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Network monitoring initialized');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to initialize network monitoring: %{public}s', JSON.stringify(error));
     }
@@ -542,17 +542,17 @@ export class REChainSystemIntegration {
       try {
         // Update system status periodically
         await this.getSystemStatus();
-        
+
         // Check for memory warnings
         if (this.systemStatus && this.systemStatus.availableMemory < 100 * 1024 * 1024) { // Less than 100MB
           this.emitEvent(SystemEvent.MEMORY_WARNING, { availableMemory: this.systemStatus.availableMemory });
         }
-        
+
         // Check for temperature warnings
         if (this.systemStatus && this.systemStatus.temperature > 45) { // Above 45°C
           this.emitEvent(SystemEvent.TEMPERATURE_WARNING, { temperature: this.systemStatus.temperature });
         }
-        
+
       } catch (error) {
         hilog.error(0x0000, 'REChainSystem', 'Performance monitoring error: %{public}s', JSON.stringify(error));
       }
@@ -580,11 +580,11 @@ export class REChainSystemIntegration {
       if (this.sensorCallbacks.has('ambientLight')) {
         sensor.off(sensor.SensorId.AMBIENT_LIGHT);
       }
-      
+
       this.sensorCallbacks.clear();
-      
+
       hilog.info(0x0000, 'REChainSystem', 'Sensor monitoring shut down');
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to shutdown sensor monitoring: %{public}s', JSON.stringify(error));
     }
@@ -602,7 +602,7 @@ export class REChainSystemIntegration {
       if (this.sensorCallbacks.has('magnetometer')) {
         sensor.off(sensor.SensorId.MAGNETIC_FIELD);
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to pause sensor monitoring: %{public}s', JSON.stringify(error));
     }
@@ -616,7 +616,7 @@ export class REChainSystemIntegration {
         this.initializeGyroscope();
         this.initializeMagnetometer();
       }
-      
+
     } catch (error) {
       hilog.error(0x0000, 'REChainSystem', 'Failed to resume sensor monitoring: %{public}s', JSON.stringify(error));
     }
@@ -627,7 +627,7 @@ export class REChainSystemIntegration {
       const netConnection = connection.createNetConnection();
       const netHandle = await netConnection.getDefaultNet();
       return netHandle !== null;
-      
+
     } catch (error) {
       return false;
     }
@@ -637,10 +637,10 @@ export class REChainSystemIntegration {
     try {
       const netConnection = connection.createNetConnection();
       const netHandle = await netConnection.getDefaultNet();
-      
+
       if (netHandle) {
         const netCapabilities = await netConnection.getNetCapabilities(netHandle);
-        
+
         if (netCapabilities.bearerTypes.includes(connection.NetBearType.BEARER_WIFI)) {
           return 'WiFi';
         } else if (netCapabilities.bearerTypes.includes(connection.NetBearType.BEARER_CELLULAR)) {
@@ -649,9 +649,9 @@ export class REChainSystemIntegration {
           return 'Ethernet';
         }
       }
-      
+
       return 'Unknown';
-      
+
     } catch (error) {
       return 'Unknown';
     }
@@ -661,7 +661,7 @@ export class REChainSystemIntegration {
     try {
       const defaultDisplay = await display.getDefaultDisplay();
       return defaultDisplay.rotation;
-      
+
     } catch (error) {
       return 0;
     }

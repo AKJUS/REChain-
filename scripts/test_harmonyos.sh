@@ -31,25 +31,25 @@ VERBOSE="${VERBOSE:-false}"
 
 check_test_environment() {
     log_info "Checking test environment..."
-    
+
     if [[ ! -d "$HARMONYOS_DIR" ]]; then
         log_error "HarmonyOS directory not found: $HARMONYOS_DIR"
         exit 1
     fi
-    
+
     # Check for hdc (HarmonyOS Device Connector)
     if ! command -v hdc &> /dev/null; then
         log_error "hdc not found, required for device testing"
         exit 1
     fi
-    
+
     # Check connected devices
     local devices=$(hdc list targets 2>/dev/null | grep -v "Empty" || true)
     if [[ -z "$devices" && "$RUN_INTEGRATION_TESTS" == "true" ]]; then
         log_warning "No HarmonyOS devices connected, integration tests will be skipped"
         RUN_INTEGRATION_TESTS="false"
     fi
-    
+
     mkdir -p "$TEST_RESULTS_DIR"
     log_success "Test environment ready"
 }
@@ -58,10 +58,10 @@ run_unit_tests() {
     if [[ "$RUN_UNIT_TESTS" != "true" ]]; then
         return 0
     fi
-    
+
     log_info "Running unit tests..."
     cd "$HARMONYOS_DIR"
-    
+
     # Run hvigor test command
     if [[ -f "hvigorw" ]]; then
         ./hvigorw test --mode debug
@@ -69,7 +69,7 @@ run_unit_tests() {
         log_error "hvigor wrapper not found"
         return 1
     fi
-    
+
     log_success "Unit tests completed"
 }
 
@@ -77,10 +77,10 @@ run_integration_tests() {
     if [[ "$RUN_INTEGRATION_TESTS" != "true" ]]; then
         return 0
     fi
-    
+
     log_info "Running integration tests..."
     cd "$HARMONYOS_DIR"
-    
+
     # Install and run tests on device
     if [[ -n "$DEVICE_ID" ]]; then
         hdc -t "$DEVICE_ID" install entry/build/default/outputs/default/entry-default-signed.hap
@@ -92,15 +92,15 @@ run_integration_tests() {
             hdc -t "$device" install entry/build/default/outputs/default/entry-default-signed.hap
         fi
     fi
-    
+
     log_success "Integration tests completed"
 }
 
 generate_test_report() {
     log_info "Generating test report..."
-    
+
     local report_file="$TEST_RESULTS_DIR/test-report-$(date +%Y%m%d-%H%M%S).html"
-    
+
     cat > "$report_file" << EOF
 <!DOCTYPE html>
 <html>
@@ -116,7 +116,7 @@ generate_test_report() {
 <body>
     <h1>REChain HarmonyOS Test Report</h1>
     <p>Generated: $(date)</p>
-    
+
     <h2>Test Summary</h2>
     <table border="1">
         <tr><th>Test Type</th><th>Status</th><th>Details</th></tr>
@@ -126,19 +126,19 @@ generate_test_report() {
 </body>
 </html>
 EOF
-    
+
     log_success "Test report generated: $report_file"
 }
 
 main() {
     echo "REChain HarmonyOS Test Suite"
     echo "=========================="
-    
+
     check_test_environment
     run_unit_tests
     run_integration_tests
     generate_test_report
-    
+
     log_success "All tests completed successfully"
 }
 

@@ -31,4 +31,4 @@ curl http://localhost:8082/api/plugins
 - [openapi.yaml](../bridges/telegram_super_tma/openapi.yaml)
 - Use Swagger UI or Redoc to explore and test the API
 
---- 
+---

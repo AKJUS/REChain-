@@ -1,6 +1,6 @@
 /**
  * Test Examples for REChain Code Snippets
- * 
+ *
  * Provides pytest-style test examples for testing bridge components.
  */
 
@@ -121,7 +121,7 @@ bridgeTests.test('should validate bridge config', () => {
         bridgeName: 'telegram',
         botUserId: '@telegram_bot:example.com'
     };
-    
+
     assert(config.appserviceToken !== '__CHANGE_ME__');
     assert(config.homeserverToken !== '__CHANGE_ME__');
     assert(config.bridgeName.length > 0);
@@ -133,7 +133,7 @@ bridgeTests.test('should validate rate limit config', () => {
         requestsPerSecond: 50,
         burstSize: 100
     };
-    
+
     assert(rateLimit.enabled === true);
     assert(rateLimit.requestsPerSecond > 0);
     assert(rateLimit.burstSize >= rateLimit.requestsPerSecond);
@@ -145,7 +145,7 @@ bridgeTests.test('should validate room mapping', () => {
             'chatId': '!matrixRoom:example.com'
         }
     };
-    
+
     assert(typeof roomMapping.telegram === 'object');
     assert(roomMapping.telegram.chatId !== undefined);
 });
@@ -161,24 +161,24 @@ circuitBreakerTests.test('should start in closed state', () => {
 circuitBreakerTests.test('should transition to open after failures', () => {
     const config = { failureThreshold: 5 };
     let failures = 0;
-    
+
     for (let i = 0; i < config.failureThreshold; i++) {
         failures++;
     }
-    
+
     assert(failures === config.failureThreshold);
 });
 
 circuitBreakerTests.test('should allow recovery after timeout', async () => {
     const state = 'OPEN';
     const timeout = 60;
-    
+
     assert(timeout > 0);
-    
+
     // Simulate timeout
     await new Promise(resolve => setTimeout(resolve, 100));
     const newState = 'HALF_OPEN';
-    
+
     assert(newState === 'HALF_OPEN');
 });
 
@@ -187,13 +187,13 @@ async function runAllTests() {
     console.log('\n' + '='.repeat(60));
     console.log('REChain Code Snippets - Test Suite');
     console.log('='.repeat(60) + '\n');
-    
+
     let allPassed = true;
-    
+
     allPassed &= await matrixTests.run();
     allPassed &= await bridgeTests.run();
     allPassed &= await circuitBreakerTests.run();
-    
+
     console.log('\n' + '='.repeat(60));
     if (allPassed) {
         console.log('✅ All tests passed!');
@@ -210,4 +210,3 @@ module.exports = { TestSuite, runAllTests };
 if (require.main === module) {
     runAllTests();
 }
-

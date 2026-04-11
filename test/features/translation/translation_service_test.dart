@@ -210,7 +210,7 @@ void main() {
 
     test('should handle provider errors', () async {
       await translationService.setTranslationProvider(TranslationProvider.libre);
-      
+
       final result = await translationService.translateText(
         'Hello',
         targetLanguage: 'es',

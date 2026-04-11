@@ -145,7 +145,7 @@ Here are a few things to try:
       ```sh
       eturnalctl credentials
       ```
-      
+
 
     * Or (**coturn only**): Temporarily configure `coturn` to accept a static
       username/password. To do this, comment out `use-auth-secret` and

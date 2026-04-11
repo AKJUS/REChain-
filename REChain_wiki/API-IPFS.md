@@ -44,4 +44,4 @@
 
 ---
 
-For more, see [IPFS Integration](../docs/IPFS_INTEGRATION.md). 
+For more, see [IPFS Integration](../docs/IPFS_INTEGRATION.md).

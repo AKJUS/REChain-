@@ -52,7 +52,7 @@ echo.
 echo [4/4] Creating installer package...
 if exist "%WINDOWS_DIR%\rechainonline.iss" (
     echo Inno Setup script found, creating installer...
-    
+
     REM Check if Inno Setup is installed
     set INNO_SETUP=""
     if exist "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" (
@@ -60,7 +60,7 @@ if exist "%WINDOWS_DIR%\rechainonline.iss" (
     ) else if exist "C:\Program Files\Inno Setup 6\ISCC.exe" (
         set INNO_SETUP="C:\Program Files\Inno Setup 6\ISCC.exe"
     )
-    
+
     if !INNO_SETUP! neq "" (
         echo Running Inno Setup compiler...
         !INNO_SETUP! "%WINDOWS_DIR%\rechainonline.iss"

@@ -181,4 +181,3 @@ migration:
   from_version: null
   to_version: "4.1.10+1160"
   backup_before_migration: true
-

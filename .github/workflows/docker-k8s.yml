@@ -36,4 +36,4 @@ jobs:
           version: 'latest'
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f bridges/telegram_super_tma/k8s-deployment.yaml 
+          kubectl apply -f bridges/telegram_super_tma/k8s-deployment.yaml

@@ -247,9 +247,9 @@ class PersistEventsStore:
         self.is_mine_id = hs.is_mine_id
 
         # This should only exist on instances that are configured to write
-        assert hs.get_instance_name() in hs.config.worker.writers.events, (
-            "Can only instantiate EventsStore on master"
-        )
+        assert (
+            hs.get_instance_name() in hs.config.worker.writers.events
+        ), "Can only instantiate EventsStore on master"
 
         # Since we have been configured to write, we ought to have id generators,
         # rather than id trackers.
@@ -437,7 +437,9 @@ class PersistEventsStore:
             if event_type == EventTypes.Member and self.is_mine_id(state_key)
         ]
 
-        membership_snapshot_shared_insert_values: SlidingSyncMembershipSnapshotSharedInsertValues = {}
+        membership_snapshot_shared_insert_values: SlidingSyncMembershipSnapshotSharedInsertValues = (
+            {}
+        )
         membership_infos_to_insert_membership_snapshots: List[
             SlidingSyncMembershipInfo
         ] = []
@@ -466,9 +468,9 @@ class PersistEventsStore:
                     missing_membership_event_ids
                 )
                 # There shouldn't be any missing events
-                assert remaining_events.keys() == missing_membership_event_ids, (
-                    missing_membership_event_ids.difference(remaining_events.keys())
-                )
+                assert (
+                    remaining_events.keys() == missing_membership_event_ids
+                ), missing_membership_event_ids.difference(remaining_events.keys())
                 membership_event_map.update(remaining_events)
 
             for (
@@ -535,9 +537,9 @@ class PersistEventsStore:
                         missing_state_event_ids
                     )
                     # There shouldn't be any missing events
-                    assert remaining_events.keys() == missing_state_event_ids, (
-                        missing_state_event_ids.difference(remaining_events.keys())
-                    )
+                    assert (
+                        remaining_events.keys() == missing_state_event_ids
+                    ), missing_state_event_ids.difference(remaining_events.keys())
                     for event in remaining_events.values():
                         current_state_map[(event.type, event.state_key)] = event
 
@@ -645,9 +647,9 @@ class PersistEventsStore:
             if missing_event_ids:
                 remaining_events = await self.store.get_events(missing_event_ids)
                 # There shouldn't be any missing events
-                assert remaining_events.keys() == missing_event_ids, (
-                    missing_event_ids.difference(remaining_events.keys())
-                )
+                assert (
+                    remaining_events.keys() == missing_event_ids
+                ), missing_event_ids.difference(remaining_events.keys())
                 for event in remaining_events.values():
                     current_state_map[(event.type, event.state_key)] = event
 
@@ -1848,8 +1850,12 @@ class PersistEventsStore:
         if sliding_sync_table_changes.to_insert_membership_snapshots:
             # Update the `sliding_sync_membership_snapshots` table
             #
-            sliding_sync_snapshot_keys = sliding_sync_table_changes.membership_snapshot_shared_insert_values.keys()
-            sliding_sync_snapshot_values = sliding_sync_table_changes.membership_snapshot_shared_insert_values.values()
+            sliding_sync_snapshot_keys = (
+                sliding_sync_table_changes.membership_snapshot_shared_insert_values.keys()
+            )
+            sliding_sync_snapshot_values = (
+                sliding_sync_table_changes.membership_snapshot_shared_insert_values.values()
+            )
             # We need to insert/update regardless of whether we have
             # `sliding_sync_snapshot_keys` because there are other fields in the `ON
             # CONFLICT` upsert to run (see inherit case (explained in
@@ -2033,9 +2039,9 @@ class PersistEventsStore:
                     # text columns.
                     and "\0" not in successor_room_id
                 ):
-                    sliding_sync_insert_map["tombstone_successor_room_id"] = (
-                        successor_room_id
-                    )
+                    sliding_sync_insert_map[
+                        "tombstone_successor_room_id"
+                    ] = successor_room_id
             else:
                 # We only expect to see events according to the
                 # `SLIDING_SYNC_RELEVANT_STATE_SET`.
@@ -2321,9 +2327,9 @@ class PersistEventsStore:
         Returns:
             filtered list
         """
-        new_events_and_contexts: OrderedDict[str, Tuple[EventBase, EventContext]] = (
-            OrderedDict()
-        )
+        new_events_and_contexts: OrderedDict[
+            str, Tuple[EventBase, EventContext]
+        ] = OrderedDict()
         for event, context in events_and_contexts:
             prev_event_context = new_events_and_contexts.get(event.event_id)
             if prev_event_context:

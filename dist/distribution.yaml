@@ -14,7 +14,7 @@ build:
     minor: 2
     patch: 0
     codename: "Stability"
-    
+
   # Build metadata
   metadata:
     build_number: 0
@@ -22,7 +22,7 @@ build:
     git_branch: ""
     build_date: ""
     build_timestamp: ""
-    
+
   # Compilation settings
   compiler:
     type: "gcc"
@@ -32,20 +32,20 @@ build:
       debug: ["-g", "-O0", "-DDEBUG"]
       lto: true
       pie: true
-    
+
   # Architecture support
   architectures:
     - x86_64
     - arm64
     - armv7
     - x86
-    
+
   # Build outputs
   output:
     format: "tar.gz"
     compression: "gzip"
     compression_level: 9
-    
+
 # ============================================================================
 # Package Configuration
 # ============================================================================
@@ -59,7 +59,7 @@ package:
   maintainer: "REChain Team <support@rechain.network>"
   license: "REChain EULA"
   version_requirement: ">= 4.0.0"
-  
+
   # Package contents
   contents:
     - type: "binary"
@@ -86,7 +86,7 @@ package:
     - type: "init"
       path: "/etc/init.d/"
       description: "Init script"
-      
+
   # Dependencies
   dependencies:
     runtime:
@@ -98,14 +98,14 @@ package:
     recommended:
       - "gnupg"
       - "ca-certificates"
-      
+
   # Scripts
   scripts:
     pre_install: "scripts/pre_install.sh"
     post_install: "scripts/post_install.sh"
     pre_remove: "scripts/pre_remove.sh"
     post_remove: "scripts/post_remove.sh"
-    
+
 # ============================================================================
 # Distribution Targets
 # ============================================================================
@@ -123,7 +123,7 @@ distributions:
       - "/etc/rechain/config.yaml"
     triggers:
       - "register-systemd-user rechain.service"
-      
+
   # Red Hat/Fedora
   redhat:
     type: "rpm"
@@ -132,13 +132,13 @@ distributions:
     requires: "${runtime_dependencies}"
     recommends: "${recommended_dependencies}"
     autocreate_dirs: "/var/lib/rechain"
-    
+
   # Alpine
   alpine:
     type: "apk"
     arch: "x86_64 aarch64 armv7"
     depends: "${runtime_dependencies}"
-    
+
   # Snap
   snap:
     type: "snap"
@@ -149,20 +149,20 @@ distributions:
       - "network"
       - "network-bind"
       - "audio-playback"
-      
+
   # Flatpak
   flatpak:
     type: "flatpak"
     runtime: "org.freedesktop.Platform"
     runtime_version: "24.08"
     sdk: "org.freedesktop.Sdk"
-    
+
   # Docker
   docker:
     type: "docker"
     base_image: "ubuntu:24.04"
     multi_stage: true
-    
+
   # Source
   source:
     type: "tarball"
@@ -172,7 +172,7 @@ distributions:
       - "scripts/"
       - "README.md"
       - "LICENSE"
-      
+
 # ============================================================================
 # Signing Configuration
 # ============================================================================
@@ -186,18 +186,18 @@ signing:
     algorithm: "SHA512"
     key_id: ""
     keyring: "~/.gnupg/rechain.gpg"
-    
+
   # Checksums
   checksums:
     sha256: true
     sha512: true
     md5: false
-    
+
   # Timestamp
   timestamp:
     enabled: true
     server: "http://timestamp.digicert.com"
-    
+
 # ============================================================================
 # Repository Configuration
 # ============================================================================
@@ -209,24 +209,24 @@ repository:
     distribution: "stable"
     component: "main"
     architectures: ["amd64", "arm64", "armhf"]
-    
+
   # YUM/DNF repository
   yum:
     baseurl: "https://repo.rechain.network/yum"
     gpgcheck: true
     gpgkey: "https://repo.rechain.network/rechain.gpg"
-    
+
   # Docker registry
   docker:
     registry: "docker.rechain.network"
     repository: "rechain"
     tag_prefix: "v"
-    
+
   # Snap store
   snap:
     channel: "stable"
     grade: "stable"
-    
+
 # ============================================================================
 # Verification
 # ============================================================================
@@ -240,7 +240,7 @@ verification:
       algorithm: "sha256"
     - type: "size"
       tolerance: "1%"
-      
+
   # Functional tests
   tests:
     - type: "unit"
@@ -249,7 +249,7 @@ verification:
       timeout: "300s"
     - type: "smoke"
       timeout: "60s"
-      
+
   # Security scans
   security:
     - type: "vulnerability"
@@ -258,7 +258,7 @@ verification:
     - type: "static"
       tool: "bandit"
       level: "LOW"
-      
+
 # ============================================================================
 # Release Channels
 # ============================================================================
@@ -269,20 +269,20 @@ channels:
     testing: false
     auto_update: true
     priority: 100
-    
+
   beta:
     version: "${version}-beta"
     testing: true
     auto_update: true
     priority: 90
-    
+
   nightly:
     version: "${version}-nightly"
     commit: "${git_commit}"
     testing: true
     auto_update: false
     priority: 0
-    
+
 # ============================================================================
 # Notifications
 # ============================================================================
@@ -296,7 +296,7 @@ notifications:
       - "build_complete"
       - "signing_complete"
       - "publish_complete"
-      
+
   webhook:
     enabled: false
     url: "https://hooks.rechain.network/build"
@@ -304,12 +304,10 @@ notifications:
       - "build_start"
       - "build_fail"
       - "publish_success"
-      
+
   slack:
     enabled: false
     channel: "#releases"
     on:
       - "build_complete"
       - "publish_complete"
-      
-

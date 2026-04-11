@@ -18,7 +18,7 @@ verto-bot:
 
 verto-config:
   passwd: 1234
-  
+
 verto-dialog-params:
   useVideo: false
   useStereo: false

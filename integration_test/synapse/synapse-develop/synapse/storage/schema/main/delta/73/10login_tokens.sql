@@ -37,7 +37,7 @@
 -- login method, mainly during SSO logins
 CREATE TABLE login_tokens (
     token TEXT PRIMARY KEY,
-    user_id TEXT NOT NULL, 
+    user_id TEXT NOT NULL,
     expiry_ts BIGINT NOT NULL,
     used_ts BIGINT,
     auth_provider_id TEXT,
@@ -45,10 +45,9 @@ CREATE TABLE login_tokens (
 );
 
 -- We're sometimes querying them by their session ID we got from their IDP
-CREATE INDEX login_tokens_auth_provider_idx 
+CREATE INDEX login_tokens_auth_provider_idx
     ON login_tokens (auth_provider_id, auth_provider_session_id);
 
 -- We're deleting them by their expiration time
-CREATE INDEX login_tokens_expiry_time_idx 
+CREATE INDEX login_tokens_expiry_time_idx
     ON login_tokens (expiry_ts);
-

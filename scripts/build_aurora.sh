@@ -66,14 +66,14 @@ print_header() {
 # Check dependencies
 check_dependencies() {
     log_info "Checking build dependencies..."
-    
+
     # Check for Aurora SDK
     if [[ ! -d "$AURORA_SDK_ROOT" ]]; then
         log_error "Aurora SDK not found at $AURORA_SDK_ROOT"
         log_error "Please install Aurora SDK or set AURORA_SDK_ROOT environment variable"
         exit 1
     fi
-    
+
     # Check for required tools
     local required_tools=("cmake" "make" "gcc" "g++" "pkg-config")
     for tool in "${required_tools[@]}"; do
@@ -82,36 +82,36 @@ check_dependencies() {
             exit 1
         fi
     done
-    
+
     # Check for Qt5 development packages
     if ! pkg-config --exists Qt5Core Qt5DBus Qt5Multimedia Qt5Network; then
         log_error "Qt5 development packages not found"
         log_error "Please install Qt5 development packages"
         exit 1
     fi
-    
+
     # Check for Flutter
     if [[ ! -d "$PROJECT_ROOT/flutter" ]]; then
         log_error "Flutter directory not found at $PROJECT_ROOT/flutter"
         exit 1
     fi
-    
+
     log_success "All dependencies found"
 }
 
 # Setup build environment
 setup_build_environment() {
     log_info "Setting up build environment..."
-    
+
     # Create build directories
     mkdir -p "$BUILD_DIR"
     mkdir -p "$DIST_DIR"
-    
+
     # Set up Aurora OS environment
     export PKG_CONFIG_PATH="$TARGET_ROOT/aurora-$TARGET_ARCH/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
     export CMAKE_PREFIX_PATH="$TARGET_ROOT/aurora-$TARGET_ARCH/usr"
     export PATH="$PSDK_ROOT/bin:$PATH"
-    
+
     # Set up cross-compilation environment
     if [[ "$TARGET_ARCH" == "aarch64" ]]; then
         export CC="aarch64-aurora-linux-gnu-gcc"
@@ -126,7 +126,7 @@ setup_build_environment() {
         export STRIP="armv7hl-aurora-linux-gnueabihf-strip"
         export RANLIB="armv7hl-aurora-linux-gnueabihf-ranlib"
     fi
-    
+
     log_success "Build environment configured"
 }
 
@@ -143,31 +143,31 @@ clean_build() {
 # Build Flutter bundle
 build_flutter() {
     log_info "Building Flutter bundle for Aurora OS..."
-    
+
     cd "$PROJECT_ROOT"
-    
+
     # Set Flutter configuration for Aurora OS
     export FLUTTER_TARGET_PLATFORM="linux-$TARGET_ARCH"
-    
+
     # Build Flutter bundle
     if [[ "$VERBOSE" == "true" ]]; then
         flutter build linux --release --verbose
     else
         flutter build linux --release
     fi
-    
+
     # Copy Flutter bundle to Aurora build directory
     cp -r "build/linux/$TARGET_ARCH/release/bundle/"* "$BUILD_DIR/"
-    
+
     log_success "Flutter bundle built successfully"
 }
 
 # Configure CMake
 configure_cmake() {
     log_info "Configuring CMake build..."
-    
+
     cd "$BUILD_DIR"
-    
+
     local cmake_args=(
         "-DCMAKE_BUILD_TYPE=$BUILD_TYPE"
         "-DCMAKE_SYSTEM_NAME=Linux"
@@ -182,39 +182,39 @@ configure_cmake() {
         "-DPSDK_VERSION=$PSDK_VERSION"
         "-DAURORA_OS_BUILD=ON"
     )
-    
+
     if [[ "$VERBOSE" == "true" ]]; then
         cmake "${cmake_args[@]}" --debug-output "$AURORA_DIR"
     else
         cmake "${cmake_args[@]}" "$AURORA_DIR"
     fi
-    
+
     log_success "CMake configuration completed"
 }
 
 # Build the project
 build_project() {
     log_info "Building REChain Aurora OS application..."
-    
+
     cd "$BUILD_DIR"
-    
+
     local make_args=("-j$PARALLEL_JOBS")
-    
+
     if [[ "$VERBOSE" == "true" ]]; then
         make "${make_args[@]}" VERBOSE=1
     else
         make "${make_args[@]}"
     fi
-    
+
     log_success "Project built successfully"
 }
 
 # Run tests
 run_tests() {
     log_info "Running Aurora OS tests..."
-    
+
     cd "$BUILD_DIR"
-    
+
     # Run unit tests if available
     if [[ -f "test/rechain_tests" ]]; then
         ./test/rechain_tests
@@ -222,7 +222,7 @@ run_tests() {
     else
         log_warning "No unit tests found"
     fi
-    
+
     # Run integration tests
     if [[ -f "test/integration_tests" ]]; then
         ./test/integration_tests
@@ -235,15 +235,15 @@ run_tests() {
 # Package the application
 package_application() {
     log_info "Packaging Aurora OS application..."
-    
+
     cd "$BUILD_DIR"
-    
+
     # Create RPM package
     make package
-    
+
     # Copy packages to distribution directory
     cp *.rpm "$DIST_DIR/" 2>/dev/null || log_warning "No RPM packages found"
-    
+
     # Create tarball
     local tarball_name="rechain-aurora-$TARGET_ARCH-$(date +%Y%m%d).tar.gz"
     tar -czf "$DIST_DIR/$tarball_name" \
@@ -251,16 +251,16 @@ package_application() {
         --exclude="*.a" \
         --exclude="CMakeFiles" \
         .
-    
+
     log_success "Application packaged: $tarball_name"
 }
 
 # Generate build report
 generate_build_report() {
     log_info "Generating build report..."
-    
+
     local report_file="$DIST_DIR/build-report-$(date +%Y%m%d-%H%M%S).txt"
-    
+
     {
         echo "REChain Aurora OS Build Report"
         echo "=============================="
@@ -289,27 +289,27 @@ generate_build_report() {
         echo "- Package Size: $(du -sh "$DIST_DIR" | cut -f1)"
         echo "- Build Duration: $((SECONDS / 60)) minutes $((SECONDS % 60)) seconds"
     } > "$report_file"
-    
+
     log_success "Build report generated: $report_file"
 }
 
 # Cleanup function
 cleanup() {
     log_info "Cleaning up temporary files..."
-    
+
     # Remove temporary build files
     find "$BUILD_DIR" -name "*.tmp" -delete 2>/dev/null || true
     find "$BUILD_DIR" -name "*.log" -delete 2>/dev/null || true
-    
+
     log_success "Cleanup completed"
 }
 
 # Main build function
 main() {
     local start_time=$SECONDS
-    
+
     print_header
-    
+
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -350,7 +350,7 @@ main() {
                 ;;
         esac
     done
-    
+
     # Execute build steps
     check_dependencies
     setup_build_environment
@@ -358,19 +358,19 @@ main() {
     build_flutter
     configure_cmake
     build_project
-    
+
     # Optional steps
     if [[ "$BUILD_TYPE" != "Debug" ]]; then
         run_tests
         package_application
     fi
-    
+
     generate_build_report
     cleanup
-    
+
     local duration=$((SECONDS - start_time))
     log_success "Build completed successfully in $((duration / 60))m $((duration % 60))s"
-    
+
     # Display build artifacts
     echo ""
     echo "Build Artifacts:"

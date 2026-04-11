@@ -40,7 +40,7 @@
 -- A map of recent events persisted with transaction IDs. Used to deduplicate
 -- send event requests with the same transaction ID.
 --
--- Note: with MSC3970, transaction IDs are scoped to the 
+-- Note: with MSC3970, transaction IDs are scoped to the
 -- room ID/user ID/device ID that was used to make the request.
 --
 -- Note: The foreign key constraints are ON DELETE CASCADE, as if we delete the
@@ -64,7 +64,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS event_txn_id_device_id_event_id
 
 -- This ensures that there is only one mapping per (room_id, user_id, device_id, txn_id) tuple.
 -- Events are usually looked up using this index.
-CREATE UNIQUE INDEX IF NOT EXISTS event_txn_id_device_id_txn_id 
+CREATE UNIQUE INDEX IF NOT EXISTS event_txn_id_device_id_txn_id
     ON event_txn_id_device_id(room_id, user_id, device_id, txn_id);
 
 -- This table is cleaned up regularly, removing the oldest entries, hence this index.

@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS roomserver_reported_events
 );`
 
 const insertReportedEventSQL = `
-	INSERT INTO roomserver_reported_events (room_nid, event_nid, reporting_user_nid, event_sender_nid, reason, score, received_ts) 
+	INSERT INTO roomserver_reported_events (room_nid, event_nid, reporting_user_nid, event_sender_nid, reason, score, received_ts)
 	VALUES ($1, $2, $3, $4, $5, $6, $7)
 	RETURNING id
 `
